@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-03-16T15:39:48 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_cronograma" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e03ac1f-1971-4313-8021-e10bf31486c1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="siged"/>
+	<queryString>
+		<![CDATA[SELECT siged_cronograma.cron_id as codigo,
+    siged_cronograma.peri_id as id_periodo,
+    siged_periodo.peri_nombre as periodo,
+    siged_cronograma.cron_tarea as id_tarea,
+    siged_enumeracion.enum_nombre as tarea,
+    siged_cronograma.cron_fecha_inicio as fecha_inicio,
+    siged_cronograma.cron_fecha_fin as fecha_fin ,
+    siged_cronograma.cron_estado_registro
+   FROM siged_cronograma,
+    siged_enumeracion,
+    siged_periodo
+  WHERE siged_cronograma.cron_tarea::text = siged_enumeracion.enum_codigo::text AND siged_cronograma.peri_id = siged_periodo.peri_id;]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Integer"/>
+	<field name="id_periodo" class="java.lang.Integer"/>
+	<field name="periodo" class="java.lang.String"/>
+	<field name="id_tarea" class="java.lang.String"/>
+	<field name="tarea" class="java.lang.String"/>
+	<field name="fecha_inicio" class="java.lang.String"/>
+	<field name="fecha_fin" class="java.lang.String"/>
+	<field name="cron_estado_registro" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="138" splitType="Stretch">
+			<staticText>
+				<reportElement x="320" y="10" width="260" height="30" uuid="bda535a6-4365-42e0-9097-cf74e88a3b5b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO TECNOLOGICO SUPERIOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="50" width="170" height="30" uuid="cafab63d-4d68-4ac5-80e7-0c1119e37c85"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BENITO JUAREZ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="90" width="340" height="30" uuid="e0c7fe89-d2fa-44f8-816d-5fdfd68a2813"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE CRONOGRAMAS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="690" y="35" width="90" height="60" uuid="2f97b90a-2d7e-4a3a-8ff2-48851d2e9a91"/>
+				<imageExpression><![CDATA["C:/Users/ITS Aloasi/Documents/logo_senecyt.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="70" y="40" width="170" height="50" uuid="110001a7-7011-4508-a860-aef206c08ac6"/>
+				<imageExpression><![CDATA["C:/Users/ITS Aloasi/Documents/logo_benitojuarez.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="0" width="100" height="30" uuid="6f4fbe4e-a420-4a4e-b1f0-8ebcc1475bcd"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PERIODO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="100" height="30" uuid="5d2eb949-09df-481a-b751-de93ff0b97e8"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TAREA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="100" height="30" uuid="a48c5e28-dece-4126-9e43-4f322d04d3f3"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA DE INICIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="608" y="0" width="142" height="30" uuid="01ff9d87-331d-4eac-b985-0b41526f6945"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA DE FINALIZACION]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="40" y="0" width="180" height="30" uuid="433a37f9-9c35-4b2c-94c0-22e93acff283"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="0" width="100" height="30" uuid="3b0cd069-c2a3-4b68-a27c-f74291de68cc"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tarea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="100" height="30" uuid="9be27971-745f-4669-b31a-cc70b496534f"/>
+				<textFieldExpression><![CDATA[$F{fecha_inicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="0" width="100" height="30" uuid="0d35d806-165f-4587-bfeb-4d5cbb3d8b94"/>
+				<textFieldExpression><![CDATA[$F{fecha_fin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="200" height="30" uuid="b19d9455-aac6-4975-86ef-fe52c33f7eb9"/>
+				<textFieldExpression><![CDATA[new java.util.Date()+" "+new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="30" uuid="b23db3c0-2879-4456-a705-82d037edc818"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+ " DE "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="700" y="0" width="100" height="30" uuid="1b4db3c7-230e-4123-93a6-8beed7db41c5"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

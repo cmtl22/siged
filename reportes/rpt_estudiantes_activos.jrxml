@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-03-14T08:09:39 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_estudiantes_activos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63ceef2b-9147-4119-a814-b22c498d4af8">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIGED Conexion"/>
+	<queryString>
+		<![CDATA[select *from siged_persona where pers_estado_registro=1 and pers_tipo='ES']]>
+	</queryString>
+	<field name="pers_num_identificacion" class="java.lang.String"/>
+	<field name="pers_nombres" class="java.lang.String"/>
+	<field name="pers_apellidos" class="java.lang.String"/>
+	<field name="pers_correo" class="java.lang.String"/>
+	<group name="pers_num_identificacion">
+		<groupExpression><![CDATA[$F{pers_num_identificacion}]]></groupExpression>
+	</group>
+	<group name="pers_nombres">
+		<groupExpression><![CDATA[$F{pers_nombres}]]></groupExpression>
+	</group>
+	<group name="pers_apellidos">
+		<groupExpression><![CDATA[$F{pers_apellidos}]]></groupExpression>
+	</group>
+	<group name="pers_correo">
+		<groupExpression><![CDATA[$F{pers_correo}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

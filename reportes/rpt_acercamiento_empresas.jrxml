@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-03-16T15:55:31 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_acercamiento_empresas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e03ac1f-1971-4313-8021-e10bf31486c1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="siged"/>
+	<queryString>
+		<![CDATA[SELECT siged_acercamiento.acer_id AS codigo,
+    siged_acercamiento.emsu_id as id_empresa,
+    siged_empresa_sucursal.emsu_nombre as empresa,
+    siged_acercamiento.acer_fecha as fecha,
+    siged_acercamiento.acer_observaciones as observaciones,
+    siged_enumeracion.enum_nombre as estado,
+    siged_acercamiento.acer_estado_registro
+   FROM siged_acercamiento
+     JOIN siged_empresa_sucursal ON siged_acercamiento.emsu_id = siged_empresa_sucursal.emsu_id,
+    siged_enumeracion
+  WHERE siged_acercamiento.acer_estado::text = siged_enumeracion.enum_codigo::text;]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Integer"/>
+	<field name="id_empresa" class="java.lang.Integer"/>
+	<field name="empresa" class="java.lang.String"/>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="acer_estado_registro" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="138" splitType="Stretch">
+			<staticText>
+				<reportElement x="320" y="10" width="260" height="30" uuid="bda535a6-4365-42e0-9097-cf74e88a3b5b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO TECNOLOGICO SUPERIOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="50" width="130" height="30" uuid="cafab63d-4d68-4ac5-80e7-0c1119e37c85"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BENITO JUAREZ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="90" width="340" height="30" uuid="e0c7fe89-d2fa-44f8-816d-5fdfd68a2813"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE ACERCAMIENTOS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="690" y="35" width="90" height="60" uuid="2f97b90a-2d7e-4a3a-8ff2-48851d2e9a91"/>
+				<imageExpression><![CDATA["reportes/recursos/logo_senecyt.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="80" y="35" width="170" height="50" uuid="110001a7-7011-4508-a860-aef206c08ac6"/>
+				<imageExpression><![CDATA["reportes/recursos/logo_benitojuarez.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="0" width="100" height="30" uuid="a5f1f1df-5485-4130-bedf-15ac364c9277"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="30" uuid="d2450b5b-bf14-4821-8a45-5eeb8730c1a8"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="30" uuid="33716e6f-af17-42f1-807a-9f0bdaed17fa"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIONES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="620" y="0" width="100" height="30" uuid="1e5534a9-442d-41cc-aa89-df7b3388af90"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="60" y="18" width="73" height="30" uuid="d4c0c82e-0fcb-4012-88e5-5fb6ce106e6a"/>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="18" width="71" height="30" uuid="d82d6cda-2b5a-4b06-8baf-3cd7efb332e2"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="20" width="170" height="30" uuid="74572fef-42ae-46a5-abb4-975b87bccd73"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="20" width="87" height="30" uuid="a43c81cb-e3e4-4188-9b79-b833856b9f3e"/>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="200" height="30" uuid="b19d9455-aac6-4975-86ef-fe52c33f7eb9"/>
+				<textFieldExpression><![CDATA[new java.util.Date()+" "+new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="30" uuid="b23db3c0-2879-4456-a705-82d037edc818"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+ " DE "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="700" y="0" width="100" height="30" uuid="1b4db3c7-230e-4123-93a6-8beed7db41c5"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

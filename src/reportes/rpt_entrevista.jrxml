@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-03-16T15:51:24 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_entrevistas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e03ac1f-1971-4313-8021-e10bf31486c1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="siged"/>
+	<queryString>
+		<![CDATA[SELECT siged_entrevista_estudiante.entr_id AS codigo,
+    siged_entrevista_estudiante.emsu_id as id_empresa,
+    siged_entrevista_estudiante.pers_id as id_persona,
+    enum1.enum_nombre AS nivel,
+    enum2.enum_nombre AS estado,
+    siged_empresa_sucursal.emsu_nombre as empresa,
+    siged_persona.pers_num_identificacion as cedula,
+    (siged_persona.pers_apellidos::text || ' '::text) || siged_persona.pers_nombres::text as apellidos_nombres,
+    siged_entrevista_estudiante.entr_observaciones as observaciones,
+    siged_entrevista_estudiante.entr_fecha as fecha,
+    siged_periodo.peri_nombre as periodo,
+    siged_entrevista_estudiante.entr_estado_registro as estado
+     FROM siged_entrevista_estudiante
+     JOIN siged_empresa_sucursal ON siged_entrevista_estudiante.emsu_id = siged_empresa_sucursal.emsu_id
+     JOIN siged_persona ON siged_entrevista_estudiante.pers_id = siged_persona.pers_id
+     JOIN siged_periodo ON siged_entrevista_estudiante.peri_id = siged_periodo.peri_id,
+    siged_enumeracion enum1,
+    siged_enumeracion enum2
+    WHERE siged_entrevista_estudiante.entr_estado = enum2.enum_codigo::bpchar AND siged_entrevista_estudiante.entr_nivel = enum1.enum_codigo::bpchar AND enum2.enum_tipo='ESTADO ENTREVISTA';]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Integer"/>
+	<field name="id_empresa" class="java.lang.Integer"/>
+	<field name="id_persona" class="java.lang.Integer"/>
+	<field name="nivel" class="java.lang.String"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="empresa" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="apellidos_nombres" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="periodo" class="java.lang.String"/>
+	<field name="COLUMN_12" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="138" splitType="Stretch">
+			<staticText>
+				<reportElement x="320" y="10" width="260" height="30" uuid="bda535a6-4365-42e0-9097-cf74e88a3b5b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO TECNOLOGICO SUPERIOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="50" width="150" height="30" uuid="cafab63d-4d68-4ac5-80e7-0c1119e37c85"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BENITO JUAREZ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="90" width="340" height="30" uuid="e0c7fe89-d2fa-44f8-816d-5fdfd68a2813"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE ENTREVISTAS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="690" y="35" width="90" height="60" uuid="2f97b90a-2d7e-4a3a-8ff2-48851d2e9a91"/>
+				<imageExpression><![CDATA["C:/Users/ITS Aloasi/Documents/logo_senecyt.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="70" y="35" width="170" height="50" uuid="110001a7-7011-4508-a860-aef206c08ac6"/>
+				<imageExpression><![CDATA["C:/Users/ITS Aloasi/Documents/logo_benitojuarez.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="30" uuid="338cbfa8-31c2-4d8c-94f0-fd09601b4987"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIVEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="0" width="50" height="30" uuid="9287605e-8f5e-4452-a911-8729cb670263"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="0" width="60" height="30" uuid="461f9e81-56e1-40d4-9f0b-d25f65acaffa"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="0" width="60" height="30" uuid="313b0327-0bbc-4fdf-b3a4-19623dc09e1f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEDULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="0" width="130" height="30" uuid="eb881856-177f-467b-9126-2db01fca10a6"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS Y NOMBRES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="100" height="30" uuid="3380ea25-d4c2-458c-a1c1-6d77183a90f9"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIONES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="0" width="50" height="30" uuid="4ad097d6-76b3-4fee-b1e5-623d5a6eebe5"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="0" width="60" height="30" uuid="fe125dc9-9f68-4d28-9fc7-a97de60dbcc4"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PERIODO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="60" height="30" uuid="f41d0be7-f2b9-4fcb-9542-a6dce258881f"/>
+				<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="67" height="30" uuid="46448712-eead-475e-a400-a5ff280f4186"/>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="90" height="30" uuid="05b5c542-19b6-498c-8f4a-9a4af57c28a3"/>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="248" y="0" width="65" height="30" uuid="ebb636f0-67f9-4581-a8b8-851d9592bc4e"/>
+				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="115" height="30" uuid="81a7c3a4-16a3-4eb4-adb9-7e29cb7f56d6"/>
+				<textFieldExpression><![CDATA[$F{apellidos_nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="114" height="30" uuid="9b06d3ab-9914-4d44-bd58-5fadb9b02f1a"/>
+				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="580" y="0" width="60" height="30" uuid="605f9331-3841-4fb9-86a3-92170cbbba99"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="0" width="150" height="30" uuid="92f8fb5d-1909-40bc-8976-67dc116ece74"/>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="200" height="30" uuid="b19d9455-aac6-4975-86ef-fe52c33f7eb9"/>
+				<textFieldExpression><![CDATA[new java.util.Date()+" "+new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="30" uuid="b23db3c0-2879-4456-a705-82d037edc818"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+ " DE "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="700" y="0" width="100" height="30" uuid="1b4db3c7-230e-4123-93a6-8beed7db41c5"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

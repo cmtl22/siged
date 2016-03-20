@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-03-16T15:33:22 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_encuesta" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e03ac1f-1971-4313-8021-e10bf31486c1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="siged"/>
+	<queryString>
+		<![CDATA[SELECT siged_encuesta.encu_id AS codigo,
+    siged_periodo.peri_nombre as periodo,
+    siged_encuesta.encu_observaciones as observaciones,
+    siged_encuesta.encu_estado_registro
+   FROM siged_encuesta
+     JOIN siged_periodo ON siged_encuesta.peri_id = siged_periodo.peri_id;]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Integer"/>
+	<field name="periodo" class="java.lang.String"/>
+	<field name="observaciones" class="java.lang.String"/>
+	<field name="encu_estado_registro" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="138" splitType="Stretch">
+			<staticText>
+				<reportElement x="320" y="10" width="260" height="30" uuid="bda535a6-4365-42e0-9097-cf74e88a3b5b"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO TECNOLOGICO SUPERIOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="50" width="100" height="30" uuid="cafab63d-4d68-4ac5-80e7-0c1119e37c85"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BENITO JUAREZ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="90" width="340" height="30" uuid="e0c7fe89-d2fa-44f8-816d-5fdfd68a2813"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE ENCUESTAS]]></text>
+			</staticText>
+			<image>
+				<reportElement x="690" y="35" width="90" height="60" uuid="2f97b90a-2d7e-4a3a-8ff2-48851d2e9a91"/>
+				<imageExpression><![CDATA["C:/Users/ITS Aloasi/Documents/logo_senecyt.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="70" y="40" width="170" height="50" uuid="110001a7-7011-4508-a860-aef206c08ac6"/>
+				<imageExpression><![CDATA["C:/Users/ITS Aloasi/Documents/logo_benitojuarez.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="130" y="0" width="100" height="30" uuid="07ec321b-6a9e-49c5-b491-3f749d5d4777"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PERIODO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="590" y="0" width="100" height="30" uuid="ec67ad99-87cb-49bb-951b-c9f7c6b946a1"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIONES]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="50" y="0" width="280" height="30" uuid="154a5d93-66af-4693-865e-9b92b9abc6b9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="505" y="0" width="270" height="30" uuid="eb874c3c-ac85-411a-9c81-5ef2fccc3965"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="200" height="30" uuid="b19d9455-aac6-4975-86ef-fe52c33f7eb9"/>
+				<textFieldExpression><![CDATA[new java.util.Date()+" "+new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="30" uuid="b23db3c0-2879-4456-a705-82d037edc818"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+ " DE "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="700" y="0" width="100" height="30" uuid="1b4db3c7-230e-4123-93a6-8beed7db41c5"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
