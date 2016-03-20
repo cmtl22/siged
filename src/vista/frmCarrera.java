@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -212,7 +213,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaAsignatura.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 260, -1));
+        jpBusquedaAsignatura.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 210, -1));
 
         lblRegistros3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros3.setText("Registros:");
@@ -246,7 +247,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(jtCarrera);
 
-        jpBusquedaAsignatura.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 430, 380));
+        jpBusquedaAsignatura.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 430, 420));
 
         btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
@@ -259,7 +260,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
                 btnNuevo1ActionPerformed(evt);
             }
         });
-        jpBusquedaAsignatura.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 40, 40));
+        jpBusquedaAsignatura.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 40, 40));
 
         jPanel1.add(jpBusquedaAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -532,9 +533,10 @@ public class frmCarrera extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo, jtCarrera.getModel());
+            controladorExcel.getInstance().generarExcel2(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtCarrera));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+
     // </editor-fold>     
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 

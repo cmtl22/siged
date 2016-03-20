@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -36,7 +37,9 @@ public class Excel {
         return instancia;
     }
 
-    public void generarExcel(String[] archivoRuta, TableModel modelo) {
+    
+
+    public void generarExcel(String[] archivoRuta, String[][] registros) {
         try {
             /*La ruta donde se creará el archivo*/
             String rutaArchivo = archivoRuta[0] + ".xls";
@@ -58,22 +61,25 @@ public class Excel {
             Sheet hoja = libro.createSheet(archivoRuta[1]);
 
             /*Hacemos un ciclo para inicializar los valores de 10 filas de celdas*/
-            int totalFilas = modelo.getRowCount();
-            int totalColumnas = modelo.getColumnCount();
-            for (int i = 0; i < totalFilas; i++) {
+            int totalFilas = registros.length;
+            int totalColumnas = registros[0].length;
+            JOptionPane.showMessageDialog(null, "col " + totalColumnas + " \nfilas" + totalFilas);
+            for (int f = 0; f < totalFilas; f++) {
                 /*La clase Row nos permitirá crear las filas*/
-                Row fila = hoja.createRow(i);
+                Row fila = hoja.createRow(f);
 
                 /*Cada fila tendrá 5 celdas de datos*/
                 for (int c = 0; c < totalColumnas - 1; c++) {
                     /*Creamos la celda a partir de la fila actual*/
                     Cell celda = fila.createCell(c);
                     /*Si la fila es la número 0, estableceremos los encabezados*/
-                    if (i == 0) {
-                        celda.setCellValue(modelo.getColumnName(c + 1));
+                    if (f == 0) {
+                        JOptionPane.showMessageDialog(null, registros[f][c + 1]);
+                        celda.setCellValue(registros[f][c + 1]);
                     } else {
                         /*Si no es la primera fila establecemos un valor*/
-                        celda.setCellValue(modelo.getValueAt(i, c + 1).toString());
+                        JOptionPane.showMessageDialog(null, registros[f][c + 1]);
+                        celda.setCellValue(registros[f][c + 1]);
                     }
                 }
             }

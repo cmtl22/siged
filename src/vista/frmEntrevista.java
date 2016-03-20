@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import static vista.frmCronograma.cmbPeriodo;
@@ -62,7 +63,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
             tipo_consulta = "entrevista_admin";
             llenarGrid(tipo_consulta);
         } else {
-            tipo_consulta="entrevista";
+            tipo_consulta = "entrevista";
             llenarGrid(tipo_consulta);
         }
     }
@@ -306,7 +307,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtEntrevista);
 
-        jpBusquedaEntrevista.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 430, 390));
+        jpBusquedaEntrevista.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 430, 420));
 
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
@@ -318,7 +319,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaEntrevista.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 230, -1));
+        jpBusquedaEntrevista.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 190, -1));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
@@ -346,7 +347,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
                 btnNuevo1ActionPerformed(evt);
             }
         });
-        jpBusquedaEntrevista.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 40, 40));
+        jpBusquedaEntrevista.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 40, 40));
 
         jPanel1.add(jpBusquedaEntrevista, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -516,9 +517,20 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo, jtEntrevista.getModel());
+            controladorExcel.getInstance().generarExcel2(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtEntrevista));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+    private DefaultTableModel filtrarGrid() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        String[] datos = new String[jtEntrevista.getColumnCount()];
+        for (int i = 0; i < jtEntrevista.getRowCount(); i++) {
+            for (int j = 0; j < jtEntrevista.getColumnCount(); j++) {
+                datos[j] = jtEntrevista.getValueAt(i, j).toString();
+            }
+            modelo.addRow(datos);
+        }
+        return modelo;
+    }
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
@@ -644,7 +656,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
     }
 
     private void llenarGrid(String tipo) {
-        jtEntrevista.setModel(controladorGrid.getInstance().llenarGrid(tipo,"grid", null, true));
+        jtEntrevista.setModel(controladorGrid.getInstance().llenarGrid(tipo, "grid", null, true));
         sorter = new TableRowSorter<>(jtEntrevista.getModel());
         jtEntrevista.setRowSorter(sorter);
         jtEntrevista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -15,6 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import static vista.frmCronograma.cmbPeriodo;
@@ -47,7 +48,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
             tipo_consulta = "encuesta_admin";
             llenarGrid(tipo_consulta);
         } else {
-            tipo_consulta="encuesta";
+            tipo_consulta = "encuesta";
             llenarGrid(tipo_consulta);
         }
     }
@@ -174,7 +175,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtEncuesta);
 
-        jpBusquedaEntrevista.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 420, 380));
+        jpBusquedaEntrevista.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 440, 380));
 
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
@@ -186,7 +187,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaEntrevista.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 220, -1));
+        jpBusquedaEntrevista.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 170, -1));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
@@ -214,7 +215,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
                 btnNuevo3ActionPerformed(evt);
             }
         });
-        jpBusquedaEntrevista.add(btnNuevo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 40, 40));
+        jpBusquedaEntrevista.add(btnNuevo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 40, 40));
 
         jPanel1.add(jpBusquedaEntrevista, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -329,11 +330,11 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (controladorVariablesSesion.getInstance().eliminar(lblId.getText()) == 0) {
-        accion = "crear";
-        eliminar();//elimina el registro seleccionado
-        llenarGrid(tipo_consulta);//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
-        limpiarCajasTexto(jpRegistroEntrevista);//limpia las cajas de texto
-        cargarTotalRegistros();//carga el total de registros
+            accion = "crear";
+            eliminar();//elimina el registro seleccionado
+            llenarGrid(tipo_consulta);//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
+            limpiarCajasTexto(jpRegistroEntrevista);//limpia las cajas de texto
+            cargarTotalRegistros();//carga el total de registros
     }//GEN-LAST:event_btnEliminarActionPerformed
     }
     private void btnCrearActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActualizarActionPerformed
@@ -369,9 +370,20 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
     private void btnNuevo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo3ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo, jtEncuesta.getModel());
+            controladorExcel.getInstance().generarExcel2(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtEncuesta));
         }
     }//GEN-LAST:event_btnNuevo3ActionPerformed
+    private DefaultTableModel filtrarGrid() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        String[] datos = new String[jtEncuesta.getColumnCount()];
+        for (int i = 0; i < jtEncuesta.getRowCount(); i++) {
+            for (int j = 0; j < jtEncuesta.getColumnCount(); j++) {
+                datos[j] = jtEncuesta.getValueAt(i, j).toString();
+            }
+            modelo.addRow(datos);
+        }
+        return modelo;
+    }
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
@@ -512,8 +524,6 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCrearActualizar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnNuevo1;
-    private javax.swing.JButton btnNuevo2;
     private javax.swing.JButton btnNuevo3;
     private javax.swing.JComboBox<String> cmbFiltro;
     public static javax.swing.JComboBox cmbPeriodo;

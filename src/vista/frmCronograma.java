@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 
 public class frmCronograma extends javax.swing.JInternalFrame {
 
@@ -57,7 +58,7 @@ public class frmCronograma extends javax.swing.JInternalFrame {
             tipo_consulta = "cronograma_admin";
             llenarGrid(tipo_consulta);
         } else {
-            tipo_consulta="cronograma";
+            tipo_consulta = "cronograma";
             llenarGrid(tipo_consulta);
         }
     }
@@ -111,6 +112,7 @@ public class frmCronograma extends javax.swing.JInternalFrame {
         lblBusqueda.setText("BÚSQUEDA");
         jPanel1.add(lblBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 10, -1, -1));
 
+        jpBusquedaCronograma.setBackground(new java.awt.Color(255, 255, 255));
         jpBusquedaCronograma.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jpBusquedaCronograma.setPreferredSize(new java.awt.Dimension(455, 520));
         jpBusquedaCronograma.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -138,7 +140,7 @@ public class frmCronograma extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaCronograma.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 260, -1));
+        jpBusquedaCronograma.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 210, -1));
 
         lblRegistros3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros3.setText("Registros:");
@@ -172,7 +174,7 @@ public class frmCronograma extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(jtCronograma);
 
-        jpBusquedaCronograma.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 430, 380));
+        jpBusquedaCronograma.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 430, 410));
 
         btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
@@ -185,7 +187,7 @@ public class frmCronograma extends javax.swing.JInternalFrame {
                 btnNuevo1ActionPerformed(evt);
             }
         });
-        jpBusquedaCronograma.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 40, 40));
+        jpBusquedaCronograma.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 40, 40));
 
         jPanel1.add(jpBusquedaCronograma, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -246,6 +248,7 @@ public class frmCronograma extends javax.swing.JInternalFrame {
         lblRegistro.setText("REGISTRO");
         jPanel1.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 10, -1, -1));
 
+        jpRegistroCronograma.setBackground(new java.awt.Color(255, 255, 255));
         jpRegistroCronograma.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jpRegistroCronograma.setPreferredSize(new java.awt.Dimension(470, 520));
         jpRegistroCronograma.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -372,9 +375,10 @@ public class frmCronograma extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo, jtCronograma.getModel());
+            controladorExcel.getInstance().generarExcel2(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtCronograma));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+    
 // </editor-fold>  
 // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 

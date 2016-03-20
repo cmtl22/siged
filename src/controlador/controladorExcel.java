@@ -1,8 +1,5 @@
 package controlador;
 
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import modelo.Excel;
 
 public class controladorExcel {
@@ -16,9 +13,9 @@ public class controladorExcel {
         return instancia;
     }
 
-    public void generarExcel(String[] archivoXLS, TableModel modelo) {
-     
-        Excel.getInstance().generarExcel(archivoXLS, modelo);
+    public void generarExcel2(String[] archivoXLS, String[][] registros) {
+
+        Excel.getInstance().generarExcel(archivoXLS, registros);
     }
 
 }

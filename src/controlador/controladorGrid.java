@@ -125,7 +125,7 @@ public class controladorGrid {
         return modelo;
     }
 
-     public DefaultTableModel llenarGridCheckBox(String tabla, String tipo, String[] criterioBusqueda) {
+    public DefaultTableModel llenarGridCheckBox(String tabla, String tipo, String[] criterioBusqueda) {
 
         controladorConsulta consultaClass = new controladorConsulta();
         DefaultTableModel modelo = null;
@@ -159,14 +159,13 @@ public class controladorGrid {
                     datosTabla.add(resultado.getObject(1));
                     datosTabla.add(resultado.getObject(2));
                     datosTabla.add(resultado.getObject(3));
-                    
 
                 } else {
 
                     datosTabla.add("0");
                     datosTabla.add("SN");
                     datosTabla.add(true);
-                    
+
                 }
 
                 modelo.addRow(arrayListToArray(datosTabla));
@@ -176,7 +175,7 @@ public class controladorGrid {
         }
         return modelo;
     }
-    
+
     public DefaultTableModel llenarGridAnexos(String tabla, String tipo, String[] criterioBusqueda) {
 
         controladorConsulta consultaClass = new controladorConsulta();
@@ -243,4 +242,21 @@ public class controladorGrid {
         return tmpPermisos;
     }
 
+    public String[][] filtrarGrid(JTable grid) {
+
+        String[][] registros = new String[grid.getRowCount() + 1][grid.getColumnCount()];
+
+        for (int i = 0; i <= grid.getRowCount(); i++) {
+            for (int j = 0; j < grid.getColumnCount(); j++) {
+                if (i == 0) {
+                    registros[i][j] = grid.getColumnName(j);
+                } else {
+                    registros[i][j] = grid.getValueAt(i - 1, j).toString();
+                }
+
+            }
+        }
+
+        return registros;
+    }
 }

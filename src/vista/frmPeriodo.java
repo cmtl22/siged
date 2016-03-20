@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -180,7 +181,7 @@ public class frmPeriodo extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtPeriodo);
 
-        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 430, 380));
+        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 430, 410));
 
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
@@ -192,7 +193,7 @@ public class frmPeriodo extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaUsuario.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 230, -1));
+        jpBusquedaUsuario.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 180, -1));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
@@ -220,7 +221,7 @@ public class frmPeriodo extends javax.swing.JInternalFrame {
                 btnNuevo1ActionPerformed(evt);
             }
         });
-        jpBusquedaUsuario.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 40, 40));
+        jpBusquedaUsuario.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 40, 40));
 
         jPanel1.add(jpBusquedaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -319,12 +320,12 @@ public class frmPeriodo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCrearActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if (controladorVariablesSesion.getInstance().eliminar(lblId.getText()) == 0)  { 
-        accion = "crear";
-        eliminar();//elimina el registro seleccionado
-        llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
-        limpiarCajasTexto(jpRegistroPeriodo);//limpia las cajas de texto
-        cargarTotalRegistros();//carga el total de registros
+        if (controladorVariablesSesion.getInstance().eliminar(lblId.getText()) == 0) {
+            accion = "crear";
+            eliminar();//elimina el registro seleccionado
+            llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
+            limpiarCajasTexto(jpRegistroPeriodo);//limpia las cajas de texto
+            cargarTotalRegistros();//carga el total de registros
     }//GEN-LAST:event_btnEliminarActionPerformed
     }
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -341,12 +342,12 @@ public class frmPeriodo extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo, jtPeriodo.getModel());
+            controladorExcel.getInstance().generarExcel2(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtPeriodo));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+
     // </editor-fold>  
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
-
     private void buscar() {
         frmConsultas consulta = new frmConsultas(null, true);//instancia la el formulario con la ventana de busqueda
         consulta.consultar("carrera", "grid", null);//llama al metodo que se encuentra en la ventana de busqueda

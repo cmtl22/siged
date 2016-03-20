@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -47,7 +48,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
         cargarTotalRegistros();
         //
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -438,7 +439,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtInstituto);
 
-        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 87, 430, 390));
+        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 57, 430, 420));
 
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
@@ -450,7 +451,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaUsuario.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 280, -1));
+        jpBusquedaUsuario.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 230, -1));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
@@ -478,7 +479,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
                 btnNuevo1ActionPerformed(evt);
             }
         });
-        jpBusquedaUsuario.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 40, 40, 50));
+        jpBusquedaUsuario.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 40, 50));
 
         jPanel1.add(jpBusquedaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -525,7 +526,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
             cargarTotalRegistros();//carga el total de registros
     }//GEN-LAST:event_btnEliminarActionPerformed
     }
-    
+
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         controladorVariablesSesion.getInstance().setContadorVentanas(-1);
         if (controladorVariablesSesion.getInstance().getContadorVentanas() == 0) {
@@ -598,9 +599,10 @@ public class frmInstituto extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo, jtInstituto.getModel());
+            controladorExcel.getInstance().generarExcel2(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtInstituto));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+    
     // </editor-fold>  
 // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
@@ -609,38 +611,38 @@ public class frmInstituto extends javax.swing.JInternalFrame {
         consulta.consultar("rector", "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
         consulta.setVisible(true);//hace visible la ventan de busqueda
     }
-    
+
     private void cargarTotalRegistros() {
         int total = jtInstituto.getRowCount();
         lblTotalRegistros.setText(String.valueOf(total));
     }
-    
+
     private ArrayList<Object> consultarRegistroIndividual(String id, String tabla) {
         criterioBusqueda[0] = id;
         controladorConsulta consulta = new controladorConsulta();
         return consulta.obtenerConsulta(tabla, controladorVariablesSesion.getInstance().getFiltrar(), criterioBusqueda);
     }
-    
+
     private void convertirAmayusculas(Component componente) {
-        
+
         if (componente instanceof JTextField) {
             JTextField text = (JTextField) componente;
             String cadena = (text.getText()).toUpperCase();
             text.setText(cadena);
-            
+
         } else if (componente instanceof JTextArea) {
             JTextArea textArea = (JTextArea) componente;
             String cadena = (textArea.getText()).toUpperCase();
             textArea.setText(cadena);
         }
-        
+
     }
-    
+
     private void convertirAminusculas(javax.swing.JTextField jTextfieldS) {
         String cadena = (jTextfieldS.getText()).toLowerCase();
         jTextfieldS.setText(cadena);
     }
-    
+
     private boolean crearActualizar() {
         Map<String, Object> map = new HashMap<>();
         //llena las variables de tipo map con los valores de las cajas de texto
@@ -660,9 +662,9 @@ public class frmInstituto extends javax.swing.JInternalFrame {
         ControladorInstituto ControladorInstituto = new ControladorInstituto();
         //llama al metodo para crear o actualizar segun sea la accion
         return ControladorInstituto.crearActualizar(map);
-        
+
     }
-    
+
     private String dateToString(JDateChooser fecha) {
         Date fechaNacimiento;
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -674,42 +676,42 @@ public class frmInstituto extends javax.swing.JInternalFrame {
         }
         return formatoFecha.format(fechaNacimiento);
     }
-    
+
     private void eliminar() {
         Map<String, Object> map = new HashMap<>();
         map.put("id", lblId.getText());
         ControladorInstituto ControladorInstituto = new ControladorInstituto();
         ControladorInstituto.eliminar(map);
-        
+
     }
-    
+
     private void filtrar() {
         RowFilter<TableModel, Object> rf;
         try {
             rf = RowFilter.regexFilter(txtCriterioBusqueda.getText(), cmbFiltro.getSelectedIndex() + 1);
             sorter.setRowFilter(rf);
-            
+
         } catch (java.util.regex.PatternSyntaxException e) {
             JOptionPane.showConfirmDialog(null, e.getMessage(), "Error Filtrar", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
-    
+
     private void formatearColumnas() {
         //Oculta la primera columna que corresponde al ID de la tabla
         jtInstituto.getColumnModel().getColumn(0).setMaxWidth(0); //ANCHO
         jtInstituto.getColumnModel().getColumn(0).setMinWidth(0); //LARGO
         jtInstituto.getColumnModel().getColumn(0).setPreferredWidth(0); //DEFECTO AQUI DEPENDE DEL LARGO Y DEL ANCHO
     }
-    
+
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
         txaNombre.isFocusable();
         if (component instanceof JTextField) {
-            
+
             JTextField text = (JTextField) component;
             text.setText("");
-            
+
         } else if (component instanceof JTextArea) {
             JTextArea textArea = (JTextArea) component;
             textArea.setText("");
@@ -719,7 +721,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void llenarGrid() {
         jtInstituto.setModel(controladorGrid.getInstance().llenarGrid("instituto", "grid", null, true));
         sorter = new TableRowSorter<>(jtInstituto.getModel());
@@ -727,7 +729,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
         jtInstituto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
     }
-    
+
     private void llenarFiltro() {
         controladorConsulta consulta = new controladorConsulta();
         cmbFiltro.removeAllItems();
@@ -735,12 +737,12 @@ public class frmInstituto extends javax.swing.JInternalFrame {
             cmbFiltro.addItem(consulta.getNombColumnas()[i]);
         }
     }
-    
+
     private void llenarRector(ArrayList<Object> datos) {
         idRector = (String.valueOf(datos.get(0)));
         txtRector.setText(String.valueOf(datos.get(2)) + " " + String.valueOf(datos.get(1)));
     }
-    
+
     private void llenarInstituto(ArrayList<Object> datos) {
         lblId.setText(String.valueOf(datos.get(0)));
         txtRector.setText((String) datos.get(2) + " " + (String) datos.get(3));
@@ -752,9 +754,9 @@ public class frmInstituto extends javax.swing.JInternalFrame {
         txtCoordinacionZonal.setText((String) datos.get(9));
         dtFechaCreacion.setDate(stringToJDateChooser((String) datos.get(10)));
         txtCreacionResolucion.setText((String) datos.get(11));
-        
+
     }
-    
+
     public Date stringToJDateChooser(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String strFecha = fecha;

@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 import static vista.frmCronograma.cmbPeriodo;
 
 public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
@@ -58,7 +59,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
             tipo_consulta = "seguimiento_estudiante_admin";
             llenarGrid(tipo_consulta);
         } else {
-            tipo_consulta="seguimiento_estudiante";
+            tipo_consulta = "seguimiento_estudiante";
             llenarGrid(tipo_consulta);
         }
     }
@@ -714,12 +715,12 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo, jtSeguimientoEstudiante.getModel());
+            controladorExcel.getInstance().generarExcel2(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtSeguimientoEstudiante));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+
     // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="Metodos"> 
-
     private boolean calcularPromedio() {
         double notaEmpresa = 0.0;
         double notaInstituto = 0.0;
@@ -846,7 +847,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
     }
 
     private void llenarGrid(String tipo) {
-        jtSeguimientoEstudiante.setModel(controladorGrid.getInstance().llenarGrid(tipo,"grid", null, true));
+        jtSeguimientoEstudiante.setModel(controladorGrid.getInstance().llenarGrid(tipo, "grid", null, true));
         sorter = new TableRowSorter<>(jtSeguimientoEstudiante.getModel());
         jtSeguimientoEstudiante.setRowSorter(sorter);
         jtSeguimientoEstudiante.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

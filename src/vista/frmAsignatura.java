@@ -15,6 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -126,7 +127,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaAsignatura.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 10, 240, -1));
+        jpBusquedaAsignatura.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 10, 200, -1));
 
         jtAsignatura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,7 +151,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(jtAsignatura);
 
-        jpBusquedaAsignatura.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 430, 380));
+        jpBusquedaAsignatura.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 430, 410));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -173,7 +174,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
                 btnNuevo1ActionPerformed(evt);
             }
         });
-        jpBusquedaAsignatura.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 40, 40));
+        jpBusquedaAsignatura.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 40, 40));
 
         jPanel1.add(jpBusquedaAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -435,11 +436,11 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (controladorVariablesSesion.getInstance().eliminar(lblId.getText()) == 0) {
-        accion = "crear";
-        eliminar();//elimina el registro seleccionado
-        llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
-        limpiarCajasTexto(jpRegistroAsignatura);//limpia las cajas de texto
-        cargarTotalRegistros();//carga el total de registros
+            accion = "crear";
+            eliminar();//elimina el registro seleccionado
+            llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
+            limpiarCajasTexto(jpRegistroAsignatura);//limpia las cajas de texto
+            cargarTotalRegistros();//carga el total de registros
     }//GEN-LAST:event_btnEliminarActionPerformed
     }
     private void btnCrearActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActualizarActionPerformed
@@ -481,9 +482,10 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo, jtAsignatura.getModel());
+            controladorExcel.getInstance().generarExcel2(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtAsignatura));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+    
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
