@@ -90,6 +90,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(945, 535));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(945, 575));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -154,12 +155,12 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpBusquedaAsignatura.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, -1));
+        jpBusquedaAsignatura.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
 
         lblRegistros3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros3.setText("Registros:");
         lblRegistros3.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpBusquedaAsignatura.add(lblRegistros3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        jpBusquedaAsignatura.add(lblRegistros3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
@@ -379,7 +380,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
