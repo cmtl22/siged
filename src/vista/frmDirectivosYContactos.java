@@ -75,11 +75,9 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         btnBuscarEmpresa = new javax.swing.JButton();
         lblClave3 = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
-        lblClave4 = new javax.swing.JLabel();
         txtFormacionAcademica = new javax.swing.JTextField();
         lblClave5 = new javax.swing.JLabel();
         txtTelefonoFijo = new javax.swing.JTextField();
-        lblClave6 = new javax.swing.JLabel();
         txtTelefonoMovil = new javax.swing.JTextField();
         lblClave7 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -98,8 +96,6 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         lblPersona3 = new javax.swing.JLabel();
         lblPersona4 = new javax.swing.JLabel();
         lblPersona5 = new javax.swing.JLabel();
-        lblPersona6 = new javax.swing.JLabel();
-        lblPersona7 = new javax.swing.JLabel();
         lblPersona9 = new javax.swing.JLabel();
         lblPersona10 = new javax.swing.JLabel();
         lblPersona11 = new javax.swing.JLabel();
@@ -131,12 +127,11 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         lblPersona12.setText("*");
         lblPersona12.setPreferredSize(new java.awt.Dimension(120, 25));
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("DIRECTIVOS Y CONTACTOS");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_directivos_32.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(945, 535));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setPreferredSize(new java.awt.Dimension(945, 575));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -172,8 +167,8 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         cmbTipoIdentificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbTipoIdentificacion.setToolTipText("");
         cmbTipoIdentificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmbTipoIdentificacion.setPreferredSize(new java.awt.Dimension(150, 25));
-        jpRegistroUsuario.add(cmbTipoIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 120, -1));
+        cmbTipoIdentificacion.setPreferredSize(new java.awt.Dimension(120, 25));
+        jpRegistroUsuario.add(cmbTipoIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, -1, -1));
 
         lblPersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona.setForeground(new java.awt.Color(255, 0, 0));
@@ -219,11 +214,6 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         });
         jpRegistroUsuario.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 230, -1));
 
-        lblClave4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblClave4.setText("<html>Número Identificación:</html>");
-        lblClave4.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 80, -1));
-
         txtFormacionAcademica.setPreferredSize(new java.awt.Dimension(225, 25));
         txtFormacionAcademica.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -233,30 +223,25 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         jpRegistroUsuario.add(txtFormacionAcademica, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 230, -1));
 
         lblClave5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblClave5.setText("Teléfono Fijo:");
+        lblClave5.setText("Teléfonos:");
         lblClave5.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroUsuario.add(lblClave5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 80, 20));
 
-        txtTelefonoFijo.setPreferredSize(new java.awt.Dimension(225, 25));
+        txtTelefonoFijo.setPreferredSize(new java.awt.Dimension(110, 25));
         txtTelefonoFijo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTelefonoFijoKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtTelefonoFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 120, -1));
+        jpRegistroUsuario.add(txtTelefonoFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, -1, -1));
 
-        lblClave6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblClave6.setText("Teléfono Móvil:");
-        lblClave6.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 90, 20));
-
-        txtTelefonoMovil.setPreferredSize(new java.awt.Dimension(225, 25));
+        txtTelefonoMovil.setPreferredSize(new java.awt.Dimension(110, 25));
         txtTelefonoMovil.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTelefonoMovilKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtTelefonoMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 130, -1));
+        jpRegistroUsuario.add(txtTelefonoMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, -1, -1));
 
         lblClave7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave7.setText("Correo Electrónico:");
@@ -309,13 +294,13 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         lblRol3.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroUsuario.add(lblRol3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 130, -1));
 
-        txtNumeroIdentificacion.setPreferredSize(new java.awt.Dimension(225, 25));
+        txtNumeroIdentificacion.setPreferredSize(new java.awt.Dimension(100, 25));
         txtNumeroIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNumeroIdentificacionKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtNumeroIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 120, -1));
+        jpRegistroUsuario.add(txtNumeroIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
 
         txaDireccion.setColumns(1);
         txaDireccion.setLineWrap(true);
@@ -330,7 +315,8 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         jpRegistroUsuario.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 230, -1));
 
         dtFechaNacimiento.setDateFormatString("yyyy-MM-dd");
-        jpRegistroUsuario.add(dtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 230, 25));
+        dtFechaNacimiento.setPreferredSize(new java.awt.Dimension(110, 25));
+        jpRegistroUsuario.add(dtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, -1, 25));
         dtFechaNacimiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         Date date3 = new Date();
@@ -363,25 +349,13 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         lblPersona5.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona5.setText("*");
         lblPersona5.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 10, -1));
-
-        lblPersona6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona6.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona6.setText("*");
-        lblPersona6.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 10, -1));
-
-        lblPersona7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona7.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona7.setText("*");
-        lblPersona7.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 10, -1));
+        jpRegistroUsuario.add(lblPersona5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 10, -1));
 
         lblPersona9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona9.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona9.setText("*");
         lblPersona9.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 10, -1));
+        jpRegistroUsuario.add(lblPersona9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 10, -1));
 
         lblPersona10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona10.setForeground(new java.awt.Color(255, 0, 0));
@@ -434,8 +408,8 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         cmbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbGenero.setToolTipText("");
         cmbGenero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmbGenero.setPreferredSize(new java.awt.Dimension(150, 25));
-        jpRegistroUsuario.add(cmbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 230, -1));
+        cmbGenero.setPreferredSize(new java.awt.Dimension(110, 25));
+        jpRegistroUsuario.add(cmbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, -1));
 
         jPanel1.add(jpRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 50, -1, -1));
 
@@ -469,7 +443,7 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtPersona);
 
-        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 450));
 
         cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -487,12 +461,12 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
         lblRegistros.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpBusquedaUsuario.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        jpBusquedaUsuario.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpBusquedaUsuario.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, 20));
+        jpBusquedaUsuario.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, 20));
 
         lblFiltro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblFiltro.setText("Filtro:");
@@ -556,17 +530,17 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnCerrar);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 5, 190, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 190, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
         );
 
         pack();
@@ -582,8 +556,8 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtPersonaMouseClicked
 
     private void txtCriterioBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCriterioBusquedaKeyReleased
-        filtrar();
         convertirAmayusculas(txtCriterioBusqueda);
+        filtrar();
     }//GEN-LAST:event_txtCriterioBusquedaKeyReleased
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -799,7 +773,7 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         txtEmpresa.setText((String) datos.get(4));
 
     }
-    
+
     private void llenarComboGenero() {
         controladorConsulta consulta = new controladorConsulta();
 
@@ -901,9 +875,7 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblBusqueda;
     private javax.swing.JLabel lblClave;
     private javax.swing.JLabel lblClave3;
-    private javax.swing.JLabel lblClave4;
     private javax.swing.JLabel lblClave5;
-    private javax.swing.JLabel lblClave6;
     private javax.swing.JLabel lblClave7;
     private javax.swing.JLabel lblClave8;
     private javax.swing.JLabel lblEmpresa;
@@ -919,8 +891,6 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblPersona3;
     private javax.swing.JLabel lblPersona4;
     private javax.swing.JLabel lblPersona5;
-    private javax.swing.JLabel lblPersona6;
-    private javax.swing.JLabel lblPersona7;
     private javax.swing.JLabel lblPersona8;
     private javax.swing.JLabel lblPersona9;
     private javax.swing.JLabel lblRegistro;

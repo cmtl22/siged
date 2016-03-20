@@ -34,7 +34,7 @@ public class controladorVariablesSesion {
     private String[] datosConsulta;
 
     private boolean bandera;
-    private static final int limiteVentanas = 2;
+    private static final int limiteVentanas = 6;
     private int contadorVentanas;
 
     private controladorVariablesSesion() {

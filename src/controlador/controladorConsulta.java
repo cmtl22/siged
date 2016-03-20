@@ -153,13 +153,11 @@ public class controladorConsulta {
             default:
                 sql = "error";
         }
-
-        System.out.println(sql);
         if (Conexion.getInstance().consultarQuery(sql)) {
             try {
                 resultadoConsulta = Conexion.getInstance().getResultado();
                 int i = 0;
-                modeloCombo.addElement("Seleccione...");
+                modeloCombo.addElement("SELECCIONE...");
                 codigoCombo.add("-1");
                 while (resultadoConsulta.next()) {
                     codigoCombo.add(resultadoConsulta.getString("referencia"));

@@ -90,7 +90,6 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         btnBuscarEmpresa = new javax.swing.JButton();
         lblClave3 = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
-        lblClave4 = new javax.swing.JLabel();
         txtFormacionAcademica = new javax.swing.JTextField();
         lblClave5 = new javax.swing.JLabel();
         txtTelefonoFijo = new javax.swing.JTextField();
@@ -114,7 +113,6 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         lblPersona4 = new javax.swing.JLabel();
         lblPersona5 = new javax.swing.JLabel();
         lblPersona6 = new javax.swing.JLabel();
-        lblPersona7 = new javax.swing.JLabel();
         lblPersona9 = new javax.swing.JLabel();
         lblPersona10 = new javax.swing.JLabel();
         lblPersona11 = new javax.swing.JLabel();
@@ -143,12 +141,11 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         lblPersona12.setText("*");
         lblPersona12.setPreferredSize(new java.awt.Dimension(120, 25));
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("ADMINISTRATIVOS EMPRESA");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_directivos_32.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(945, 535));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setPreferredSize(new java.awt.Dimension(945, 575));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -178,30 +175,30 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
                 txtNombrePersonaKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 230, -1));
+        jpRegistroUsuario.add(txtNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 230, -1));
 
         cmbTipoIdentificacion.setBackground(new java.awt.Color(204, 204, 255));
         cmbTipoIdentificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbTipoIdentificacion.setToolTipText("");
         cmbTipoIdentificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmbTipoIdentificacion.setPreferredSize(new java.awt.Dimension(150, 25));
-        jpRegistroUsuario.add(cmbTipoIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 110, -1));
+        cmbTipoIdentificacion.setPreferredSize(new java.awt.Dimension(120, 25));
+        jpRegistroUsuario.add(cmbTipoIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
 
         lblPersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona.setText("*");
         lblPersona.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 10, -1));
+        jpRegistroUsuario.add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 10, -1));
 
         lblRol.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRol.setText("<html>Tipo de Identificación:</html>");
         lblRol.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 80, -1));
+        jpRegistroUsuario.add(lblRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 80, -1));
 
         lblClave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave.setText("Nombres:");
         lblClave.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 20));
+        jpRegistroUsuario.add(lblClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 130, 20));
 
         txtEmpresa.setEditable(false);
         txtEmpresa.setPreferredSize(new java.awt.Dimension(225, 25));
@@ -221,7 +218,7 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         lblClave3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave3.setText("Apellidos:");
         lblClave3.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 130, 20));
+        jpRegistroUsuario.add(lblClave3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 130, 20));
 
         txtApellido.setPreferredSize(new java.awt.Dimension(225, 25));
         txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -229,12 +226,7 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
                 txtApellidoKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 230, -1));
-
-        lblClave4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblClave4.setText("<html>Número Identificación:</html>");
-        lblClave4.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 80, -1));
+        jpRegistroUsuario.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 230, -1));
 
         txtFormacionAcademica.setPreferredSize(new java.awt.Dimension(225, 25));
         txtFormacionAcademica.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -242,12 +234,12 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
                 txtFormacionAcademicaKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtFormacionAcademica, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 230, -1));
+        jpRegistroUsuario.add(txtFormacionAcademica, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 230, -1));
 
         lblClave5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave5.setText("Teléfono Fijo:");
         lblClave5.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 80, 20));
+        jpRegistroUsuario.add(lblClave5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 80, 20));
 
         txtTelefonoFijo.setPreferredSize(new java.awt.Dimension(225, 25));
         txtTelefonoFijo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -255,12 +247,12 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
                 txtTelefonoFijoKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtTelefonoFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 110, -1));
+        jpRegistroUsuario.add(txtTelefonoFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 230, -1));
 
         lblClave6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave6.setText("Teléfono Móvil:");
         lblClave6.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 90, 20));
+        jpRegistroUsuario.add(lblClave6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 90, 20));
 
         txtTelefonoMovil.setPreferredSize(new java.awt.Dimension(225, 25));
         txtTelefonoMovil.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -268,12 +260,12 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
                 txtTelefonoMovilKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtTelefonoMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 110, -1));
+        jpRegistroUsuario.add(txtTelefonoMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 230, -1));
 
         lblClave7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave7.setText("Correo Electrónico:");
         lblClave7.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 130, 20));
+        jpRegistroUsuario.add(lblClave7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 130, 20));
 
         txtEmail.setPreferredSize(new java.awt.Dimension(225, 25));
         txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -281,22 +273,22 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
                 txtEmailKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 230, -1));
+        jpRegistroUsuario.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 230, -1));
 
         lblClave8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave8.setText("Fecha Nacimiento:");
         lblClave8.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 130, 20));
+        jpRegistroUsuario.add(lblClave8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 130, 20));
 
         lblRol1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRol1.setText("Dirección:");
         lblRol1.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblRol1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 130, -1));
+        jpRegistroUsuario.add(lblRol1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 130, -1));
 
         lblRol2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRol2.setText("Formación Académica:");
         lblRol2.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblRol2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 130, -1));
+        jpRegistroUsuario.add(lblRol2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 130, -1));
 
         jScrollPane2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -314,20 +306,20 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(txaInformacionAdicional);
 
-        jpRegistroUsuario.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 230, -1));
+        jpRegistroUsuario.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 230, -1));
 
         lblRol3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRol3.setText("Información Adicional:");
         lblRol3.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblRol3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 130, -1));
+        jpRegistroUsuario.add(lblRol3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 130, -1));
 
-        txtNumeroIdentificacion.setPreferredSize(new java.awt.Dimension(225, 25));
+        txtNumeroIdentificacion.setPreferredSize(new java.awt.Dimension(100, 25));
         txtNumeroIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNumeroIdentificacionKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtNumeroIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 110, -1));
+        jpRegistroUsuario.add(txtNumeroIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
 
         txaDireccion.setColumns(1);
         txaDireccion.setLineWrap(true);
@@ -339,10 +331,11 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(txaDireccion);
 
-        jpRegistroUsuario.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 230, -1));
+        jpRegistroUsuario.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 230, -1));
 
         dtFechaNacimiento.setDateFormatString("yyyy-MM-dd");
-        jpRegistroUsuario.add(dtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 230, 25));
+        dtFechaNacimiento.setPreferredSize(new java.awt.Dimension(110, 25));
+        jpRegistroUsuario.add(dtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, -1, -1));
         dtFechaNacimiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         Date date3 = new Date();
@@ -363,73 +356,67 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         lblPersona3.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona3.setText("*");
         lblPersona3.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 10, -1));
+        jpRegistroUsuario.add(lblPersona3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 10, -1));
 
         lblPersona4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona4.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona4.setText("*");
         lblPersona4.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 10, -1));
+        jpRegistroUsuario.add(lblPersona4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 10, -1));
 
         lblPersona5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona5.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona5.setText("*");
         lblPersona5.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 10, -1));
+        jpRegistroUsuario.add(lblPersona5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 10, -1));
 
         lblPersona6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona6.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona6.setText("*");
         lblPersona6.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 10, -1));
-
-        lblPersona7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona7.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona7.setText("*");
-        lblPersona7.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 10, -1));
+        jpRegistroUsuario.add(lblPersona6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 10, -1));
 
         lblPersona9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona9.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona9.setText("*");
         lblPersona9.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 10, -1));
+        jpRegistroUsuario.add(lblPersona9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 10, -1));
 
         lblPersona10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona10.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona10.setText("*");
         lblPersona10.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 10, -1));
+        jpRegistroUsuario.add(lblPersona10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 10, -1));
 
         lblPersona11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona11.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona11.setText("*");
         lblPersona11.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 10, -1));
+        jpRegistroUsuario.add(lblPersona11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 10, -1));
 
         lblPersona13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona13.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona13.setText("*");
         lblPersona13.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 10, -1));
+        jpRegistroUsuario.add(lblPersona13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 10, -1));
 
         lblRol4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRol4.setText("Tipo:");
         lblRol4.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblRol4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 130, -1));
+        jpRegistroUsuario.add(lblRol4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 130, -1));
 
         lblPersona8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona8.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona8.setText("*");
         lblPersona8.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 10, -1));
+        jpRegistroUsuario.add(lblPersona8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 10, -1));
 
         cmbTipoPersonaEmpresa.setBackground(new java.awt.Color(204, 204, 255));
         cmbTipoPersonaEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbTipoPersonaEmpresa.setToolTipText("");
         cmbTipoPersonaEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbTipoPersonaEmpresa.setPreferredSize(new java.awt.Dimension(150, 25));
-        jpRegistroUsuario.add(cmbTipoPersonaEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 440, 230, -1));
+        jpRegistroUsuario.add(cmbTipoPersonaEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 230, -1));
 
         jPanel1.add(jpRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 50, -1, -1));
 
@@ -481,12 +468,12 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
         lblRegistros.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpBusquedaUsuario.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        jpBusquedaUsuario.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpBusquedaUsuario.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, 20));
+        jpBusquedaUsuario.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, 20));
 
         lblFiltro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblFiltro.setText("Filtro:");
@@ -504,7 +491,7 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         jPanel1.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 10, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(300, 50));
+        jPanel2.setPreferredSize(new java.awt.Dimension(185, 50));
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_nuevo_40.png"))); // NOI18N
         btnNuevo.setToolTipText("NUEVO");
@@ -550,17 +537,17 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnCerrar);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, 190, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
 
         pack();
@@ -576,8 +563,8 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtPersonaMouseClicked
 
     private void txtCriterioBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCriterioBusquedaKeyReleased
-        filtrar();
         convertirAmayusculas(txtCriterioBusqueda);
+        filtrar();
     }//GEN-LAST:event_txtCriterioBusquedaKeyReleased
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -728,7 +715,7 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         return persona.crearActualizar(map);
 
     }
-    
+
     private String dateToString(JDateChooser fecha) {
         Date fechaNacimiento;
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -785,7 +772,7 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void llenarCarrera(ArrayList<Object> datos) {
         idCarrera = (String.valueOf(datos.get(0)));
         txtEmpresa.setText((String) datos.get(3));
@@ -824,7 +811,7 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         jtPersona.setRowSorter(sorter);
         jtPersona.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
-    }    
+    }
 
     private void llenarPersona(ArrayList<Object> datos) {
 
@@ -844,7 +831,7 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
         idCarrera = (String.valueOf(datos.get(13)));
         txaInformacionAdicional.setText((String) datos.get(14));
 
-    }    
+    }
 
     public Date stringToJDateChooser(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
@@ -882,7 +869,6 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblBusqueda;
     private javax.swing.JLabel lblClave;
     private javax.swing.JLabel lblClave3;
-    private javax.swing.JLabel lblClave4;
     private javax.swing.JLabel lblClave5;
     private javax.swing.JLabel lblClave6;
     private javax.swing.JLabel lblClave7;
@@ -900,7 +886,6 @@ public class frmPersonaEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblPersona4;
     private javax.swing.JLabel lblPersona5;
     private javax.swing.JLabel lblPersona6;
-    private javax.swing.JLabel lblPersona7;
     private javax.swing.JLabel lblPersona8;
     private javax.swing.JLabel lblPersona9;
     private javax.swing.JLabel lblRegistro;

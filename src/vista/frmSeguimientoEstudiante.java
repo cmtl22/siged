@@ -196,6 +196,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         lblPromedio.setText("Promedio:");
         jpRegistroSeguimientoEstudiante.add(lblPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
 
+        txtPromedio.setEditable(false);
         txtPromedio.setPreferredSize(new java.awt.Dimension(50, 25));
         txtPromedio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,7 +318,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 btnEstudianteActionPerformed(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(btnEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(btnEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
 
         btnTutorEmpresarial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
         btnTutorEmpresarial.setToolTipText("Buscar");
@@ -430,7 +431,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaSeguimientoEstudiante.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 250, -1));
+        jpBusquedaSeguimientoEstudiante.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 200, -1));
 
         jtSeguimientoEstudiante.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -454,17 +455,17 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtSeguimientoEstudiante);
 
-        jpBusquedaSeguimientoEstudiante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 420, 370));
+        jpBusquedaSeguimientoEstudiante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 440, 450));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
         lblRegistros.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpBusquedaSeguimientoEstudiante.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 60, -1));
+        jpBusquedaSeguimientoEstudiante.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 60, -1));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpBusquedaSeguimientoEstudiante.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 200, -1));
+        jpBusquedaSeguimientoEstudiante.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 200, -1));
 
         btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
@@ -477,12 +478,13 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 btnNuevo1ActionPerformed(evt);
             }
         });
-        jpBusquedaSeguimientoEstudiante.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 40, 40));
+        jpBusquedaSeguimientoEstudiante.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 40, 40));
 
         jPanel1.add(jpBusquedaSeguimientoEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(300, 50));
+        jPanel2.setMinimumSize(new java.awt.Dimension(230, 50));
+        jPanel2.setPreferredSize(new java.awt.Dimension(230, 50));
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_nuevo_40.png"))); // NOI18N
         btnNuevo.setToolTipText("Nuevo");
@@ -544,7 +546,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnCerrar);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, 230, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -8,7 +8,7 @@ import controlador.controladorVariablesSesion;
 import java.awt.Component;
 import java.awt.Container;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -93,13 +93,12 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("USUARIO");
         setToolTipText("");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_usuarios_32.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(945, 535));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setPreferredSize(new java.awt.Dimension(945, 575));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -180,13 +179,13 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         lblRegistros1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros1.setText("Estado:");
         lblRegistros1.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpRegistroUsuario.add(lblRegistros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 50, -1));
+        jpRegistroUsuario.add(lblRegistros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 50, -1));
 
         lblEstadoProceso.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         lblEstadoProceso.setForeground(new java.awt.Color(255, 0, 0));
         lblEstadoProceso.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblEstadoProceso.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpRegistroUsuario.add(lblEstadoProceso, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 370, -1));
+        jpRegistroUsuario.add(lblEstadoProceso, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 370, -1));
 
         jPanel1.add(jpRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 50, -1, -1));
 
@@ -217,7 +216,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtUsuario);
 
-        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 430, 350));
+        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 430, 380));
 
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
@@ -229,17 +228,17 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaUsuario.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 280, -1));
+        jpBusquedaUsuario.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 200, -1));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
         lblRegistros.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpBusquedaUsuario.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, -1, -1));
+        jpBusquedaUsuario.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpBusquedaUsuario.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 490, -1, -1));
+        jpBusquedaUsuario.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
 
         lblFiltro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblFiltro.setText("Filtro:");
@@ -288,7 +287,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                 btnNuevo1ActionPerformed(evt);
             }
         });
-        jpBusquedaUsuario.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 60, 40, 40));
+        jpBusquedaUsuario.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 40, 40));
 
         jPanel1.add(jpBusquedaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -351,17 +350,17 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnCerrar);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 5, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
         );
 
         pack();

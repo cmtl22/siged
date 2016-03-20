@@ -22,9 +22,8 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
-    
-    // <editor-fold defaultstate="collapsed" desc="Declaracion de Variables"> 
 
+    // <editor-fold defaultstate="collapsed" desc="Declaracion de Variables"> 
     private String accion;
     private String tipoAutoridad;
     private ArrayList<String> codigoTipoPersona = new ArrayList<>();
@@ -127,9 +126,10 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         setTitle("AUTORIDADES");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_autoridades_32.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(945, 535));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setPreferredSize(new java.awt.Dimension(935, 570));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpRegistroUsuario.setBackground(new java.awt.Color(255, 255, 255));
@@ -163,8 +163,8 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         cmbTipoIdentificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbTipoIdentificacion.setToolTipText("");
         cmbTipoIdentificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmbTipoIdentificacion.setPreferredSize(new java.awt.Dimension(150, 25));
-        jpRegistroUsuario.add(cmbTipoIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 120, -1));
+        cmbTipoIdentificacion.setPreferredSize(new java.awt.Dimension(120, 25));
+        jpRegistroUsuario.add(cmbTipoIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
 
         lblPersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona.setForeground(new java.awt.Color(255, 0, 0));
@@ -280,13 +280,13 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         lblRol3.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroUsuario.add(lblRol3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 130, -1));
 
-        txtNumeroIdentificacion.setPreferredSize(new java.awt.Dimension(225, 25));
+        txtNumeroIdentificacion.setPreferredSize(new java.awt.Dimension(100, 25));
         txtNumeroIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNumeroIdentificacionKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtNumeroIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 100, -1));
+        jpRegistroUsuario.add(txtNumeroIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
 
         txaDireccion.setColumns(1);
         txaDireccion.setLineWrap(true);
@@ -301,7 +301,8 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         jpRegistroUsuario.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 230, -1));
 
         dtFechaNacimiento.setDateFormatString("yyyy-MM-dd");
-        jpRegistroUsuario.add(dtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 110, 25));
+        dtFechaNacimiento.setPreferredSize(new java.awt.Dimension(110, 25));
+        jpRegistroUsuario.add(dtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, -1));
         dtFechaNacimiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         Date date3 = new Date();
@@ -382,8 +383,8 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         cmbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbGenero.setToolTipText("");
         cmbGenero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmbGenero.setPreferredSize(new java.awt.Dimension(150, 25));
-        jpRegistroUsuario.add(cmbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 100, -1));
+        cmbGenero.setPreferredSize(new java.awt.Dimension(110, 25));
+        jpRegistroUsuario.add(cmbGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, -1));
 
         lblPersona15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona15.setForeground(new java.awt.Color(255, 0, 0));
@@ -391,7 +392,7 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         lblPersona15.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroUsuario.add(lblPersona15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 10, -1));
 
-        jPanel1.add(jpRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 55, -1, -1));
+        jPanel1.add(jpRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 50, -1, -1));
 
         jpBusquedaUsuario.setBackground(new java.awt.Color(255, 255, 255));
         jpBusquedaUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -422,7 +423,7 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtPersona);
 
-        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 450));
 
         cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -452,7 +453,7 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         lblFiltro.setPreferredSize(new java.awt.Dimension(32, 25));
         jpBusquedaUsuario.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel1.add(jpBusquedaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 55, -1, -1));
+        jPanel1.add(jpBusquedaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
         lblBusqueda.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
         lblBusqueda.setText("BÚSQUEDA");
@@ -469,6 +470,8 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         btnNuevo.setToolTipText("NUEVO");
         btnNuevo.setBorder(null);
         btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnNuevo.setPreferredSize(new java.awt.Dimension(40, 40));
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
@@ -480,6 +483,7 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         btnCrearActualizar.setToolTipText("GUARDAR");
         btnCrearActualizar.setBorder(null);
         btnCrearActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCrearActualizar.setPreferredSize(new java.awt.Dimension(40, 40));
         btnCrearActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearActualizarActionPerformed(evt);
@@ -491,6 +495,7 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         btnEliminar.setToolTipText("ELIMINAR");
         btnEliminar.setBorder(null);
         btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.setPreferredSize(new java.awt.Dimension(40, 40));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -502,6 +507,7 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         btnCerrar.setToolTipText("CERRAR");
         btnCerrar.setBorder(null);
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setPreferredSize(new java.awt.Dimension(40, 40));
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarActionPerformed(evt);
@@ -509,18 +515,9 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnCerrar);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(765, 5, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 954, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -535,41 +532,9 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtPersonaMouseClicked
 
     private void txtCriterioBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCriterioBusquedaKeyReleased
-        filtrar();
         convertirAmayusculas(txtCriterioBusqueda);
+        filtrar();
     }//GEN-LAST:event_txtCriterioBusquedaKeyReleased
-
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        accion = "crear";
-        limpiarCajasTexto(jpRegistroUsuario);//limpia las cajas de texto
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
-    private void btnCrearActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActualizarActionPerformed
-        if (crearActualizar()) {//crea o actualiza segun la accion designada
-            limpiarCajasTexto(jpRegistroUsuario);
-            llenarGrid();//consulta a la base de datos para que cargue el nuevo registro ingresado
-            cargarTotalRegistros();//carga el total de registros
-        }
-    }//GEN-LAST:event_btnCrearActualizarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if (controladorVariablesSesion.getInstance().eliminar(lblId.getText()) == 0) {
-            accion = "crear";
-            eliminar();//elimina el registro seleccionado
-            llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
-            limpiarCajasTexto(jpRegistroUsuario);//limpia las cajas de texto
-            cargarTotalRegistros();//carga el total de registros
-        }
-
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        controladorVariablesSesion.getInstance().setContadorVentanas(-1);
-        if (controladorVariablesSesion.getInstance().getContadorVentanas() == 0) {
-            frmPrincipal.jpEncabezado.setVisible(true);
-        }
-        this.dispose();//cierra el formulario
-    }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void txtNombrePersonaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePersonaKeyReleased
 
@@ -617,6 +582,37 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
     private void txtNombrePersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombrePersonaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombrePersonaActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        controladorVariablesSesion.getInstance().setContadorVentanas(-1);
+        if (controladorVariablesSesion.getInstance().getContadorVentanas() == 0) {
+            frmPrincipal.jpEncabezado.setVisible(true);
+        }
+        this.dispose();//cierra el formulario
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        if (controladorVariablesSesion.getInstance().eliminar(lblId.getText()) == 0) {
+            accion = "crear";
+            eliminar();//elimina el registro seleccionado
+            llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
+            limpiarCajasTexto(jpRegistroUsuario);//limpia las cajas de texto
+            cargarTotalRegistros();//carga el total de registros
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnCrearActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActualizarActionPerformed
+        if (crearActualizar()) {//crea o actualiza segun la accion designada
+            limpiarCajasTexto(jpRegistroUsuario);
+            llenarGrid();//consulta a la base de datos para que cargue el nuevo registro ingresado
+            cargarTotalRegistros();//carga el total de registros
+        }
+    }//GEN-LAST:event_btnCrearActualizarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        accion = "crear";
+        limpiarCajasTexto(jpRegistroUsuario);//limpia las cajas de texto
+    }//GEN-LAST:event_btnNuevoActionPerformed
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
@@ -750,7 +746,7 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         cmbGenero.setModel(consulta.consultarCombo(criterioBusqueda));
         codigoGenero = consulta.getCodigoCombo();
     }
-    
+
     private void llenarComboTipoIdentificacion() {
         controladorConsulta consulta = new controladorConsulta();
 

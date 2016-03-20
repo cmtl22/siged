@@ -117,6 +117,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         btnCerrar = new javax.swing.JButton();
 
         setTitle("SEGUIMIENTO REUNIÓN");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_reunion_32.jpg"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(945, 535));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -257,17 +258,17 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 0, 0));
         jLabel11.setText("*");
-        jpRegistroSeguimientoReunion.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 10, -1));
+        jpRegistroSeguimientoReunion.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 10, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 0, 0));
         jLabel12.setText("*");
-        jpRegistroSeguimientoReunion.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 10, -1));
+        jpRegistroSeguimientoReunion.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 10, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 0, 0));
         jLabel13.setText("*");
-        jpRegistroSeguimientoReunion.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 10, -1));
+        jpRegistroSeguimientoReunion.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 10, -1));
 
         jpRegistroSeguimientoReunion3.add(jpRegistroSeguimientoReunion, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 50, 470, -1));
 
@@ -305,7 +306,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaSeguimientoReunion.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 250, -1));
+        jpBusquedaSeguimientoReunion.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 200, -1));
 
         lblRegistrosActuales.setForeground(new java.awt.Color(102, 102, 102));
         jpBusquedaSeguimientoReunion.add(lblRegistrosActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(383, 391, -1, -1));
@@ -313,12 +314,12 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
         lblRegistros.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpBusquedaSeguimientoReunion.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        jpBusquedaSeguimientoReunion.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpBusquedaSeguimientoReunion.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, -1));
+        jpBusquedaSeguimientoReunion.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
 
         jtSeguimientoReunion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -342,7 +343,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtSeguimientoReunion);
 
-        jpBusquedaSeguimientoReunion.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 420, 380));
+        jpBusquedaSeguimientoReunion.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 420, 420));
 
         btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
@@ -355,7 +356,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
                 btnNuevo1ActionPerformed(evt);
             }
         });
-        jpBusquedaSeguimientoReunion.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 40, 40));
+        jpBusquedaSeguimientoReunion.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 40, 40));
 
         jpRegistroSeguimientoReunion3.add(jpBusquedaSeguimientoReunion, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -364,7 +365,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         jpRegistroSeguimientoReunion3.add(lblBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 10, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(225, 50));
+        jPanel2.setPreferredSize(new java.awt.Dimension(230, 50));
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_nuevo_40.png"))); // NOI18N
         btnNuevo.setToolTipText("Nuevo");
@@ -426,7 +427,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnCerrar);
 
-        jpRegistroSeguimientoReunion3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, -1, -1));
+        jpRegistroSeguimientoReunion3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, -1, -1));
 
         getContentPane().add(jpRegistroSeguimientoReunion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
 

@@ -108,12 +108,11 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("SUCURSAL");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_sucursal_32.jpg"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(945, 620));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setMaximumSize(new java.awt.Dimension(943, 565));
         jPanel1.setMinimumSize(new java.awt.Dimension(943, 565));
         jPanel1.setPreferredSize(new java.awt.Dimension(945, 575));
@@ -139,17 +138,17 @@ public class frmSucursal extends javax.swing.JInternalFrame {
                 txtProvinciaKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
+        jpRegistroUsuario.add(txtProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
 
         lblPersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona.setText("Empresa Matriz:");
+        lblPersona.setText("Empresa:");
         lblPersona.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroUsuario.add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 120, -1));
 
         lblClave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave.setText("Provincia:");
         lblClave.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 120, -1));
+        jpRegistroUsuario.add(lblClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 120, -1));
 
         txtEmpresaMatriz.setEditable(false);
         txtEmpresaMatriz.setPreferredSize(new java.awt.Dimension(225, 25));
@@ -169,12 +168,12 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         lblClave3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave3.setText("Nombre De Sucursal:");
         lblClave3.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 120, -1));
+        jpRegistroUsuario.add(lblClave3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 120, -1));
 
         lblClave4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave4.setText("País:");
         lblClave4.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 120, -1));
+        jpRegistroUsuario.add(lblClave4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 120, -1));
 
         txtNombreSucursal.setPreferredSize(new java.awt.Dimension(225, 25));
         txtNombreSucursal.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -182,12 +181,12 @@ public class frmSucursal extends javax.swing.JInternalFrame {
                 txtNombreSucursalKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtNombreSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
+        jpRegistroUsuario.add(txtNombreSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, -1, -1));
 
         lblClave5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave5.setText("Cantón:");
         lblClave5.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 50, -1));
+        jpRegistroUsuario.add(lblClave5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 50, -1));
 
         txtCanton.setPreferredSize(new java.awt.Dimension(225, 25));
         txtCanton.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -195,12 +194,12 @@ public class frmSucursal extends javax.swing.JInternalFrame {
                 txtCantonKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtCanton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
+        jpRegistroUsuario.add(txtCanton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
 
         lblClave6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave6.setText("Ciudad:");
         lblClave6.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 120, -1));
+        jpRegistroUsuario.add(lblClave6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 120, -1));
 
         txtCiudad.setPreferredSize(new java.awt.Dimension(225, 25));
         txtCiudad.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -208,12 +207,12 @@ public class frmSucursal extends javax.swing.JInternalFrame {
                 txtCiudadKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, -1, -1));
+        jpRegistroUsuario.add(txtCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
 
         lblClave7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave7.setText("Sector:");
         lblClave7.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 120, -1));
+        jpRegistroUsuario.add(lblClave7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 120, -1));
 
         txtSector.setPreferredSize(new java.awt.Dimension(225, 25));
         txtSector.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -221,12 +220,12 @@ public class frmSucursal extends javax.swing.JInternalFrame {
                 txtSectorKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtSector, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
+        jpRegistroUsuario.add(txtSector, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, -1, -1));
 
         lblClave8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave8.setText("Referencia:");
         lblClave8.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 120, -1));
+        jpRegistroUsuario.add(lblClave8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 120, -1));
 
         txtReferencia.setPreferredSize(new java.awt.Dimension(225, 25));
         txtReferencia.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -234,12 +233,12 @@ public class frmSucursal extends javax.swing.JInternalFrame {
                 txtReferenciaKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, -1, -1));
+        jpRegistroUsuario.add(txtReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, -1, -1));
 
         lblClave9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave9.setText("Calle Principal:");
         lblClave9.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 120, -1));
+        jpRegistroUsuario.add(lblClave9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 120, -1));
 
         txtCallePrincipal.setPreferredSize(new java.awt.Dimension(225, 25));
         txtCallePrincipal.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -247,7 +246,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
                 txtCallePrincipalKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtCallePrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, -1, -1));
+        jpRegistroUsuario.add(txtCallePrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, -1, -1));
 
         txtCalleInterseccion.setPreferredSize(new java.awt.Dimension(225, 25));
         txtCalleInterseccion.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -255,17 +254,17 @@ public class frmSucursal extends javax.swing.JInternalFrame {
                 txtCalleInterseccionKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtCalleInterseccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, -1, -1));
+        jpRegistroUsuario.add(txtCalleInterseccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, -1, -1));
 
         lblClave10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave10.setText("Calle Intersección:");
         lblClave10.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 120, -1));
+        jpRegistroUsuario.add(lblClave10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 120, -1));
 
         lblClave11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave11.setText("Tipo:");
         lblClave11.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 120, -1));
+        jpRegistroUsuario.add(lblClave11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 120, -1));
 
         txtNumero.setPreferredSize(new java.awt.Dimension(225, 25));
         txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -273,23 +272,24 @@ public class frmSucursal extends javax.swing.JInternalFrame {
                 txtNumeroKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, -1, -1));
+        jpRegistroUsuario.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, -1, -1));
 
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         cmbTipo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpRegistroUsuario.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 220, -1));
+        cmbTipo.setPreferredSize(new java.awt.Dimension(100, 25));
+        jpRegistroUsuario.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
 
         lblPersona5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona5.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona5.setText("*");
         lblPersona5.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 10, -1));
+        jpRegistroUsuario.add(lblPersona5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, 10, -1));
 
         lblPersona6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona6.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona6.setText("*");
         lblPersona6.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 460, 10, -1));
+        jpRegistroUsuario.add(lblPersona6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 10, -1));
 
         lblPersona7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona7.setForeground(new java.awt.Color(255, 0, 0));
@@ -301,67 +301,66 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         lblPersona8.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona8.setText("*");
         lblPersona8.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 10, -1));
+        jpRegistroUsuario.add(lblPersona8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 10, -1));
 
         lblPersona9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona9.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona9.setText("*");
         lblPersona9.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 10, -1));
+        jpRegistroUsuario.add(lblPersona9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 10, -1));
 
         lblPersona10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona10.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona10.setText("*");
         lblPersona10.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 10, -1));
+        jpRegistroUsuario.add(lblPersona10, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 10, -1));
 
         lblPersona11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona11.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona11.setText("*");
         lblPersona11.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 10, -1));
+        jpRegistroUsuario.add(lblPersona11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 10, -1));
 
         lblPersona12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona12.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona12.setText("*");
         lblPersona12.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 10, -1));
+        jpRegistroUsuario.add(lblPersona12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 10, -1));
 
         lblPersona13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona13.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona13.setText("*");
         lblPersona13.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona13, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 10, -1));
+        jpRegistroUsuario.add(lblPersona13, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 10, -1));
 
         lblPersona14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona14.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona14.setText("*");
         lblPersona14.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona14, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 10, -1));
+        jpRegistroUsuario.add(lblPersona14, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 10, -1));
 
         lblPersona15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona15.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona15.setText("*");
         lblPersona15.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona15, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 10, -1));
+        jpRegistroUsuario.add(lblPersona15, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 10, -1));
 
         lblPersona16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona16.setForeground(new java.awt.Color(255, 0, 0));
         lblPersona16.setText("*");
         lblPersona16.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona16, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, 10, -1));
+        jpRegistroUsuario.add(lblPersona16, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 10, -1));
 
         lblClave12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave12.setText("Número:");
         lblClave12.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 120, -1));
+        jpRegistroUsuario.add(lblClave12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 120, -1));
 
         cmbPais.setBackground(new java.awt.Color(204, 204, 255));
-        cmbPais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbPais.setToolTipText("");
         cmbPais.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmbPais.setPreferredSize(new java.awt.Dimension(150, 25));
-        jpRegistroUsuario.add(cmbPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 230, -1));
+        cmbPais.setPreferredSize(new java.awt.Dimension(220, 25));
+        jpRegistroUsuario.add(cmbPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
 
         jPanel1.add(jpRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 50, -1, -1));
 
@@ -396,7 +395,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtSucursal);
 
-        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 450));
 
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
@@ -413,12 +412,12 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
         lblRegistros.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpBusquedaUsuario.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        jpBusquedaUsuario.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpBusquedaUsuario.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, -1));
+        jpBusquedaUsuario.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
 
         lblFiltro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblFiltro.setText("Filtro:");
@@ -482,13 +481,13 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnCerrar);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,8 +507,8 @@ public class frmSucursal extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtSucursalMouseClicked
 
     private void txtCriterioBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCriterioBusquedaKeyReleased
-        filtrar();
         convertirAmayusculas(txtCriterioBusqueda);
+        filtrar();
     }//GEN-LAST:event_txtCriterioBusquedaKeyReleased
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -555,7 +554,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
 
     private void txtNombreSucursalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreSucursalKeyReleased
         convertirAmayusculas(txtNombreSucursal);
-        
+
     }//GEN-LAST:event_txtNombreSucursalKeyReleased
 
     private void txtCantonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantonKeyReleased
@@ -570,7 +569,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
 
     private void txtSectorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSectorKeyReleased
         convertirAmayusculas(txtSector);
-        
+
     }//GEN-LAST:event_txtSectorKeyReleased
 
     private void txtReferenciaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReferenciaKeyReleased
@@ -697,7 +696,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void llenarComboPais() {
         controladorConsulta consulta = new controladorConsulta();
 
@@ -706,7 +705,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         cmbPais.setModel(consulta.consultarCombo(criterioBusqueda));
         codigoPais = consulta.getCodigoCombo();
     }
-    
+
     private void llenarComboTipos() {
         controladorConsulta consulta = new controladorConsulta();
 
@@ -715,13 +714,13 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         cmbTipo.setModel(consulta.consultarCombo(criterioBusqueda));
         codigoTipo = consulta.getCodigoCombo();
     }
-    
+
     private void llenarEmpresa(ArrayList<Object> datos) {
         idEmpresa = (String.valueOf(datos.get(0)));
         txtEmpresaMatriz.setText((String) datos.get(2));
 
     }
-    
+
     private void llenarEmpresaSucursal(ArrayList<Object> datos) {
         lblId.setText(String.valueOf(datos.get(0)));
         idEmpresa = (String.valueOf(datos.get(1)));
@@ -729,7 +728,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         txtEmpresaMatriz.setText((String) datos.get(3));
         txtNombreSucursal.setText((String) datos.get(4));
         cmbTipo.setSelectedItem((String) datos.get(5));
-        cmbPais.setSelectedItem((String) datos.get(6));        
+        cmbPais.setSelectedItem((String) datos.get(6));
         txtProvincia.setText((String) datos.get(7));
         txtCanton.setText((String) datos.get(8));
         txtCiudad.setText((String) datos.get(9));

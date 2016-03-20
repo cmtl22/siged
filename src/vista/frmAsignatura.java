@@ -316,7 +316,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         jPanel1.add(jpRegistroAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 50, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(230, 50));
+        jPanel2.setPreferredSize(new java.awt.Dimension(225, 50));
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_nuevo_40.png"))); // NOI18N
         btnNuevo.setToolTipText("LIMPIAR");
@@ -378,9 +378,9 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnCerrar);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 570));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
