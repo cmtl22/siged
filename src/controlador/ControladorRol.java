@@ -61,7 +61,10 @@ public class ControladorRol {
     public String validarCamposObligatorios(Map datos) {
         camposObligatorios = "";
         if (datos.get("id").equals("")) {
-            camposObligatorios += "Ingres el nombre de un Rol\n";
+            camposObligatorios += "Ingres el nombre del Rol\n";
+        }
+        if (datos.get("nombreRol").equals("")) {
+            camposObligatorios += "Ingres el nombre del Rol\n";
         }
 
         return camposObligatorios;

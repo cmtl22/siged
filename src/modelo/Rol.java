@@ -67,6 +67,7 @@ public class Rol {
             respuesta[0] = resultadoQuery.getString(1);
             respuesta[1] = resultadoQuery.getString(2);
             respuesta[2] = resultadoQuery.getString(3);
+            System.out.println("1: " + resultadoQuery.getString(1) + "\n2: " + resultadoQuery.getString(2) + "\n3: " + resultadoQuery.getString(3));
             sentencia.close();
             return respuesta;
 

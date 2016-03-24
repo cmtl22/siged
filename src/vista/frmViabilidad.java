@@ -7,16 +7,21 @@ import controlador.controladorGrid;
 import controlador.controladorVariablesSesion;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Dimension;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -24,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import modelo.Conexion;
 
 public class frmViabilidad extends javax.swing.JInternalFrame {
 
@@ -31,7 +37,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 //fks
     private String accion;   
     private String idEmpresaSucursal;
-    private String idCarrera;
+    private String[] idsCarrera;
     private String idPersona;
     private String idInstituto;
     private String idEmpresa;
@@ -50,6 +56,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private ArrayList<String> codigoTipo;
     ArrayList<String> codigoEntidadDeRegulacion = new ArrayList<>();
     private TableRowSorter<TableModel> sorter;
+    private TableRowSorter<TableModel> sorterEntidades;
     private String[] direccionEmpresa;
     private String[] direccionSucursal;
     
@@ -73,16 +80,16 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         accion = "crear";
         criterioBusqueda = new String[2];
         idEmpresaSucursal = "-1";
-        idCarrera = "-1";
+        //idCarrera = "-1";
         nombreEmpresa = " ";
         nombreInstituto = " ";
         idEmpresa = "-1";  
-        direccionEmpresa = new String[3];
+        direccionEmpresa = new String[10];
         direccionSucursal = new String[10];
         
-        modeloSucursales = new DefaultTableModel();
+        modeloSucursales = null;
         modeloDireccionMatriz = new DefaultTableModel();
-        modeloDireccionSucursal = new DefaultTableModel();
+        modeloDireccionSucursal = null;
         //llenarGridDocumentosHabilitantes();
         
         //llenarGrid();
@@ -130,7 +137,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         txtInstituto = new javax.swing.JTextField();
         btnBuscarInstittuto = new javax.swing.JButton();
         txtViabNumeroInforme = new javax.swing.JFormattedTextField();
-        btnBuscarRector = new javax.swing.JButton();
         jScrollPane16 = new javax.swing.JScrollPane();
         jp_Antecedentes = new javax.swing.JPanel();
         jrbConductaInstitucionalSi = new javax.swing.JRadioButton();
@@ -157,9 +163,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         txtActividadEconomica = new javax.swing.JTextArea();
         lblDireccionMatriz = new javax.swing.JLabel();
         lblDireccionSucursal = new javax.swing.JLabel();
-        lblDireccionSucursal1 = new javax.swing.JLabel();
-        jScrollPane22 = new javax.swing.JScrollPane();
-        jtDatosContacto = new javax.swing.JTable();
+        lblInfoRepresentanteLegal = new javax.swing.JLabel();
         jScrollPane24 = new javax.swing.JScrollPane();
         jtDireccionMatriz = new javax.swing.JTable();
         jScrollPane25 = new javax.swing.JScrollPane();
@@ -168,7 +172,10 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jtDeudas = new javax.swing.JTable();
         lblTipoDeEmpresa1 = new javax.swing.JLabel();
         txtNombreER = new javax.swing.JTextField();
-        btnBuscarEmpresaSucursal = new javax.swing.JButton();
+        btnBuscarRepresentanteLegal = new javax.swing.JButton();
+        btnAgregarEmsu = new javax.swing.JButton();
+        btnQuitarCarrera1 = new javax.swing.JButton();
+        lblDireccionSucursal2 = new javax.swing.JLabel();
         jScrollPane12 = new javax.swing.JScrollPane();
         jpContenidoDelInforme = new javax.swing.JPanel();
         lblNombreInstituto = new javax.swing.JLabel();
@@ -190,8 +197,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jScrollPane18 = new javax.swing.JScrollPane();
         txaObservacionesPlazoConvenio = new javax.swing.JTextArea();
         lblAsignaturas = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         lblEstudiantesEscenarioPedagogico = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jtEstudiantesEscenarioPedagogico = new javax.swing.JTable();
@@ -231,6 +236,10 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jspNumEstudiantes = new javax.swing.JSpinner();
         jspNumTutores = new javax.swing.JSpinner();
         jspPlazoVigenciaConvenio = new javax.swing.JSpinner();
+        jScrollPane26 = new javax.swing.JScrollPane();
+        jtAsignaturas = new javax.swing.JTable();
+        btnAgregarAsignatura = new javax.swing.JButton();
+        btnQuitarAsignatura = new javax.swing.JButton();
         jScrollPane14 = new javax.swing.JScrollPane();
         jpConclusiones = new javax.swing.JPanel();
         lblElaborado = new javax.swing.JLabel();
@@ -332,7 +341,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         txaAsunto.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jScrollPane19.setViewportView(txaAsunto);
 
-        jp_DatosGenerales.add(jScrollPane19, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 230, 320, -1));
+        jp_DatosGenerales.add(jScrollPane19, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 221, 320, 70));
 
         jScrollPane20.setEnabled(false);
 
@@ -391,17 +400,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         txtViabNumeroInforme.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000"))));
         jp_DatosGenerales.add(txtViabNumeroInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 213, 25));
 
-        btnBuscarRector.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
-        btnBuscarRector.setToolTipText("BUSCAR SOLICITANTE");
-        btnBuscarRector.setBorder(null);
-        btnBuscarRector.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscarRector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarRectorActionPerformed(evt);
-            }
-        });
-        jp_DatosGenerales.add(btnBuscarRector, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 340, -1, -1));
-
         jScrollPane10.setViewportView(jp_DatosGenerales);
 
         jp_Viabilidad.addTab("Datos Generales", null, jScrollPane10, "");
@@ -419,19 +417,19 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         btnGroupConductaInstitucional.add(jrbConductaInstitucionalSi);
         jrbConductaInstitucionalSi.setSelected(true);
         jrbConductaInstitucionalSi.setText("SI");
-        jp_Antecedentes.add(jrbConductaInstitucionalSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 45, 42, -1));
+        jp_Antecedentes.add(jrbConductaInstitucionalSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 42, -1));
 
         btnGroupConductaInstitucional.add(jrbConductaInstitucionalNo);
         jrbConductaInstitucionalNo.setText("NO");
-        jp_Antecedentes.add(jrbConductaInstitucionalNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 45, -1, -1));
+        jp_Antecedentes.add(jrbConductaInstitucionalNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
 
         lblObservaciones.setText("Observaciones sobre deudas:");
         lblObservaciones.setToolTipText("Observaciones respecto al análisis de deudas");
-        jp_Antecedentes.add(lblObservaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 25));
+        jp_Antecedentes.add(lblObservaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, -1, 25));
 
         lblConsideracionesRecomendaciones.setText("<html>                           <p  > \tConsideraciones Preliminares/Recomendaciones                   </p>                   <small> \t<span style =\"font-weight:normal\"> (Principales consideraciones a tomar en cuenta previo análisis de los apectos técnicos y académicos descritos en el informe y a las conclusiones arribadas)                  </small>             </div> </html>");
         lblConsideracionesRecomendaciones.setToolTipText("");
-        jp_Antecedentes.add(lblConsideracionesRecomendaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 160, 390, -1));
+        jp_Antecedentes.add(lblConsideracionesRecomendaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 390, -1));
 
         jLabel14.setText("<html>           <div align=\"justify\">¿Se realizó el análisis preliminar mediante consultas online a las entidades de regulación y control? </div> </html>");
         jp_Antecedentes.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 10, 390, 30));
@@ -439,7 +437,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("<html>           <div align = \"justify\"> \t¿Se constató una conducta institucional/empresarial apropiada, por parte de la empresa?           </div> </html>");
         jLabel7.setMinimumSize(new java.awt.Dimension(140, 15));
-        jp_Antecedentes.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 390, 25));
+        jp_Antecedentes.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 390, 25));
 
         txaObservacionesDeudas.setColumns(20);
         txaObservacionesDeudas.setRows(2);
@@ -451,7 +449,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         txaObservacionesDeudas.setLineWrap(true);
         jScrollPane1.setViewportView(txaObservacionesDeudas);
 
-        jp_Antecedentes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 390, -1));
+        jp_Antecedentes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 390, -1));
 
         txaObservacionesConsideracionesRecomendaciones.setColumns(20);
         txaObservacionesConsideracionesRecomendaciones.setRows(2);
@@ -463,7 +461,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         txaObservacionesConsideracionesRecomendaciones.setLineWrap(true);
         jScrollPane2.setViewportView(txaObservacionesConsideracionesRecomendaciones);
 
-        jp_Antecedentes.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 210, 390, -1));
+        jp_Antecedentes.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 390, -1));
 
         lblFechaDeAcercamientoInicial.setText("Fecha de Acercamiento Inicial");
         jp_Antecedentes.add(lblFechaDeAcercamientoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, 25));
@@ -491,7 +489,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jp_Antecedentes.add(lblNombreRepresentanteLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 390, -1));
 
         txtNombreRepresentanteLegal.setEditable(false);
-        txtNombreRepresentanteLegal.setText("Bill Gates");
         txtNombreRepresentanteLegal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreRepresentanteLegalActionPerformed(evt);
@@ -503,7 +500,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jp_Antecedentes.add(lblTipoDeEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 140, 25));
 
         txtTipoDeEmpresa.setEditable(false);
-        txtTipoDeEmpresa.setText("Privada");
         txtTipoDeEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTipoDeEmpresaActionPerformed(evt);
@@ -518,7 +514,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         txtActividadEconomica.setBackground(new java.awt.Color(238, 238, 238));
         txtActividadEconomica.setColumns(20);
         txtActividadEconomica.setRows(2);
-        txtActividadEconomica.setText("DESARROLLO DE SOFTWARE");
         txtActividadEconomica.setLineWrap(true);
         jScrollPane9.setViewportView(txtActividadEconomica);
 
@@ -527,26 +522,11 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         lblDireccionMatriz.setText("Dirección Matriz");
         jp_Antecedentes.add(lblDireccionMatriz, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 260, 390, 25));
 
-        lblDireccionSucursal.setText("Dirección Sucursal");
+        lblDireccionSucursal.setText("Sucursales: ");
         jp_Antecedentes.add(lblDireccionSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 380, 344, 25));
 
-        lblDireccionSucursal1.setText("Datos de contacto");
-        jp_Antecedentes.add(lblDireccionSucursal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 520, 140, 25));
-
-        jtDatosContacto.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane22.setViewportView(jtDatosContacto);
-
-        jp_Antecedentes.add(jScrollPane22, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 550, 390, 91));
+        lblInfoRepresentanteLegal.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jp_Antecedentes.add(lblInfoRepresentanteLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 570, 400, 70));
 
         jtDireccionMatriz.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -573,8 +553,8 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
             }
         ));
         jtSucursales.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jtSucursales.setPreferredSize(new java.awt.Dimension(1100, 20));
-        jtSucursales.getTableHeader().setReorderingAllowed(false);
+        jtSucursales.setComponentPopupMenu(jPopupMenu1);
+        jtSucursales.setPreferredSize(new java.awt.Dimension(1100, 1000));
         jScrollPane25.setViewportView(jtSucursales);
 
         jp_Antecedentes.add(jScrollPane25, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 390, 83));
@@ -610,16 +590,35 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jp_Antecedentes.add(txtNombreER, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 180, -1));
 
-        btnBuscarEmpresaSucursal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
-        btnBuscarEmpresaSucursal.setToolTipText("BUSCAR EMPRESA");
-        btnBuscarEmpresaSucursal.setBorder(null);
-        btnBuscarEmpresaSucursal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscarEmpresaSucursal.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarRepresentanteLegal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
+        btnBuscarRepresentanteLegal.setToolTipText("BUSCAR SUBSECRETARIO");
+        btnBuscarRepresentanteLegal.setBorder(null);
+        btnBuscarRepresentanteLegal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscarRepresentanteLegal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarEmpresaSucursalActionPerformed(evt);
+                btnBuscarRepresentanteLegalActionPerformed(evt);
             }
         });
-        jp_Antecedentes.add(btnBuscarEmpresaSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, -1, -1));
+        jp_Antecedentes.add(btnBuscarRepresentanteLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, -1, -1));
+
+        btnAgregarEmsu.setText("Agregar");
+        btnAgregarEmsu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarEmsuActionPerformed(evt);
+            }
+        });
+        jp_Antecedentes.add(btnAgregarEmsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, -1, -1));
+
+        btnQuitarCarrera1.setText("Quitar");
+        btnQuitarCarrera1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarCarrera1ActionPerformed(evt);
+            }
+        });
+        jp_Antecedentes.add(btnQuitarCarrera1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 500, 80, -1));
+
+        lblDireccionSucursal2.setText("Datos de contacto");
+        jp_Antecedentes.add(lblDireccionSucursal2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 140, 25));
 
         jScrollPane16.setViewportView(jp_Antecedentes);
 
@@ -723,34 +722,17 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jpContenidoDelInforme.add(jScrollPane18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 310, -1));
 
         lblAsignaturas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblAsignaturas.setText("Carrera, ciclos académicos y asignaturas que solventan el convenio de formación dual:");
-        jpContenidoDelInforme.add(lblAsignaturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 510, 25));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "<html>Asignatura</html>", "<html>(A) Resultados <br>de Aprendizaje</html>", "(B) Equipamiento o Estructura de la ER", "Elementos de similitud entre A y B"
+        lblAsignaturas.setText("<html>Carrera, ciclos académicos y asignaturas que solventan el convenio de formación dual:</html>");
+        lblAsignaturas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAsignaturasMouseClicked(evt);
             }
-        ));
-        jTable1.setDragEnabled(true);
-        jTable1.setDropMode(javax.swing.DropMode.ON);
-        jTable1.setEditingColumn(3);
-        jTable1.setFillsViewportHeight(true);
-        jTable1.setInheritsPopupMenu(true);
-        jTable1.setName(""); // NOI18N
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane4.setViewportView(jTable1);
-
-        jpContenidoDelInforme.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 779, 91));
+        });
+        jpContenidoDelInforme.add(lblAsignaturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 310, 25));
 
         lblEstudiantesEscenarioPedagogico.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblEstudiantesEscenarioPedagogico.setText("Estudiantes por escenario pedagógico");
-        jpContenidoDelInforme.add(lblEstudiantesEscenarioPedagogico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 324, 25));
+        jpContenidoDelInforme.add(lblEstudiantesEscenarioPedagogico, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, 324, 25));
 
         jtEstudiantesEscenarioPedagogico.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -771,21 +753,21 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         columnaEscenarioPedagogico.setCellEditor(new DefaultCellEditor(cmbEscenarios));
         jScrollPane5.setViewportView(jtEstudiantesEscenarioPedagogico);
 
-        jpContenidoDelInforme.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, 324, 92));
+        jpContenidoDelInforme.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 324, 92));
 
         lbAdministradorConvInstituto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbAdministradorConvInstituto.setText("Administrador del convenio por parte del instituto:");
-        jpContenidoDelInforme.add(lbAdministradorConvInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 650, 320, 25));
-        jpContenidoDelInforme.add(txtAdministradorConvInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 690, 320, 25));
+        jpContenidoDelInforme.add(lbAdministradorConvInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 610, 320, 25));
+        jpContenidoDelInforme.add(txtAdministradorConvInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 650, 320, 25));
 
         lbAdministradorConvER.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbAdministradorConvER.setText("Administrador del convenio por parte de la Empresa Receptora:");
-        jpContenidoDelInforme.add(lbAdministradorConvER, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 730, 369, 25));
-        jpContenidoDelInforme.add(txtAdministradorConvER, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 770, 319, 25));
+        jpContenidoDelInforme.add(lbAdministradorConvER, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 690, 369, 25));
+        jpContenidoDelInforme.add(txtAdministradorConvER, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 730, 319, 25));
 
         lblCompensacionEstudiantes.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblCompensacionEstudiantes.setText("Compensación del estudiante:");
-        jpContenidoDelInforme.add(lblCompensacionEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 860, 319, 25));
+        jpContenidoDelInforme.add(lblCompensacionEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 740, 319, 25));
 
         txaProcesoDesignacionEstudiantes.setColumns(20);
         txaProcesoDesignacionEstudiantes.setRows(3);
@@ -797,39 +779,39 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane6.setViewportView(txaProcesoDesignacionEstudiantes);
 
-        jpContenidoDelInforme.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 790, 319, -1));
+        jpContenidoDelInforme.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 319, -1));
 
         lblProcesoDesignacionEstudiantes1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblProcesoDesignacionEstudiantes1.setText("Proceso de designación de estudiantes:");
-        jpContenidoDelInforme.add(lblProcesoDesignacionEstudiantes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 750, 319, 25));
+        jpContenidoDelInforme.add(lblProcesoDesignacionEstudiantes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 319, 25));
 
         lblDotacionUniformes.setText(" ¿Se dotará de uniforme al estudiante?");
-        jpContenidoDelInforme.add(lblDotacionUniformes, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 800, 319, -1));
+        jpContenidoDelInforme.add(lblDotacionUniformes, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 760, 319, -1));
 
         buttonGroupUniformesEstudiantes.add(jrbUniformesSi);
         jrbUniformesSi.setSelected(true);
         jrbUniformesSi.setText("SI");
-        jpContenidoDelInforme.add(jrbUniformesSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 820, -1, -1));
+        jpContenidoDelInforme.add(jrbUniformesSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 780, -1, -1));
 
         buttonGroupUniformesEstudiantes.add(jrbUniformeNo);
         jrbUniformeNo.setText("NO");
-        jpContenidoDelInforme.add(jrbUniformeNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 820, -1, -1));
+        jpContenidoDelInforme.add(jrbUniformeNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 780, -1, -1));
 
         lblEquipoDeProteccion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEquipoDeProteccion.setText("<html>       <div align=\"justify\">             ¿Se dotará de equipo mínimo de protección personal al setudiante?       </div>   </html>");
-        jpContenidoDelInforme.add(lblEquipoDeProteccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 860, -1, -1));
+        jpContenidoDelInforme.add(lblEquipoDeProteccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 820, -1, -1));
 
         buttonGroupEquipoDeProteccion.add(jrbEquipoDeProteccionSi);
         jrbEquipoDeProteccionSi.setSelected(true);
         jrbEquipoDeProteccionSi.setText("SI");
-        jpContenidoDelInforme.add(jrbEquipoDeProteccionSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 880, -1, -1));
+        jpContenidoDelInforme.add(jrbEquipoDeProteccionSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 840, -1, -1));
 
         buttonGroupEquipoDeProteccion.add(jrbEquipoDeProteccionNo);
         jrbEquipoDeProteccionNo.setText("NO");
-        jpContenidoDelInforme.add(jrbEquipoDeProteccionNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 880, -1, -1));
+        jpContenidoDelInforme.add(jrbEquipoDeProteccionNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 840, -1, -1));
 
         lbObservacionesCondicionesEstudiantes.setText("<html>\n       <div align=\"justify\">\n             Observaciones\n       </div>\n</html>");
-        jpContenidoDelInforme.add(lbObservacionesCondicionesEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 970, 382, 14));
+        jpContenidoDelInforme.add(lbObservacionesCondicionesEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 930, 382, 14));
 
         buttonGroupNormasDeSeguridad.add(jrbNormasDeSeguridadSi);
         jrbNormasDeSeguridadSi.setSelected(true);
@@ -839,15 +821,15 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 jrbNormasDeSeguridadSiActionPerformed(evt);
             }
         });
-        jpContenidoDelInforme.add(jrbNormasDeSeguridadSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 940, -1, -1));
+        jpContenidoDelInforme.add(jrbNormasDeSeguridadSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 900, -1, -1));
 
         buttonGroupNormasDeSeguridad.add(jrbNormasDeSeguridadNo);
         jrbNormasDeSeguridadNo.setText("NO");
-        jpContenidoDelInforme.add(jrbNormasDeSeguridadNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 940, -1, -1));
+        jpContenidoDelInforme.add(jrbNormasDeSeguridadNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 900, -1, -1));
 
         lblNormasDeSeguridad1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNormasDeSeguridad1.setText("<html>\n       <div align=\"justify\">\n             ¿Se verificó que las normas de seguridad de la ER garanticen la protección de los estudiantes durante sus prácticas?\n       </div>\n</html>");
-        jpContenidoDelInforme.add(lblNormasDeSeguridad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 910, 382, -1));
+        jpContenidoDelInforme.add(lblNormasDeSeguridad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 870, 382, -1));
 
         txaObservacionesCondicionesEstudiantes.setColumns(20);
         txaObservacionesCondicionesEstudiantes.setRows(2);
@@ -858,22 +840,22 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane8.setViewportView(txaObservacionesCondicionesEstudiantes);
 
-        jpContenidoDelInforme.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 1000, 382, 57));
+        jpContenidoDelInforme.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 960, 382, 57));
 
         lblCompensacionEstudiante2.setText("<html>\n      <div align=\"justify\">\n            ¿La ER compensará al estudiante en formación dual?\n      </div> \n </html>");
-        jpContenidoDelInforme.add(lblCompensacionEstudiante2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 890, 319, 14));
+        jpContenidoDelInforme.add(lblCompensacionEstudiante2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, 319, 14));
 
         buttonGroupCompensacion.add(jrbCompensacionSi);
         jrbCompensacionSi.setSelected(true);
         jrbCompensacionSi.setText("SI");
-        jpContenidoDelInforme.add(jrbCompensacionSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 910, -1, -1));
+        jpContenidoDelInforme.add(jrbCompensacionSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 790, -1, -1));
 
         buttonGroupCompensacion.add(jrbCompensacionNo);
         jrbCompensacionNo.setText("NO");
-        jpContenidoDelInforme.add(jrbCompensacionNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 910, -1, -1));
+        jpContenidoDelInforme.add(jrbCompensacionNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 790, -1, -1));
 
         lblTipoCompensacion.setText("<html>\n      <div align=\"justify\">\n            Tipo de compensación:\n      </div> \n </html>");
-        jpContenidoDelInforme.add(lblTipoCompensacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 940, 321, -1));
+        jpContenidoDelInforme.add(lblTipoCompensacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 820, 321, -1));
 
         txaCondiciones.setColumns(20);
         txaCondiciones.setRows(2);
@@ -884,10 +866,10 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane11.setViewportView(txaCondiciones);
 
-        jpContenidoDelInforme.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 1040, 321, -1));
+        jpContenidoDelInforme.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 920, 321, -1));
 
         lblCondiciones.setText("<html>\n      <div align=\"justify\">\n            Condiciones:\n      </div> \n </html>");
-        jpContenidoDelInforme.add(lblCondiciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 1010, -1, 14));
+        jpContenidoDelInforme.add(lblCondiciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 890, -1, 14));
 
         txaTipoCompensacion.setColumns(20);
         txaTipoCompensacion.setRows(1);
@@ -898,7 +880,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane13.setViewportView(txaTipoCompensacion);
 
-        jpContenidoDelInforme.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 970, 321, 25));
+        jpContenidoDelInforme.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 850, 321, 25));
 
         btnAgregarCarrera.setText("Agregar");
         btnAgregarCarrera.addActionListener(new java.awt.event.ActionListener() {
@@ -921,11 +903,11 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "ID inst", "CARRERA", "N° DE RESOLIUCIÓN"
+                "ID", "CARRERA", "N° DE RESOLUCIÓN"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -944,6 +926,42 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 
         jspPlazoVigenciaConvenio.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
         jpContenidoDelInforme.add(jspPlazoVigenciaConvenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 280, 49, 25));
+
+        jtAsignaturas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id asignatura", "id carrera", "CARRERA"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane26.setViewportView(jtAsignaturas);
+
+        jpContenidoDelInforme.add(jScrollPane26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 310, 83));
+
+        btnAgregarAsignatura.setText("Agregar");
+        btnAgregarAsignatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarAsignaturaActionPerformed(evt);
+            }
+        });
+        jpContenidoDelInforme.add(btnAgregarAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 590, -1, -1));
+
+        btnQuitarAsignatura.setText("Quitar");
+        btnQuitarAsignatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarAsignaturaActionPerformed(evt);
+            }
+        });
+        jpContenidoDelInforme.add(btnQuitarAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 590, 80, -1));
 
         jScrollPane12.setViewportView(jpContenidoDelInforme);
 
@@ -1123,8 +1141,9 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private void btnAgregarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarreraActionPerformed
         criterioBusqueda[0] = idInstituto;
         
-        buscar("carrera","grid_filtro");//abre una ventana de busqueda
-        llenarNombresCarreras(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "carrera"));//consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos el tipo persona sirve para estudiante, tutor academicoy empresarial
+        buscar("carrera_viabilidad","grid_filtro");//abre una ventana de busqueda
+        String str = controladorVariablesSesion.getInstance().getDatosTemporalesConsulta();
+        llenarNombresCarreras(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "carrera_viabilidad"));//consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos el tipo persona sirve para estudiante, tutor academicoy empresarial
 
     }//GEN-LAST:event_btnAgregarCarreraActionPerformed
 
@@ -1171,7 +1190,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBuscarEmpresaActionPerformed
 
     private void btnBuscarEncargadoSenescytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEncargadoSenescytActionPerformed
-        buscar("encargadoSenescyt","grid");//abre una ventana de busqueda
+        buscar("encargado_senescyt","grid");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
         llenarEncargadoSenescyt(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
     }//GEN-LAST:event_btnBuscarEncargadoSenescytActionPerformed
@@ -1183,23 +1202,8 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBuscarInstittutoActionPerformed
 
     private void btnAdjuntarAnexosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarAnexosActionPerformed
-        int fila = jtDatosContacto.getSelectedRow();
-        if (fila != -1) {
-            criterioBusqueda[0] = jtDatosContacto.getValueAt(fila, 0).toString();
-            criterioBusqueda[1] = "V";//tipo de documento anexo
-            criterioBusqueda[2] = "Reunion Seguimiento";//descripcion de los anexos
-            frmDocumentoAnexos frm = new frmDocumentoAnexos(null, true, criterioBusqueda);
-            frm.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Seleccione un Documento", "Seleccionar", 2);
-        }
+        
     }//GEN-LAST:event_btnAdjuntarAnexosActionPerformed
-
-    private void btnBuscarRectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRectorActionPerformed
-       buscar("rector","grid");//abre una ventana de busqueda
-        //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarSolicitante(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
-    }//GEN-LAST:event_btnBuscarRectorActionPerformed
 
     private void txaObservacionesDeudasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaObservacionesDeudasKeyReleased
         convertirAmayusculas(txaObservacionesDeudas);
@@ -1250,13 +1254,72 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreERActionPerformed
 
-    private void btnBuscarEmpresaSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEmpresaSucursalActionPerformed
-        criterioBusqueda[0] = idEmpresaSucursal;
+    private void btnBuscarRepresentanteLegalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRepresentanteLegalActionPerformed
+        buscar("representante_legal","grid");//abre una ventana de busqueda
+        //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+        llenarRepresentanteLegal(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
+    }//GEN-LAST:event_btnBuscarRepresentanteLegalActionPerformed
+
+    private void btnAgregarEmsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEmsuActionPerformed
+         criterioBusqueda[0] = idEmpresaSucursal;
         buscar("empresa_sucursal_sucursales", "grid_filtro");//abre una ventana de busqueda
         
-        llenarSucursales(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresa_sucursales_viabilidad"));//consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos el tipo persona sirve para estudiante, tutor academicoy empresarial
+        llenarSucursales(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresa_sucursales"));//consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos el tipo persona sirve para estudiante, tutor academicoy empresarial
 
-    }//GEN-LAST:event_btnBuscarEmpresaSucursalActionPerformed
+    }//GEN-LAST:event_btnAgregarEmsuActionPerformed
+
+    private void btnQuitarCarrera1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarCarrera1ActionPerformed
+        
+        int fila = jtSucursales.getSelectedRow();
+        modeloSucursales = (DefaultTableModel)jtSucursales.getModel();
+        modeloSucursales.removeRow(fila);
+    }//GEN-LAST:event_btnQuitarCarrera1ActionPerformed
+
+    private void lblAsignaturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAsignaturasMouseClicked
+         
+    }//GEN-LAST:event_lblAsignaturasMouseClicked
+
+    private void btnAgregarAsignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAsignaturaActionPerformed
+        
+        frmConsultas1 frm = new frmConsultas1(null, true);
+        //JTable jt = frm.ge();
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        
+        try {
+            
+            for(int i = 0; i < idsCarrera.length; i++){
+                PreparedStatement ps = Conexion.getConexion().prepareStatement("select * from siged_asignatura where carr_id =" + idsCarrera[i]);
+                ResultSet rs = ps.executeQuery();
+                
+                Object[] datosTabla = new Object[rs.getMetaData().getColumnCount()];
+                while (rs.next()) {
+
+                    for (int j = 1; j <= rs.getMetaData().getColumnCount(); j++) {
+                        if (rs.getObject(j) != null) {
+                            datosTabla[j - 1] = rs.getObject(j);
+
+                        } else {
+                            datosTabla[j - 1] = "";
+                        }
+                    }
+                modelo.addRow(datosTabla);
+            }
+            }
+            
+            
+            llenarNombresCarreras(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "carrera_viabilidad"));//consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos el tipo persona sirve para estudiante, tutor academicoy empresarial
+        } catch (SQLException ex) {
+            Logger.getLogger(frmViabilidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        frm.setVisible(true); //hace visible la ventan de busqueda
+        
+    }//GEN-LAST:event_btnAgregarAsignaturaActionPerformed
+
+    private void btnQuitarAsignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarAsignaturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnQuitarAsignaturaActionPerformed
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
@@ -1264,7 +1327,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private void buscar(String tabla, String tipo) {
         
         switch (tabla) {
-            case "carrera":
+            case "carrera_viabilidad":
                 criterioBusqueda[0] = idInstituto;
                 break;
             case "empresa_sucursal_sucursales":
@@ -1351,7 +1414,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         map.put("revisado", txtRevisado.getText());
         map.put("aprobado", txtAprobado.getText());
         map.put("estadoTramite", "0");
-        map.put("idCarrera", idCarrera);
+        map.put("idCarrera", idsCarrera[0]);
 
         ControladorViabilidad controladorViabilidad = new ControladorViabilidad();
         return controladorViabilidad.crearActualizar(map);
@@ -1373,12 +1436,9 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jtNombreCarreras.getColumnModel().getColumn(0).setMinWidth(0);
         jtNombreCarreras.getColumnModel().getColumn(0).setPreferredWidth(0);
        
-        jtNombreCarreras.getColumnModel().getColumn(1).setMaxWidth(0);
-        jtNombreCarreras.getColumnModel().getColumn(1).setMinWidth(0);
-        jtNombreCarreras.getColumnModel().getColumn(1).setPreferredWidth(0);
         
         //formatea la tabla que muestra la ubicación de la sucursal asociada a el actual informe de viabilidad
-        for(int i = 0; i < jtSucursales.getColumnCount(); i++){
+        for(int i = 1; i < jtSucursales.getColumnCount(); i++){
             
             jtSucursales.getColumnModel().getColumn(i).setMaxWidth(110);
             jtSucursales.getColumnModel().getColumn(i).setMinWidth(110);
@@ -1388,6 +1448,16 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
             jtSucursales.getTableHeader().getColumnModel().getColumn(i).setPreferredWidth(110);           
             
         }
+        
+        if(modeloSucursales != null){
+            jtSucursales.getColumnModel().getColumn(0).setMaxWidth(140);
+            jtSucursales.getColumnModel().getColumn(0).setMinWidth(140);
+            jtSucursales.getColumnModel().getColumn(0).setPreferredWidth(140);
+            jtSucursales.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(140);
+            jtSucursales.getTableHeader().getColumnModel().getColumn(0).setMinWidth(140);
+            jtSucursales.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(140); 
+        }
+        
         
         //formatea la tabla que muestra la ubicación de la empresa matriz asociada a el actual informe de viabilidad
         for(int i = 0; i < jtDireccionMatriz.getColumnCount(); i++){
@@ -1448,11 +1518,11 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         
         String[] cabecera = {"NOMBRE","PAÍS", "PROVINCIA", "CIUDAD", "CANTÓN","SECTOR", "REFERENCIA", "CALLE PRINCIPAL", "INTERSECCIÓN", "NÚMERO" };
         
-        modeloDireccionSucursal = new DefaultTableModel(cabecera, 0);        
         
-        //if(modeloSucursales.getRowCount() >= 1 )modeloSucursales.removeRow(0);
+        if(modeloDireccionSucursal == null)modeloDireccionSucursal = new DefaultTableModel(cabecera, 0);
+        
         modeloDireccionSucursal.addRow(direccion);
-        //jtSucursales.getTableHeader().setPreferredSize(new Dimension(1100,15));
+       
         jtSucursales.setModel(modeloDireccionSucursal);
         
     }    
@@ -1474,6 +1544,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         txtTipoDeEmpresa.setText((String) datos.get(16));
         txtActividadEconomica.setText((String) datos.get(17));
         txtFechaDeAcercamientoInicial.setText((String) datos.get(18));
+        txtNombreER.setText((String) datos.get(3));
 
         txaAsunto.setText("Informe técnico-académico de viabilidad para la firma del\nConvenio de formación dual entre \"" + nombreEmpresa + "\" y el \"" + nombreInstituto + " \"");
         
@@ -1491,8 +1562,8 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private void llenarGridEntidadesDeControl() {
         criterioBusqueda[0] = "'TIPO ENTIDAD'";
         jtDeudas.setModel(controladorGrid.getInstance().llenarGridPermisos("consulta_regulacion", "grid_filtro", criterioBusqueda));
-        sorter = new TableRowSorter<>(jtDeudas.getModel());
-        jtDeudas.setRowSorter(sorter);
+        sorterEntidades = new TableRowSorter<>(jtDeudas.getModel());
+        jtDeudas.setRowSorter(sorterEntidades);
         jtDeudas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
     }
@@ -1501,26 +1572,39 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         
         idInstituto = (String.valueOf(datos.get(0)));
         
-        txtNombreInstituto.setText((String) datos.get(2));
-        nombreInstituto = (String) datos.get(2);
-        txtDocCreacionInstituto.setText((String) datos.get(9));
-        txtInstituto.setText((String) datos.get(6));
+        txtNombreInstituto.setText((String) datos.get(4));
+        nombreInstituto = (String) datos.get(4);
+        txtDocCreacionInstituto.setText((String) datos.get(11));
+        txtInstituto.setText((String) datos.get(8));
         txaAsunto.setText("Informe técnico-académico de viabilidad para la firma del\nConvenio de formación dual entre \"" + nombreEmpresa + "\" y el \"" + nombreInstituto + " \"");
 
         DecimalFormat fmt = new DecimalFormat("000");
         Year año = Year.now();
 
-        int numeroInforme = (Integer) datos.get(10)+1;
+        int numeroInforme = (Integer) datos.get(12)+1;
         txtViabNumeroInforme.setText("SENESCYT-SFTT-" + fmt.format(numeroInforme) + "-" + año);
+        
+        
+        txaSolicitante.setText(((String) datos.get(15)).toUpperCase() + ", " + (String) datos.get(3) + " " + (String) datos.get(2) + ", RECTOR/A DE " + (String) datos.get(4));
+        txtNumYTipoDeContrato.setText((String) datos.get(14));
+        txtNombreRector.setText((String) datos.get(3) + " " + (String) datos.get(2));
 
     }
 
     private void llenarNombresCarreras(ArrayList<Object> datos) {
         
         modeloCarreras = (DefaultTableModel) jtNombreCarreras.getModel();
+        
+        String[] prueba = new String[datos.size()];
+        
+        for(int i = 0; i < datos.size(); i++) prueba[i] = String.valueOf(datos.get(i));
                 
-        modeloCarreras.addRow(controladorVariablesSesion.getInstance().getDatosConsulta());
+        modeloCarreras.addRow(prueba);
         jtNombreCarreras.setModel(modeloCarreras);
+        
+        idsCarrera = new String[jtNombreCarreras.getRowCount()];
+        
+        for(int i = 0; i < jtNombreCarreras.getRowCount(); i++) idsCarrera[i] = String.valueOf(modeloCarreras.getValueAt(i, 0)); 
         
        formatearColumnas();
         
@@ -1528,11 +1612,16 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     
     }
 
-    private void llenarSolicitante(ArrayList<Object> datos) {
-        idPersona = (String.valueOf(datos.get(0)));
-        txaSolicitante.setText("Mgs. " + (String) datos.get(2) + " " + (String) datos.get(1) + ", Rector del Instituto Tecnológico Superior Benito Juarez");
-        txtNumYTipoDeContrato.setText((String) datos.get(14));
-        txtNombreRector.setText((String) datos.get(2) + " " + (String) datos.get(1));
+    private void llenarRepresentanteLegal(ArrayList<Object> datos) {
+        //idPersona = (String.valueOf(datos.get(0)));
+        
+        txtNombreRepresentanteLegal.setText((String) datos.get(2) + " " + (String) datos.get(1));
+        
+        lblInfoRepresentanteLegal.setText("<html> <b>Nombre:</b> "+ (String) datos.get(2) + " " + (String) datos.get(1)+ " <br>"
+                + "                         <b>Correo:</b> "+ (String) datos.get(7) + " <br>"
+                + "                         <b>Teléfono:</b> "+ (String) datos.get(5) + " <br>"
+                + "                         <b>Celular:</b> "+ (String) datos.get(6) + " <br>"
+                + "                         </html>");
 
     }
     
@@ -1545,7 +1634,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         llenarDireccionSucursal(direccionSucursal);
         
         idEmpresaSucursal = String.valueOf(datos.get(0));        
-        txtNombreER.setText((String) datos.get(4));
+        
         formatearColumnas();
     
     }
@@ -1553,18 +1642,21 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Variables declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdjuntarAnexos;
+    private javax.swing.JButton btnAgregarAsignatura;
     private javax.swing.JButton btnAgregarCarrera;
+    private javax.swing.JButton btnAgregarEmsu;
     private javax.swing.JButton btnBuscarEmpresa;
-    private javax.swing.JButton btnBuscarEmpresaSucursal;
     private javax.swing.JButton btnBuscarEncargadoSenescyt;
     private javax.swing.JButton btnBuscarInstittuto;
-    private javax.swing.JButton btnBuscarRector;
+    private javax.swing.JButton btnBuscarRepresentanteLegal;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnCrearActualizar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.ButtonGroup btnGroupConductaInstitucional;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnQuitarAsignatura;
     private javax.swing.JButton btnQuitarCarrera;
+    private javax.swing.JButton btnQuitarCarrera1;
     private javax.swing.ButtonGroup buttonGroupCompensacion;
     private javax.swing.ButtonGroup buttonGroupEquipoDeProteccion;
     private javax.swing.ButtonGroup buttonGroupNormasDeSeguridad;
@@ -1588,18 +1680,16 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane20;
-    private javax.swing.JScrollPane jScrollPane22;
     private javax.swing.JScrollPane jScrollPane23;
     private javax.swing.JScrollPane jScrollPane24;
     private javax.swing.JScrollPane jScrollPane25;
+    private javax.swing.JScrollPane jScrollPane26;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel jpConclusiones;
     private javax.swing.JPanel jpContenidoDelInforme;
     public static javax.swing.JPanel jp_Antecedentes;
@@ -1620,7 +1710,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner jspNumEstudiantes;
     private javax.swing.JSpinner jspNumTutores;
     private javax.swing.JSpinner jspPlazoVigenciaConvenio;
-    private javax.swing.JTable jtDatosContacto;
+    private javax.swing.JTable jtAsignaturas;
     private javax.swing.JTable jtDeudas;
     private javax.swing.JTable jtDireccionMatriz;
     private javax.swing.JTable jtEstudiantesEscenarioPedagogico;
@@ -1639,7 +1729,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblConsideracionesRecomendaciones;
     private javax.swing.JLabel lblDireccionMatriz;
     private javax.swing.JLabel lblDireccionSucursal;
-    private javax.swing.JLabel lblDireccionSucursal1;
+    private javax.swing.JLabel lblDireccionSucursal2;
     private javax.swing.JLabel lblDisposicionRenovarConvenio;
     private javax.swing.JLabel lblDocCreacionInstituto;
     private javax.swing.JLabel lblDotacionUniformes;
@@ -1651,6 +1741,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblFechaDeAcercamientoInicial;
     private javax.swing.JLabel lblFechaInforme;
     private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblInfoRepresentanteLegal;
     private javax.swing.JLabel lblListadoDocumentacionRespaldo;
     private javax.swing.JLabel lblNombreCarreras;
     private javax.swing.JLabel lblNombreInstituto;

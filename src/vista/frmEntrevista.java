@@ -52,7 +52,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
         idEstudiante = "-1";
         fechaActual = new Date();
         dtFecha.setDate(fechaActual);
-        tipo_consulta = "entrevista";
+        tipo_consulta = "entrevista_estudiante";
         llenarFiltro();
         llenarComboPeriodos();
         llenarComboNiveles();
@@ -60,10 +60,10 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
         cargarTotalRegistros();
         if (controladorVariablesSesion.getInstance().getPerfilUsuario().equals("1")) {
             cmbPeriodo.setEnabled(true);
-            tipo_consulta = "entrevista_admin";
+            tipo_consulta = "entrevista_estudiante_admin";
             llenarGrid(tipo_consulta);
         } else {
-            tipo_consulta = "entrevista";
+            tipo_consulta = "entrevista_estudiante";
             llenarGrid(tipo_consulta);
         }
     }
@@ -517,7 +517,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel2(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtEntrevista));
+            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtEntrevista));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
     private DefaultTableModel filtrarGrid() {

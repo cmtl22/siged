@@ -13,7 +13,7 @@ public class controladorExcel {
         return instancia;
     }
 
-    public void generarExcel2(String[] archivoXLS, String[][] registros) {
+    public void generarExcel(String[] archivoXLS, String[][] registros) {
 
         Excel.getInstance().generarExcel(archivoXLS, registros);
     }

@@ -370,7 +370,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
     private void btnNuevo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo3ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel2(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtEncuesta));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtEncuesta));
         }
     }//GEN-LAST:event_btnNuevo3ActionPerformed
     private DefaultTableModel filtrarGrid() {

@@ -65,6 +65,7 @@ public class frmLogin extends javax.swing.JDialog {
         lblTituloIntentosRestantes = new javax.swing.JLabel();
         lblTituloTiempoRestante = new javax.swing.JLabel();
         lblTiempoRestante = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(getIconImage());
@@ -157,6 +158,10 @@ public class frmLogin extends javax.swing.JDialog {
         jPanel2.add(lblTiempoRestante, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 330, 200));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("1.0.1");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 610, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -360,6 +365,7 @@ public class frmLogin extends javax.swing.JDialog {
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblClaveUsuario;

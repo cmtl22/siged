@@ -80,7 +80,6 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
         lblRegistros3 = new javax.swing.JLabel();
         lblTotalRegistros = new javax.swing.JLabel();
         lblFiltro = new javax.swing.JLabel();
-        btnNuevo1 = new javax.swing.JButton();
         lblBusqueda = new javax.swing.JLabel();
         lblRegistro = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -89,6 +88,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
         btnEliminar3 = new javax.swing.JButton();
         btnAdjuntarAnexos = new javax.swing.JButton();
         btnCerrar3 = new javax.swing.JButton();
+        btnNuevo1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setTitle("ACERCAMIENTO");
@@ -232,7 +232,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaAcercamiento.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 250, -1));
+        jpBusquedaAcercamiento.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 300, -1));
 
         lblRegistros3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros3.setText("Registros:");
@@ -248,19 +248,6 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
         lblFiltro.setText("Filtro:");
         lblFiltro.setPreferredSize(new java.awt.Dimension(35, 20));
         jpBusquedaAcercamiento.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
-        btnNuevo1.setToolTipText("Exportar");
-        btnNuevo1.setBorder(null);
-        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
-        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevo1ActionPerformed(evt);
-            }
-        });
-        jpBusquedaAcercamiento.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 40, 40));
 
         jPanel7.add(jpBusquedaAcercamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -337,6 +324,19 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
 
         jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, -1, -1));
 
+        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
+        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
+        btnNuevo1.setToolTipText("Exportar");
+        btnNuevo1.setBorder(null);
+        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
+        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevo1ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 40, 40));
+
         getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
 
         pack();
@@ -360,6 +360,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
     private void txtCriterioBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCriterioBusquedaKeyReleased
         convertirAmayusculas(txtCriterioBusqueda);
         filtrar();
+        cargarTotalRegistros();
     }//GEN-LAST:event_txtCriterioBusquedaKeyReleased
 
     private void btnCerrar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrar3ActionPerformed
@@ -372,11 +373,11 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
 
     private void btnEliminar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar3ActionPerformed
         if (controladorVariablesSesion.getInstance().eliminar(lblId.getText()) == 0) {
-        accion = "crear";
-        eliminar();//elimina el registro seleccionado
-        llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
-        limpiarCajasTexto(jpRegistroAcercamiento);//limpia las cajas de texto
-        cargarTotalRegistros();//carga el total de registros
+            accion = "crear";
+            eliminar();//elimina el registro seleccionado
+            llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
+            limpiarCajasTexto(jpRegistroAcercamiento);//limpia las cajas de texto
+            cargarTotalRegistros();//carga el total de registros
     }//GEN-LAST:event_btnEliminar3ActionPerformed
     }
     private void btnCrearActualizar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActualizar3ActionPerformed
@@ -416,13 +417,12 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-                        controladorExcel.getInstance().generarExcel2(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtAcercamiento));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtAcercamiento));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
 
 // </editor-fold>  
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
-
     private void buscar(String tabla) {
         frmConsultas consulta = new frmConsultas(null, true);//instancia el formulario con la ventana de busqueda
         consulta.consultar(tabla, "grid", null);//llama al metodo que se encuentra en la ventana de busqueda

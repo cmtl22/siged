@@ -1,6 +1,5 @@
 package vista;
 
-import controlador.ControladorNotificacion;
 import controlador.ControladorUsuario;
 import controlador.controladorVariablesSesion;
 import java.awt.Image;
@@ -8,25 +7,18 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JOptionPane;
-
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 public class frmCambiarClave extends javax.swing.JDialog {
 
     TableRowSorter<TableModel> sorter;
-    private DefaultTableModel modelo = new DefaultTableModel();
-    private String[] datosTemporales;
-    private int contador;
 
     String[] nombresColmunas;
 
     public frmCambiarClave(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        datosTemporales = new String[3];
         txtClave.requestFocus();
 
         //Inahblita el boton cerrar
@@ -41,7 +33,7 @@ public class frmCambiarClave extends javax.swing.JDialog {
 
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("recursos/ico_sistema.jpg"));
+                getImage(ClassLoader.getSystemResource("recursos/ico_clave_32.png"));
 
         return retValue;
     }
@@ -59,6 +51,7 @@ public class frmCambiarClave extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CAMBIAR CONTRASEÑA");
+        setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpRecuperarClave.setBackground(new java.awt.Color(255, 255, 255));

@@ -57,7 +57,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         dpContenedor.setSize(this.getSize());
         jpFondo.setSize(dpContenedor.getSize());
         lblNombreUsuario.setText(controladorVariablesSesion.getInstance().getNombresPersona());
-        this.setTitle("SIGED - " + controladorVariablesSesion.getInstance().getNombresPersona());
+        this.setTitle("SIGED 1.0.1 - " + controladorVariablesSesion.getInstance().getNombresPersona());
         String[] criterioBusqueda = new String[3];
         ArrayList permisos = new ArrayList();
 

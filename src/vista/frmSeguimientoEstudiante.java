@@ -45,8 +45,11 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
 // </editor-fold > 
 
     public frmSeguimientoEstudiante() {
-
         initComponents();
+        init();
+    }
+
+    private void init() {
         accion = "crear";
         criterioBusqueda = new String[3];
         tipo_consulta = "seguimiento_estudiante";
@@ -715,7 +718,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel2(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtSeguimientoEstudiante));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtSeguimientoEstudiante));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
 
