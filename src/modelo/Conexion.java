@@ -14,7 +14,7 @@ public class Conexion {
 
     private static Connection _conexion;
     private static String _user = "postgres";
-    private static String _password = "deadldu22";
+    private static String _password = "root";
     Statement sentencia;
     private ResultSet _resultado;
     private ResultSetMetaData _mtd;

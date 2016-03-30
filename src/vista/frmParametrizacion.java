@@ -303,7 +303,11 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
 
     private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
         txaDescripción.setText(descripcion.get(cmbTipo.getSelectedIndex()));
-        filtrar();
+        if (cmbTipo.getSelectedIndex() == 0) {
+            llenarGrid();
+        } else {
+            filtrar();
+        }
         cargarTotalRegistros();
     }//GEN-LAST:event_cmbTipoActionPerformed
 // </editor-fold> 
@@ -431,7 +435,6 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
         criterioBusqueda[1] = "tabla";
         cmbTipo.setModel(consulta.consultarCombo(criterioBusqueda));
         descripcion = consulta.getCodigoCombo();
-
     }
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Variables declaration - do not modify                     "> 

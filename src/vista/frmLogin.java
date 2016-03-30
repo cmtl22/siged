@@ -161,6 +161,7 @@ public class frmLogin extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("1.0.1");
+        jLabel3.setPreferredSize(new java.awt.Dimension(35, 15));
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 610, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -1,6 +1,8 @@
 package controlador;
 
 import java.io.File;
+import java.util.Map;
+import modelo.Configuraciones;
 
 public class controladorConfiguraciones {
 
@@ -12,7 +14,7 @@ public class controladorConfiguraciones {
     private static final String DATOS_FILTRAR = "filtroIndividual";
     private static final String DATOS = "datos";
     private static final String PATH_APLICATION = new File("").getAbsolutePath();
-
+    private String camposObligatorios;
     private String codigoUsuario;
     private String nombreUsuario;
     private String perfilUsuario;
@@ -27,10 +29,13 @@ public class controladorConfiguraciones {
     private static final int limiteIntentosLogin = 3;
     private int contadorVentanas;
     private int contadorIntentosLogin;
+    String[] respuesta;
 
     private controladorConfiguraciones() {
         contadorVentanas = 0;
         contadorIntentosLogin = limiteIntentosLogin;
+        this.bandera = false;
+        this.respuesta = new String[3];
     }
 
     public static controladorConfiguraciones getInstance() {
@@ -107,6 +112,46 @@ public class controladorConfiguraciones {
 
     // </editor-fold>                        
 // <editor-fold defaultstate="collapsed" desc="Metodos">  
+    public boolean crearActualizar(Map datos) {
+        camposObligatorios = validarCamposObligatorios(datos);
+        if (camposObligatorios.equals("")) {
+            Configuraciones configuraciones = new Configuraciones();
+            configuraciones.setAccion((String) datos.get("accion"));
+            configuraciones.setId((String) datos.get("id"));
+            configuraciones.setNombre((String) datos.get("nombre"));
+            configuraciones.setValor((String) datos.get("valor"));
+
+            respuesta = configuraciones.crearActualizar(configuraciones);
+
+            controladorMensaje.getInstance().getMsgGuardar(respuesta[1]);
+            bandera = controladorVariablesSesion.getInstance().validarRespuestaDB(respuesta[2]);
+
+        } else {
+            controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
+        }
+        return bandera;
+    }
+
+    public void eliminar(Map datos) {
+
+        Configuraciones configuraciones = new Configuraciones();
+        configuraciones.setId((String) datos.get("id"));
+        controladorMensaje.getInstance().getMsgEliminar(configuraciones.eliminar(configuraciones));
+
+    }
+
+    public String validarCamposObligatorios(Map datos) {
+        camposObligatorios = "";
+        if (datos.get("nombre").equals("")) {
+            camposObligatorios += "Nombre\n";
+        }
+        if (datos.get("valor").equals("")) {
+            camposObligatorios += "Valor\n";
+        }
+
+        return camposObligatorios;
+    }
+
     public boolean validarRespuestaDB(String respuesta) {
         bandera = false;
         switch (respuesta) {

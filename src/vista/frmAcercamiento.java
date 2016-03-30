@@ -96,7 +96,6 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel7.setPreferredSize(new java.awt.Dimension(945, 575));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -232,7 +231,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaAcercamiento.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 300, -1));
+        jpBusquedaAcercamiento.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 290, -1));
 
         lblRegistros3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros3.setText("Registros:");
@@ -329,13 +328,13 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
         btnNuevo1.setToolTipText("Exportar");
         btnNuevo1.setBorder(null);
         btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
+        btnNuevo1.setPreferredSize(new java.awt.Dimension(40, 40));
         btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevo1ActionPerformed(evt);
             }
         });
-        jPanel7.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 40, 40));
+        jPanel7.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
 
         getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
 

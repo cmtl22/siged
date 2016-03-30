@@ -55,7 +55,10 @@ public class ControladorEnumeracion {
     public String validarCamposObligatorios(Map datos) {
         camposObligatorios = "";
         if (datos.get("nombre").equals("")) {
-            camposObligatorios += "nombre\n";
+            camposObligatorios += "Nombre\n";
+        }
+        if (datos.get("valor").equals("")) {
+            camposObligatorios += "Valor\n";
         }
 
         return camposObligatorios;

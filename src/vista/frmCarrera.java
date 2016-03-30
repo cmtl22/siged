@@ -74,7 +74,6 @@ public class frmCarrera extends javax.swing.JInternalFrame {
         lblTotalRegistros = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtCarrera = new javax.swing.JTable();
-        btnNuevo1 = new javax.swing.JButton();
         jpRegistroCarrera = new javax.swing.JPanel();
         lblNumero = new javax.swing.JLabel();
         dtFecha = new com.toedter.calendar.JDateChooser();
@@ -99,9 +98,11 @@ public class frmCarrera extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txaDescripcion = new javax.swing.JTextArea();
         lblInstituto2 = new javax.swing.JLabel();
+        btnNuevo1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setTitle("CARRERA");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_carrera_24.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(950, 605));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -213,17 +214,17 @@ public class frmCarrera extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaAsignatura.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 210, -1));
+        jpBusquedaAsignatura.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 270, -1));
 
         lblRegistros3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros3.setText("Registros:");
         lblRegistros3.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpBusquedaAsignatura.add(lblRegistros3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        jpBusquedaAsignatura.add(lblRegistros3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpBusquedaAsignatura.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, -1));
+        jpBusquedaAsignatura.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
 
         jtCarrera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -247,20 +248,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(jtCarrera);
 
-        jpBusquedaAsignatura.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 430, 420));
-
-        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
-        btnNuevo1.setToolTipText("Exportar");
-        btnNuevo1.setBorder(null);
-        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
-        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevo1ActionPerformed(evt);
-            }
-        });
-        jpBusquedaAsignatura.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 40, 40));
+        jpBusquedaAsignatura.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 440, 460));
 
         jPanel1.add(jpBusquedaAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -418,6 +406,19 @@ public class frmCarrera extends javax.swing.JInternalFrame {
         jpRegistroCarrera.add(lblInstituto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         jPanel1.add(jpRegistroCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 50, -1, -1));
+
+        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
+        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
+        btnNuevo1.setToolTipText("Exportar");
+        btnNuevo1.setBorder(null);
+        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo1.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevo1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 

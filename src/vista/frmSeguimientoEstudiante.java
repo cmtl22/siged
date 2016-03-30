@@ -122,13 +122,13 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         jtSeguimientoEstudiante = new javax.swing.JTable();
         lblRegistros = new javax.swing.JLabel();
         lblTotalRegistros = new javax.swing.JLabel();
-        btnNuevo1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
         btnCrearActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnAdjuntarAnexos = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        btnNuevo1 = new javax.swing.JButton();
 
         setTitle("SEGUIMIENTO ESTUDIANTE");
         setPreferredSize(new java.awt.Dimension(945, 535));
@@ -435,7 +435,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaSeguimientoEstudiante.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 200, -1));
+        jpBusquedaSeguimientoEstudiante.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 270, -1));
 
         jtSeguimientoEstudiante.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -459,7 +459,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtSeguimientoEstudiante);
 
-        jpBusquedaSeguimientoEstudiante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 440, 450));
+        jpBusquedaSeguimientoEstudiante.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 440, 460));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
@@ -470,19 +470,6 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
         jpBusquedaSeguimientoEstudiante.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 200, -1));
-
-        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
-        btnNuevo1.setToolTipText("Exportar");
-        btnNuevo1.setBorder(null);
-        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
-        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevo1ActionPerformed(evt);
-            }
-        });
-        jpBusquedaSeguimientoEstudiante.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 40, 40));
 
         jPanel1.add(jpBusquedaSeguimientoEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -551,6 +538,19 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         jPanel2.add(btnCerrar);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, -1, -1));
+
+        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
+        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
+        btnNuevo1.setToolTipText("Exportar");
+        btnNuevo1.setBorder(null);
+        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
+        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevo1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 40, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

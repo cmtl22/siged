@@ -2,6 +2,7 @@ package vista;
 
 import controlador.ControladorEnumeracion;
 import controlador.ControladorUsuario;
+import controlador.controladorConfiguraciones;
 import controlador.controladorConsulta;
 import controlador.controladorGrid;
 import controlador.controladorVariablesSesion;
@@ -55,15 +56,13 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
         lblClave2 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtValor = new javax.swing.JTextField();
-        jpBusquedaUsuario = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtConfiguraciones = new javax.swing.JTable();
+        lblFiltro = new javax.swing.JLabel();
         cmbFiltro = new javax.swing.JComboBox<>();
         txtCriterioBusqueda = new javax.swing.JTextField();
         lblRegistros = new javax.swing.JLabel();
         lblTotalRegistros = new javax.swing.JLabel();
-        lblFiltro = new javax.swing.JLabel();
-        lblBusqueda = new javax.swing.JLabel();
         lblRegistro = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
@@ -73,10 +72,10 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("CONFIGURACIONES");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_configuraciones_32.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(945, 535));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jpRegistroEnumeración.setBackground(new java.awt.Color(255, 255, 255));
@@ -102,13 +101,14 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
         lblClave2.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroEnumeración.add(lblClave2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 60, -1));
 
+        txtNombre.setEditable(false);
         txtNombre.setPreferredSize(new java.awt.Dimension(225, 25));
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNombreKeyReleased(evt);
             }
         });
-        jpRegistroEnumeración.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 290, -1));
+        jpRegistroEnumeración.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 330, -1));
 
         txtValor.setPreferredSize(new java.awt.Dimension(225, 25));
         txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -116,13 +116,7 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
                 txtValorKeyReleased(evt);
             }
         });
-        jpRegistroEnumeración.add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 130, -1));
-
-        jPanel1.add(jpRegistroEnumeración, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 440, 400));
-
-        jpBusquedaUsuario.setBackground(new java.awt.Color(255, 255, 255));
-        jpBusquedaUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jpBusquedaUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpRegistroEnumeración.add(txtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 110, -1));
 
         jtConfiguraciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,12 +140,17 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtConfiguraciones);
 
-        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 77, 370, 270));
+        jpRegistroEnumeración.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 420, 330));
+
+        lblFiltro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblFiltro.setText("Filtro:");
+        lblFiltro.setPreferredSize(new java.awt.Dimension(32, 25));
+        jpRegistroEnumeración.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
-        jpBusquedaUsuario.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 33, 150, -1));
+        jpRegistroEnumeración.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 110, -1));
 
         txtCriterioBusqueda.setPreferredSize(new java.awt.Dimension(6, 25));
         txtCriterioBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -165,32 +164,23 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyTyped(evt);
             }
         });
-        jpBusquedaUsuario.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 33, 150, -1));
+        jpRegistroEnumeración.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 250, -1));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
         lblRegistros.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpBusquedaUsuario.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
+        jpRegistroEnumeración.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpBusquedaUsuario.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
+        jpRegistroEnumeración.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
 
-        lblFiltro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblFiltro.setText("Filtro:");
-        lblFiltro.setPreferredSize(new java.awt.Dimension(32, 25));
-        jpBusquedaUsuario.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 33, -1, -1));
-
-        jPanel1.add(jpBusquedaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 430, 400));
-
-        lblBusqueda.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
-        lblBusqueda.setText("BUSQUEDA");
-        jPanel1.add(lblBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        jPanel1.add(jpRegistroEnumeración, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 440, 520));
 
         lblRegistro.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
-        lblRegistro.setText("REGISTRO");
-        jPanel1.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
+        lblRegistro.setText("CONFIGURACIONES");
+        jPanel1.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(300, 50));
@@ -243,7 +233,7 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnCerrar);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, 180, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 180, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -253,7 +243,7 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
         );
 
         pack();
@@ -364,12 +354,12 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
         map.put("accion", accion);
         map.put("id", lblId.getText());
         map.put("nombre", txtNombre.getText());
-        map.put("codigo", txtValor.getText());
+        map.put("valor", txtValor.getText());
 
         //instacia el controlador
-        ControladorEnumeracion controladorEnumeracion = new ControladorEnumeracion();
+        controladorConfiguraciones controladorConfiguraciones = null;
         //llama al metodo para crear o actualizar segun sea la accion
-        return controladorEnumeracion.crearActualizar(map);
+        return controladorConfiguraciones.crearActualizar(map);
 
     }
 
@@ -451,10 +441,8 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel jpBusquedaUsuario;
     private javax.swing.JPanel jpRegistroEnumeración;
     private javax.swing.JTable jtConfiguraciones;
-    private javax.swing.JLabel lblBusqueda;
     private javax.swing.JLabel lblClave2;
     private javax.swing.JLabel lblFiltro;
     private javax.swing.JLabel lblId;

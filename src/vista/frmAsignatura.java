@@ -54,7 +54,6 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         jtAsignatura = new javax.swing.JTable();
         lblTotalRegistros = new javax.swing.JLabel();
         lblRegistros3 = new javax.swing.JLabel();
-        btnNuevo1 = new javax.swing.JButton();
         lblRegistro = new javax.swing.JLabel();
         jpRegistroAsignatura = new javax.swing.JPanel();
         lblCarrera = new javax.swing.JLabel();
@@ -84,6 +83,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnAdjuntarAnexos = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        btnNuevo1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setTitle("ASIGNATURA");
@@ -127,7 +127,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaAsignatura.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 10, 200, -1));
+        jpBusquedaAsignatura.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 10, 270, -1));
 
         jtAsignatura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -151,7 +151,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(jtAsignatura);
 
-        jpBusquedaAsignatura.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 430, 410));
+        jpBusquedaAsignatura.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 440, 450));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -162,19 +162,6 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         lblRegistros3.setText("Registros:");
         lblRegistros3.setPreferredSize(new java.awt.Dimension(60, 20));
         jpBusquedaAsignatura.add(lblRegistros3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
-
-        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
-        btnNuevo1.setToolTipText("Exportar");
-        btnNuevo1.setBorder(null);
-        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
-        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevo1ActionPerformed(evt);
-            }
-        });
-        jpBusquedaAsignatura.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 40, 40));
 
         jPanel1.add(jpBusquedaAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -380,6 +367,19 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         jPanel2.add(btnCerrar);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, -1, -1));
+
+        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
+        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
+        btnNuevo1.setToolTipText("Exportar");
+        btnNuevo1.setBorder(null);
+        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo1.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevo1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 

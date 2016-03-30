@@ -211,6 +211,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         lblRegistros = new javax.swing.JLabel();
         lblTotalRegistros = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         mnAdministracion = new javax.swing.JMenu();
         btnFormacionAcademica = new javax.swing.JMenu();
@@ -286,7 +287,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_sistema.jpg"))); // NOI18N
-        jpFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 300, 900, 220));
+        jpFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 300, 900, 250));
 
         jtNotificaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -345,8 +346,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
         jpFondo.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("1.0.1");
+        jLabel1.setPreferredSize(new java.awt.Dimension(35, 15));
+        jpFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 535, -1, -1));
+
         dpContenedor.add(jpFondo);
-        jpFondo.setBounds(0, 50, 945, 520);
+        jpFondo.setBounds(0, 50, 945, 550);
 
         getContentPane().add(dpContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -1137,6 +1143,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     public static javax.swing.JMenuItem btnUsuarios;
     public static javax.swing.JMenuItem btnViabilidad;
     private javax.swing.JDesktopPane dpContenedor;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel2;

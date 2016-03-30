@@ -37,8 +37,6 @@ public class Excel {
         return instancia;
     }
 
-    
-
     public void generarExcel(String[] archivoRuta, String[][] registros) {
         try {
             /*La ruta donde se creará el archivo*/
@@ -63,7 +61,7 @@ public class Excel {
             /*Hacemos un ciclo para inicializar los valores de 10 filas de celdas*/
             int totalFilas = registros.length;
             int totalColumnas = registros[0].length;
-            JOptionPane.showMessageDialog(null, "col " + totalColumnas + " \nfilas" + totalFilas);
+
             for (int f = 0; f < totalFilas; f++) {
                 /*La clase Row nos permitirá crear las filas*/
                 Row fila = hoja.createRow(f);
@@ -74,11 +72,11 @@ public class Excel {
                     Cell celda = fila.createCell(c);
                     /*Si la fila es la número 0, estableceremos los encabezados*/
                     if (f == 0) {
-                        JOptionPane.showMessageDialog(null, registros[f][c + 1]);
+
                         celda.setCellValue(registros[f][c + 1]);
                     } else {
                         /*Si no es la primera fila establecemos un valor*/
-                        JOptionPane.showMessageDialog(null, registros[f][c + 1]);
+
                         celda.setCellValue(registros[f][c + 1]);
                     }
                 }

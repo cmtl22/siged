@@ -108,7 +108,6 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
         lblRegistros = new javax.swing.JLabel();
         lblTotalRegistros = new javax.swing.JLabel();
         lblFiltro = new javax.swing.JLabel();
-        btnNuevo1 = new javax.swing.JButton();
         lblBusqueda = new javax.swing.JLabel();
         lblRegistro = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -117,13 +116,13 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnAdjuntarAnexos = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        btnNuevo1 = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("ENTREVISTA");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_entrevista_32.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(945, 535));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setPreferredSize(new java.awt.Dimension(945, 575));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -307,7 +306,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtEntrevista);
 
-        jpBusquedaEntrevista.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 430, 420));
+        jpBusquedaEntrevista.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 430, 460));
 
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
@@ -319,35 +318,22 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaEntrevista.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 190, -1));
+        jpBusquedaEntrevista.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 230, -1));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
         lblRegistros.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpBusquedaEntrevista.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        jpBusquedaEntrevista.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpBusquedaEntrevista.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, -1));
+        jpBusquedaEntrevista.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
 
         lblFiltro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblFiltro.setText("Filtro:");
         lblFiltro.setPreferredSize(new java.awt.Dimension(35, 20));
         jpBusquedaEntrevista.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 10, -1, -1));
-
-        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
-        btnNuevo1.setToolTipText("Exportar");
-        btnNuevo1.setBorder(null);
-        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
-        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevo1ActionPerformed(evt);
-            }
-        });
-        jpBusquedaEntrevista.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 40, 40));
 
         jPanel1.add(jpBusquedaEntrevista, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -424,15 +410,28 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, 240, 50));
 
+        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
+        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
+        btnNuevo1.setToolTipText("Exportar");
+        btnNuevo1.setBorder(null);
+        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
+        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevo1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 40, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
         );
 
         pack();

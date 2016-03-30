@@ -76,7 +76,6 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         lblRegistros = new javax.swing.JLabel();
         lblTotalRegistros = new javax.swing.JLabel();
         lblFiltro = new javax.swing.JLabel();
-        btnNuevo3 = new javax.swing.JButton();
         lblBusqueda = new javax.swing.JLabel();
         lblRegistro = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -85,13 +84,14 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnAdjuntarAnexos = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        btnNuevo3 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("ENCUESTA");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_encuesta_32.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(945, 535));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setPreferredSize(new java.awt.Dimension(945, 575));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -175,7 +175,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtEncuesta);
 
-        jpBusquedaEntrevista.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 440, 380));
+        jpBusquedaEntrevista.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 440, 460));
 
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
@@ -187,35 +187,22 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaEntrevista.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 170, -1));
+        jpBusquedaEntrevista.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 240, -1));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
         lblRegistros.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpBusquedaEntrevista.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, -1, -1));
+        jpBusquedaEntrevista.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpBusquedaEntrevista.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, -1));
+        jpBusquedaEntrevista.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, -1, -1));
 
         lblFiltro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblFiltro.setText("Filtro:");
         lblFiltro.setPreferredSize(new java.awt.Dimension(35, 20));
         jpBusquedaEntrevista.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 10, -1, -1));
-
-        btnNuevo3.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
-        btnNuevo3.setToolTipText("Exportar");
-        btnNuevo3.setBorder(null);
-        btnNuevo3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNuevo3.setPreferredSize(new java.awt.Dimension(48, 48));
-        btnNuevo3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevo3ActionPerformed(evt);
-            }
-        });
-        jpBusquedaEntrevista.add(btnNuevo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 40, 40));
 
         jPanel1.add(jpBusquedaEntrevista, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -292,6 +279,19 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, 240, 50));
 
+        btnNuevo3.setBackground(new java.awt.Color(255, 255, 255));
+        btnNuevo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
+        btnNuevo3.setToolTipText("Exportar");
+        btnNuevo3.setBorder(null);
+        btnNuevo3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo3.setPreferredSize(new java.awt.Dimension(48, 48));
+        btnNuevo3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevo3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNuevo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 40, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -300,7 +300,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
         );
 
         pack();

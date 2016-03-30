@@ -108,7 +108,6 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         lblTotalRegistros = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtSeguimientoReunion = new javax.swing.JTable();
-        btnNuevo1 = new javax.swing.JButton();
         lblBusqueda = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
@@ -116,6 +115,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnAdjuntarAnexos = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        btnNuevo1 = new javax.swing.JButton();
 
         setTitle("SEGUIMIENTO REUNIÓN");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_reunion_32.jpg"))); // NOI18N
@@ -307,7 +307,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaSeguimientoReunion.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 200, -1));
+        jpBusquedaSeguimientoReunion.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 260, -1));
 
         lblRegistrosActuales.setForeground(new java.awt.Color(102, 102, 102));
         jpBusquedaSeguimientoReunion.add(lblRegistrosActuales, new org.netbeans.lib.awtextra.AbsoluteConstraints(383, 391, -1, -1));
@@ -344,20 +344,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtSeguimientoReunion);
 
-        jpBusquedaSeguimientoReunion.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 420, 420));
-
-        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
-        btnNuevo1.setToolTipText("Exportar");
-        btnNuevo1.setBorder(null);
-        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
-        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevo1ActionPerformed(evt);
-            }
-        });
-        jpBusquedaSeguimientoReunion.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 40, 40));
+        jpBusquedaSeguimientoReunion.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 430, 450));
 
         jpRegistroSeguimientoReunion3.add(jpBusquedaSeguimientoReunion, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 50, -1, -1));
 
@@ -429,6 +416,19 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         jPanel2.add(btnCerrar);
 
         jpRegistroSeguimientoReunion3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, -1, -1));
+
+        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
+        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
+        btnNuevo1.setToolTipText("Exportar");
+        btnNuevo1.setBorder(null);
+        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
+        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevo1ActionPerformed(evt);
+            }
+        });
+        jpRegistroSeguimientoReunion3.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 40, 40));
 
         getContentPane().add(jpRegistroSeguimientoReunion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 580));
 
