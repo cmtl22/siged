@@ -1,16 +1,28 @@
 package vista;
 
 import controlador.ControladorNotificacion;
+import controlador.controladorConfiguraciones;
 import controlador.controladorConsulta;
 import controlador.controladorGrid;
 import controlador.controladorReporte;
 import controlador.controladorVariablesSesion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
@@ -18,8 +30,8 @@ import javax.swing.table.TableRowSorter;
 
 public class frmPrincipal extends javax.swing.JFrame {
 
-    TableRowSorter<TableModel> sorter;
-    ImageIcon icon;
+    private TableRowSorter<TableModel> sorter;
+    private ImageIcon icon;
 
     public frmPrincipal() {
         initComponents();
@@ -72,7 +84,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         permisos = consulta.getCodigoCombo();
 
         for (int i = 0; i < permisos.size(); i++) {
-
             switch (permisos.get(i).toString()) {
                 case "frmAcercamiento":
                     frmPrincipal.btnAcercamientos.setEnabled(true);
@@ -83,6 +94,9 @@ public class frmPrincipal extends javax.swing.JFrame {
                     break;
                 case "frmAutoridades":
                     frmPrincipal.btnAutoridades.setEnabled(true);
+                    break;
+                case "frmBackup":
+                    frmPrincipal.btnBackup.setEnabled(true);
                     break;
                 case "frmCarrera":
                     frmPrincipal.btnCarreras.setEnabled(true);
@@ -168,6 +182,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                     frmPrincipal.btnAcercamientos.setEnabled(false);
                     frmPrincipal.btnAsignaturas.setEnabled(false);
                     frmPrincipal.btnAutoridades.setEnabled(false);
+                    frmPrincipal.btnBackup.setEnabled(false);
                     frmPrincipal.btnCarreras.setEnabled(false);
                     frmPrincipal.btnConfiguraciones.setEnabled(false);
                     frmPrincipal.btnConvenio.setEnabled(false);
@@ -245,6 +260,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnPermisos = new javax.swing.JMenuItem();
         btnParametrizacion = new javax.swing.JMenuItem();
         btnConfiguraciones = new javax.swing.JMenuItem();
+        btnBackup = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -697,6 +713,17 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         mnConfiguracion.add(btnConfiguraciones);
 
+        btnBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_backup_32.png"))); // NOI18N
+        btnBackup.setText("Backup");
+        btnBackup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBackup.setEnabled(false);
+        btnBackup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackupActionPerformed(evt);
+            }
+        });
+        mnConfiguracion.add(btnBackup);
+
         jMenuBar2.add(mnConfiguracion);
 
         setJMenuBar(jMenuBar2);
@@ -1016,6 +1043,10 @@ public class frmPrincipal extends javax.swing.JFrame {
             frm.setResizable(false);
         }
     }//GEN-LAST:event_btnDirectivosContactosActionPerformed
+
+    private void btnBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackupActionPerformed
+        controladorConfiguraciones.getInstance().generarBackup();
+    }//GEN-LAST:event_btnBackupActionPerformed
 // </editor-fold >  
 
     // <editor-fold defaultstate="collapsed" desc="Metodos">    
@@ -1058,7 +1089,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     private boolean validarFormularios() {
-        //JInternalFrame[] activos = dpContenedor.getAllFrames();
         if (controladorVariablesSesion.getInstance().getContadorVentanas() >= controladorVariablesSesion.getInstance().getLimiteVentanas()) {
             return true;
         } else {
@@ -1099,12 +1129,9 @@ public class frmPrincipal extends javax.swing.JFrame {
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new frmPrincipal().setVisible(true);
             }
@@ -1117,6 +1144,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     public static javax.swing.JMenuItem btnAcercamientos;
     public static javax.swing.JMenuItem btnAsignaturas;
     public static javax.swing.JMenuItem btnAutoridades;
+    public static javax.swing.JMenuItem btnBackup;
     public static javax.swing.JMenuItem btnCarreras;
     private javax.swing.JButton btnCerrarSesion;
     public static javax.swing.JMenuItem btnConfiguraciones;

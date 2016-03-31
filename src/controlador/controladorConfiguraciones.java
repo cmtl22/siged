@@ -1,10 +1,15 @@
 package controlador;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.Map;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import modelo.Configuraciones;
 
 public class controladorConfiguraciones {
+
+    private JFileChooser RealizarBackupMySQL = new JFileChooser();
 
     private static controladorConfiguraciones instancia;
     private boolean estadoFormulario;
@@ -112,6 +117,40 @@ public class controladorConfiguraciones {
 
     // </editor-fold>                        
 // <editor-fold defaultstate="collapsed" desc="Metodos">  
+    public void generarBackup() {
+        int resp;
+        Calendar c = Calendar.getInstance();
+        String fecha = String.valueOf(c.get(Calendar.DATE));
+        fecha = fecha + String.valueOf(c.get(Calendar.MONTH));
+        fecha = fecha + String.valueOf(c.get(Calendar.YEAR));
+        resp = RealizarBackupMySQL.showSaveDialog(null);//JFileChooser de nombre RealizarBackupMySQL
+        if (resp == JFileChooser.APPROVE_OPTION) {//Si el usuario presiona aceptar; se genera el Backup
+            try {
+
+                File backupFile = new File(String.valueOf(RealizarBackupMySQL.getSelectedFile().getParent())
+                        + "\\"
+                        + "backup_"
+                        + RealizarBackupMySQL.getSelectedFile().getName()
+                        + "_"
+                        + fecha
+                        + ".sql");
+
+                String userDataBase = "postgres";
+                String passwordDataBase = "root";
+                String dataBase = "siged_pruebas";
+                String comandos = "cmd /c pg_dump -U  " + userDataBase + " " + dataBase + " > " + backupFile.getAbsoluteFile().toString();
+                System.out.println(comandos);
+                Runtime.getRuntime().exec(comandos);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error no se genero el archivo por el siguiente motivo:" + e.getMessage(), "Verificar", JOptionPane.ERROR_MESSAGE);
+            }
+            JOptionPane.showMessageDialog(null, "Backup generado correctamente", "Generado", JOptionPane.INFORMATION_MESSAGE);
+        } else if (resp == JFileChooser.CANCEL_OPTION) {
+            JOptionPane.showMessageDialog(null, "Ha sido cancelada la generacion del Backup", "Cancelado", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     public boolean crearActualizar(Map datos) {
         camposObligatorios = validarCamposObligatorios(datos);
         if (camposObligatorios.equals("")) {

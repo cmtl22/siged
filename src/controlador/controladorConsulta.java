@@ -153,6 +153,7 @@ public class controladorConsulta {
             default:
                 sql = "error";
         }
+        System.out.println("sql combos: " + sql);
         if (Conexion.getInstance().consultarQuery(sql)) {
             try {
                 resultadoConsulta = Conexion.getInstance().getResultado();
