@@ -462,6 +462,7 @@ public class frmPeriodo extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        
         if (component instanceof JTextField) {
 
             JTextField text = (JTextField) component;

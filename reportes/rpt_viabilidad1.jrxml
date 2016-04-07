@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-04-05T14:47:23 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_viabilidad1" pageWidth="550" pageHeight="770" columnWidth="510" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cffa55f7-0fec-4181-bdc8-68ae1b8477b9">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIGED PRUEBAS"/>
+	<style name="Crosstab_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="p_id_viabilidad" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+	viab_numero_informe as numero_informe,
+	(select pers_formacion_academica || ' '||pers_apellidos || ' '||pers_nombres|| ' '||pers_inf_adicional from siged_persona where pers_tipo='SS') as para,
+	viab_fecha_informe as fecha_informe,
+	viab_asunto as asunto,
+	(select pers_formacion_academica || ' '||pers_apellidos || ' '||pers_nombres|| ' '||pers_inf_adicional from siged_persona where pers_tipo='R') as solicitante,
+	(case when viab_constatacion = 1 then 'X' when viab_constatacion=0 then ''  end) as op_si,
+	(case when viab_constatacion = 0 then 'X' when viab_constatacion=1 then ''  end) as op_no,
+	(case when (select core_opcion from siged_consulta_regulacion where viab_id=1 and core_codigo='SRI')=1 then 'X' else ''end) as sri_si,
+	(case when (select core_opcion from siged_consulta_regulacion where viab_id=1 and core_codigo='SRI')=0 then 'X' else ''end) as sri_no,
+	(case when (select core_opcion from siged_consulta_regulacion where viab_id=1 and core_codigo='IESS')=1 then 'X' else '' end) as iess_si,
+	(case when (select core_opcion from siged_consulta_regulacion where viab_id=1 and core_codigo='IESS')=0 then 'X' else '' end) as iess_no,
+	(case when (select core_opcion from siged_consulta_regulacion where viab_id=1 and core_codigo='SERCOP')=1 then 'X' else '' end) as sercop_si,
+	(case when (select core_opcion from siged_consulta_regulacion where viab_id=1 and core_codigo='SERCOP')=0 then 'X' else '' end) as sercop_no,
+	(case when (select core_opcion from siged_consulta_regulacion where viab_id=1 and core_codigo='SUPER_INTENDENCIA')=1 then 'X' else '' end) as super_intendencia_si,
+	(case when (select core_opcion from siged_consulta_regulacion where viab_id=1 and core_codigo='SUPER_INTENDENCIA')=0 then 'X' else '' end) as super_intendencia_no,
+	(case when (select core_opcion from siged_consulta_regulacion where viab_id=1 and core_codigo='OTROS')=1 then 'X' else '' end) as otros,
+	viab_observaciones_deudas as obervaciones_deudas,
+	viab_recomendaciones as recomendaciones,
+	viab_fecha_acercamiento as fecha_acercamiento,
+	viab_docu_acercamiento as documentacion_respaldo,
+	(select empr_razon_social from siged_empresa inner join siged_empresa_sucursal using(empr_id) where emsu_id=(select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} ))) as razon_social,
+	(select empr_nombre_comercial from siged_empresa inner join siged_empresa_sucursal using(empr_id) where emsu_id=(select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} ))) as nombre_comercial,
+	(select pers_apellidos||' '||pers_nombres from siged_persona_empresa_sucursal inner join siged_persona using(pers_id) where siged_persona_empresa_sucursal.emsu_id=
+	(select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe=$P{p_id_viabilidad} )) and pers_tipo  = 'RL') as representante_legal
+	
+
+FROM 
+siged_viabilidad 
+WHERE 
+siged_viabilidad.viab_numero_informe= $P{p_id_viabilidad}]]>
+	</queryString>
+	<field name="numero_informe" class="java.lang.String"/>
+	<field name="para" class="java.lang.String"/>
+	<field name="fecha_informe" class="java.lang.String"/>
+	<field name="asunto" class="java.lang.String"/>
+	<field name="solicitante" class="java.lang.String"/>
+	<field name="op_si" class="java.lang.String"/>
+	<field name="op_no" class="java.lang.String"/>
+	<field name="sri_si" class="java.lang.String"/>
+	<field name="sri_no" class="java.lang.String"/>
+	<field name="iess_si" class="java.lang.String"/>
+	<field name="iess_no" class="java.lang.String"/>
+	<field name="sercop_si" class="java.lang.String"/>
+	<field name="sercop_no" class="java.lang.String"/>
+	<field name="super_intendencia_si" class="java.lang.String"/>
+	<field name="super_intendencia_no" class="java.lang.String"/>
+	<field name="otros" class="java.lang.String"/>
+	<field name="obervaciones_deudas" class="java.lang.String"/>
+	<field name="recomendaciones" class="java.lang.String"/>
+	<field name="fecha_acercamiento" class="java.lang.String"/>
+	<field name="documentacion_respaldo" class="java.lang.String"/>
+	<field name="razon_social" class="java.lang.String"/>
+	<field name="nombre_comercial" class="java.lang.String"/>
+	<field name="representante_legal" class="java.lang.String"/>
+	<detail>
+		<band height="600">
+			<componentElement>
+				<reportElement stretchType="RelativeToTallestObject" x="30" y="0" width="475" height="600" uuid="141e3845-b455-49f4-a64e-813b92797e05"/>
+				<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="FillFrame" horizontalAlign="Left" verticalAlign="Middle">
+					<hc:htmlContentExpression><![CDATA["<html>    <meta charset='utf-8'>    <style>        td{            font-size: 12pt;         }    </style>    <table border='1' width='600' height='530'>            <tr>                    <td colspan='6'>                <center><strong>INFORME TÉCNICO - ACADÉMICO DE VIABILIDAD PARA LA FIRMA DE CONVENIO DE FORMACIÓN</strong></center>            </td>            </tr>                <tr>                    <td colspan='6' style='background-color:black;color:white;'>                            <center><strong>PERSONA JURÍDICA</strong></center>            </td>            </tr>        <!-- PRIMERA SECCIÓN-->            <tr>                    <td colspan='6' style='background-color:#d7e5f0;'>                            <strong>Primera sección.- Datos Generales:</strong>                    </td>            </tr>            <tr>                    <td width='5%'>                            No. de informe                    </td>                    <td colspan='5'>                "+$F{numero_informe}+"            </td>            </tr>        <tr>                    <td width='5%'>                            Para:                    </td>                    <td colspan='5'>                "+$F{para}+"            </td>            </tr>        <tr>                    <td width='5%'>                            Fecha:            </td>                    <td colspan='5'>                "+$F{fecha_informe}+"            </td>            </tr>        <tr>                    <td width='5%'>                            Asunto:                    </td>                    <td colspan='5'>                "+$F{asunto}+"            </td>            </tr>        <tr>                    <td width='5%'>                            Solicitante:                    </td>                    <td colspan='5'>                "+$F{solicitante}+"            </td>            </tr>        <!-- SEGUNDA SECCIÓN-->            <tr>                    <td colspan='6' style='background-color:#d7e5f0;'>                            <strong>Segunda sección.- Antecedentes:</strong>            </td>            </tr>            <tr>                    <td colspan='6'>                ¿Se constató que la entidad receptora goce de una conducta institucional/empresarial apropiada, para desarrollar el proceso de formación dual, a través de un análisis preliminar?            </td>        </tr>    </table>    <table border='1' width='600' height='530'>            <tr>                    <td colspan='2' width='50%'>                            En el ANEXO I se deberá incluir todos los documentos que este proceso ha generado, como capturas de pantalla, certificados, etc.            </td>                    <td width='15%'>                <center>SI</center>            </td>              <td width='10%'>                <center>"+$F{op_si}+"</center>            </td>            <td width='15%'>                <center>NO</center>            </td >              <td width='10%'>                <center>"+$F{op_no}+"</center>            </td>        </tr>    </table>    <table border='1' width='600' height='530'>            <tr>                    <td colspan='6'>                            ¿Se realizó el análisis preliminar mediante consultas online a las entidades de regulación y control?            </td>                    </tr>        <tr>                    <td width='30%'>                            <center><strong>Nombre</strong></center>            </td>                    <td width='10%'>                <center>SI</center>            </td>              <td width='10%'>                            <center>NO</center>            </td>                    <td width='30%'>                <center><strong>Nombre</strong></center>            </td>              <td width='10%'>                            <center>SI</center>            </td>                    <td width='10%'>                <center>NO</center>            </td>          </tr>        <tr>                    <td width='30%'>                            SRI:                    </td>                    <td >                <center>"+$F{sri_si}+"</center>            </td>              <td>                            <center>"+$F{sri_no}+"</center>            </td>                    <td width='30%'>                Superintendencia de Compañías            </td>              <td>                            <center>"+$F{super_intendencia_si}+"</center>            </td>                    <td >                <center>"+$F{super_intendencia_no}+"</center>            </td>          </tr>        <tr>                    <td width='30%'>                            IESS:                    </td>                    <td>                            <center>"+$F{iess_si}+"</center>            </td>                    <td>                            <center>"+$F{iess_no}+"</center>            </td>                    <td rowspan='2'>                Otros:            </td>              <td rowspan='2'>                            <center>"+$F{otros}+"</center>            </td>                    <td rowspan='2'>                        </td>                            </tr>        <tr>                    <td>                            SERCOP:                    </td>                    <td >                <center>"+$F{sercop_si}+"</center>            </td>            <td >                <center>"+$F{sercop_no}+"</center>            </td>                    </tr>        <tr>            <td colspan='6'>                Observaciones: "+$F{obervaciones_deudas}+"            </td>        </tr>        <tr>            <td colspan='2'>                Consideraciones preliminares/recomendaciones            </td>            <td colspan='4'>                <p>                     "+$F{recomendaciones}+"                </p>            </td>        </tr>        <tr>            <td colspan='2'>                Fecha acercamiento inicial            </td>            <td colspan='4'>                 "+$F{fecha_acercamiento}+"            </td>        </tr>        <tr>            <td colspan='2'>                Documentación de respaldo Oficios, Memos, Ayuda Memoria, etc.            </td>            <td colspan='4'>                "+$F{documentacion_respaldo}+"            </td>        </tr>        <tr>            <td colspan='2'>                Nombre de la Entidad Receptora (Razón Social)            </td>            <td colspan='4'>                "+$F{razon_social}+"            </td>        </tr>        <tr>            <td colspan='2'>                Nombre Comercial            </td>            <td colspan='4'>                "+$F{nombre_comercial}+"            </td>        </tr>        <tr>            <td colspan='2'>                Nombre del Representante Legal o delegado/ a. (persona legalmente autorizada para la suscripción de convenios o documentos de similar característica)            </td>            <td colspan='4'>                "+$F{representante_legal}+"            </td>        </tr>    </table></html>"]]></hc:htmlContentExpression>
+				</hc:html>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

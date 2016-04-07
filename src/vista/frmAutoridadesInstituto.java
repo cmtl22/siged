@@ -741,6 +741,8 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
         cmbTipoIdentificacion.setSelectedIndex(0);
+        cmbGenero.setSelectedIndex(0);
+        cmbTipoAutoridad.setSelectedIndex(0);
         if (component instanceof JTextField) {
 
             JTextField text = (JTextField) component;

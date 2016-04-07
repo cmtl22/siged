@@ -6,6 +6,7 @@ import controlador.controladorConsulta;
 import controlador.controladorGrid;
 import controlador.controladorReporte;
 import controlador.controladorVariablesSesion;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -255,12 +258,17 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnEntrevista = new javax.swing.JMenuItem();
         mnReportes = new javax.swing.JMenu();
         btnReportes = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         mnConfiguracion = new javax.swing.JMenu();
         btnUsuarios = new javax.swing.JMenuItem();
         btnPermisos = new javax.swing.JMenuItem();
         btnParametrizacion = new javax.swing.JMenuItem();
         btnConfiguraciones = new javax.swing.JMenuItem();
         btnBackup = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -649,7 +657,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         btnReportes.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12)); // NOI18N
         btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_reportes_32.png"))); // NOI18N
-        btnReportes.setText("Reportes");
+        btnReportes.setText("Matriz Formación Dual");
         btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReportes.setEnabled(false);
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
@@ -658,6 +666,39 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
         mnReportes.add(btnReportes);
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_informe_32.png"))); // NOI18N
+        jMenuItem1.setText("Informe Viabilidad");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnReportes.add(jMenuItem1);
+
+        jMenuItem2.setText("Seguimiento Estudiante");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        mnReportes.add(jMenuItem2);
+
+        jMenuItem3.setText("Seguimiento Estudiante Individual");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        mnReportes.add(jMenuItem3);
+
+        jMenuItem4.setText("Historial Seguimiento Academico Individual");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        mnReportes.add(jMenuItem4);
 
         jMenuBar2.add(mnReportes);
 
@@ -725,6 +766,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnConfiguracion.add(btnBackup);
 
         jMenuBar2.add(mnConfiguracion);
+
+        jMenu1.setText("Agenda");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+        jMenuBar2.add(jMenu1);
 
         setJMenuBar(jMenuBar2);
 
@@ -961,11 +1010,10 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
         Map parametros = new HashMap();
-        parametros.put("fechaInicio", "");
-        parametros.put("fechaFin", "");
-        parametros.put("id", "");
+        parametros.put("p_numero_informe_principal", "SENESCYT-SFTT-001-2016");
         controladorReporte reporte = new controladorReporte();
-        reporte.generarReporte("estudiantes", parametros);
+        reporte.generarReporte("matriz_formacion_dual", parametros);
+
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnEncuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncuestaActionPerformed
@@ -1047,6 +1095,45 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void btnBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackupActionPerformed
         controladorConfiguraciones.getInstance().generarBackup();
     }//GEN-LAST:event_btnBackupActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        frmAgenda agenda = new frmAgenda();
+        agenda.setVisible(true);
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Map parametros = new HashMap();
+        parametros.put("p_numero_informe_principal", "SENESCYT-SFTT-001-2016");
+        controladorReporte reporte = new controladorReporte();
+        reporte.generarReporte("viabilidad", parametros);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Map parametros = new HashMap();
+        parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
+        parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
+        parametros.put("p_condicion", "");
+        controladorReporte reporte = new controladorReporte();
+        reporte.generarReporte("segumiento_estudiantes", parametros);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        Map parametros = new HashMap();
+        parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
+        parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
+        parametros.put("p_condicion", " and segui_id=1");
+        controladorReporte reporte = new controladorReporte();
+        reporte.generarReporte("segumiento_estudiantes", parametros);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Map parametros = new HashMap();
+        parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
+        parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
+        parametros.put("p_id_estudiante", 4);
+        controladorReporte reporte = new controladorReporte();
+        reporte.generarReporte("historial_segumiento_estudiantes_individual", parametros);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 // </editor-fold >  
 
     // <editor-fold defaultstate="collapsed" desc="Metodos">    
@@ -1173,7 +1260,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane dpContenedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JPanel jpEncabezado;

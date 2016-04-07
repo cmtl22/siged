@@ -43,7 +43,8 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private String idEmpresa;
     
     private DefaultTableModel modeloSucursales;
-    private DefaultTableModel modeloCarreras  = new DefaultTableModel(); 
+    private DefaultTableModel modeloCarreras  = new DefaultTableModel();
+    private DefaultTableModel modeloAsignaturas  = new DefaultTableModel(); 
     private DefaultTableModel modeloDireccionMatriz;
     private DefaultTableModel modeloDireccionSucursal;
 
@@ -257,6 +258,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("VIABILIDAD");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_informe_32.png"))); // NOI18N
         setMaximumSize(new java.awt.Dimension(945, 535));
         setPreferredSize(new java.awt.Dimension(945, 535));
 
@@ -638,7 +640,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 txtNombreInstitutoActionPerformed(evt);
             }
         });
-        jpContenidoDelInforme.add(txtNombreInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 49, 309, 25));
+        jpContenidoDelInforme.add(txtNombreInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 49, 380, 25));
 
         lblDocCreacionInstituto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblDocCreacionInstituto.setText("Documento de Creación del Instituto");
@@ -662,7 +664,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 txtNombreRectorActionPerformed(evt);
             }
         });
-        jpContenidoDelInforme.add(txtNombreRector, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 129, 309, 25));
+        jpContenidoDelInforme.add(txtNombreRector, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 129, 380, 25));
 
         lblNumYTipoDeContrato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblNumYTipoDeContrato.setText("N° y Tipo de Contrato del Rector/a del Instituto con el Senescyt:");
@@ -719,7 +721,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane18.setViewportView(txaObservacionesPlazoConvenio);
 
-        jpContenidoDelInforme.add(jScrollPane18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 310, -1));
+        jpContenidoDelInforme.add(jScrollPane18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 380, -1));
 
         lblAsignaturas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblAsignaturas.setText("<html>Carrera, ciclos académicos y asignaturas que solventan el convenio de formación dual:</html>");
@@ -779,7 +781,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane6.setViewportView(txaProcesoDesignacionEstudiantes);
 
-        jpContenidoDelInforme.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 319, -1));
+        jpContenidoDelInforme.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 390, -1));
 
         lblProcesoDesignacionEstudiantes1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblProcesoDesignacionEstudiantes1.setText("Proceso de designación de estudiantes:");
@@ -866,7 +868,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane11.setViewportView(txaCondiciones);
 
-        jpContenidoDelInforme.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 920, 321, -1));
+        jpContenidoDelInforme.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 920, 390, -1));
 
         lblCondiciones.setText("<html>\n      <div align=\"justify\">\n            Condiciones:\n      </div> \n </html>");
         jpContenidoDelInforme.add(lblCondiciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 890, -1, 14));
@@ -880,7 +882,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane13.setViewportView(txaTipoCompensacion);
 
-        jpContenidoDelInforme.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 850, 321, 25));
+        jpContenidoDelInforme.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 850, 390, 25));
 
         btnAgregarCarrera.setText("Agregar");
         btnAgregarCarrera.addActionListener(new java.awt.event.ActionListener() {
@@ -888,7 +890,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 btnAgregarCarreraActionPerformed(evt);
             }
         });
-        jpContenidoDelInforme.add(btnAgregarCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 304, -1, -1));
+        jpContenidoDelInforme.add(btnAgregarCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, -1, -1));
 
         btnQuitarCarrera.setText("Quitar");
         btnQuitarCarrera.addActionListener(new java.awt.event.ActionListener() {
@@ -896,7 +898,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 btnQuitarCarreraActionPerformed(evt);
             }
         });
-        jpContenidoDelInforme.add(btnQuitarCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 304, 80, -1));
+        jpContenidoDelInforme.add(btnQuitarCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 80, -1));
 
         jtNombreCarreras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -916,7 +918,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane23.setViewportView(jtNombreCarreras);
 
-        jpContenidoDelInforme.add(jScrollPane23, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 209, 310, 83));
+        jpContenidoDelInforme.add(jScrollPane23, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 209, 380, 83));
 
         jspNumEstudiantes.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
         jpContenidoDelInforme.add(jspNumEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 210, 49, 25));
@@ -932,11 +934,11 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "id asignatura", "id carrera", "CARRERA"
+                "id asignatura", "id carrera", "ASIGNATURA", "CARRERA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -945,7 +947,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane26.setViewportView(jtAsignaturas);
 
-        jpContenidoDelInforme.add(jScrollPane26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 310, 83));
+        jpContenidoDelInforme.add(jScrollPane26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 380, 83));
 
         btnAgregarAsignatura.setText("Agregar");
         btnAgregarAsignatura.addActionListener(new java.awt.event.ActionListener() {
@@ -953,7 +955,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 btnAgregarAsignaturaActionPerformed(evt);
             }
         });
-        jpContenidoDelInforme.add(btnAgregarAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 590, -1, -1));
+        jpContenidoDelInforme.add(btnAgregarAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, -1, -1));
 
         btnQuitarAsignatura.setText("Quitar");
         btnQuitarAsignatura.addActionListener(new java.awt.event.ActionListener() {
@@ -961,7 +963,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 btnQuitarAsignaturaActionPerformed(evt);
             }
         });
-        jpContenidoDelInforme.add(btnQuitarAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 590, 80, -1));
+        jpContenidoDelInforme.add(btnQuitarAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 590, 80, -1));
 
         jScrollPane12.setViewportView(jpContenidoDelInforme);
 
@@ -1142,7 +1144,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         criterioBusqueda[0] = idInstituto;
         
         buscar("carrera_viabilidad","grid_filtro");//abre una ventana de busqueda
-        String str = controladorVariablesSesion.getInstance().getDatosTemporalesConsulta();
+        controladorVariablesSesion.getInstance().getDatosTemporalesConsulta();
         llenarNombresCarreras(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "carrera_viabilidad"));//consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos el tipo persona sirve para estudiante, tutor academicoy empresarial
 
     }//GEN-LAST:event_btnAgregarCarreraActionPerformed
@@ -1281,39 +1283,40 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 
     private void btnAgregarAsignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAsignaturaActionPerformed
         
-        frmConsultas1 frm = new frmConsultas1(null, true);
-        //JTable jt = frm.ge();
-        DefaultTableModel modelo = new DefaultTableModel();
         
+        frmConsultas1 frm = new frmConsultas1(null, true);
+        //JTable jt = frm.getjtConsulta();
+        
+        String[] nombresColmunas = {"id_asig","id_carr","ASIGNATURA","CARRERA"};
+        DefaultTableModel modeloAignaturas = new DefaultTableModel(nombresColmunas, 0);        
         
         try {
             
             for(int i = 0; i < idsCarrera.length; i++){
-                PreparedStatement ps = Conexion.getConexion().prepareStatement("select * from siged_asignatura where carr_id =" + idsCarrera[i]);
+                
+                PreparedStatement ps = Conexion.getConexion().prepareStatement("select * from v_asignatura_viabilidad_grid where carr_id =" + idsCarrera[i]);
                 ResultSet rs = ps.executeQuery();
                 
                 Object[] datosTabla = new Object[rs.getMetaData().getColumnCount()];
                 while (rs.next()) {
-
                     for (int j = 1; j <= rs.getMetaData().getColumnCount(); j++) {
                         if (rs.getObject(j) != null) {
                             datosTabla[j - 1] = rs.getObject(j);
-
                         } else {
                             datosTabla[j - 1] = "";
                         }
-                    }
-                modelo.addRow(datosTabla);
-            }
+                    }                    
+                    modeloAignaturas.addRow(datosTabla);
+                }
             }
             
-            
-            llenarNombresCarreras(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "carrera_viabilidad"));//consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos el tipo persona sirve para estudiante, tutor academicoy empresarial
+            jtAsignaturas.setModel(modeloAignaturas);
         } catch (SQLException ex) {
             Logger.getLogger(frmViabilidad.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+       // frm.formatearColumnas();
         frm.setVisible(true); //hace visible la ventan de busqueda
+        llenarAsignaturas(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "asignatura"));//consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos el tipo persona sirve para estudiante, tutor academicoy empresarial
         
     }//GEN-LAST:event_btnAgregarAsignaturaActionPerformed
 
@@ -1479,6 +1482,15 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jtDeudas.getColumnModel().getColumn(3).setMinWidth(0);
         jtDeudas.getColumnModel().getColumn(3).setPreferredWidth(0);
         
+        jtAsignaturas.getColumnModel().getColumn(0).setMaxWidth(0);
+        jtAsignaturas.getColumnModel().getColumn(0).setMinWidth(0);
+        jtAsignaturas.getColumnModel().getColumn(0).setPreferredWidth(0);
+        
+        jtAsignaturas.getColumnModel().getColumn(1).setMaxWidth(0);
+        jtAsignaturas.getColumnModel().getColumn(1).setMinWidth(0);
+        jtAsignaturas.getColumnModel().getColumn(1).setPreferredWidth(0);
+        
+        
         
     }
     
@@ -1499,6 +1511,23 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
             }
         }
 
+    }
+    
+    private void llenarAsignaturas(ArrayList<Object> datos) {
+        
+        modeloAsignaturas = (DefaultTableModel) jtAsignaturas.getModel();        
+        String[] buffer = new String[datos.size()];
+        //Guardando los datos en un array para llenar en Jtable
+        for(int i = 0; i < datos.size(); i++) buffer[i] = String.valueOf(datos.get(i));
+        //añadiendo una fila        
+        modeloAsignaturas.addRow(buffer);
+        //Poniendo los datos en la Jtable
+        jtAsignaturas.setModel(modeloAsignaturas);  
+        //Ocultando las filas de los ids
+        formatearColumnas();
+        
+        
+    
     }
     
     private void llenarDireccionMatriz(String[] direccion){
@@ -1554,9 +1583,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private void llenarEncargadoSenescyt(ArrayList<Object> datos) {
         idPersona = (String.valueOf(datos.get(0)));
         txaPara.setText((String) datos.get(10) + " " + (String) datos.get(2) + " " + (String) datos.get(1) + ", " + (String) datos.get(14));
-        txtNumYTipoDeContrato.setText((String) datos.get(14));
-        
-
     }
     
     private void llenarGridEntidadesDeControl() {

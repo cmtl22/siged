@@ -9,6 +9,7 @@ import controlador.controladorVariablesSesion;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -319,12 +320,21 @@ public class frmConvenio extends javax.swing.JInternalFrame {
             }
         ));
         jtConvenio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jtConvenio.setFocusCycleRoot(true);
+        jtConvenio.setFocusTraversalPolicyProvider(true);
         jtConvenio.setGridColor(new java.awt.Color(0, 102, 153));
         jtConvenio.setSelectionBackground(new java.awt.Color(255, 255, 0));
         jtConvenio.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jtConvenio.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jtConvenio.setVerifyInputWhenFocusTarget(false);
         jtConvenio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtConvenioMouseClicked(evt);
+            }
+        });
+        jtConvenio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtConvenioKeyTyped(evt);
             }
         });
         jScrollPane1.setViewportView(jtConvenio);
@@ -511,7 +521,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
 
     private void txtAdmEmpPrinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdmEmpPrinKeyReleased
         convertirAmayusculas(txtAdmEmpPrin);
-        txtAdmEmpPrin.setText(controladorVariablesSesion.validarLetrasConEspacios(txtAdmEmpPrin.getText()));
+        txtAdmEmpPrin.setText(controladorVariablesSesion.validarLetrasConEspacios(txtAdmEmpPrin.getText()));   
     }//GEN-LAST:event_txtAdmEmpPrinKeyReleased
 
     private void txtAdmInsSupKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdmInsSupKeyReleased
@@ -531,6 +541,30 @@ public class frmConvenio extends javax.swing.JInternalFrame {
             controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtConvenio));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+
+    private void jtConvenioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtConvenioKeyTyped
+        
+        jtConvenio.getModel().addTableModelListener(jtConvenio);
+        
+        
+        int fila = jtConvenio.getSelectedRow();//guarda la fila seleccionada
+        cambiarColorPanel(accion);
+        int keycode = evt.getKeyCode();
+        
+        System.out.println(""+ KeyEvent.VK_DELETE +" " + keycode);
+        
+        if (fila != -1 && keycode == KeyEvent.VK_DELETE) {
+            //consulta en la base de datos y llena las cajas de texto con la consulta realizada
+            
+            if (controladorVariablesSesion.getInstance().eliminar(jtConvenio.getValueAt(fila, 0).toString()) == 0) {
+            accion = "crear";
+            eliminar();//elimina el registro seleccionado
+            llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
+            limpiarCajasTexto(jpRegistroUsuario);//limpia las cajas de texto
+            cargarTotalRegistros();//carga el total de registros
+        }
+        }
+    }//GEN-LAST:event_jtConvenioKeyTyped
 // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Metodos">
 

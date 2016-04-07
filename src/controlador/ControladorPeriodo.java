@@ -63,7 +63,7 @@ public class ControladorPeriodo {
             camposObligatorios += "\nFalta el id";
 
         }
-        if (datos.get("nombre").equals("-1")) {
+        if (datos.get("nombre").equals("")) {
             camposObligatorios += "\nIngrese el período";
 
         }

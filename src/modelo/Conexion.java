@@ -33,7 +33,7 @@ public class Conexion {
         try {
             Class.forName("org.postgresql.Driver");
             //String connectString = "jdbc:postgresql://192.168.88.244:5432/siged_pruebas";
-            String connectString = "jdbc:postgresql://localhost:5432/siged_pruebas";
+            String connectString = "jdbc:postgresql://192.168.88.244:5432/siged_pruebas";
             _conexion = DriverManager.getConnection(connectString, _user, _password);
 
             if (_conexion != null) {

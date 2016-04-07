@@ -53,7 +53,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         accion = "crear";
         criterioBusqueda = new String[3];
         tipo_consulta = "seguimiento_estudiante";
-        llenarFiltro();
+
         llenarComboPeriodos();
         llenarComboNiveles();
         cargarTotalRegistros();
@@ -65,6 +65,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
             tipo_consulta = "seguimiento_estudiante";
             llenarGrid(tipo_consulta);
         }
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -855,7 +856,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         jtSeguimientoEstudiante.setRowSorter(sorter);
         jtSeguimientoEstudiante.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
-
+        llenarFiltro();
     }
 
     private void llenarFiltro() {

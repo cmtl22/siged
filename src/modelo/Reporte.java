@@ -1,7 +1,11 @@
 package modelo;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -17,23 +21,25 @@ public class Reporte {
 
         File reportFile = new File("");
         String path = "";
+        String report_path = reportFile.getAbsolutePath() + "\\reportes\\";
         String titulo = "";
+        parametros.put("p_path_principal", report_path);
         switch (nombreReporte) {
-            case "estudiantes":
-                path = reportFile.getAbsolutePath() + "\\reportes\\rpt_acercamiento_empresas.jasper";
-                titulo = "Estudiantes";
+            case "segumiento_estudiantes":
+                path = report_path + "rpt_seguimiento_estudiante.jasper";
+                titulo = "Seguimiento Estudiantes";
                 break;
-            case "generar_factura":
-                path = reportFile.getAbsolutePath() + "/reportes/rpt_facturaIndividual.jasper";
-                titulo = "Factura";
+            case "viabilidad":
+                path = report_path + "rpt_informe_viabilidad.jasper";
+                titulo = "Inform de Viabilidad";
                 break;
-            case "3":
-                path = reportFile.getAbsolutePath() + "/reportes/rpt_fechaIngreso.jasper";
-                titulo = "Ordenes de Ingreso";
+            case "matriz_formacion_dual":
+                path = report_path + "rpt_matriz_formacion_dual.jasper";
+                titulo = "Formación Dual";
                 break;
-            case "4":
-                path = reportFile.getAbsolutePath() + "/reportes/rpt_fechaIngresoDonaciones.jasper";
-                titulo = "Ingresos Por Donaciones";
+            case "historial_segumiento_estudiantes_individual":
+                path = report_path + "rpt_seguimiento_estudiante_historial.jasper";
+                titulo = "Historial Seguimiento Académico";
                 break;
             case "5":
                 path = reportFile.getAbsolutePath() + "/reportes/rpt_fechaPedido.jasper";
@@ -58,9 +64,7 @@ public class Reporte {
             reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametros, Conexion.getConexion());
-
             JasperViewer jv = new JasperViewer(jasperPrint, false);
-
             jv.setVisible(true);
             /*
 
@@ -90,6 +94,61 @@ public class Reporte {
             }*/
         } catch (Exception ex) {
             JOptionPane.showConfirmDialog(null, ex.getMessage());
+        }
+    }
+
+    public void generarReporteViabilidad(String nombreReporte, Map parametros) {
+        try {
+            File informeViabilidad = new File("");
+            File reportFile = new File("");
+            String path = "";
+            String titulo = "Informe de Viabilidad";
+            for (int i = 1; i <= 8; i++) {
+                path = reportFile.getAbsolutePath() + "\\reportes\\rpt_viabilidad" + i + ".jasper";
+                JasperReport reporte = null;
+                System.out.println(path);
+                try {
+                    reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametros, Conexion.getConexion());
+
+                    JasperViewer jv = new JasperViewer(jasperPrint, false);
+//                    jv.get
+                    //jv.setVisible(true);
+                } catch (Exception ex) {
+                    JOptionPane.showConfirmDialog(null, ex.getMessage());
+                }
+            }
+            Desktop.getDesktop().open(informeViabilidad);
+
+            /*
+            
+            String fileName = "C:\\Users\\itsbj\\Documents\\NetBeansProjects\\siged\\reportes\\rpt_estudiantes.jasper";
+            String outFileName = "d:\\test.pdf";
+            HashMap hm = new HashMap();
+            try {
+            JasperPrint print = JasperFillManager.fillReport(
+            fileName,
+            hm,
+            new JREmptyDataSource());
+            JRExporter exporter
+            = new net.sf.jasperreports.engine.export.JRPdfExporter();
+            exporter.setParameter(
+            JRExporterParameter.OUTPUT_FILE_NAME,
+            outFileName);
+            exporter.setParameter(
+            JRExporterParameter.JASPER_PRINT, print);
+            exporter.exportReport();
+            System.out.println("Created file: " + outFileName);
+            } catch (JRException e) {
+            e.printStackTrace();
+            System.exit(1);
+            } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+            }*/
+        } catch (IOException ex) {
+            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

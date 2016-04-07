@@ -704,6 +704,8 @@ public class frmSucursal extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        cmbPais.setSelectedIndex(0);
+        cmbTipo.setSelectedIndex(0);
         if (component instanceof JTextField) {
 
             JTextField text = (JTextField) component;

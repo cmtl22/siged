@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_viabilidad2" pageWidth="550" pageHeight="850" columnWidth="510" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cffa55f7-0fec-4181-bdc8-68ae1b8477b9">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIGED PRUEBAS"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="317"/>
+	<style name="Crosstab_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="p_id_viabilidad" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+	(case when(select empr_tipo from siged_empresa inner join siged_empresa_sucursal using(empr_id) where emsu_id=(select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad}))) = 'PR' then 'X' else '' end ) as naturaleza_privada,
+	(case when(select empr_tipo from siged_empresa inner join siged_empresa_sucursal using(empr_id) where emsu_id=(select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad}))) = 'PU' then 'X' else '' end ) as naturaleza_publica,
+	(case when(select empr_tipo from siged_empresa inner join siged_empresa_sucursal using(empr_id) where emsu_id=(select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad}))) = 'MI' then 'X' else '' end ) as naturaleza_mixta,
+	(select empr_actividad_economica from siged_empresa inner join siged_empresa_sucursal using(empr_id) where emsu_id=(select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad}))) as actividad_economica,
+	(select empr_ruc from siged_empresa inner join siged_empresa_sucursal using(empr_id) where emsu_id=(select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad}))) as ruc,
+	(select ubic_referencia from siged_ubicacion where ubic_id = (select ubic_id from siged_empresa_sucursal where emsu_id = (select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} )))) as edificio,
+	(select ubic_edificio from siged_ubicacion where ubic_id = (select ubic_id from siged_empresa_sucursal where emsu_id = (select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} )))) as referencia,
+	(select ubic_piso from siged_ubicacion where ubic_id = (select ubic_id from siged_empresa_sucursal where emsu_id = (select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} )))) as piso,
+	(select ubic_oficina from siged_ubicacion where ubic_id = (select ubic_id from siged_empresa_sucursal where emsu_id = (select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} )))) as oficina,
+	(select ubic_provincia from siged_ubicacion where ubic_id = (select ubic_id from siged_empresa_sucursal where emsu_id = (select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} )))) as provincia,
+	(select ubic_ciudad from siged_ubicacion where ubic_id = (select ubic_id from siged_empresa_sucursal where emsu_id = (select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} )))) as ciudad,
+	(select ubic_sector from siged_ubicacion where ubic_id = (select ubic_id from siged_empresa_sucursal where emsu_id = (select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} )))) as sector,
+	(select ubic_numero from siged_ubicacion where ubic_id = (select ubic_id from siged_empresa_sucursal where emsu_id = (select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} )))) as numero,
+	(select ubic_calle_principal from siged_ubicacion where ubic_id = (select ubic_id from siged_empresa_sucursal where emsu_id = (select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} )))) as calle_principal,
+	(select ubic_calle_interseccion from siged_ubicacion where ubic_id = (select ubic_id from siged_empresa_sucursal where emsu_id = (select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} )))) as calle_secundaria,
+	(select inst_nombre from siged_instituto limit 1) as instituto,
+	(select empr_razon_social from siged_empresa inner join siged_empresa_sucursal using(empr_id) where emsu_id=(select emsu_id from siged_viabilidad_empresa_sucursal where viab_id=(select viab_id from siged_viabilidad where viab_numero_informe= $P{p_id_viabilidad} ))) as empresa,
+	(select inst_creacion_resolucion from siged_instituto limit 1) as resolucion_instituto,
+	(select pers_apellidos||' '||pers_nombres from siged_instituto inner join siged_persona using(pers_id) limit 1) as rector,
+	(select pers_inf_adicional from siged_instituto inner join siged_persona using(pers_id) limit 1) as contrato_rector,
+	(select carr_nombre from siged_instituto inner join siged_carrera using(inst_id) limit 1) as carrera,
+	(select carr_num_resolucion from siged_instituto inner join siged_carrera using(inst_id) limit 1) as resolucion_carrera,
+	viab_num_estudiantes as total_estudiantes,
+	viab_cantidad_tutores as total_tutores,
+	viab_plazo as plazo,
+	viab_observaciones_renovacion as obersvaciones_renovacion,
+	(case when viab_renueva_convenio=1 then 'X' else ''end) as renovar_si,
+	(case when viab_renueva_convenio=0 then 'X' else ''end) as renovar_no
+FROM 
+siged_viabilidad 
+WHERE 
+siged_viabilidad.viab_numero_informe= $P{p_id_viabilidad}]]>
+	</queryString>
+	<field name="naturaleza_privada" class="java.lang.String"/>
+	<field name="naturaleza_publica" class="java.lang.String"/>
+	<field name="naturaleza_mixta" class="java.lang.String"/>
+	<field name="actividad_economica" class="java.lang.String"/>
+	<field name="ruc" class="java.lang.String"/>
+	<field name="edificio" class="java.lang.String"/>
+	<field name="referencia" class="java.lang.String"/>
+	<field name="piso" class="java.lang.String"/>
+	<field name="oficina" class="java.lang.String"/>
+	<field name="provincia" class="java.lang.String"/>
+	<field name="ciudad" class="java.lang.String"/>
+	<field name="sector" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="calle_principal" class="java.lang.String"/>
+	<field name="calle_secundaria" class="java.lang.String"/>
+	<field name="instituto" class="java.lang.String"/>
+	<field name="empresa" class="java.lang.String"/>
+	<field name="resolucion_instituto" class="java.lang.String"/>
+	<field name="rector" class="java.lang.String"/>
+	<field name="contrato_rector" class="java.lang.String"/>
+	<field name="carrera" class="java.lang.String"/>
+	<field name="resolucion_carrera" class="java.lang.String"/>
+	<field name="total_estudiantes" class="java.lang.Integer"/>
+	<field name="total_tutores" class="java.lang.Integer"/>
+	<field name="plazo" class="java.lang.Integer"/>
+	<field name="obersvaciones_renovacion" class="java.lang.String"/>
+	<field name="renovar_si" class="java.lang.String"/>
+	<field name="renovar_no" class="java.lang.String"/>
+	<pageHeader>
+		<band height="40">
+			<image>
+				<reportElement x="0" y="0" width="110" height="30" uuid="99619fd2-5ec4-4167-b02d-56b0831a1e2d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["C:/Users/itsbj/JaspersoftWorkspace/siged_reportes/recursos/logo_secretaria.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="390" y="0" width="120" height="30" uuid="f8c3cb3b-5928-4390-ac42-368d890f07af">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["C:/Users/itsbj/JaspersoftWorkspace/siged_reportes/recursos/logo_instituto.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="770">
+			<componentElement>
+				<reportElement x="30" y="0" width="475" height="770" uuid="141e3845-b455-49f4-a64e-813b92797e05"/>
+				<hc:html xmlns:hc="http://jasperreports.sourceforge.net/htmlcomponent" xsi:schemaLocation="http://jasperreports.sourceforge.net/htmlcomponent http://jasperreports.sourceforge.net/xsd/htmlcomponent.xsd" scaleType="RealSize" horizontalAlign="Left" verticalAlign="Top">
+					<hc:htmlContentExpression><![CDATA["<html><meta charset='utf-8'><style>td{font: sans-serif 8pt;}</style>    <table border='1' width='750' height='770'>    <!--***********************************FILA Naturaleza de su gestión*********************************** -->                   <tr>                    <td  width='20%'>                            Naturaleza de su gestión                    </td>                    <td >                Privada            </td>                <td>                <center>"+$F{naturaleza_privada}+"</center>            </td>            <td>                Pública            </td>            <td>                <center>"+$F{naturaleza_publica}+"</center>            </td>            <td >                Mixta            </td>                <td>                <center>"+$F{naturaleza_mixta}+"</center>            </td>        </tr><!--***********************************FILA Actividad económica que consta en el RUC*********************************** -->                           <tr>                    <td  width='10%'  >                            Actividad económica que consta en el RUC                    </td>                    <td colspan='6'>                "+$F{actividad_economica}+"            </td>            </tr><!--***********************************FILA 3*********************************** -->                           <tr>                    <td width='10%'  >                            Número de RUC            </td>                    <td colspan='6'>                "+$F{ruc}+"            </td>            </tr><!--***********************************FILA 4*********************************** -->                                   <tr>                    <td width='5%' rowspan='14' >                            Locación geográfica y contactos                    </td>                    <td colspan='6'>                Referencia: "+$F{referencia}+" <br>                 Edificio: "+$F{referencia}+" <br>                 Piso: "+$F{piso}+" <br>                Oficina. "+$F{oficina}+" <br>                 Email: jcuaical@transfiriendo.com            </td>            </tr><!--***********************************FILA 4-1 Provincia*********************************** -->                                   <tr>                    <td >                            Provincia                    </td>                    <td colspan='2'>                "+$F{provincia}+"             </td>            <td >                Ciudad            </td>            <td colspan='2'>                "+$F{ciudad}+"             </td>        </tr><!--***********************************FILA 4-2 Sector*********************************** -->                                   <tr>                    <td >                            Sector                    </td>                    <td colspan='2'>                "+$F{sector}+"             </td>            <td >                Número            </td>            <td colspan='2'>                "+$F{numero}+"             </td>        </tr><!--***********************************FILA 4-3 Calle*********************************** -->                                   <tr>                    <td >                            Calle                    </td>                    <td colspan='2'>                "+$F{calle_principal}+"             </td>            <td >                Intersección            </td>            <td colspan='2'>                "+$F{calle_secundaria}+"              </td>        </tr>        <!--***********************************FILA 4-4 Dirección sucursal*********************************** -->                                           <tr>                    <td colspan='6' style='color:#2952a3;'>                            Dirección sucursal/ planta/ filial: (Lugar en donde se realizará la formación dual, establecer referencias para ubicación, por ejm: diagonal a bco. Pacifico)            </td>                </tr><!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='6'>                                        </td>                </tr>        <!--***********************************FILA 4-6 Provincia*********************************** -->                                   <tr>                    <td >                            Provincia                    </td>                    <td colspan='2'>                "+$F{provincia}+"             </td>            <td >                Ciudad            </td>            <td colspan='2'>                "+$F{ciudad}+"            </td>        </tr>     <!--***********************************FILA 4-6 Provincia*********************************** -->                                   <tr>                    <td >                            Sector                    </td>                    <td colspan='2'>                "+$F{sector}+"            </td>            <td >                Número            </td>            <td colspan='2'>                "+$F{numero}+"              </td>        </tr><!--***********************************FILA 4-6 Provincia*********************************** -->                                   <tr>                    <td >                            Calle                    </td>                    <td colspan='2'>                "+$F{calle_principal}+"            </td>            <td >                Intersección            </td>            <td colspan='2'>                "+$F{calle_secundaria}+"            </td>        </tr> <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='6'>                           <center><strong>Datos de contacto</strong></center>            </td>                </tr>   <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td >                            Nombre/cargo            </td>             <td colspan='5'>                            Jonathan Cuaical , Gerente Comercial            </td>         </tr>           <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td >                            Teléfono            </td>             <td colspan='2'>                            </td>            <td >                            Celular            </td>             <td colspan='2'>                (+593)985347779            </td>        </tr> <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td >                            E-mail            </td>             <td colspan='5'>                           jcuaical@transfiriendo.com            </td>         </tr>         <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td >                            Otro            </td>             <td colspan='5'>                            </td>         </tr><!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='7' style='background-color:#d7e5f0;'>                  Tercera Sección.- Contenido del Informe:            </td>         </tr>        <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td >                  <strong>I. Objetivo</strong>            </td>             <td colspan='6'>                Determinar la factibilidad de la firma del convenio de formación dual entre el "+$F{instituto}+" y "+$F{empresa}+".            </td>         </tr>   <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='7'>                 <strong>II. Criterios académicos condiciones del proceso para la formación dual</strong>            </td>          </tr>   <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='2'>                  Nombre del IST            </td>             <td colspan='5'>                  "+$F{instituto}+"            </td>         </tr>         <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='2'>                  Documento de creación del IST            </td>             <td colspan='5'>                  "+$F{resolucion_instituto}+"            </td>         </tr> <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='2'>                   Nombre del Rector/a del IST            </td>             <td colspan='5'>                  "+$F{rector}+"            </td>         </tr> <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='2'>                   No. y tipo de Contrato del Rector/a del IST con SENESCYT            </td>             <td colspan='5'>                  "+$F{contrato_rector}+"            </td>         </tr> <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='2'>                   Nombre de la/s carrera/s            </td>             <td colspan='5'>                  "+$F{carrera}+"            </td>         </tr> <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='2'>                   No. Resolución de aprobación, registro o regularización de cada carrera otorgada por el CES            </td>             <td colspan='5'>                    "+$F{resolucion_carrera}+"            </td>         </tr> <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='2'>                    No. de estudiantes que recibiría la Entidad Receptora por ciclo académico            </td>             <td colspan='5'>                   "+$F{total_estudiantes}+"            </td>         </tr> <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='2'>                   Cantidad de tutores por parte de la Entidad Receptora (principales y suplentes) por estudiante. (establecer la cantidad mínima que conforme a la capacidad de la ER, nos proporcionen)            </td>             <td colspan='5'>                   "+$F{total_tutores}+"            </td>         </tr> <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='2'>                    Plazo de vigencia del convenio Se recomienda que el plazo sea mínimo de 3 años)            </td>             <td colspan='5'>                  "+$F{plazo}+"            </td>         </tr>     <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='3'>                   ¿La entidad receptora estaría dispuesta a renovar el convenio?            </td>             <td >                  SI            </td>             <td >                   "+$F{renovar_si}+"            </td>             <td >                  NO            </td>             <td >                   "+$F{renovar_no}+"            </td>         </tr>     <!--***********************************FILA 4-5 Espacio en blanco*********************************** -->                                           <tr>                    <td colspan='7'>                   Observaciones: "+$F{obersvaciones_renovacion}+"            </td>         </tr>             </table></html>"]]></hc:htmlContentExpression>
+				</hc:html>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

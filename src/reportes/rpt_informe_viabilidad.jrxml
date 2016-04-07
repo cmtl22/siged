@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-04-07T14:38:02 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_informe_viabilidad" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="5" bottomMargin="5" uuid="edea6030-f4cb-4a56-a95e-e0aa8375f195">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIGED PRUEBAS"/>
+	<parameter name="p_numero_informe_principal" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="p_path_principal" class="java.lang.String">
+		<defaultValueExpression><![CDATA["C:\\Users\\itsbj\\JaspersoftWorkspace\\siged_reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select *from siged_viabilidad where viab_numero_informe  = $P{p_numero_informe_principal}]]>
+	</queryString>
+	<field name="viab_id" class="java.lang.Integer"/>
+	<field name="viab_numero_informe" class="java.lang.String"/>
+	<field name="viab_fecha_informe" class="java.lang.String"/>
+	<field name="viab_asunto" class="java.lang.String"/>
+	<field name="viab_constatacion" class="java.lang.Integer"/>
+	<field name="viab_observaciones_deudas" class="java.lang.String"/>
+	<field name="viab_recomendaciones" class="java.lang.String"/>
+	<field name="viab_fecha_acercamiento" class="java.lang.String"/>
+	<field name="viab_docu_acercamiento" class="java.lang.String"/>
+	<field name="viab_observaciones_informe" class="java.lang.String"/>
+	<field name="viab_num_estudiantes" class="java.lang.Integer"/>
+	<field name="viab_cantidad_tutores" class="java.lang.Integer"/>
+	<field name="viab_plazo" class="java.lang.Integer"/>
+	<field name="viab_renueva_convenio" class="java.lang.Integer"/>
+	<field name="viab_observaciones_renovacion" class="java.lang.String"/>
+	<field name="viab_administrador_inst" class="java.lang.String"/>
+	<field name="viab_administrador_empr" class="java.lang.String"/>
+	<field name="viab_proceso_designacion" class="java.lang.String"/>
+	<field name="viab_uniformes" class="java.lang.Integer"/>
+	<field name="viab_equipo_proteccion" class="java.lang.Integer"/>
+	<field name="viab_normas_seguridad" class="java.lang.Integer"/>
+	<field name="viab_observaciones_condiciones" class="java.lang.String"/>
+	<field name="viab_compensacion" class="java.lang.Integer"/>
+	<field name="viab_compensacion_tipo" class="java.lang.String"/>
+	<field name="viab_compensacion_condiciones" class="java.lang.String"/>
+	<field name="viab_elaborado" class="java.lang.String"/>
+	<field name="viab_revisado" class="java.lang.String"/>
+	<field name="viab_aprobado" class="java.lang.String"/>
+	<field name="viab_estado_tramite" class="java.lang.String"/>
+	<field name="viab_conclusiones" class="java.lang.String"/>
+	<field name="viab_estado_registro" class="java.lang.Integer"/>
+	<field name="viab_otros_anexos" class="java.lang.String"/>
+	<field name="viab_objetivo" class="java.lang.String"/>
+	<title>
+		<band height="89" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="80" height="30" uuid="5c45331e-9381-4bea-b879-019fe820ae7c"/>
+				<imageExpression><![CDATA["reportes/recursos/logo_secretaria.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="480" y="0" width="70" height="30" uuid="2c3e9ad3-40bc-4bfa-8009-b003b1271896"/>
+				<imageExpression><![CDATA["reportes/recursos/logo_instituto.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="30" width="550" height="30" uuid="8e9db961-bd31-4d7a-bd7a-8832954c3437"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARÍA DE EDUCACIÓN SUPERIOR, CIENCIA, TECNOLOGÍA E INNOVACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="59" width="550" height="30" uuid="1ffd7749-679c-4ee6-be8c-14040eb15dec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUBSECRETARÍA DE FORMACIÓN TÉCNICA Y TECNOLÓGICA, ARTES, MÚSICA Y
+PEDAGOGÍA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="130" splitType="Stretch">
+			<break>
+				<reportElement x="0" y="20" width="99" height="1" uuid="0bb9fe97-f7ce-4c7f-8fda-efe8180cedb4"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="0" width="550" height="20" uuid="273725fd-3b45-42bf-ac8d-3b0639329ab5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="p_numero_informe_sub">
+					<subreportParameterExpression><![CDATA[$P{p_numero_informe_principal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{p_path_principal} + "rpt_informe_1.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="43" width="100" height="1" uuid="e7ed47f9-154f-40c8-8228-0c910c927206">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</break>
+			<subreport>
+				<reportElement x="0" y="22" width="550" height="20" uuid="6893daf3-74b1-4064-b79d-83b85f364308">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="p_numero_informe_sub">
+					<subreportParameterExpression><![CDATA[$P{p_numero_informe_principal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{p_path_principal} +"rpt_informe_2.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="64" width="100" height="1" uuid="74080825-865d-4c5e-8e16-e4846531c7c3">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</break>
+			<subreport>
+				<reportElement x="0" y="44" width="550" height="20" uuid="e55381f0-6a50-4a4d-87ae-b790cb244e24">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="p_numero_informe_sub">
+					<subreportParameterExpression><![CDATA[$P{p_numero_informe_principal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{p_path_principal} +"rpt_informe_3.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="65" width="100" height="1" uuid="7421fb15-6a41-477a-96cc-79aa8ad3ab4a"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="66" width="550" height="20" uuid="1785bd8a-d7b2-4275-85e0-869bb01cd439">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="p_numero_informe_sub">
+					<subreportParameterExpression><![CDATA[$P{p_numero_informe_principal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{p_path_principal} +"rpt_informe_4.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="87" width="100" height="1" uuid="52f1f23a-99f9-4d09-acbb-726aba6e9d7e"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="88" width="550" height="20" uuid="c6cdeb69-f3c9-40f7-8628-dd7aaf95500e">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="p_numero_informe_sub">
+					<subreportParameterExpression><![CDATA[$P{p_numero_informe_principal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{p_path_principal} +"rpt_informe_5.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="109" width="100" height="1" uuid="6c5bb72e-3bad-4d69-b772-5b059c5f32b4">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</break>
+			<subreport>
+				<reportElement x="0" y="110" width="550" height="20" uuid="8b98315f-9d27-4f71-b873-f56efe4f1c36">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="p_numero_informe_sub">
+					<subreportParameterExpression><![CDATA[$P{p_numero_informe_principal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{p_path_principal} +"rpt_informe_6.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="535" y="0" width="15" height="15" uuid="eec51eae-03b0-4e7d-9253-d36620ee473b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
