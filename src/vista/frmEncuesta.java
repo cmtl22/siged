@@ -40,7 +40,6 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         accion = "crear";
         criterioBusqueda = new String[3];
         tipo_consulta = "encuesta";
-        llenarFiltro();
         llenarComboPeriodos();
         cargarTotalRegistros();
         if (controladorVariablesSesion.getInstance().getPerfilUsuario().equals("1")) {
@@ -58,7 +57,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jpRegistroEntrevista = new javax.swing.JPanel();
+        jpRegistroEncuesta = new javax.swing.JPanel();
         lblTitulo_Id = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         lblObservaciones = new javax.swing.JLabel();
@@ -95,29 +94,29 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(945, 575));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jpRegistroEntrevista.setBackground(new java.awt.Color(255, 255, 255));
-        jpRegistroEntrevista.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jpRegistroEntrevista.setPreferredSize(new java.awt.Dimension(470, 520));
-        jpRegistroEntrevista.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpRegistroEncuesta.setBackground(new java.awt.Color(255, 255, 255));
+        jpRegistroEncuesta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jpRegistroEncuesta.setPreferredSize(new java.awt.Dimension(470, 520));
+        jpRegistroEncuesta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo_Id.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblTitulo_Id.setText("Id:");
         lblTitulo_Id.setPreferredSize(new java.awt.Dimension(15, 20));
-        jpRegistroEntrevista.add(lblTitulo_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+        jpRegistroEncuesta.add(lblTitulo_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         lblId.setText("0");
         lblId.setPreferredSize(new java.awt.Dimension(100, 20));
-        jpRegistroEntrevista.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
+        jpRegistroEncuesta.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
 
         lblObservaciones.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblObservaciones.setText("Observaciones:");
         lblObservaciones.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroEntrevista.add(lblObservaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, -1));
+        jpRegistroEncuesta.add(lblObservaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, -1));
 
         lblPeriodo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPeriodo.setText("Período:");
         lblPeriodo.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroEntrevista.add(lblPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 90, -1));
+        jpRegistroEncuesta.add(lblPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 90, -1));
 
         txaObservaciones.setColumns(2);
         txaObservaciones.setLineWrap(true);
@@ -129,24 +128,24 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(txaObservaciones);
 
-        jpRegistroEntrevista.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 260, 100));
+        jpRegistroEncuesta.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 260, 100));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
         jLabel9.setText("*");
-        jpRegistroEntrevista.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 10, -1));
+        jpRegistroEncuesta.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 10, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 0, 0));
         jLabel10.setText("*");
-        jpRegistroEntrevista.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 10, -1));
+        jpRegistroEncuesta.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 10, -1));
 
         cmbPeriodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbPeriodo.setEnabled(false);
         cmbPeriodo.setPreferredSize(new java.awt.Dimension(28, 25));
-        jpRegistroEntrevista.add(cmbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 260, -1));
+        jpRegistroEncuesta.add(cmbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 260, -1));
 
-        jPanel1.add(jpRegistroEntrevista, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, -1, -1));
+        jPanel1.add(jpRegistroEncuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, -1, -1));
 
         jpBusquedaEntrevista.setBackground(new java.awt.Color(255, 255, 255));
         jpBusquedaEntrevista.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -329,17 +328,17 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if (controladorVariablesSesion.getInstance().eliminar(lblId.getText()) == 0) {
+    if (controladorVariablesSesion.getInstance().eliminar(lblId.getText()) == 0) {
             accion = "crear";
             eliminar();//elimina el registro seleccionado
             llenarGrid(tipo_consulta);//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
-            limpiarCajasTexto(jpRegistroEntrevista);//limpia las cajas de texto
-            cargarTotalRegistros();//carga el total de registros
+            limpiarCajasTexto(jpRegistroEncuesta);//limpia las cajas de texto
+            cargarTotalRegistros();//carga el total de registros                     
     }//GEN-LAST:event_btnEliminarActionPerformed
     }
     private void btnCrearActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActualizarActionPerformed
         if (crearActualizar()) {//crea o actualiza segun la accion designada
-            limpiarCajasTexto(jpRegistroEntrevista);
+            limpiarCajasTexto(jpRegistroEncuesta);
             llenarGrid(tipo_consulta);//consulta a la base de datos para que cargue el nuevo registro ingresado
             cargarTotalRegistros();//carga el total de registros
         }
@@ -347,7 +346,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         accion = "crear";
-        limpiarCajasTexto(jpRegistroEntrevista);//limpia las cajas de texto
+        limpiarCajasTexto(jpRegistroEncuesta);//limpia las cajas de texto
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnAdjuntarAnexosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarAnexosActionPerformed
@@ -507,6 +506,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         jtEncuesta.setRowSorter(sorter);
         jtEncuesta.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        llenarFiltro();
     }
 
     private void llenarEncuesta(ArrayList<Object> datos) {
@@ -534,7 +534,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel jpBusquedaEntrevista;
-    private javax.swing.JPanel jpRegistroEntrevista;
+    private javax.swing.JPanel jpRegistroEncuesta;
     private javax.swing.JTable jtEncuesta;
     private javax.swing.JLabel lblBusqueda;
     private javax.swing.JLabel lblFiltro;

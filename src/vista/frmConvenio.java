@@ -459,7 +459,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
         
         int fila = jtConvenio.getSelectedRow();//guarda la fila seleccionada
         accion = "actualizar";
-        cambiarColorPanel(accion);
+        //cambiarColorPanel(accion);
         if (fila != -1) {
             //consulta en la base de datos y llena las cajas de texto con la consulta realizada
             llenarConvenio(consultarRegistroIndividual(jtConvenio.getValueAt(fila, 0).toString(), "convenio"));
@@ -474,7 +474,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         accion = "crear";
         limpiarCajasTexto(jpRegistroUsuario);//limpia las cajas de texto
-        cambiarColorPanel(accion);
+        //cambiarColorPanel(accion);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCrearActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActualizarActionPerformed
@@ -675,6 +675,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
 
     private void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        idViabilidad = "-1";
         if (component instanceof JTextField) {
 
             JTextField text = (JTextField) component;
@@ -723,7 +724,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
 
     private void llenarViabilidad(ArrayList<Object> datos) {
         idViabilidad = (String.valueOf(datos.get(0)));
-        txtViabilidad.setText((String) datos.get(2));
+        txtViabilidad.setText((String) datos.get(1));
 
     }
 

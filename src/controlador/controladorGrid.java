@@ -125,6 +125,104 @@ public class controladorGrid {
         return modelo;
     }
 
+    public DefaultTableModel llenarGridEntidadesRegulacion() {
+
+        controladorConsulta consultaClass = new controladorConsulta();
+        DefaultTableModel modelo = null;
+        try {
+            ResultSet resultado;
+
+            resultado = consultaClass.consultarDatos("entidades_regulacion", "grid", null);
+
+            int numCol = consultaClass.getNumColumnas();
+            nombresColmunas = new String[numCol];
+            nombresColmunas = consultaClass.getNombColumnas();
+
+            modelo = (new DefaultTableModel(
+                    nombresColmunas, 0) {
+
+                Class[] types = new Class[]{
+                    java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+            });
+
+            ArrayList<Object> datosTabla;
+            while (resultado.next()) {
+                //          JOptionPane.showMessageDialog(null,"id: "+ resultado.getObject(1));
+                datosTabla = new ArrayList();
+                if (resultado.getObject(1) != null) {
+
+                    datosTabla.add(resultado.getObject(1));
+                    datosTabla.add(resultado.getObject(2));
+                    datosTabla.add(resultado.getObject(3));
+                } else {
+
+                    datosTabla.add("0");
+                    datosTabla.add("SN");
+                    datosTabla.add(true);
+                }
+
+                modelo.addRow(arrayListToArray(datosTabla));
+            }
+        } catch (Exception ex) {
+
+        }
+        return modelo;
+    }
+
+    public DefaultTableModel llenarGridDocumentosHabilitantes(String tabla) {
+
+        controladorConsulta consultaClass = new controladorConsulta();
+        DefaultTableModel modelo = null;
+        try {
+            ResultSet resultado;
+
+            resultado = consultaClass.consultarDatos(tabla, "grid", null);
+
+            int numCol = consultaClass.getNumColumnas();
+            nombresColmunas = new String[numCol];
+            nombresColmunas = consultaClass.getNombColumnas();
+
+            modelo = (new DefaultTableModel(
+                    nombresColmunas, 0) {
+
+                Class[] types = new Class[]{
+                    java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                };
+
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+            });
+
+            ArrayList<Object> datosTabla;
+            while (resultado.next()) {
+                //          JOptionPane.showMessageDialog(null,"id: "+ resultado.getObject(1));
+                datosTabla = new ArrayList();
+                if (resultado.getObject(1) != null) {
+
+                    datosTabla.add(resultado.getObject(1));
+                    datosTabla.add(resultado.getObject(2));
+                    datosTabla.add(resultado.getObject(3));
+                } else {
+
+                    datosTabla.add("0");
+                    datosTabla.add("SN");
+                    datosTabla.add(true);
+                }
+
+                modelo.addRow(arrayListToArray(datosTabla));
+            }
+        } catch (Exception ex) {
+
+        }
+        return modelo;
+    }
+
     public DefaultTableModel llenarGridCheckBox(String tabla, String tipo, String[] criterioBusqueda) {
 
         controladorConsulta consultaClass = new controladorConsulta();

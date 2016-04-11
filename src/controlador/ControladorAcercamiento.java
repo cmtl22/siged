@@ -1,10 +1,12 @@
 package controlador;
 
+import java.sql.ResultSet;
 import java.util.Map;
 import modelo.Acercamiento;
 
 public class ControladorAcercamiento {
 
+    private ResultSet resultado;
     String camposObligatorios;
     String camposInvalidos;
     boolean bandera;
@@ -65,7 +67,7 @@ public class ControladorAcercamiento {
             camposObligatorios += "\nSeleccione un estado";
 
         }
-        
+
         return camposObligatorios;
     }
 

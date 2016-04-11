@@ -91,6 +91,9 @@ public class frmPrincipal extends javax.swing.JFrame {
                 case "frmAcercamiento":
                     frmPrincipal.btnAcercamientos.setEnabled(true);
                     break;
+                case "frmAgenda":
+                    frmPrincipal.btnAgenda.setEnabled(true);
+                    break;
 
                 case "frmAsignatura":
                     frmPrincipal.btnAsignaturas.setEnabled(true);
@@ -260,7 +263,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnReportes = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         mnConfiguracion = new javax.swing.JMenu();
         btnUsuarios = new javax.swing.JMenuItem();
@@ -269,6 +271,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnConfiguraciones = new javax.swing.JMenuItem();
         btnBackup = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        btnAgenda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
@@ -684,14 +687,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         mnReportes.add(jMenuItem2);
 
-        jMenuItem3.setText("Seguimiento Estudiante Individual");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        mnReportes.add(jMenuItem3);
-
         jMenuItem4.setText("Historial Seguimiento Academico Individual");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -768,11 +763,24 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenuBar2.add(mnConfiguracion);
 
         jMenu1.setText("Agenda");
+        jMenu1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
             }
         });
+
+        btnAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_agenda_32.jpg"))); // NOI18N
+        btnAgenda.setText("Contactos");
+        btnAgenda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgenda.setEnabled(false);
+        btnAgenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgendaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnAgenda);
+
         jMenuBar2.add(jMenu1);
 
         setJMenuBar(jMenuBar2);
@@ -1097,8 +1105,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackupActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        frmAgenda agenda = new frmAgenda();
-        agenda.setVisible(true);
+
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -1109,31 +1116,42 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        Map parametros = new HashMap();
-        parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
-        parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
-        parametros.put("p_condicion", "");
-        controladorReporte reporte = new controladorReporte();
-        reporte.generarReporte("segumiento_estudiantes", parametros);
+
+        try {
+            File informe = new File("c:/seguimiento_estudiante.pdf");
+            Desktop.getDesktop().open(informe);
+
+            /*Map parametros = new HashMap();
+            parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
+            parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
+            parametros.put("p_condicion", "");
+            controladorReporte reporte = new controladorReporte();
+            reporte.generarReporte("segumiento_estudiantes", parametros);*/
+        } catch (IOException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        Map parametros = new HashMap();
-        parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
-        parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
-        parametros.put("p_condicion", " and segui_id=1");
-        controladorReporte reporte = new controladorReporte();
-        reporte.generarReporte("segumiento_estudiantes", parametros);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        Map parametros = new HashMap();
-        parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
-        parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
-        parametros.put("p_id_estudiante", 4);
-        controladorReporte reporte = new controladorReporte();
-        reporte.generarReporte("historial_segumiento_estudiantes_individual", parametros);
+        try {
+            File informe = new File("c:/seguimiento_estudiante_historial.pdf");
+            Desktop.getDesktop().open(informe);
+            
+            /*        Map parametros = new HashMap();
+            parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
+            parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
+            parametros.put("p_id_estudiante", 4);
+            controladorReporte reporte = new controladorReporte();
+            reporte.generarReporte("historial_segumiento_estudiantes_individual", parametros);*/
+        } catch (IOException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void btnAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendaActionPerformed
+        frmAgenda agenda = new frmAgenda();
+        agenda.setVisible(true);
+    }//GEN-LAST:event_btnAgendaActionPerformed
 // </editor-fold >  
 
     // <editor-fold defaultstate="collapsed" desc="Metodos">    
@@ -1229,6 +1247,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnAbrirPeriodo;
     public static javax.swing.JMenuItem btnAcercamientos;
+    public static javax.swing.JMenuItem btnAgenda;
     public static javax.swing.JMenuItem btnAsignaturas;
     public static javax.swing.JMenuItem btnAutoridades;
     public static javax.swing.JMenuItem btnBackup;
@@ -1264,7 +1283,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -53,7 +53,6 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
         fechaActual = new Date();
         dtFecha.setDate(fechaActual);
         tipo_consulta = "entrevista_estudiante";
-        llenarFiltro();
         llenarComboPeriodos();
         llenarComboNiveles();
         llenarComboEstadoEntrevista();
@@ -619,6 +618,8 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        idEmpresaSucursal="-1";
+        idEstudiante="-1";
         cmbNivel.setSelectedIndex(0);
         cmbEstadoEntrevista.setSelectedIndex(0);
         if (component instanceof JTextField) {
@@ -660,6 +661,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
         jtEntrevista.setRowSorter(sorter);
         jtEntrevista.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        llenarFiltro();
     }
 
     private void llenarEmpresaSucursal(ArrayList<Object> datos) {

@@ -8,6 +8,8 @@ public class SeguimientoEstudiante {
 
     private String _id;
     private String _idPeriodo;
+    private String _fechaInicio;
+    private String _fechaFin;
     private String _idEstudiante;
     private String _idTutorEmpresarial;
     private String _idTutorAcademico;
@@ -104,23 +106,41 @@ public class SeguimientoEstudiante {
         this.accion = accion;
     }
 
+    public String getFechaInicio() {
+        return _fechaInicio;
+    }
+
+    public void setFechaInicio(String _fechaInicio) {
+        this._fechaInicio = _fechaInicio;
+    }
+
+    public String getFechaFin() {
+        return _fechaFin;
+    }
+
+    public void setFechaFin(String _fechaFin) {
+        this._fechaFin = _fechaFin;
+    }
+
     // </editor-fold>
     
     public String[] crearActualizar(SeguimientoEstudiante datos) {
 
         try {
-            this._sql = "select *from sp_siged_seguimiento_estudiante_crear_actualizar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            this._sql = "select *from sp_siged_seguimiento_estudiante_crear_actualizar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
             sentencia = Conexion.getConexion().prepareStatement(this._sql);
             sentencia.setString(1, datos.getAccion());
             sentencia.setInt(2, Integer.parseInt(datos.getId()));
             sentencia.setInt(3, Integer.parseInt(datos.getIdPeriodo()));
-            sentencia.setInt(4, Integer.parseInt(datos.getIdEstudiante()));
-            sentencia.setInt(5, Integer.parseInt(datos.getIdTutorEmpresarial()));
-            sentencia.setInt(6, Integer.parseInt(datos.getIdTutorAcademico()));
-            sentencia.setInt(7, Integer.parseInt(datos.getIdEmpresaSucursal()));
-            sentencia.setString(8, datos.getIdNivel());
-            sentencia.setDouble(9, Double.parseDouble(datos.getNotaInstituto()));
-            sentencia.setDouble(10, Double.parseDouble(datos.getNotaEmpresa()));
+            sentencia.setString(4, datos.getFechaInicio());
+            sentencia.setString(5, datos.getFechaFin());
+            sentencia.setInt(6, Integer.parseInt(datos.getIdEstudiante()));
+            sentencia.setInt(7, Integer.parseInt(datos.getIdTutorEmpresarial()));
+            sentencia.setInt(8, Integer.parseInt(datos.getIdTutorAcademico()));
+            sentencia.setInt(9, Integer.parseInt(datos.getIdEmpresaSucursal()));
+            sentencia.setString(10, datos.getIdNivel());
+            sentencia.setDouble(11, Double.parseDouble(datos.getNotaInstituto()));
+            sentencia.setDouble(12, Double.parseDouble(datos.getNotaEmpresa()));
 
             System.out.println(sentencia);
             resultadoQuery = sentencia.executeQuery();

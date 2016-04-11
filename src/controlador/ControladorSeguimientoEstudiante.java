@@ -20,6 +20,8 @@ public class ControladorSeguimientoEstudiante {
             seguimientoEstudiante.setAccion((String) datos.get("accion"));
             seguimientoEstudiante.setId((String) datos.get("id"));
             seguimientoEstudiante.setIdPeriodo((String) datos.get("idPeriodo"));
+            seguimientoEstudiante.setFechaInicio((String) datos.get("fechaInicio"));
+            seguimientoEstudiante.setFechaFin((String) datos.get("fechaFin"));
             seguimientoEstudiante.setIdEstudiante((String) datos.get("idEstudiante"));
             seguimientoEstudiante.setIdTutorEmpresarial((String) datos.get("idTutorEmpresarial"));
             seguimientoEstudiante.setIdTutorAcademico((String) datos.get("idTutorAcademico"));
@@ -56,6 +58,15 @@ public class ControladorSeguimientoEstudiante {
             camposObligatorios += "\nSeleccione el período";
 
         }
+        
+        if (datos.get("fechaInicio").equals("")) {
+            camposObligatorios += "\nSeleccione una fecha";
+        }
+        
+        if (datos.get("fechaFin").equals("")) {
+            camposObligatorios += "\nSeleccione una fecha";
+        }
+        
         if (datos.get("idEstudiante").equals("-1")) {
             camposObligatorios += "\nSeleccione el estudiante";
 

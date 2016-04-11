@@ -71,7 +71,7 @@ public class ControladorCarrera {
             camposObligatorios += "\nIngrese la descripción de la carrera";
 
         }
-        if (datos.get("fecha").equals("")) {
+        if (datos.get("fecha").equals("2016-04-05")) {
             camposObligatorios += "\nSeleccione una fecha";
 
         }

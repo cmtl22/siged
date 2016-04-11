@@ -1,5 +1,6 @@
 package vista;
 
+import com.toedter.calendar.JDateChooser;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import controlador.ControladorSeguimientoEstudiante;
@@ -10,7 +11,10 @@ import controlador.controladorVariablesSesion;
 import java.awt.Component;
 import java.awt.Container;
 import java.io.FileInputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultListModel;
@@ -25,7 +29,7 @@ import static vista.frmCronograma.cmbPeriodo;
 public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
 // <editor-fold defaultstate="collapsed" desc="Declaracion de Variables"> 
     //id de las claves foraneas
-
+    Date fechaActual;
     private String idEstudiante = "-1";//Foreign Key
     private String idTutorEmpresarial = "-1";//Foreign Key
     private String idTutorAcademico = "-1";//Foreign Key
@@ -52,8 +56,10 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
     private void init() {
         accion = "crear";
         criterioBusqueda = new String[3];
+        fechaActual = new Date();
+        dtFechaInicio.setDate(fechaActual);
+        dtFechaFin.setDate(fechaActual);
         tipo_consulta = "seguimiento_estudiante";
-
         llenarComboPeriodos();
         llenarComboNiveles();
         cargarTotalRegistros();
@@ -65,7 +71,6 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
             tipo_consulta = "seguimiento_estudiante";
             llenarGrid(tipo_consulta);
         }
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -113,6 +118,12 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        lblFechaReunion = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        dtFechaInicio = new com.toedter.calendar.JDateChooser();
+        lblFechaReunion1 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        dtFechaFin = new com.toedter.calendar.JDateChooser();
         lblBusqueda = new javax.swing.JLabel();
         lblRegistro = new javax.swing.JLabel();
         jpBusquedaSeguimientoEstudiante = new javax.swing.JPanel();
@@ -152,23 +163,23 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
 
         lblTutorEmpresarial.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblTutorEmpresarial.setText("Tutor Empresarial:");
-        jpRegistroSeguimientoEstudiante.add(lblTutorEmpresarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(lblTutorEmpresarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
 
         lblEmpresa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblEmpresa.setText("Empresa:");
-        jpRegistroSeguimientoEstudiante.add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
 
         lblNivel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblNivel.setText("Nivel:");
-        jpRegistroSeguimientoEstudiante.add(lblNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(lblNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
 
         lblNotaInstituto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblNotaInstituto.setText("Nota Instituto:");
-        jpRegistroSeguimientoEstudiante.add(lblNotaInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(lblNotaInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
 
         cmbNivel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         cmbNivel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpRegistroSeguimientoEstudiante.add(cmbNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 110, 25));
+        jpRegistroSeguimientoEstudiante.add(cmbNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 110, 25));
 
         txtTutorAcademico.setEditable(false);
         txtTutorAcademico.setPreferredSize(new java.awt.Dimension(250, 25));
@@ -177,11 +188,11 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 txtTutorAcademicoActionPerformed(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(txtTutorAcademico, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 270, -1));
+        jpRegistroSeguimientoEstudiante.add(txtTutorAcademico, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 270, -1));
 
         lblTutorAcademico.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblTutorAcademico.setText("Tutor Académico:");
-        jpRegistroSeguimientoEstudiante.add(lblTutorAcademico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(lblTutorAcademico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
 
         txtEmpresaSucursal.setEditable(false);
         txtEmpresaSucursal.setPreferredSize(new java.awt.Dimension(250, 25));
@@ -190,7 +201,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 txtEmpresaSucursalActionPerformed(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(txtEmpresaSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 270, -1));
+        jpRegistroSeguimientoEstudiante.add(txtEmpresaSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 270, -1));
 
         cmbPeriodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbPeriodo.setEnabled(false);
@@ -199,7 +210,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
 
         lblPromedio.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPromedio.setText("Promedio:");
-        jpRegistroSeguimientoEstudiante.add(lblPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(lblPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, -1, -1));
 
         txtPromedio.setEditable(false);
         txtPromedio.setPreferredSize(new java.awt.Dimension(50, 25));
@@ -208,11 +219,11 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 txtPromedioActionPerformed(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(txtPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 70, -1));
+        jpRegistroSeguimientoEstudiante.add(txtPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 70, -1));
 
         lblEstudiante.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblEstudiante.setText("Estudiante:");
-        jpRegistroSeguimientoEstudiante.add(lblEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(lblEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         txtNombresApellidos.setEditable(false);
         txtNombresApellidos.setPreferredSize(new java.awt.Dimension(120, 25));
@@ -221,11 +232,11 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 txtNombresApellidosActionPerformed(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(txtNombresApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 270, -1));
+        jpRegistroSeguimientoEstudiante.add(txtNombresApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 270, -1));
 
         lblNotaEmpresarial.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblNotaEmpresarial.setText("Nota Empresarial:");
-        jpRegistroSeguimientoEstudiante.add(lblNotaEmpresarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(lblNotaEmpresarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -267,7 +278,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 txtTutorEmpresarialActionPerformed(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(txtTutorEmpresarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 270, -1));
+        jpRegistroSeguimientoEstudiante.add(txtTutorEmpresarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 270, -1));
 
         txtCedula.setEditable(false);
         txtCedula.setPreferredSize(new java.awt.Dimension(95, 25));
@@ -276,7 +287,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 txtCedulaActionPerformed(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 150, -1));
+        jpRegistroSeguimientoEstudiante.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 150, -1));
 
         txtNotaInstituto.setPreferredSize(new java.awt.Dimension(50, 25));
         txtNotaInstituto.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +300,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 txtNotaInstitutoKeyReleased(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(txtNotaInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 70, -1));
+        jpRegistroSeguimientoEstudiante.add(txtNotaInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 70, -1));
 
         txtNotaEmpresarial.setPreferredSize(new java.awt.Dimension(50, 25));
         txtNotaEmpresarial.addActionListener(new java.awt.event.ActionListener() {
@@ -302,7 +313,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 txtNotaEmpresarialKeyReleased(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(txtNotaEmpresarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 70, -1));
+        jpRegistroSeguimientoEstudiante.add(txtNotaEmpresarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 70, -1));
 
         lblTitulo_Id.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblTitulo_Id.setText("Id:");
@@ -323,7 +334,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 btnEstudianteActionPerformed(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(btnEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(btnEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
 
         btnTutorEmpresarial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
         btnTutorEmpresarial.setToolTipText("Buscar");
@@ -335,7 +346,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 btnTutorEmpresarialActionPerformed(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(btnTutorEmpresarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(btnTutorEmpresarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, -1, -1));
 
         btnTutorAcademico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
         btnTutorAcademico.setToolTipText("Buscar");
@@ -347,7 +358,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 btnTutorAcademicoActionPerformed(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(btnTutorAcademico, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(btnTutorAcademico, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, -1, -1));
 
         btnEmpresaSucursal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
         btnEmpresaSucursal.setToolTipText("Buscar");
@@ -359,12 +370,12 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
                 btnEmpresaSucursalActionPerformed(evt);
             }
         });
-        jpRegistroSeguimientoEstudiante.add(btnEmpresaSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
+        jpRegistroSeguimientoEstudiante.add(btnEmpresaSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
         jLabel9.setText("*");
-        jpRegistroSeguimientoEstudiante.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 10, -1));
+        jpRegistroSeguimientoEstudiante.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, 10, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 0, 0));
@@ -374,32 +385,58 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 0, 0));
         jLabel11.setText("*");
-        jpRegistroSeguimientoEstudiante.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 10, -1));
+        jpRegistroSeguimientoEstudiante.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 10, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 0, 0));
         jLabel12.setText("*");
-        jpRegistroSeguimientoEstudiante.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 10, -1));
+        jpRegistroSeguimientoEstudiante.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 10, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 0, 0));
         jLabel13.setText("*");
-        jpRegistroSeguimientoEstudiante.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 10, -1));
+        jpRegistroSeguimientoEstudiante.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 10, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 0, 0));
         jLabel14.setText("*");
-        jpRegistroSeguimientoEstudiante.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 10, -1));
+        jpRegistroSeguimientoEstudiante.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 10, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 0, 0));
         jLabel15.setText("*");
-        jpRegistroSeguimientoEstudiante.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 10, -1));
+        jpRegistroSeguimientoEstudiante.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 10, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 0, 0));
         jLabel16.setText("*");
-        jpRegistroSeguimientoEstudiante.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 10, -1));
+        jpRegistroSeguimientoEstudiante.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 10, -1));
+
+        lblFechaReunion.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblFechaReunion.setText("Fecha Inicio:");
+        jpRegistroSeguimientoEstudiante.add(lblFechaReunion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel17.setText("*");
+        jpRegistroSeguimientoEstudiante.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 10, -1));
+
+        dtFechaInicio.setDateFormatString("yyyy-MM-dd");
+        dtFechaInicio.setPreferredSize(new java.awt.Dimension(100, 25));
+        jpRegistroSeguimientoEstudiante.add(dtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
+
+        lblFechaReunion1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblFechaReunion1.setText("Fecha Fin:");
+        jpRegistroSeguimientoEstudiante.add(lblFechaReunion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel18.setText("*");
+        jpRegistroSeguimientoEstudiante.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 10, -1));
+
+        dtFechaFin.setDateFormatString("yyyy-MM-dd");
+        dtFechaFin.setPreferredSize(new java.awt.Dimension(100, 25));
+        jpRegistroSeguimientoEstudiante.add(dtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, -1, -1));
 
         jPanel1.add(jpRegistroSeguimientoEstudiante, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 50, -1, -1));
 
@@ -785,6 +822,8 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         map.put("accion", accion);
         map.put("id", lblId.getText());
         map.put("idPeriodo", codigoPeriodo.get(cmbPeriodo.getSelectedIndex()));
+        map.put("fechaInicio", dateToString(dtFechaInicio));
+        map.put("fechaFin", dateToString(dtFechaFin));
         map.put("idEstudiante", idEstudiante);
         map.put("idTutorEmpresarial", idTutorEmpresarial);
         map.put("idTutorAcademico", idTutorAcademico);
@@ -799,6 +838,18 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         //llama al metodo para crear o actualizar segun sea la accion
         return controladorSeguimientoEstudiante.crearActualizar(map, archivos, tamanioArchivos);
 
+    }
+
+    private String dateToString(JDateChooser fecha) {
+        Date fechaNacimiento;
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        if (fecha.getDate() != null) {
+            fechaNacimiento = fecha.getDate();
+        } else {
+            Date fechActual = new Date();
+            fechaNacimiento = fechActual;
+        }
+        return formatoFecha.format(fechaNacimiento);
     }
 
     private void consultarDocumentoAnexos() {
@@ -857,6 +908,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         jtSeguimientoEstudiante.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
         llenarFiltro();
+
     }
 
     private void llenarFiltro() {
@@ -869,6 +921,10 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        idEmpresaSucursal = "-1";
+        idEstudiante = "-1";
+        idTutorAcademico = "-1";
+        idTutorEmpresarial = "-1";
         //cmbPeriodo.setSelectedIndex(0);
         cmbNivel.setSelectedIndex(0);
         if (component instanceof JTextField) {
@@ -913,14 +969,16 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         idEmpresaSucursal = (String.valueOf(datos.get(4)));
         txtEmpresaSucursal.setText((String) datos.get(5));
         cmbPeriodo.setSelectedItem(datos.get(6));
-        txtCedula.setText((String) datos.get(7));
-        txtNombresApellidos.setText((String) datos.get(8));
-        txtTutorEmpresarial.setText((String) datos.get(9));
-        txtTutorAcademico.setText((String) datos.get(10));
-        cmbNivel.setSelectedItem(datos.get(11));
-        txtNotaInstituto.setText(String.valueOf(datos.get(12)));
-        txtNotaEmpresarial.setText(String.valueOf(datos.get(13)));
-        txtPromedio.setText(String.valueOf(datos.get(14)));
+        txtCedula.setText((String) datos.get(9));
+        txtNombresApellidos.setText((String) datos.get(10));
+        txtTutorEmpresarial.setText((String) datos.get(11));
+        txtTutorAcademico.setText((String) datos.get(12));
+        cmbNivel.setSelectedItem(datos.get(13));
+        txtNotaInstituto.setText(String.valueOf(datos.get(14)));
+        txtNotaEmpresarial.setText(String.valueOf(datos.get(15)));
+        txtPromedio.setText(String.valueOf(datos.get(16)));
+        dtFechaInicio.setDate(stringToJDateChooser((String) datos.get(7)));
+        dtFechaFin.setDate(stringToJDateChooser((String) datos.get(8)));
     }
 
     private void llenarEstudiante(ArrayList<Object> datos) {
@@ -943,6 +1001,20 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         idEmpresaSucursal = (String.valueOf(datos.get(0)));
         txtEmpresaSucursal.setText(String.valueOf(datos.get(3)));
     }
+    
+    public Date stringToJDateChooser(String fecha) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String strFecha = fecha;
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(strFecha);
+            System.out.println(fechaDate.toString());
+            return fechaDate;
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+            return fechaDate;
+        }
+    }
 
 // </editor-fold>  
     // <editor-fold defaultstate="collapsed" desc="Variables declaration"> 
@@ -964,6 +1036,8 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbFiltro;
     private javax.swing.JComboBox cmbNivel;
     public static javax.swing.JComboBox cmbPeriodo;
+    private com.toedter.calendar.JDateChooser dtFechaFin;
+    private com.toedter.calendar.JDateChooser dtFechaInicio;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -971,6 +1045,8 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -983,6 +1059,8 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblBusqueda;
     private javax.swing.JLabel lblEmpresa;
     private javax.swing.JLabel lblEstudiante;
+    private javax.swing.JLabel lblFechaReunion;
+    private javax.swing.JLabel lblFechaReunion1;
     private javax.swing.JLabel lblFiltro;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNivel;

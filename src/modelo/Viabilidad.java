@@ -14,8 +14,6 @@ import java.sql.SQLException;
  * @author ITS Aloasi
  */
 public class Viabilidad {
-    
-    
 
     //declaración de variables de la clase Viabilidad
     private String _id;
@@ -53,17 +51,16 @@ public class Viabilidad {
     private String _aprobado;
     private String _estadoTramite;
     private String _idCarrera;
-    
+
     //variables auxiliares
-    private String accion; 
-    private boolean bandera; 
-    private String _sql;
+    private String accion;
+    private boolean bandera;
+    private String sql;
     PreparedStatement sentencia;
     ResultSet resultadoQuery;
     private final String respuesta[] = new String[3];
-    
-// <editor-fold defaultstate="collapsed" desc="Getters and Setters">
 
+// <editor-fold defaultstate="collapsed" desc="Getters and Setters">
     public String getIdCarrera() {
         return _idCarrera;
     }
@@ -71,10 +68,7 @@ public class Viabilidad {
     public void setIdCarrera(String _idCarrera) {
         this._idCarrera = _idCarrera;
     }
-    
 
-    
-    
     public String getId() {
         return _id;
     }
@@ -364,33 +358,31 @@ public class Viabilidad {
     }
 
     public String getSql() {
-        return _sql;
+        return sql;
     }
 
-    public void setSql(String _sql) {
-        this._sql = _sql;
+    public void setSql(String sql) {
+        sql = sql;
     }
 
-    
 // </editor-fold>
-    
 // <editor-fold defaultstate="collapsed" desc="Métodos">
     public String[] crearActualizar(Viabilidad datos) { //éste método crea y modifica a la misma vez
-            
+
         try {
-            
-            _sql = "select * from sp_siged_viabilidad_crear_actualizar(?, ?, ?, ?, ?,"
+
+            sql = "select * from sp_siged_viabilidad_crear_actualizar(?, ?, ?, ?, ?,"
                     + "                                              ?, ?, ?, ?, ?,"
                     + "                                              ?, ?, ?, ?, ?,"
                     + "                                              ?, ?, ?, ?, ?,"
                     + "                                              ?, ?, ?, ?, ?,"
                     + "                                              ?, ?, ?, ?, ?,"
                     + "                                              ?, ?, ?, ?, ?, ?);";
-          
-            sentencia = Conexion.getConexion().prepareStatement(_sql);            
+
+            sentencia = Conexion.getConexion().prepareStatement(sql);
 
             sentencia.setString(1, datos.getAccion());
-            
+
             sentencia.setInt(2, Integer.parseInt(datos.getId()));
             sentencia.setInt(3, Integer.parseInt(datos.getEmprId()));
             sentencia.setString(4, datos.getNumeroInforme());
@@ -426,9 +418,7 @@ public class Viabilidad {
             sentencia.setString(34, datos.getAprobado());
             sentencia.setString(35, datos.getEstadoTramite());
             sentencia.setInt(36, Integer.parseInt(datos.getIdCarrera()));
-            
-            
-            
+
             System.out.println(sentencia);//Imprimir la consulta
             resultadoQuery = sentencia.executeQuery(); //ejecuta la consulta
             resultadoQuery.next();
@@ -446,8 +436,8 @@ public class Viabilidad {
 
     public String eliminar(Viabilidad datos) {
         try {
-            this._sql = "select * from sp_siged_eliminar('viabilidad',?);";
-            sentencia = Conexion.getConexion().prepareStatement(this._sql);
+            sql = "select * from sp_siged_eliminar('viabilidad',?);";
+            sentencia = Conexion.getConexion().prepareStatement(sql);
             sentencia.setInt(1, Integer.parseInt(datos.getId()));
             resultadoQuery = sentencia.executeQuery();
             resultadoQuery.next();
@@ -457,11 +447,80 @@ public class Viabilidad {
             sentencia.close();
             return respuesta[1];
         } catch (SQLException ex) {
-            System.out.println("err: "+ ex);
+            System.out.println("err: " + ex);
+            return null;
+        }
+    }
+
+    public String obtenerNumeroInforme() {
+        try {
+            sql = "select * from sp_siged_viabilidad_numero_informe();";
+            sentencia = Conexion.getConexion().prepareStatement(sql);
+            resultadoQuery = sentencia.executeQuery();
+            resultadoQuery.next();
+            respuesta[0] = resultadoQuery.getString(1);
+            respuesta[1] = resultadoQuery.getString(2);
+            respuesta[2] = resultadoQuery.getString(3);
+            sentencia.close();
+            return respuesta[1];
+        } catch (SQLException ex) {
+            System.out.println("err: " + ex);
+            return null;
+        }
+    }
+
+    public String[] obtenerInstituto() {
+        try {
+            sql = "select * from sp_siged_viabilidad_nombre_instituto();";
+            sentencia = Conexion.getConexion().prepareStatement(sql);
+            resultadoQuery = sentencia.executeQuery();
+            resultadoQuery.next();
+            respuesta[0] = resultadoQuery.getString(1);
+            respuesta[1] = resultadoQuery.getString(2);
+            respuesta[2] = resultadoQuery.getString(3);
+            sentencia.close();
+            return respuesta;
+        } catch (SQLException ex) {
+            System.out.println("err: " + ex);
+            return null;
+        }
+    }
+
+    public String[] obtenerParaAsuntoSolicitante() {
+        try {
+            sql = "select * from sp_siged_viabilidad_para_asunto_solicitante();";
+            sentencia = Conexion.getConexion().prepareStatement(sql);
+            resultadoQuery = sentencia.executeQuery();
+            resultadoQuery.next();
+            respuesta[0] = resultadoQuery.getString(1);
+            respuesta[1] = resultadoQuery.getString(2);
+            respuesta[2] = resultadoQuery.getString(3);
+            sentencia.close();
+            return respuesta;
+        } catch (SQLException ex) {
+            System.out.println("err: " + ex);
+            return null;
+        }
+    }
+
+    public String obtenerFechaAcercamiento(String idEmpresa) {
+        try {
+            sql = "select * from sp_siged_viabilidad_fecha_acercamiento(?);";
+            sentencia = Conexion.getConexion().prepareStatement(sql);
+            sentencia.setInt(1, Integer.parseInt(idEmpresa));
+            System.out.println(sentencia);
+            resultadoQuery = sentencia.executeQuery();
+            resultadoQuery.next();
+            respuesta[0] = resultadoQuery.getString(1);
+            respuesta[1] = resultadoQuery.getString(2);
+            respuesta[2] = resultadoQuery.getString(3);
+            sentencia.close();
+            return respuesta[1];
+        } catch (SQLException ex) {
+            System.out.println("err: " + ex);
             return null;
         }
     }
     // </editor-fold>
- 
 
 }

@@ -40,7 +40,6 @@ public class frmPeriodo extends javax.swing.JInternalFrame {
         fechaActual = new Date();
         dtFechaFin.setDate(fechaActual);
         llenarGrid();
-        llenarFiltro();
         cargarTotalRegistros();
     }
 
@@ -450,6 +449,7 @@ public class frmPeriodo extends javax.swing.JInternalFrame {
         jtPeriodo.setRowSorter(sorter);
         jtPeriodo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        llenarFiltro();
     }
 
     private void llenarFiltro() {
@@ -462,7 +462,6 @@ public class frmPeriodo extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
-        
         if (component instanceof JTextField) {
 
             JTextField text = (JTextField) component;

@@ -46,7 +46,6 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
         fechaActual = new Date();
         dtFechaAcercamiento.setDate(fechaActual);
         llenarGrid();
-        llenarFiltro();
         llenarComboEstadoAcercamiento();
         cargarTotalRegistros();
     }
@@ -223,6 +222,11 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
 
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
+        cmbFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFiltroActionPerformed(evt);
+            }
+        });
         jpBusquedaAcercamiento.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 100, -1));
 
         txtCriterioBusqueda.setPreferredSize(new java.awt.Dimension(6, 25));
@@ -420,6 +424,10 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
 
+    private void cmbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbFiltroActionPerformed
+
 // </editor-fold>  
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
     private void buscar(String tabla) {
@@ -517,6 +525,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        idEmpresaSucursal="-1";
         cmbEstadoAcercamiento.setSelectedIndex(0);
         if (component instanceof JTextField) {
 
@@ -556,6 +565,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
         jtAcercamiento.setRowSorter(sorter);
         jtAcercamiento.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        llenarFiltro();
     }
 
     private void llenarEmpresaSucursal(ArrayList<Object> datos) {

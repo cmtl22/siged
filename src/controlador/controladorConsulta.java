@@ -30,6 +30,9 @@ public class controladorConsulta {
             case "grid":
                 sql = "select *from v_" + tabla + "_grid;";
                 break;
+            case "grid_filtro":
+                sql = "select *from v_" + tabla + "_grid where codigo =" + criterioBusqueda[0];
+                break;
             case "grid_checkbox":
                 sql = "select *from v_" + tabla + "_checkbox where codigo=" + criterioBusqueda[0];
                 break;

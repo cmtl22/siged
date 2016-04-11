@@ -31,7 +31,7 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
         initComponents();
         init();
     }
-    
+
     private void init() {
         accion = "crear";
         criterioBusqueda = new String[2];
@@ -39,18 +39,18 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
         llenarGrid();
         llenarFiltro();
         llenarGridModulos();
-        
+
         cargarTotalRegistros();
         vaciarModulos();
-        
+
     }
-    
+
     private void vaciarModulos() {
         for (int i = 0; i < jtModulos.getRowCount(); i++) {
             jtModulos.setValueAt(false, i, 2);
         }
     }
-    
+
     private void seleccionarTodos() {
         for (int i = 0; i < jtModulos.getRowCount(); i++) {
             if (chbSeleccionarTodos.isSelected()) {
@@ -60,10 +60,10 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
                 jtModulos.setValueAt(false, i, 2);
                 chbSeleccionarTodos.setText("Seleccionar todos");
             }
-            
+
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -319,7 +319,7 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCrearActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActualizarActionPerformed
-        
+
         if (almacenarPermisos()) {
             if (crearActualizar()) {
                 limpiarCajasTexto(jpRegistroPermisos);
@@ -365,7 +365,7 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
     private boolean almacenarPermisos() {
         boolean bandera = false;
         modulos.removeAll(modulos);
-        
+
         for (int i = 0; i < jtModulos.getRowCount(); i++) {
             if (jtModulos.getValueAt(i, 2).equals(true)) {
                 modulos.add(jtModulos.getValueAt(i, 0));
@@ -373,31 +373,31 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
             }
         }
         return bandera;
-        
+
     }
-    
+
     private void buscar(String tabla) {
         frmConsultas consulta = new frmConsultas(null, true);//instancia el formulario con la ventana de busqueda
         consulta.consultar(tabla, "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
         consulta.setVisible(true);//hace visible la ventan de busqueda
     }
-    
+
     private void cargarTotalRegistros() {
         int total = jtRol.getRowCount();
         lblTotalRegistros.setText(String.valueOf(total));
     }
-    
+
     private ArrayList<Object> consultarRegistroIndividual(String id, String tabla) {
         criterioBusqueda[0] = id;
         controladorConsulta consulta = new controladorConsulta();
         return consulta.obtenerConsulta(tabla, controladorVariablesSesion.getInstance().getFiltrar(), criterioBusqueda);
     }
-    
+
     private void convertirAMayusculas(javax.swing.JTextField jTextfieldS) {
         String cadena = (jTextfieldS.getText()).toUpperCase();
         jTextfieldS.setText(cadena);
     }
-    
+
     private boolean crearActualizar() {
         Map<String, Object> map = new HashMap<>();
         //llena las variables de tipo map con los valores de las cajas de texto
@@ -409,61 +409,61 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
         ControladorRol controladorRol = new ControladorRol();
         //llama al metodo para crear o actualizar segun sea la accion
         return controladorRol.crearActualizar(map, modulos);
-        
+
     }
-    
+
     private void eliminar() {
         Map<String, Object> map = new HashMap<>();
         map.put("id", lblId.getText());
         ControladorRol controladorRol = new ControladorRol();
         controladorRol.eliminar(map);
     }
-    
+
     private void filtrar() {
         RowFilter<TableModel, Object> rf;
         try {
             rf = RowFilter.regexFilter(txtCriterioBusqueda.getText(), cmbFiltro.getSelectedIndex() + 1);
             sorterRol.setRowFilter(rf);
-            
+
         } catch (java.util.regex.PatternSyntaxException e) {
             JOptionPane.showConfirmDialog(null, e.getMessage(), "Error Filtrar", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
-    
+
     private void formatearColumnas() {
         //Oculta la primera columna que corresponde al ID de la tabla
         jtRol.getColumnModel().getColumn(0).setMaxWidth(0);
         jtRol.getColumnModel().getColumn(0).setMinWidth(0);
         jtRol.getColumnModel().getColumn(0).setPreferredWidth(0);
-        
+
         jtModulos.getColumnModel().getColumn(0).setMaxWidth(0);
         jtModulos.getColumnModel().getColumn(0).setMinWidth(0);
         jtModulos.getColumnModel().getColumn(0).setPreferredWidth(0);
-        
+
         jtModulos.getColumnModel().getColumn(3).setMaxWidth(0);
         jtModulos.getColumnModel().getColumn(3).setMinWidth(0);
         jtModulos.getColumnModel().getColumn(3).setPreferredWidth(0);
-        
+
     }
-    
+
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
         vaciarModulos();
         chbSeleccionarTodos.setSelected(false);
         chbSeleccionarTodos.setText("Selecionar Todos");
         if (component instanceof JTextField) {
-            
+
             JTextField text = (JTextField) component;
             text.setText("");
-            
+
         } else if (component instanceof Container) {
             for (Component c : ((Container) component).getComponents()) {
                 limpiarCajasTexto(c);
             }
         }
     }
-    
+
     private void llenarFiltro() {
         controladorConsulta consulta = new controladorConsulta();
         cmbFiltro.removeAllItems();
@@ -471,7 +471,7 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
             cmbFiltro.addItem(consulta.getNombColumnas()[i]);
         }
     }
-    
+
     private void llenarGrid() {
         jtRol.setModel(controladorGrid.getInstance().llenarGrid("rol", "grid", null, true));
         sorterRol = new TableRowSorter<>(jtRol.getModel());
@@ -479,7 +479,7 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
         jtRol.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
     }
-    
+
     private void llenarGridModulos() {
         criterioBusqueda[0] = "0";
         jtModulos.setModel(controladorGrid.getInstance().llenarGridPermisos("modulo", "grid", criterioBusqueda));
@@ -488,7 +488,7 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
         jtModulos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
     }
-    
+
     private void llenarRol(ArrayList<Object> datos) {
         vaciarModulos();
         lblId.setText(String.valueOf(datos.get(0)));
@@ -496,16 +496,16 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
         criterioBusqueda[0] = datos.get(0).toString();
         controladorConsulta consulta = new controladorConsulta();
         permisos = consulta.obtenerConsultaVarios("permisos", controladorVariablesSesion.getInstance().getFiltrar(), criterioBusqueda);
-        
+
         for (int i = 0; i < jtModulos.getRowCount(); i++) {
             for (int j = 0; j < permisos.size(); j++) {
                 if (jtModulos.getValueAt(i, 0).equals(permisos.get(j))) {
                     jtModulos.setValueAt(true, i, 2);
                 }
             }
-            
+
         }
-        
+
     }
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Variables declaration - do not modify                     "> 

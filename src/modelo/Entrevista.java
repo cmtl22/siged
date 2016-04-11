@@ -131,16 +131,16 @@ public class Entrevista {
 
     public String eliminar(Entrevista datos) {
         try {
-            sql = "select sp_siged_eliminar('entrevista_estudiante',?);";
+            sql = "select *from sp_siged_eliminar('entrevista_estudiante',?);";
             sentencia = Conexion.getConexion().prepareStatement(sql);
             sentencia.setInt(1, Integer.parseInt(datos.getId()));
             resultadoQuery = sentencia.executeQuery();
             resultadoQuery.next();
             respuesta[0] = resultadoQuery.getString(1);
-            respuesta[1] = resultadoQuery.getString(1);
-            respuesta[2] = resultadoQuery.getString(1);
+            respuesta[1] = resultadoQuery.getString(2);
+            respuesta[2] = resultadoQuery.getString(3);
             sentencia.close();
-            return respuesta[0];
+            return respuesta[1];
         } catch (SQLException ex) {
             return null;
         }

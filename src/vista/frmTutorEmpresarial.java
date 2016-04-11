@@ -45,9 +45,7 @@ public class frmTutorEmpresarial extends javax.swing.JInternalFrame {
         accion = "crear";
         criterioBusqueda = new String[2];
         idEmpresaSucursal = "-1";
-
         llenarGrid();
-        llenarFiltro();
         llenarComboTipoIdentificacion();
         llenarComboTipoPersona();
         cargarTotalRegistros();
@@ -234,6 +232,11 @@ public class frmTutorEmpresarial extends javax.swing.JInternalFrame {
         jpRegistroUsuario.add(lblClave5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 80, 20));
 
         txtTelefonoFijo.setPreferredSize(new java.awt.Dimension(225, 25));
+        txtTelefonoFijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoFijoActionPerformed(evt);
+            }
+        });
         txtTelefonoFijo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTelefonoFijoKeyReleased(evt);
@@ -638,7 +641,8 @@ public class frmTutorEmpresarial extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtEmailKeyReleased
 
     private void txtNumeroIdentificacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionKeyReleased
-        // TODO add your handling code here:
+        txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtNumeroIdentificacion.getText()));
+
     }//GEN-LAST:event_txtNumeroIdentificacionKeyReleased
 
     private void txaDireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaDireccionKeyReleased
@@ -658,7 +662,7 @@ public class frmTutorEmpresarial extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombrePersonaActionPerformed
 
     private void txtNumeroIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionActionPerformed
-
+        txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosConEspacios(txtNumeroIdentificacion.getText()));
     }//GEN-LAST:event_txtNumeroIdentificacionActionPerformed
 
     private void cmbTipoIdentificacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoIdentificacionItemStateChanged
@@ -685,6 +689,10 @@ public class frmTutorEmpresarial extends javax.swing.JInternalFrame {
             controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtPersona));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+
+    private void txtTelefonoFijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoFijoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoFijoActionPerformed
 
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
@@ -794,6 +802,7 @@ public class frmTutorEmpresarial extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        idEmpresaSucursal = "-1";
         cmbTipoIdentificacion.setSelectedIndex(0);
         cmbGenero.setSelectedIndex(0);
         if (component instanceof JTextField) {
@@ -858,6 +867,7 @@ public class frmTutorEmpresarial extends javax.swing.JInternalFrame {
         jtPersona.setRowSorter(sorter);
         jtPersona.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        llenarFiltro();
     }
 
     private void llenarTutorEmpresarial(ArrayList<Object> datos) {

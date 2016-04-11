@@ -9,6 +9,8 @@ import controlador.controladorConsulta;
 import controlador.controladorGrid;
 import controlador.controladorVariablesSesion;
 import java.awt.Component;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,10 +23,6 @@ import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-/**
- *
- * @author itsbj
- */
 public class frmAgenda extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Declaracion de Variables"> 
 
@@ -32,11 +30,9 @@ public class frmAgenda extends javax.swing.JFrame {
     private TableRowSorter<TableModel> sorter;
 // </editor-fold> 
 
-    /**
-     * Creates new form frmAgenda
-     */
     public frmAgenda() {
         initComponents();
+        this.setLocationRelativeTo(null);
         init();
     }
 
@@ -45,6 +41,13 @@ public class frmAgenda extends javax.swing.JFrame {
         llenarGrid();
         llenarFiltro();
         cargarTotalRegistros();
+    }
+
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("recursos/ico_agenda_32.jpg"));
+
+        return retValue;
     }
 
     @SuppressWarnings("unchecked")
@@ -57,17 +60,15 @@ public class frmAgenda extends javax.swing.JFrame {
         cmbFiltro = new javax.swing.JComboBox();
         txtCriterioBusqueda = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jtAsignatura = new javax.swing.JTable();
+        jtContactos = new javax.swing.JTable();
         lblTotalRegistros = new javax.swing.JLabel();
         lblRegistros3 = new javax.swing.JLabel();
         jpRegistroUsuario = new javax.swing.JPanel();
         lblTitulo_Id = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         txtNombrePersona = new javax.swing.JTextField();
-        lblPersona = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
         lblClave = new javax.swing.JLabel();
-        txtEmpresa = new javax.swing.JTextField();
         lblClave3 = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
         txtFormacionAcademica = new javax.swing.JTextField();
@@ -87,23 +88,12 @@ public class frmAgenda extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txaDireccion = new javax.swing.JTextArea();
         dtFechaNacimiento = new com.toedter.calendar.JDateChooser();
-        lblEmpresa = new javax.swing.JLabel();
-        lblPersona2 = new javax.swing.JLabel();
-        lblPersona3 = new javax.swing.JLabel();
-        lblPersona4 = new javax.swing.JLabel();
-        lblPersona5 = new javax.swing.JLabel();
-        lblPersona6 = new javax.swing.JLabel();
-        lblPersona9 = new javax.swing.JLabel();
-        lblPersona10 = new javax.swing.JLabel();
-        lblPersona11 = new javax.swing.JLabel();
-        lblPersona13 = new javax.swing.JLabel();
-        lblRol4 = new javax.swing.JLabel();
-        lblPersona15 = new javax.swing.JLabel();
-        txtTipoIdentificacion = new javax.swing.JTextField();
-        txtGenero = new javax.swing.JTextField();
+        lblBusqueda = new javax.swing.JLabel();
+        lblBusqueda1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("AGENDA");
+        setIconImage(getIconImage());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -120,7 +110,7 @@ public class frmAgenda extends javax.swing.JFrame {
         jpBusquedaAsignatura.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
 
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpBusquedaAsignatura.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 110, 23));
+        jpBusquedaAsignatura.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 140, 23));
 
         txtCriterioBusqueda.setPreferredSize(new java.awt.Dimension(6, 25));
         txtCriterioBusqueda.addActionListener(new java.awt.event.ActionListener() {
@@ -136,9 +126,9 @@ public class frmAgenda extends javax.swing.JFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaAsignatura.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 280, -1));
+        jpBusquedaAsignatura.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 250, -1));
 
-        jtAsignatura.setModel(new javax.swing.table.DefaultTableModel(
+        jtContactos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -149,16 +139,16 @@ public class frmAgenda extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jtAsignatura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jtAsignatura.setGridColor(new java.awt.Color(0, 102, 153));
-        jtAsignatura.setSelectionBackground(new java.awt.Color(255, 255, 0));
-        jtAsignatura.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        jtAsignatura.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtContactos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jtContactos.setGridColor(new java.awt.Color(0, 102, 153));
+        jtContactos.setSelectionBackground(new java.awt.Color(255, 255, 0));
+        jtContactos.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jtContactos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtAsignaturaMouseClicked(evt);
+                jtContactosMouseClicked(evt);
             }
         });
-        jScrollPane4.setViewportView(jtAsignatura);
+        jScrollPane4.setViewportView(jtContactos);
 
         jpBusquedaAsignatura.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 440, 450));
 
@@ -188,6 +178,7 @@ public class frmAgenda extends javax.swing.JFrame {
         lblId.setPreferredSize(new java.awt.Dimension(100, 20));
         jpRegistroUsuario.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
 
+        txtNombrePersona.setEditable(false);
         txtNombrePersona.setPreferredSize(new java.awt.Dimension(225, 25));
         txtNombrePersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,67 +190,61 @@ public class frmAgenda extends javax.swing.JFrame {
                 txtNombrePersonaKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 230, -1));
-
-        lblPersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona.setText("*");
-        lblPersona.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 10, -1));
+        jpRegistroUsuario.add(txtNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 250, -1));
 
         lblRol.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblRol.setText("Tipo de Identificación:");
+        lblRol.setText("Identificación:");
         lblRol.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, -1));
+        jpRegistroUsuario.add(lblRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 130, -1));
 
         lblClave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave.setText("Nombres:");
         lblClave.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 130, 20));
-
-        txtEmpresa.setEditable(false);
-        txtEmpresa.setPreferredSize(new java.awt.Dimension(225, 25));
-        jpRegistroUsuario.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 230, -1));
+        jpRegistroUsuario.add(lblClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 130, 20));
 
         lblClave3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave3.setText("Apellidos:");
         lblClave3.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 130, 20));
+        jpRegistroUsuario.add(lblClave3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 130, 20));
 
+        txtApellido.setEditable(false);
         txtApellido.setPreferredSize(new java.awt.Dimension(225, 25));
         txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtApellidoKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 230, -1));
+        jpRegistroUsuario.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 250, -1));
 
+        txtFormacionAcademica.setEditable(false);
         txtFormacionAcademica.setPreferredSize(new java.awt.Dimension(225, 25));
         txtFormacionAcademica.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFormacionAcademicaKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtFormacionAcademica, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 230, -1));
+        jpRegistroUsuario.add(txtFormacionAcademica, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 250, -1));
 
         lblClave5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave5.setText("Teléfono Fijo:");
         lblClave5.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 80, 20));
+        jpRegistroUsuario.add(lblClave5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 80, 20));
 
+        txtTelefonoFijo.setEditable(false);
         txtTelefonoFijo.setPreferredSize(new java.awt.Dimension(225, 25));
         txtTelefonoFijo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtTelefonoFijoKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtTelefonoFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 230, -1));
+        jpRegistroUsuario.add(txtTelefonoFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 250, -1));
 
         lblClave6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave6.setText("Teléfono Móvil:");
         lblClave6.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 90, 20));
+        jpRegistroUsuario.add(lblClave6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 90, 20));
 
+        txtTelefonoMovil.setEditable(false);
         txtTelefonoMovil.setPreferredSize(new java.awt.Dimension(225, 25));
         txtTelefonoMovil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,35 +256,36 @@ public class frmAgenda extends javax.swing.JFrame {
                 txtTelefonoMovilKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtTelefonoMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 230, -1));
+        jpRegistroUsuario.add(txtTelefonoMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 250, -1));
 
         lblClave7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave7.setText("Correo Electrónico:");
         lblClave7.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 130, 20));
+        jpRegistroUsuario.add(lblClave7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 130, 20));
 
+        txtEmail.setEditable(false);
         txtEmail.setPreferredSize(new java.awt.Dimension(225, 25));
         txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtEmailKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 230, -1));
+        jpRegistroUsuario.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 250, -1));
 
         lblClave8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave8.setText("Fecha Nacimiento:");
         lblClave8.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblClave8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 130, 20));
+        jpRegistroUsuario.add(lblClave8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 130, 20));
 
         lblRol1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRol1.setText("Dirección:");
         lblRol1.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblRol1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 130, -1));
+        jpRegistroUsuario.add(lblRol1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 130, -1));
 
         lblRol2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRol2.setText("Formación Académica:");
         lblRol2.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblRol2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 130, -1));
+        jpRegistroUsuario.add(lblRol2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 130, -1));
 
         jScrollPane2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -307,6 +293,7 @@ public class frmAgenda extends javax.swing.JFrame {
             }
         });
 
+        txaInformacionAdicional.setEditable(false);
         txaInformacionAdicional.setColumns(20);
         txaInformacionAdicional.setLineWrap(true);
         txaInformacionAdicional.setRows(2);
@@ -317,13 +304,14 @@ public class frmAgenda extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(txaInformacionAdicional);
 
-        jpRegistroUsuario.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 230, -1));
+        jpRegistroUsuario.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 250, -1));
 
         lblRol3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRol3.setText("Información Adicional:");
         lblRol3.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblRol3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 130, -1));
+        jpRegistroUsuario.add(lblRol3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 130, -1));
 
+        txtNumeroIdentificacion.setEditable(false);
         txtNumeroIdentificacion.setPreferredSize(new java.awt.Dimension(100, 25));
         txtNumeroIdentificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -335,8 +323,9 @@ public class frmAgenda extends javax.swing.JFrame {
                 txtNumeroIdentificacionKeyReleased(evt);
             }
         });
-        jpRegistroUsuario.add(txtNumeroIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
+        jpRegistroUsuario.add(txtNumeroIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 250, -1));
 
+        txaDireccion.setEditable(false);
         txaDireccion.setColumns(1);
         txaDireccion.setLineWrap(true);
         txaDireccion.setRows(2);
@@ -347,113 +336,27 @@ public class frmAgenda extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(txaDireccion);
 
-        jpRegistroUsuario.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 230, -1));
+        jpRegistroUsuario.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 250, -1));
 
         dtFechaNacimiento.setDateFormatString("yyyy-MM-dd");
         dtFechaNacimiento.setPreferredSize(new java.awt.Dimension(110, 25));
-        jpRegistroUsuario.add(dtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, -1, -1));
+        jpRegistroUsuario.add(dtFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 110, -1));
         dtFechaNacimiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         Date date3 = new Date();
         dtFechaNacimiento.setDate(date3);
 
-        lblEmpresa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblEmpresa.setText("Empresa:");
-        lblEmpresa.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 60, -1));
-
-        lblPersona2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona2.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona2.setText("*");
-        lblPersona2.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 10, -1));
-
-        lblPersona3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona3.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona3.setText("*");
-        lblPersona3.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 10, -1));
-
-        lblPersona4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona4.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona4.setText("*");
-        lblPersona4.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 10, -1));
-
-        lblPersona5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona5.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona5.setText("*");
-        lblPersona5.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 10, -1));
-
-        lblPersona6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona6.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona6.setText("*");
-        lblPersona6.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 10, -1));
-
-        lblPersona9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona9.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona9.setText("*");
-        lblPersona9.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 10, -1));
-
-        lblPersona10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona10.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona10.setText("*");
-        lblPersona10.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 10, -1));
-
-        lblPersona11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona11.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona11.setText("*");
-        lblPersona11.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 10, -1));
-
-        lblPersona13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona13.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona13.setText("*");
-        lblPersona13.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona13, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 10, -1));
-
-        lblRol4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblRol4.setText("Género:");
-        lblRol4.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblRol4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 130, -1));
-
-        lblPersona15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPersona15.setForeground(new java.awt.Color(255, 0, 0));
-        lblPersona15.setText("*");
-        lblPersona15.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpRegistroUsuario.add(lblPersona15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 10, -1));
-
-        txtTipoIdentificacion.setPreferredSize(new java.awt.Dimension(100, 25));
-        txtTipoIdentificacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTipoIdentificacionActionPerformed(evt);
-            }
-        });
-        txtTipoIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtTipoIdentificacionKeyReleased(evt);
-            }
-        });
-        jpRegistroUsuario.add(txtTipoIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 120, -1));
-
-        txtGenero.setPreferredSize(new java.awt.Dimension(100, 25));
-        txtGenero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGeneroActionPerformed(evt);
-            }
-        });
-        txtGenero.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtGeneroKeyReleased(evt);
-            }
-        });
-        jpRegistroUsuario.add(txtGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 120, -1));
-
         jPanel1.add(jpRegistroUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 50, -1, -1));
+
+        lblBusqueda.setBackground(new java.awt.Color(255, 255, 255));
+        lblBusqueda.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
+        lblBusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_agenda_32.jpg"))); // NOI18N
+        jPanel1.add(lblBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, -1));
+
+        lblBusqueda1.setBackground(new java.awt.Color(255, 255, 255));
+        lblBusqueda1.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
+        lblBusqueda1.setText("AGENDA");
+        jPanel1.add(lblBusqueda1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 580));
 
@@ -499,13 +402,13 @@ public class frmAgenda extends javax.swing.JFrame {
 
     }
 
-    private void jtAsignaturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAsignaturaMouseClicked
-        int fila = jtAsignatura.getSelectedRow();//guarda la fila seleccionada
+    private void jtContactosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtContactosMouseClicked
+        int fila = jtContactos.getSelectedRow();//guarda la fila seleccionada
         if (fila != -1) {
             //consulta en la base de datos y llena las cajas de texto con la consulta realizada
-            llenarTutorEmpresarial(consultarRegistroIndividual(jtAsignatura.getValueAt(fila, 0).toString(), "persona_agenda"));
+            llenarTutorEmpresarial(consultarRegistroIndividual(jtContactos.getValueAt(fila, 0).toString(), "persona_agenda"));
         }
-    }//GEN-LAST:event_jtAsignaturaMouseClicked
+    }//GEN-LAST:event_jtContactosMouseClicked
 
     private void txtNombrePersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombrePersonaActionPerformed
         // TODO add your handling code here:
@@ -550,33 +453,17 @@ public class frmAgenda extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jScrollPane2KeyReleased
 
-    private void txtNumeroIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionActionPerformed
-
-    }//GEN-LAST:event_txtNumeroIdentificacionActionPerformed
+    private void txaDireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaDireccionKeyReleased
+        convertirAmayusculas(txaDireccion);
+    }//GEN-LAST:event_txaDireccionKeyReleased
 
     private void txtNumeroIdentificacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroIdentificacionKeyReleased
 
-    private void txaDireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaDireccionKeyReleased
-        convertirAmayusculas(txaDireccion);
-    }//GEN-LAST:event_txaDireccionKeyReleased
+    private void txtNumeroIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionActionPerformed
 
-    private void txtTipoIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoIdentificacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTipoIdentificacionActionPerformed
-
-    private void txtTipoIdentificacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoIdentificacionKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTipoIdentificacionKeyReleased
-
-    private void txtGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGeneroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGeneroActionPerformed
-
-    private void txtGeneroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGeneroKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGeneroKeyReleased
+    }//GEN-LAST:event_txtNumeroIdentificacionActionPerformed
     private ArrayList<Object> consultarRegistroIndividual(String id, String tabla) {
         criterioBusqueda[0] = id;
         controladorConsulta consulta = new controladorConsulta();
@@ -584,24 +471,16 @@ public class frmAgenda extends javax.swing.JFrame {
     }
 
     private void llenarTutorEmpresarial(ArrayList<Object> datos) {
-
-        lblId.setText(String.valueOf(datos.get(0)));
-        txtTipoIdentificacion.setText((String) datos.get(1));
-        txtNumeroIdentificacion.setText((String) datos.get(2));
-        txtNombrePersona.setText((String) datos.get(3));
-        txtApellido.setText((String) datos.get(4));
-        dtFechaNacimiento.setDate(stringToJDateChooser((String) datos.get(5)));
-        txaDireccion.setText((String) datos.get(6));
-        txtTelefonoFijo.setText((String) datos.get(7));
-        txtTelefonoMovil.setText((String) datos.get(8));
-        txtEmail.setText((String) datos.get(9));
-        txtGenero.setText((String) datos.get(10));
-        txtFormacionAcademica.setText((String) datos.get(11));
-        txaInformacionAdicional.setText((String) datos.get(12));
-        //txtEmpresa.setText((String) datos.get(13));
-
-        
-
+        txtNombrePersona.setText((String) datos.get(1));
+        txtApellido.setText((String) datos.get(2));
+        txtNumeroIdentificacion.setText((String) datos.get(3));
+        txtTelefonoFijo.setText((String) datos.get(4));
+        txtTelefonoMovil.setText((String) datos.get(5));
+        txtEmail.setText((String) datos.get(6));
+        dtFechaNacimiento.setDate(stringToJDateChooser((String) datos.get(7)));
+        txaDireccion.setText((String) datos.get(8));
+        txtFormacionAcademica.setText((String) datos.get(9));
+        txaInformacionAdicional.setText((String) datos.get(10));
     }
 
     public Date stringToJDateChooser(String fecha) {
@@ -619,10 +498,10 @@ public class frmAgenda extends javax.swing.JFrame {
     }
 
     private void llenarGrid() {
-        jtAsignatura.setModel(controladorGrid.getInstance().llenarGrid("persona", "grid", null, true));
-        sorter = new TableRowSorter<>(jtAsignatura.getModel());
-        jtAsignatura.setRowSorter(sorter);
-        jtAsignatura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        jtContactos.setModel(controladorGrid.getInstance().llenarGrid("persona", "grid", null, true));
+        sorter = new TableRowSorter<>(jtContactos.getModel());
+        jtContactos.setRowSorter(sorter);
+        jtContactos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
     }
 
@@ -636,14 +515,14 @@ public class frmAgenda extends javax.swing.JFrame {
 
     private void formatearColumnas() {
         //Oculta la primera columna que corresponde al ID de la tabla
-        jtAsignatura.getColumnModel().getColumn(0).setMaxWidth(0);
-        jtAsignatura.getColumnModel().getColumn(0).setMinWidth(0);
-        jtAsignatura.getColumnModel().getColumn(0).setPreferredWidth(0);
+        jtContactos.getColumnModel().getColumn(0).setMaxWidth(0);
+        jtContactos.getColumnModel().getColumn(0).setMinWidth(0);
+        jtContactos.getColumnModel().getColumn(0).setPreferredWidth(0);
 
     }
 
     private void cargarTotalRegistros() {
-        int total = jtAsignatura.getRowCount();
+        int total = jtContactos.getRowCount();
         lblTotalRegistros.setText(String.valueOf(total));
     }
 
@@ -691,33 +570,22 @@ public class frmAgenda extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPanel jpBusquedaAsignatura;
     private javax.swing.JPanel jpRegistroUsuario;
-    private javax.swing.JTable jtAsignatura;
+    private javax.swing.JTable jtContactos;
+    private javax.swing.JLabel lblBusqueda;
+    private javax.swing.JLabel lblBusqueda1;
     private javax.swing.JLabel lblClave;
     private javax.swing.JLabel lblClave3;
     private javax.swing.JLabel lblClave5;
     private javax.swing.JLabel lblClave6;
     private javax.swing.JLabel lblClave7;
     private javax.swing.JLabel lblClave8;
-    private javax.swing.JLabel lblEmpresa;
     private javax.swing.JLabel lblFiltro;
     private javax.swing.JLabel lblId;
-    private javax.swing.JLabel lblPersona;
-    private javax.swing.JLabel lblPersona10;
-    private javax.swing.JLabel lblPersona11;
-    private javax.swing.JLabel lblPersona13;
-    private javax.swing.JLabel lblPersona15;
-    private javax.swing.JLabel lblPersona2;
-    private javax.swing.JLabel lblPersona3;
-    private javax.swing.JLabel lblPersona4;
-    private javax.swing.JLabel lblPersona5;
-    private javax.swing.JLabel lblPersona6;
-    private javax.swing.JLabel lblPersona9;
     private javax.swing.JLabel lblRegistros3;
     private javax.swing.JLabel lblRol;
     private javax.swing.JLabel lblRol1;
     private javax.swing.JLabel lblRol2;
     private javax.swing.JLabel lblRol3;
-    private javax.swing.JLabel lblRol4;
     private javax.swing.JLabel lblTitulo_Id;
     private javax.swing.JLabel lblTotalRegistros;
     private javax.swing.JTextArea txaDireccion;
@@ -725,13 +593,10 @@ public class frmAgenda extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCriterioBusqueda;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtEmpresa;
     private javax.swing.JTextField txtFormacionAcademica;
-    private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtNombrePersona;
     private javax.swing.JTextField txtNumeroIdentificacion;
     private javax.swing.JTextField txtTelefonoFijo;
     private javax.swing.JTextField txtTelefonoMovil;
-    private javax.swing.JTextField txtTipoIdentificacion;
     // End of variables declaration//GEN-END:variables
 }

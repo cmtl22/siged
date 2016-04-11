@@ -6,7 +6,7 @@ import modelo.Encuesta;
 
 public class ControladorEncuesta {
 
-    ResultSet resultado;
+    private ResultSet resultado;
     String camposObligatorios;
     String camposInvalidos;
     boolean bandera;
@@ -19,15 +19,15 @@ public class ControladorEncuesta {
 
     public boolean crearActualizar(Map datos) {
         camposObligatorios = validarCamposObligatorios(datos);
-         if (camposObligatorios.equals("")) {
-            
-                Encuesta encuesta = new Encuesta();
-                encuesta.setAccion((String) datos.get("accion"));
-                encuesta.setId((String) datos.get("id"));
-                encuesta.setIdPeriodo((String) datos.get("idPeriodo"));
-                encuesta.setObservaciones((String) datos.get("observaciones"));
+        if (camposObligatorios.equals("")) {
 
-                respuesta = encuesta.crearActualizar(encuesta);
+            Encuesta encuesta = new Encuesta();
+            encuesta.setAccion((String) datos.get("accion"));
+            encuesta.setId((String) datos.get("id"));
+            encuesta.setIdPeriodo((String) datos.get("idPeriodo"));
+            encuesta.setObservaciones((String) datos.get("observaciones"));
+
+            respuesta = encuesta.crearActualizar(encuesta);
             controladorMensaje.getInstance().getMsgGuardar(respuesta[1]);
             bandera = controladorVariablesSesion.getInstance().validarRespuestaDB(respuesta[2]);
 
@@ -59,9 +59,8 @@ public class ControladorEncuesta {
             camposObligatorios += "\nIngrese una observación";
 
         }
-        
+
         return camposObligatorios;
     }
 
 }
-

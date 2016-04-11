@@ -49,7 +49,6 @@ public class frmCronograma extends javax.swing.JInternalFrame {
         dtFechaInicio.setDate(fechaActual);
         dtFechaFin.setDate(fechaActual);
         tipo_consulta = "cronograma";
-        llenarFiltro();
         llenarComboPeriodos();
         llenarComboTareas();
         cargarTotalRegistros();
@@ -376,13 +375,12 @@ public class frmCronograma extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtCronograma));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtCronograma));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
-    
+
 // </editor-fold>  
 // <editor-fold defaultstate="collapsed" desc="Metodos"> 
-
     private void buscar() {
         frmConsultas consulta = new frmConsultas(null, true);//instancia la el formulario con la ventana de busqueda
         consulta.consultar("persona", "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
@@ -473,22 +471,6 @@ public class frmCronograma extends javax.swing.JInternalFrame {
         }
     }
 
-    private void llenarGrid(String tipo) {
-        jtCronograma.setModel(controladorGrid.getInstance().llenarGrid(tipo, "grid", null, true));
-        sorter = new TableRowSorter<>(jtCronograma.getModel());
-        jtCronograma.setRowSorter(sorter);
-        jtCronograma.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        formatearColumnas();
-    }
-
-    private void llenarFiltro() {
-        controladorConsulta consulta = new controladorConsulta();
-        cmbFiltro.removeAllItems();
-        for (int i = 1; i < consulta.getNumColumnas(); i++) {
-            cmbFiltro.addItem(consulta.getNombColumnas()[i]);
-        }
-    }
-
     private void llenarComboPeriodos() {
         controladorConsulta consulta = new controladorConsulta();
 
@@ -518,6 +500,23 @@ public class frmCronograma extends javax.swing.JInternalFrame {
 
     }
 
+    private void llenarFiltro() {
+        controladorConsulta consulta = new controladorConsulta();
+        cmbFiltro.removeAllItems();
+        for (int i = 1; i < consulta.getNumColumnas(); i++) {
+            cmbFiltro.addItem(consulta.getNombColumnas()[i]);
+        }
+    }
+
+    private void llenarGrid(String tipo) {
+        jtCronograma.setModel(controladorGrid.getInstance().llenarGrid(tipo, "grid", null, true));
+        sorter = new TableRowSorter<>(jtCronograma.getModel());
+        jtCronograma.setRowSorter(sorter);
+        jtCronograma.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        formatearColumnas();
+        llenarFiltro();
+    }
+
     private void filtrar() {
         RowFilter<TableModel, Object> rf;
         try {
@@ -532,21 +531,15 @@ public class frmCronograma extends javax.swing.JInternalFrame {
 
     private void formatearColumnas() {
         //Oculta la primera columna que corresponde al ID de la tabla
-        jtCronograma.getColumnModel().getColumn(0).setMaxWidth(0);
-        jtCronograma.getColumnModel().getColumn(0).setMinWidth(0);
-        jtCronograma.getColumnModel().getColumn(0).setPreferredWidth(0);
+         jtCronograma.getColumnModel().getColumn(0).setMaxWidth(0);
+         jtCronograma.getColumnModel().getColumn(0).setMinWidth(0);
+         jtCronograma.getColumnModel().getColumn(0).setPreferredWidth(0);
+         
+         jtCronograma.getColumnModel().getColumn(1).setMaxWidth(150);
+         jtCronograma.getColumnModel().getColumn(1).setMinWidth(0);
+         jtCronograma.getColumnModel().getColumn(1).setPreferredWidth(150);
 
-        jtCronograma.getColumnModel().getColumn(1).setMaxWidth(0);
-        jtCronograma.getColumnModel().getColumn(1).setMinWidth(0);
-        jtCronograma.getColumnModel().getColumn(1).setPreferredWidth(0);
-
-        jtCronograma.getColumnModel().getColumn(2).setMaxWidth(150);
-        jtCronograma.getColumnModel().getColumn(2).setMinWidth(0);
-        jtCronograma.getColumnModel().getColumn(2).setPreferredWidth(150);
-
-        jtCronograma.getColumnModel().getColumn(3).setMaxWidth(0);
-        jtCronograma.getColumnModel().getColumn(3).setMinWidth(0);
-        jtCronograma.getColumnModel().getColumn(3).setPreferredWidth(0);
+        
     }
 
     public Date stringToJDateChooser(String fecha) {

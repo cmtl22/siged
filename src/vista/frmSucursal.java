@@ -42,7 +42,6 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         idEmpresa = "-1";
         idUbicacion = "-1";
         llenarGrid();
-        llenarFiltro();
         cargarTotalRegistros();
         llenarComboTipos();
         llenarComboPais();
@@ -135,6 +134,11 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         jpRegistroUsuario.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
 
         txtProvincia.setPreferredSize(new java.awt.Dimension(225, 25));
+        txtProvincia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProvinciaActionPerformed(evt);
+            }
+        });
         txtProvincia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtProvinciaKeyReleased(evt);
@@ -565,6 +569,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
 
     private void txtProvinciaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProvinciaKeyReleased
         convertirAmayusculas(txtProvincia);
+        txtProvincia.setText(controladorVariablesSesion.validarLetrasConEspacios(txtProvincia.getText()));
     }//GEN-LAST:event_txtProvinciaKeyReleased
 
     private void txtNombreSucursalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreSucursalKeyReleased
@@ -609,6 +614,10 @@ public class frmSucursal extends javax.swing.JInternalFrame {
             controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtSucursal));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+
+    private void txtProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProvinciaActionPerformed
+       
+    }//GEN-LAST:event_txtProvinciaActionPerformed
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
@@ -704,6 +713,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        idEmpresa = "-1";
         cmbPais.setSelectedIndex(0);
         cmbTipo.setSelectedIndex(0);
         if (component instanceof JTextField) {
@@ -778,6 +788,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         jtSucursal.setRowSorter(sorter);
         jtSucursal.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        llenarFiltro();
     }
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Variables declaration - do not modify                     "> 

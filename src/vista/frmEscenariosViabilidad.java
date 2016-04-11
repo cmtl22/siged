@@ -39,8 +39,6 @@ public class frmEscenariosViabilidad extends javax.swing.JInternalFrame {
         criterioBusqueda = new String[2];
         idViabilidad = "-1";
         llenarGrid();
-        llenarFiltro();
-
         cargarTotalRegistros();
     }
 
@@ -554,6 +552,7 @@ public class frmEscenariosViabilidad extends javax.swing.JInternalFrame {
         jtEscenariosPedagogicos.setRowSorter(sorter);
         jtEscenariosPedagogicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        llenarFiltro();
     }
 
     private void llenarViabilidad(ArrayList<Object> datos) {

@@ -38,7 +38,6 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
         accion = "crear";
         criterioBusqueda = new String[2];
         llenarGrid();
-        llenarFiltro();
         llenarComboTipoEmpresa();
         cargarTotalRegistros();
     }
@@ -478,7 +477,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txaActividadEconomicaKeyReleased
 
     private void txtTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyReleased
-        // TODO add your handling code here:
+        txtTelefono.setText(controladorVariablesSesion.validarNumerosConEspacios(txtTelefono.getText()));
     }//GEN-LAST:event_txtTelefonoKeyReleased
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
@@ -635,6 +634,8 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
         jtEmpresa.setRowSorter(sorter);
         jtEmpresa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        
+        llenarFiltro();
     }
 
     

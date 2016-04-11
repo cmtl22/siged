@@ -1,6 +1,7 @@
 package controlador;
 
 import java.util.Map;
+import javax.swing.JOptionPane;
 import modelo.Viabilidad;
 
 public class ControladorViabilidad {
@@ -10,7 +11,7 @@ public class ControladorViabilidad {
     private String camposInvalidos;
     private boolean bandera;
     private String[] respuesta;
-    private String[] referenciaSplit = new String[1];
+    private String numeroInforme;
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Métodos">
@@ -125,6 +126,26 @@ public class ControladorViabilidad {
         }
 
         return camposObligatorios;
+    }
+
+    public String obtenerNumeroInforme() {
+        Viabilidad viabilidad = new Viabilidad();
+        return viabilidad.obtenerNumeroInforme();
+    }
+
+    public String[] obtenerInstituto() {
+        Viabilidad viabilidad = new Viabilidad();
+        return viabilidad.obtenerInstituto();
+    }
+
+    public String[] obtenerParaAsuntoSolicitante() {
+        Viabilidad viabilidad = new Viabilidad();
+        return viabilidad.obtenerParaAsuntoSolicitante();
+    }
+    
+    public String obtenerFechaAcercamiento(String idEmpresa) {
+        Viabilidad viabilidad = new Viabilidad();
+        return viabilidad.obtenerFechaAcercamiento(idEmpresa);
     }
 //</editor-fold>
 

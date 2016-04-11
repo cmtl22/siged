@@ -55,7 +55,6 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         fechaActual = new Date();
         dtFechaReunion.setDate(fechaActual);
         tipo_consulta = "seguimiento_reunion";
-        llenarFiltro();
         llenarComboPeriodos();
         cargarTotalRegistros();
         if (controladorVariablesSesion.getInstance().getPerfilUsuario().equals("1")) {
@@ -667,6 +666,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         jtSeguimientoReunion.setRowSorter(sorter);
         jtSeguimientoReunion.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        llenarFiltro();
     }
 
     private void llenarFiltro() {
@@ -689,6 +689,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        idTutorEmpresarial="-1";
         //cmbPeriodo.setSelectedIndex(0);
         if (component instanceof JTextField) {
 

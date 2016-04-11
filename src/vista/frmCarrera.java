@@ -49,7 +49,6 @@ public class frmCarrera extends javax.swing.JInternalFrame {
         fechaActual = new Date();
         dtFecha.setDate(fechaActual);
         llenarGrid();
-        llenarFiltro();
         cargarTotalRegistros();
     }
 
@@ -285,7 +284,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
         jpRegistroCarrera.add(txtNumeroResolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, -1, -1));
 
         txaInstituto.setForeground(new java.awt.Color(51, 51, 51));
-        txaInstituto.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txaInstituto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txaInstituto.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         txaInstituto.setMaximumSize(new java.awt.Dimension(250, 60));
         txaInstituto.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -293,7 +292,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
         jpRegistroCarrera.add(txaInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
 
         lblCarrera.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblCarrera.setText("Nómbre de Carrera:");
+        lblCarrera.setText("Nombre de Carrera:");
         jpRegistroCarrera.add(lblCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         txtNombre.setPreferredSize(new java.awt.Dimension(250, 25));
@@ -434,7 +433,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnInstitutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstitutoActionPerformed
-        buscar();//abre una ventana de busqueda
+        buscar("instituto");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
         llenarInstituto(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "instituto"));
     }//GEN-LAST:event_btnInstitutoActionPerformed
@@ -522,7 +521,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCoordinadorActionPerformed
 
     private void btnCoordinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCoordinadorActionPerformed
-        buscar();//abre una ventana de busqueda
+        buscar("coordinador");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
         llenarCoordinador(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
     }//GEN-LAST:event_btnCoordinadorActionPerformed
@@ -541,9 +540,9 @@ public class frmCarrera extends javax.swing.JInternalFrame {
     // </editor-fold>     
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
-    private void buscar() {
+    private void buscar(String tipo) {
         frmConsultas consulta = new frmConsultas(null, true);//instancia la el formulario con la ventana de busqueda
-        consulta.consultar("coordinador", "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
+        consulta.consultar(tipo, "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
         consulta.setVisible(true);//hace visible la ventan de busqueda
     }
 
@@ -638,6 +637,9 @@ public class frmCarrera extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        idCoordinador="-1";
+        idInstituto="-1";
+        txaInstituto.setText("");
         if (component instanceof JTextField) {
 
             JTextField text = (JTextField) component;
@@ -679,11 +681,12 @@ public class frmCarrera extends javax.swing.JInternalFrame {
         jtCarrera.setRowSorter(sorter);
         jtCarrera.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        llenarFiltro();
     }
 
     private void llenarInstituto(ArrayList<Object> datos) {
         idInstituto = (String.valueOf(datos.get(0)));
-        txaInstituto.setText(String.valueOf(datos.get(2)));
+        txaInstituto.setText(String.valueOf("<html>"+datos.get(4)+"</html>"));
 
     }
 

@@ -4,6 +4,7 @@ import controlador.controladorGrid;
 import controlador.controladorVariablesSesion;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
 
@@ -37,6 +38,14 @@ public class frmConsultas1 extends javax.swing.JDialog {
                 getImage(ClassLoader.getSystemResource("recursos/ico_sistema.jpg"));
 
         return retValue;
+    }
+
+    public JTable getJtConsulta() {
+        return jtConsulta;
+    }
+
+    public void setJtConsulta(JTable jtConsulta) {
+        this.jtConsulta = jtConsulta;
     }
 
     @SuppressWarnings("unchecked")
@@ -145,11 +154,15 @@ public class frmConsultas1 extends javax.swing.JDialog {
         cargarTotalRegistros();
     }
 
-    private void formatearColumnas() {
+    public void formatearColumnas() {
         //Oculta la primera columna que corresponde al ID de la tabla
         jtConsulta.getColumnModel().getColumn(0).setMaxWidth(0);
         jtConsulta.getColumnModel().getColumn(0).setMinWidth(0);
         jtConsulta.getColumnModel().getColumn(0).setPreferredWidth(0);
+        
+        jtConsulta.getColumnModel().getColumn(1).setMaxWidth(0);
+        jtConsulta.getColumnModel().getColumn(1).setMinWidth(0);
+        jtConsulta.getColumnModel().getColumn(1).setPreferredWidth(0);
     }
     private void jtConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtConsultaMouseClicked
         guardarConsulta();
@@ -159,6 +172,7 @@ public class frmConsultas1 extends javax.swing.JDialog {
         convertirAmayusculas(txt_buscar);
         filtrar();
     }//GEN-LAST:event_txt_buscarKeyReleased
+    
     private void guardarConsulta() {
         if (jtConsulta.getSelectedRow() != -1) {
             controladorVariablesSesion.getInstance().setDatosTemporalesConsulta(jtConsulta.getValueAt(jtConsulta.getSelectedRow(), 0).toString());

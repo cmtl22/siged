@@ -22,7 +22,7 @@ public class ControladorInstituto {
             Instituto instituto = new Instituto();
             instituto.setAccion((String) datos.get("accion"));
             instituto.setId((String) datos.get("id"));
-            instituto.setIdUbicacion((String) datos.get("idUbicacion"));
+            instituto.setIdPersona( String.valueOf(datos.get("idPersona")));
             instituto.setNombre((String) datos.get("nombre"));
             instituto.setDireccion((String) datos.get("direccion"));
             instituto.setTelefono((String) datos.get("telefono"));
@@ -66,7 +66,7 @@ public class ControladorInstituto {
             camposObligatorios += "\nIngrese el nombre del instituto";
 
         }
-         if (datos.get("idRector").equals("-1")) {
+         if (datos.get("idPersona").equals("-1")) {
             camposObligatorios += "\nIngrese el nombre del rector";
 
         }

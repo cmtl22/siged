@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Instituto {
 
     private String _id;
-    private String _idUbicacion;
+    private String _idPersona;
     private String _nombre;
     private String _direccion;
     private String _telefono;
@@ -25,8 +25,8 @@ public class Instituto {
     private String accion;
     private boolean bandera;
     private String sql;
-    PreparedStatement sentencia;
-    ResultSet resultadoQuery;
+    private PreparedStatement sentencia;
+    private ResultSet resultadoQuery;
     private final String respuesta[] = new String[3];
 
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
@@ -46,12 +46,12 @@ public class Instituto {
         this._id = _id;
     }
 
-    public String getIdUbicacion() {
-        return _idUbicacion;
+    public String getIdPersona() {
+        return _idPersona;
     }
 
-    public void setIdUbicacion(String _idUbicacion) {
-        this._idUbicacion = _idUbicacion;
+    public void setIdPersona(String _idPersona) {
+        this._idPersona = _idPersona;
     }
 
     public String getNombre() {
@@ -192,7 +192,7 @@ public class Instituto {
 
             sentencia.setString(1, datos.getAccion());
             sentencia.setInt(2, Integer.parseInt(datos.getId()));
-            sentencia.setInt(3, Integer.parseInt(datos.getIdUbicacion()));
+            sentencia.setInt(3, Integer.parseInt(datos.getIdPersona()));
             sentencia.setString(4, datos.getNombre());
             sentencia.setString(5, datos.getDireccion());
             sentencia.setString(6, datos.getTelefono());

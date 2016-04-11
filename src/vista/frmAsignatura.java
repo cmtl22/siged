@@ -36,7 +36,6 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         idCarrera = "-1";
         criterioBusqueda = new String[2];
         llenarGrid();
-        llenarFiltro();
         cargarTotalRegistros();
     }
 
@@ -482,12 +481,13 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtAsignatura));
+            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtAsignatura));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
-
+    
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
+
     private void buscar(String tabla) {
         frmConsultas consulta = new frmConsultas(null, true);//instancia la el formulario con la ventana de busqueda
         consulta.consultar(tabla, "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
@@ -570,6 +570,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        idCarrera="-1";
         if (component instanceof JTextField) {
 
             JTextField text = (JTextField) component;
@@ -599,6 +600,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         jtAsignatura.setRowSorter(sorter);
         jtAsignatura.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        llenarFiltro();
     }
 
     private void llenarAsignatura(ArrayList<Object> datos) {
@@ -613,7 +615,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
 
     private void llenarCarrera(ArrayList<Object> datos) {
         idCarrera = (String.valueOf(datos.get(0)));
-        txtCarrera.setText(String.valueOf(datos.get(3)));
+        txtCarrera.setText(String.valueOf(datos.get(5)));
 
     }
 

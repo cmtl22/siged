@@ -44,7 +44,6 @@ public class frmInstituto extends javax.swing.JInternalFrame {
         fechaActual = new Date();
         dtFechaCreacion.setDate(fechaActual);
         llenarGrid();
-        llenarFiltro();
         cargarTotalRegistros();
         //
     }
@@ -589,7 +588,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRectorActionPerformed
 
     private void txaNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaNombreKeyReleased
-        // TODO add your handling code here:
+        convertirAmayusculas(txaNombre);
     }//GEN-LAST:event_txaNombreKeyReleased
 
     private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
@@ -648,7 +647,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
         //llena las variables de tipo map con los valores de las cajas de texto
         map.put("accion", accion);
         map.put("id", lblId.getText());
-        map.put("idRector", idRector);
+        map.put("idPersona", idRector);
         map.put("nombre", txaNombre.getText());
         map.put("direccion", txaDireccion.getText());
         map.put("telefono", txtTelefono.getText());
@@ -706,6 +705,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        idRector="-1";
         txaNombre.isFocusable();
         if (component instanceof JTextField) {
 
@@ -728,6 +728,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
         jtInstituto.setRowSorter(sorter);
         jtInstituto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
+        llenarFiltro();
     }
 
     private void llenarFiltro() {
@@ -746,6 +747,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
     private void llenarInstituto(ArrayList<Object> datos) {
         lblId.setText(String.valueOf(datos.get(0)));
         txtRector.setText((String) datos.get(2) + " " + (String) datos.get(3));
+        idRector=String.valueOf(datos.get(1));
         txaNombre.setText((String) datos.get(4));
         txaDireccion.setText((String) datos.get(5));
         txtTelefono.setText((String) datos.get(6));

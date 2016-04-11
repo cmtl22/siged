@@ -1,4 +1,3 @@
-
 package vista;
 
 import controlador.ControladorViabilidad;
@@ -7,6 +6,8 @@ import controlador.controladorGrid;
 import controlador.controladorVariablesSesion;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,6 +20,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -34,20 +37,18 @@ import modelo.Conexion;
 public class frmViabilidad extends javax.swing.JInternalFrame {
 
 // <editor-fold defaultstate="collapsed" desc="Declaracion de Variables">     
-//fks
-    private String accion;   
+    private String accion;
     private String idEmpresaSucursal;
-    private String[] idsCarrera;
+    private String idCarrera;
     private String idPersona;
     private String idInstituto;
     private String idEmpresa;
-    
+
     private DefaultTableModel modeloSucursales;
-    private DefaultTableModel modeloCarreras  = new DefaultTableModel();
-    private DefaultTableModel modeloAsignaturas  = new DefaultTableModel(); 
+    private DefaultTableModel modeloCarreras = new DefaultTableModel();
+    private DefaultTableModel modeloAsignaturasTabla = new DefaultTableModel();
     private DefaultTableModel modeloDireccionMatriz;
     private DefaultTableModel modeloDireccionSucursal;
-
 
     private String nombreInstituto;
     private String nombreEmpresa;
@@ -60,988 +61,205 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private TableRowSorter<TableModel> sorterEntidades;
     private String[] direccionEmpresa;
     private String[] direccionSucursal;
-    
 
     private String respuestaRadioButton;
     private String respuestaCheckBox;
     private TableModel modeloTablaDeudas;
-    
-    
-    
-// </editor-fold > 
 
+// </editor-fold > 
     public frmViabilidad() {
         initComponents();
         init();
-        
 
     }
 
     private void init() {
-        accion = "crear";
-        criterioBusqueda = new String[2];
-        idEmpresaSucursal = "-1";
-        //idCarrera = "-1";
-        nombreEmpresa = " ";
-        nombreInstituto = " ";
-        idEmpresa = "-1";  
-        direccionEmpresa = new String[10];
-        direccionSucursal = new String[10];
-        
-        modeloSucursales = null;
-        modeloDireccionMatriz = new DefaultTableModel();
-        modeloDireccionSucursal = null;
-        //llenarGridDocumentosHabilitantes();
-        
-        //llenarGrid();
-        llenarGridEntidadesDeControl();
-        //llenarFiltro();
-        //cargarTotalRegistros();
-        
-
+        criterioBusqueda = new String[3];
+        cargarPrimeraSeccion();
+        llenarGridEntidadesRegulacion();
+        llenarGridDocumentosHabilitantesEntidadReceptora();
+        llenarGridDocumentosHabilitantesInstituto();
+        btnAdelante.setEnabled(true);
+        jtpInformeViabilidad.setEnabledAt(0, true);
+        jtpInformeViabilidad.setEnabledAt(1, false);
+        jtpInformeViabilidad.setEnabledAt(2, false);
+        jtpInformeViabilidad.setEnabledAt(3, false);
+        jtpInformeViabilidad.setEnabledAt(4, false);
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGroupConductaInstitucional = new javax.swing.ButtonGroup();
-        buttonGroupRenovacionConvenio = new javax.swing.ButtonGroup();
-        buttonGroupUniformesEstudiantes = new javax.swing.ButtonGroup();
-        buttonGroupEquipoDeProteccion = new javax.swing.ButtonGroup();
-        buttonGroupNormasDeSeguridad = new javax.swing.ButtonGroup();
-        buttonGroupCompensacion = new javax.swing.ButtonGroup();
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        btgConstatacion = new javax.swing.ButtonGroup();
+        btgRecompensa = new javax.swing.ButtonGroup();
+        btgNormasSeguridad = new javax.swing.ButtonGroup();
+        btgEquipo = new javax.swing.ButtonGroup();
+        btgUniforme = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jp_Viabilidad = new javax.swing.JTabbedPane();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        jp_DatosGenerales = new javax.swing.JPanel();
-        lblAsunto = new javax.swing.JLabel();
-        lblSolicitante = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        lblPara = new javax.swing.JLabel();
-        lblEmpresa = new javax.swing.JLabel();
-        txtEmpresa = new javax.swing.JTextField();
-        txtRUC = new javax.swing.JTextField();
-        lblRUC = new javax.swing.JLabel();
-        lblId = new javax.swing.JLabel();
-        dtFechaInforme = new com.toedter.calendar.JDateChooser();
-        lblFechaInforme = new javax.swing.JLabel();
-        jScrollPane15 = new javax.swing.JScrollPane();
-        txaPara = new javax.swing.JTextArea();
-        jScrollPane19 = new javax.swing.JScrollPane();
-        txaAsunto = new javax.swing.JTextArea();
-        jScrollPane20 = new javax.swing.JScrollPane();
-        txaSolicitante = new javax.swing.JTextArea();
-        btnBuscarEmpresa = new javax.swing.JButton();
-        btnBuscarEncargadoSenescyt = new javax.swing.JButton();
-        lblEmpresa1 = new javax.swing.JLabel();
-        txtInstituto = new javax.swing.JTextField();
-        btnBuscarInstittuto = new javax.swing.JButton();
-        txtViabNumeroInforme = new javax.swing.JFormattedTextField();
-        jScrollPane16 = new javax.swing.JScrollPane();
-        jp_Antecedentes = new javax.swing.JPanel();
-        jrbConductaInstitucionalSi = new javax.swing.JRadioButton();
-        jrbConductaInstitucionalNo = new javax.swing.JRadioButton();
-        lblObservaciones = new javax.swing.JLabel();
-        lblConsideracionesRecomendaciones = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txaObservacionesDeudas = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txaObservacionesConsideracionesRecomendaciones = new javax.swing.JTextArea();
-        lblFechaDeAcercamientoInicial = new javax.swing.JLabel();
-        txtFechaDeAcercamientoInicial = new javax.swing.JTextField();
-        lblListadoDocumentacionRespaldo = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txaListadoDocumentacionRespaldo = new javax.swing.JTextArea();
-        lblNombreRepresentanteLegal = new javax.swing.JLabel();
-        txtNombreRepresentanteLegal = new javax.swing.JTextField();
-        lblTipoDeEmpresa = new javax.swing.JLabel();
-        txtTipoDeEmpresa = new javax.swing.JTextField();
-        lblActividadEconomica = new javax.swing.JLabel();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        txtActividadEconomica = new javax.swing.JTextArea();
-        lblDireccionMatriz = new javax.swing.JLabel();
-        lblDireccionSucursal = new javax.swing.JLabel();
-        lblInfoRepresentanteLegal = new javax.swing.JLabel();
-        jScrollPane24 = new javax.swing.JScrollPane();
-        jtDireccionMatriz = new javax.swing.JTable();
-        jScrollPane25 = new javax.swing.JScrollPane();
-        jtSucursales = new javax.swing.JTable();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jtDeudas = new javax.swing.JTable();
-        lblTipoDeEmpresa1 = new javax.swing.JLabel();
-        txtNombreER = new javax.swing.JTextField();
-        btnBuscarRepresentanteLegal = new javax.swing.JButton();
-        btnAgregarEmsu = new javax.swing.JButton();
-        btnQuitarCarrera1 = new javax.swing.JButton();
-        lblDireccionSucursal2 = new javax.swing.JLabel();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        jpContenidoDelInforme = new javax.swing.JPanel();
-        lblNombreInstituto = new javax.swing.JLabel();
-        txtNombreInstituto = new javax.swing.JTextField();
-        lblDocCreacionInstituto = new javax.swing.JLabel();
-        txtDocCreacionInstituto = new javax.swing.JTextField();
-        lblNombreRector = new javax.swing.JLabel();
-        txtNombreRector = new javax.swing.JTextField();
-        lblNumYTipoDeContrato = new javax.swing.JLabel();
-        txtNumYTipoDeContrato = new javax.swing.JTextField();
-        lblNombreCarreras = new javax.swing.JLabel();
-        lblNumResolucion = new javax.swing.JLabel();
-        lblNumTutores = new javax.swing.JLabel();
-        lblPlazoVigenciaConvenio = new javax.swing.JLabel();
-        lblDisposicionRenovarConvenio = new javax.swing.JLabel();
-        jrbRespuestaRenovarConvenioSi = new javax.swing.JRadioButton();
-        jrbRespuestaRenovarConvenioNo = new javax.swing.JRadioButton();
-        lblObservacionesPlazoConvenio = new javax.swing.JLabel();
-        jScrollPane18 = new javax.swing.JScrollPane();
-        txaObservacionesPlazoConvenio = new javax.swing.JTextArea();
-        lblAsignaturas = new javax.swing.JLabel();
-        lblEstudiantesEscenarioPedagogico = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jtEstudiantesEscenarioPedagogico = new javax.swing.JTable();
-        lbAdministradorConvInstituto = new javax.swing.JLabel();
-        txtAdministradorConvInstituto = new javax.swing.JTextField();
-        lbAdministradorConvER = new javax.swing.JLabel();
-        txtAdministradorConvER = new javax.swing.JTextField();
-        lblCompensacionEstudiantes = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        txaProcesoDesignacionEstudiantes = new javax.swing.JTextArea();
-        lblProcesoDesignacionEstudiantes1 = new javax.swing.JLabel();
-        lblDotacionUniformes = new javax.swing.JLabel();
-        jrbUniformesSi = new javax.swing.JRadioButton();
-        jrbUniformeNo = new javax.swing.JRadioButton();
-        lblEquipoDeProteccion = new javax.swing.JLabel();
-        jrbEquipoDeProteccionSi = new javax.swing.JRadioButton();
-        jrbEquipoDeProteccionNo = new javax.swing.JRadioButton();
-        lbObservacionesCondicionesEstudiantes = new javax.swing.JLabel();
-        jrbNormasDeSeguridadSi = new javax.swing.JRadioButton();
-        jrbNormasDeSeguridadNo = new javax.swing.JRadioButton();
-        lblNormasDeSeguridad1 = new javax.swing.JLabel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        txaObservacionesCondicionesEstudiantes = new javax.swing.JTextArea();
-        lblCompensacionEstudiante2 = new javax.swing.JLabel();
-        jrbCompensacionSi = new javax.swing.JRadioButton();
-        jrbCompensacionNo = new javax.swing.JRadioButton();
-        lblTipoCompensacion = new javax.swing.JLabel();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        txaCondiciones = new javax.swing.JTextArea();
-        lblCondiciones = new javax.swing.JLabel();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        txaTipoCompensacion = new javax.swing.JTextArea();
-        btnAgregarCarrera = new javax.swing.JButton();
-        btnQuitarCarrera = new javax.swing.JButton();
-        jScrollPane23 = new javax.swing.JScrollPane();
-        jtNombreCarreras = new javax.swing.JTable();
-        jspNumEstudiantes = new javax.swing.JSpinner();
-        jspNumTutores = new javax.swing.JSpinner();
-        jspPlazoVigenciaConvenio = new javax.swing.JSpinner();
-        jScrollPane26 = new javax.swing.JScrollPane();
-        jtAsignaturas = new javax.swing.JTable();
-        btnAgregarAsignatura = new javax.swing.JButton();
-        btnQuitarAsignatura = new javax.swing.JButton();
-        jScrollPane14 = new javax.swing.JScrollPane();
-        jpConclusiones = new javax.swing.JPanel();
-        lblElaborado = new javax.swing.JLabel();
-        txtElaborado = new javax.swing.JTextField();
-        lblRevisado = new javax.swing.JLabel();
-        txtRevisado = new javax.swing.JTextField();
-        lblAprobado = new javax.swing.JLabel();
-        txtAprobado = new javax.swing.JTextField();
         lblRegistro = new javax.swing.JLabel();
         btnNuevo = new javax.swing.JButton();
-        btnCrearActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         btnAdjuntarAnexos = new javax.swing.JButton();
+        jtpInformeViabilidad = new javax.swing.JTabbedPane();
+        jpPrimeraSeccion = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        txtNumeroInforme = new javax.swing.JFormattedTextField();
+        lblFechaInforme = new javax.swing.JLabel();
+        dtFechaInforme = new com.toedter.calendar.JDateChooser();
+        lblEmpresa1 = new javax.swing.JLabel();
+        txtRUC = new javax.swing.JTextField();
+        lblRUC = new javax.swing.JLabel();
+        txtEmpresa = new javax.swing.JTextField();
+        lblEmpresa = new javax.swing.JLabel();
+        btnBuscarCarrera = new javax.swing.JButton();
+        lblSolicitante = new javax.swing.JLabel();
+        lblPara = new javax.swing.JLabel();
+        lblAsunto = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        txtCarrera = new javax.swing.JFormattedTextField();
+        btnBuscarEmpresa = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txaNombreInstituto = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txaSolicitante = new javax.swing.JTextArea();
+        jScrollPane19 = new javax.swing.JScrollPane();
+        txaPara = new javax.swing.JTextArea();
+        jScrollPane20 = new javax.swing.JScrollPane();
+        txaAsunto = new javax.swing.JTextArea();
+        jpSegundaSeccion = new javax.swing.JPanel();
+        btnBuscarRepresentanteLegal = new javax.swing.JButton();
+        txtNombreRepresentanteLegal = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        rbSiConstatacion = new javax.swing.JRadioButton();
+        rbNoConstatacion = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtEntidadesRegulacion = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txaObservacionesDeudas = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txaConsideracionesRecomendaciones = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtFechaAcercamiento = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        txaDireccion2 = new javax.swing.JTextArea();
+        txtCreacionResolucion1 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jtSucursales = new javax.swing.JTable();
+        btnAgregarSucursal = new javax.swing.JButton();
+        btnQuitarSucursal = new javax.swing.JButton();
+        jpTereceraSeccion1 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        txaProcesoDesignacionEstudiantes = new javax.swing.JTextArea();
+        jLabel17 = new javax.swing.JLabel();
+        txtCantidadEstudiantes = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtCantidadTutores = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        txtPlazo = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jtAsignaturas = new javax.swing.JTable();
+        jLabel23 = new javax.swing.JLabel();
+        btnAgregarAsignatura = new javax.swing.JButton();
+        btnQuitarAsignatura = new javax.swing.JButton();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jtEscenariosPedagogicos = new javax.swing.JTable();
+        btnAgregarEscenarioPedagogico = new javax.swing.JButton();
+        btnQuitarEscenarioPedagogico = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        txtAdministradorInstituto = new javax.swing.JTextField();
+        txtAdministradorEntidadReceptora = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jScrollPane18 = new javax.swing.JScrollPane();
+        txaObjetivo = new javax.swing.JTextArea();
+        jpTerceraSeccion2 = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        rbSiUniforme = new javax.swing.JRadioButton();
+        rbNoUniforme = new javax.swing.JRadioButton();
+        jLabel33 = new javax.swing.JLabel();
+        rbNoEquipoProteccion = new javax.swing.JRadioButton();
+        rbSiEquipoProteccion = new javax.swing.JRadioButton();
+        jLabel34 = new javax.swing.JLabel();
+        rbNoNormasSeguridad = new javax.swing.JRadioButton();
+        rbSiNormasSeguridad = new javax.swing.JRadioButton();
+        jLabel35 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        txaObjetivo1 = new javax.swing.JTextArea();
+        jLabel36 = new javax.swing.JLabel();
+        rbSiRecompensa = new javax.swing.JRadioButton();
+        rbNoRecompensa = new javax.swing.JRadioButton();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        txtCreacionResolucion7 = new javax.swing.JTextField();
+        txtCreacionResolucion8 = new javax.swing.JTextField();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        txaObjetivo2 = new javax.swing.JTextArea();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        jtAsignaturas2 = new javax.swing.JTable();
+        jLabel43 = new javax.swing.JLabel();
+        jpCuartaQuintaSeccion = new javax.swing.JPanel();
+        jLabel44 = new javax.swing.JLabel();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        txaOtrosDocumentosHabilitantes = new javax.swing.JTextArea();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        txtRemitenteInstituto = new javax.swing.JTextField();
+        jLabel47 = new javax.swing.JLabel();
+        txtRemitenteEntidadReceptora = new javax.swing.JTextField();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel51 = new javax.swing.JLabel();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        jtDocumentosHabilitantesInstituto = new javax.swing.JTable();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        jtDocumentosHabilitantesEntidadReceptora = new javax.swing.JTable();
+        jLabel54 = new javax.swing.JLabel();
+        jScrollPane17 = new javax.swing.JScrollPane();
+        txaObjetivo4 = new javax.swing.JTextArea();
+        lblId = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JButton();
+        btnAdelante = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setTitle("VIABILIDAD");
+        setTitle("INFORME DE VIABILIDAD");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_informe_32.png"))); // NOI18N
         setMaximumSize(new java.awt.Dimension(945, 535));
         setPreferredSize(new java.awt.Dimension(945, 535));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(935, 535));
         jPanel1.setPreferredSize(new java.awt.Dimension(935, 535));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jp_Viabilidad.setBackground(new java.awt.Color(255, 255, 255));
-        jp_Viabilidad.setForeground(new java.awt.Color(0, 0, 102));
-        jp_Viabilidad.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jp_Viabilidad.setMaximumSize(new java.awt.Dimension(946, 520));
-        jp_Viabilidad.setPreferredSize(new java.awt.Dimension(946, 520));
-
-        jp_DatosGenerales.setBackground(new java.awt.Color(255, 255, 255));
-        jp_DatosGenerales.setAutoscrolls(true);
-        jp_DatosGenerales.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblAsunto.setText("Asunto:");
-        jp_DatosGenerales.add(lblAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 190, 210, 25));
-
-        lblSolicitante.setText("Solicitante:");
-        jp_DatosGenerales.add(lblSolicitante, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, 210, 25));
-
-        jLabel5.setText("N° Informe:");
-        jp_DatosGenerales.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 210, 25));
-
-        lblPara.setText("Para:");
-        jp_DatosGenerales.add(lblPara, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 210, 25));
-
-        lblEmpresa.setText("Empresa:");
-        jp_DatosGenerales.add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 30, 210, 25));
-
-        txtEmpresa.setEditable(false);
-        jp_DatosGenerales.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 70, 240, 25));
-
-        txtRUC.setEditable(false);
-        jp_DatosGenerales.add(txtRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 150, 160, 25));
-
-        lblRUC.setText("RUC:");
-        jp_DatosGenerales.add(lblRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 110, 210, 25));
-
-        lblId.setText("0");
-        lblId.setEnabled(false);
-        jp_DatosGenerales.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(783, 12, 110, 20));
-
-        dtFechaInforme.setDateFormatString("yyyy-MM-dd");
-        jp_DatosGenerales.add(dtFechaInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 210, 25));
-        dtFechaInforme.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        Date date = new Date();
-        dtFechaInforme.setDate(date);
-
-        lblFechaInforme.setText("Fecha Informe:");
-        jp_DatosGenerales.add(lblFechaInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 210, 25));
-
-        jScrollPane15.setEnabled(false);
-
-        txaPara.setEditable(false);
-        txaPara.setBackground(new java.awt.Color(238, 238, 238));
-        txaPara.setColumns(20);
-        txaPara.setLineWrap(true);
-        txaPara.setRows(3);
-        txaPara.setWrapStyleWord(true);
-        txaPara.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        txaPara.setFocusCycleRoot(true);
-        txaPara.setFocusTraversalPolicyProvider(true);
-        txaPara.setFocusable(false);
-        txaPara.setRequestFocusEnabled(false);
-        txaPara.setVerifyInputWhenFocusTarget(false);
-        jScrollPane15.setViewportView(txaPara);
-
-        jp_DatosGenerales.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 320, -1));
-
-        jScrollPane19.setEnabled(false);
-
-        txaAsunto.setBackground(new java.awt.Color(238, 238, 238));
-        txaAsunto.setColumns(20);
-        txaAsunto.setLineWrap(true);
-        txaAsunto.setRows(3);
-        txaAsunto.setWrapStyleWord(true);
-        txaAsunto.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jScrollPane19.setViewportView(txaAsunto);
-
-        jp_DatosGenerales.add(jScrollPane19, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 221, 320, 70));
-
-        jScrollPane20.setEnabled(false);
-
-        txaSolicitante.setEditable(false);
-        txaSolicitante.setBackground(new java.awt.Color(238, 238, 238));
-        txaSolicitante.setColumns(20);
-        txaSolicitante.setLineWrap(true);
-        txaSolicitante.setRows(3);
-        txaSolicitante.setWrapStyleWord(true);
-        txaSolicitante.setCaretColor(new java.awt.Color(0, 153, 255));
-        txaSolicitante.setRequestFocusEnabled(false);
-        txaSolicitante.setVerifyInputWhenFocusTarget(false);
-        jScrollPane20.setViewportView(txaSolicitante);
-
-        jp_DatosGenerales.add(jScrollPane20, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 250, -1));
-
-        btnBuscarEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
-        btnBuscarEmpresa.setToolTipText("BUSCAR EMPRESA");
-        btnBuscarEmpresa.setBorder(null);
-        btnBuscarEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscarEmpresa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarEmpresaActionPerformed(evt);
-            }
-        });
-        jp_DatosGenerales.add(btnBuscarEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, -1, -1));
-
-        btnBuscarEncargadoSenescyt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
-        btnBuscarEncargadoSenescyt.setToolTipText("BUSCAR SUBSECRETARIO");
-        btnBuscarEncargadoSenescyt.setBorder(null);
-        btnBuscarEncargadoSenescyt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscarEncargadoSenescyt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarEncargadoSenescytActionPerformed(evt);
-            }
-        });
-        jp_DatosGenerales.add(btnBuscarEncargadoSenescyt, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 340, -1, -1));
-
-        lblEmpresa1.setText("Instittuto:");
-        jp_DatosGenerales.add(lblEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 140, 25));
-
-        txtInstituto.setEditable(false);
-        jp_DatosGenerales.add(txtInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 240, 25));
-
-        btnBuscarInstittuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
-        btnBuscarInstittuto.setToolTipText("BUSCAR INSTITUTO");
-        btnBuscarInstittuto.setBorder(null);
-        btnBuscarInstittuto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscarInstittuto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarInstittutoActionPerformed(evt);
-            }
-        });
-        jp_DatosGenerales.add(btnBuscarInstittuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, -1, -1));
-
-        txtViabNumeroInforme.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000"))));
-        jp_DatosGenerales.add(txtViabNumeroInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 213, 25));
-
-        jScrollPane10.setViewportView(jp_DatosGenerales);
-
-        jp_Viabilidad.addTab("Datos Generales", null, jScrollPane10, "");
-        jScrollPane10.getAccessibleContext().setAccessibleName("");
-        jScrollPane10.getAccessibleContext().setAccessibleDescription("");
-        jScrollPane10.getVerticalScrollBar().setUnitIncrement(16);
-
-        jp_Antecedentes.setBackground(new java.awt.Color(255, 255, 255));
-        jp_Antecedentes.setToolTipText("");
-        jp_Antecedentes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jp_Antecedentes.setRequestFocusEnabled(false);
-        jp_Antecedentes.setVerifyInputWhenFocusTarget(false);
-        jp_Antecedentes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnGroupConductaInstitucional.add(jrbConductaInstitucionalSi);
-        jrbConductaInstitucionalSi.setSelected(true);
-        jrbConductaInstitucionalSi.setText("SI");
-        jp_Antecedentes.add(jrbConductaInstitucionalSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 42, -1));
-
-        btnGroupConductaInstitucional.add(jrbConductaInstitucionalNo);
-        jrbConductaInstitucionalNo.setText("NO");
-        jp_Antecedentes.add(jrbConductaInstitucionalNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
-
-        lblObservaciones.setText("Observaciones sobre deudas:");
-        lblObservaciones.setToolTipText("Observaciones respecto al análisis de deudas");
-        jp_Antecedentes.add(lblObservaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, -1, 25));
-
-        lblConsideracionesRecomendaciones.setText("<html>                           <p  > \tConsideraciones Preliminares/Recomendaciones                   </p>                   <small> \t<span style =\"font-weight:normal\"> (Principales consideraciones a tomar en cuenta previo análisis de los apectos técnicos y académicos descritos en el informe y a las conclusiones arribadas)                  </small>             </div> </html>");
-        lblConsideracionesRecomendaciones.setToolTipText("");
-        jp_Antecedentes.add(lblConsideracionesRecomendaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 390, -1));
-
-        jLabel14.setText("<html>           <div align=\"justify\">¿Se realizó el análisis preliminar mediante consultas online a las entidades de regulación y control? </div> </html>");
-        jp_Antecedentes.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 10, 390, 30));
-
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setText("<html>           <div align = \"justify\"> \t¿Se constató una conducta institucional/empresarial apropiada, por parte de la empresa?           </div> </html>");
-        jLabel7.setMinimumSize(new java.awt.Dimension(140, 15));
-        jp_Antecedentes.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 390, 25));
-
-        txaObservacionesDeudas.setColumns(20);
-        txaObservacionesDeudas.setRows(2);
-        txaObservacionesDeudas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txaObservacionesDeudasKeyReleased(evt);
-            }
-        });
-        txaObservacionesDeudas.setLineWrap(true);
-        jScrollPane1.setViewportView(txaObservacionesDeudas);
-
-        jp_Antecedentes.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 390, -1));
-
-        txaObservacionesConsideracionesRecomendaciones.setColumns(20);
-        txaObservacionesConsideracionesRecomendaciones.setRows(2);
-        txaObservacionesConsideracionesRecomendaciones.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txaObservacionesConsideracionesRecomendacionesKeyReleased(evt);
-            }
-        });
-        txaObservacionesConsideracionesRecomendaciones.setLineWrap(true);
-        jScrollPane2.setViewportView(txaObservacionesConsideracionesRecomendaciones);
-
-        jp_Antecedentes.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 390, -1));
-
-        lblFechaDeAcercamientoInicial.setText("Fecha de Acercamiento Inicial");
-        jp_Antecedentes.add(lblFechaDeAcercamientoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, 25));
-
-        txtFechaDeAcercamientoInicial.setEditable(false);
-        jp_Antecedentes.add(txtFechaDeAcercamientoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 89, -1));
-
-        lblListadoDocumentacionRespaldo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblListadoDocumentacionRespaldo.setText("<html>     <div align=\"justify\">        <p> Documentación de Respaldo:</p>         <small>           <span style =\"font-weight:normal\">  Oficios, Memos, Ayuda Memoria,  etc:</span>        </small>     </div> </html>");
-        jp_Antecedentes.add(lblListadoDocumentacionRespaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 390, -1));
-
-        txaListadoDocumentacionRespaldo.setColumns(20);
-        txaListadoDocumentacionRespaldo.setRows(3);
-        txaListadoDocumentacionRespaldo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txaListadoDocumentacionRespaldoKeyReleased(evt);
-            }
-        });
-        jScrollPane3.setViewportView(txaListadoDocumentacionRespaldo);
-
-        jp_Antecedentes.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 390, -1));
-
-        lblNombreRepresentanteLegal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblNombreRepresentanteLegal.setText("<html>\n     <div align=\"justify\">\n        <p>Nombre del Representante Legal o Delegado:</p>\n         <small>\n           <span style =\"font-weight:normal\"> (persona legalmente autorizada para la suscripción de convenios o documentos de similar característica)</span>\n        </small>\n     </div>\n </html>");
-        jp_Antecedentes.add(lblNombreRepresentanteLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 390, -1));
-
-        txtNombreRepresentanteLegal.setEditable(false);
-        txtNombreRepresentanteLegal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreRepresentanteLegalActionPerformed(evt);
-            }
-        });
-        jp_Antecedentes.add(txtNombreRepresentanteLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 174, -1));
-
-        lblTipoDeEmpresa.setText("Tipo de Empresa");
-        jp_Antecedentes.add(lblTipoDeEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 140, 25));
-
-        txtTipoDeEmpresa.setEditable(false);
-        txtTipoDeEmpresa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTipoDeEmpresaActionPerformed(evt);
-            }
-        });
-        jp_Antecedentes.add(txtTipoDeEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 55, -1));
-
-        lblActividadEconomica.setText("Actividad Económica");
-        jp_Antecedentes.add(lblActividadEconomica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 390, 25));
-
-        txtActividadEconomica.setEditable(false);
-        txtActividadEconomica.setBackground(new java.awt.Color(238, 238, 238));
-        txtActividadEconomica.setColumns(20);
-        txtActividadEconomica.setRows(2);
-        txtActividadEconomica.setLineWrap(true);
-        jScrollPane9.setViewportView(txtActividadEconomica);
-
-        jp_Antecedentes.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 390, -1));
-
-        lblDireccionMatriz.setText("Dirección Matriz");
-        jp_Antecedentes.add(lblDireccionMatriz, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 260, 390, 25));
-
-        lblDireccionSucursal.setText("Sucursales: ");
-        jp_Antecedentes.add(lblDireccionSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 380, 344, 25));
-
-        lblInfoRepresentanteLegal.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jp_Antecedentes.add(lblInfoRepresentanteLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 570, 400, 70));
-
-        jtDireccionMatriz.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jtDireccionMatriz.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jtDireccionMatriz.setPreferredSize(new java.awt.Dimension(1100, 20));
-        jScrollPane24.setViewportView(jtDireccionMatriz);
-
-        jp_Antecedentes.add(jScrollPane24, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 290, 390, 91));
-
-        jScrollPane25.setViewportBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        jtSucursales.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jtSucursales.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jtSucursales.setComponentPopupMenu(jPopupMenu1);
-        jtSucursales.setPreferredSize(new java.awt.Dimension(1100, 1000));
-        jScrollPane25.setViewportView(jtSucursales);
-
-        jp_Antecedentes.add(jScrollPane25, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 390, 83));
-
-        jtDeudas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre", "Consultado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane7.setViewportView(jtDeudas);
-
-        jp_Antecedentes.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 380, 92));
-
-        lblTipoDeEmpresa1.setText("Nombre de la Entidad Receptora:");
-        jp_Antecedentes.add(lblTipoDeEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 200, 25));
-
-        txtNombreER.setEditable(false);
-        txtNombreER.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreERActionPerformed(evt);
-            }
-        });
-        jp_Antecedentes.add(txtNombreER, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 180, -1));
-
-        btnBuscarRepresentanteLegal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
-        btnBuscarRepresentanteLegal.setToolTipText("BUSCAR SUBSECRETARIO");
-        btnBuscarRepresentanteLegal.setBorder(null);
-        btnBuscarRepresentanteLegal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscarRepresentanteLegal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarRepresentanteLegalActionPerformed(evt);
-            }
-        });
-        jp_Antecedentes.add(btnBuscarRepresentanteLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, -1, -1));
-
-        btnAgregarEmsu.setText("Agregar");
-        btnAgregarEmsu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarEmsuActionPerformed(evt);
-            }
-        });
-        jp_Antecedentes.add(btnAgregarEmsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, -1, -1));
-
-        btnQuitarCarrera1.setText("Quitar");
-        btnQuitarCarrera1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitarCarrera1ActionPerformed(evt);
-            }
-        });
-        jp_Antecedentes.add(btnQuitarCarrera1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 500, 80, -1));
-
-        lblDireccionSucursal2.setText("Datos de contacto");
-        jp_Antecedentes.add(lblDireccionSucursal2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 140, 25));
-
-        jScrollPane16.setViewportView(jp_Antecedentes);
-
-        jp_Viabilidad.addTab("Antecedentes", jScrollPane16);
-        jScrollPane16.getVerticalScrollBar().setUnitIncrement(16);
-
-        jpContenidoDelInforme.setBackground(new java.awt.Color(255, 255, 255));
-        jpContenidoDelInforme.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblNombreInstituto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblNombreInstituto.setText("Nombre del Instituto:");
-        jpContenidoDelInforme.add(lblNombreInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 309, 25));
-
-        txtNombreInstituto.setEditable(false);
-        txtNombreInstituto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreInstitutoActionPerformed(evt);
-            }
-        });
-        jpContenidoDelInforme.add(txtNombreInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 49, 380, 25));
-
-        lblDocCreacionInstituto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblDocCreacionInstituto.setText("Documento de Creación del Instituto");
-        jpContenidoDelInforme.add(lblDocCreacionInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 12, 309, 25));
-
-        txtDocCreacionInstituto.setEditable(false);
-        txtDocCreacionInstituto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDocCreacionInstitutoActionPerformed(evt);
-            }
-        });
-        jpContenidoDelInforme.add(txtDocCreacionInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 49, 309, 25));
-
-        lblNombreRector.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblNombreRector.setText("Nombre del Rector/a del Instituto");
-        jpContenidoDelInforme.add(lblNombreRector, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 92, 309, 25));
-
-        txtNombreRector.setEditable(false);
-        txtNombreRector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreRectorActionPerformed(evt);
-            }
-        });
-        jpContenidoDelInforme.add(txtNombreRector, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 129, 380, 25));
-
-        lblNumYTipoDeContrato.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblNumYTipoDeContrato.setText("N° y Tipo de Contrato del Rector/a del Instituto con el Senescyt:");
-        jpContenidoDelInforme.add(lblNumYTipoDeContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 92, 372, 25));
-
-        txtNumYTipoDeContrato.setEditable(false);
-        txtNumYTipoDeContrato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumYTipoDeContratoActionPerformed(evt);
-            }
-        });
-        jpContenidoDelInforme.add(txtNumYTipoDeContrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 129, 308, 25));
-
-        lblNombreCarreras.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblNombreCarreras.setText("Carreras que entran en el Convenio:");
-        jpContenidoDelInforme.add(lblNombreCarreras, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 172, 214, 25));
-
-        lblNumResolucion.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblNumResolucion.setText(" No. de Estudiantes que recibirá la empresa receptora por ciclo académico: ");
-        jpContenidoDelInforme.add(lblNumResolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 170, 310, 25));
-
-        lblNumTutores.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblNumTutores.setText("N° de tutores empresariales");
-        jpContenidoDelInforme.add(lblNumTutores, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 320, 210, 25));
-
-        lblPlazoVigenciaConvenio.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblPlazoVigenciaConvenio.setText("Plazo de vigencia del Convenio (en años):");
-        jpContenidoDelInforme.add(lblPlazoVigenciaConvenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 250, 245, 25));
-
-        lblDisposicionRenovarConvenio.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblDisposicionRenovarConvenio.setText(" ¿La ER está dispuesta a renovar el convenio?");
-        jpContenidoDelInforme.add(lblDisposicionRenovarConvenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 400, 280, 25));
-
-        buttonGroupRenovacionConvenio.add(jrbRespuestaRenovarConvenioSi);
-        jrbRespuestaRenovarConvenioSi.setSelected(true);
-        jrbRespuestaRenovarConvenioSi.setText("SI");
-        jpContenidoDelInforme.add(jrbRespuestaRenovarConvenioSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, -1, -1));
-
-        buttonGroupRenovacionConvenio.add(jrbRespuestaRenovarConvenioNo);
-        jrbRespuestaRenovarConvenioNo.setText("NO");
-        jpContenidoDelInforme.add(jrbRespuestaRenovarConvenioNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 430, -1, -1));
-
-        lblObservacionesPlazoConvenio.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblObservacionesPlazoConvenio.setText("Observaciones respecto al plazo del convenio");
-        jpContenidoDelInforme.add(lblObservacionesPlazoConvenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 310, 25));
-
-        txaObservacionesPlazoConvenio.setColumns(1);
-        txaObservacionesPlazoConvenio.setRows(2);
-        txaObservacionesPlazoConvenio.setPreferredSize(new java.awt.Dimension(150, 32));
-        txaObservacionesPlazoConvenio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txaObservacionesPlazoConvenioKeyReleased(evt);
-            }
-        });
-        jScrollPane18.setViewportView(txaObservacionesPlazoConvenio);
-
-        jpContenidoDelInforme.add(jScrollPane18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, 380, -1));
-
-        lblAsignaturas.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblAsignaturas.setText("<html>Carrera, ciclos académicos y asignaturas que solventan el convenio de formación dual:</html>");
-        lblAsignaturas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblAsignaturasMouseClicked(evt);
-            }
-        });
-        jpContenidoDelInforme.add(lblAsignaturas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 310, 25));
-
-        lblEstudiantesEscenarioPedagogico.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblEstudiantesEscenarioPedagogico.setText("Estudiantes por escenario pedagógico");
-        jpContenidoDelInforme.add(lblEstudiantesEscenarioPedagogico, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, 324, 25));
-
-        jtEstudiantesEscenarioPedagogico.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Escenario pedagógico", "No. Estudiantes"
-            }
-        ));
-        TableColumn columnaEscenarioPedagogico = jtEstudiantesEscenarioPedagogico.getColumnModel().getColumn(0);
-
-        JComboBox cmbEscenarios = new JComboBox();
-        cmbEscenarios.addItem("Análisis");
-        cmbEscenarios.addItem("Limpieza");
-        columnaEscenarioPedagogico.setCellEditor(new DefaultCellEditor(cmbEscenarios));
-        jScrollPane5.setViewportView(jtEstudiantesEscenarioPedagogico);
-
-        jpContenidoDelInforme.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 500, 324, 92));
-
-        lbAdministradorConvInstituto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lbAdministradorConvInstituto.setText("Administrador del convenio por parte del instituto:");
-        jpContenidoDelInforme.add(lbAdministradorConvInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 610, 320, 25));
-        jpContenidoDelInforme.add(txtAdministradorConvInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 650, 320, 25));
-
-        lbAdministradorConvER.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lbAdministradorConvER.setText("Administrador del convenio por parte de la Empresa Receptora:");
-        jpContenidoDelInforme.add(lbAdministradorConvER, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 690, 369, 25));
-        jpContenidoDelInforme.add(txtAdministradorConvER, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 730, 319, 25));
-
-        lblCompensacionEstudiantes.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblCompensacionEstudiantes.setText("Compensación del estudiante:");
-        jpContenidoDelInforme.add(lblCompensacionEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 740, 319, 25));
-
-        txaProcesoDesignacionEstudiantes.setColumns(20);
-        txaProcesoDesignacionEstudiantes.setRows(3);
-        txaProcesoDesignacionEstudiantes.setLineWrap(true);
-        txaProcesoDesignacionEstudiantes.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txaProcesoDesignacionEstudiantesKeyReleased(evt);
-            }
-        });
-        jScrollPane6.setViewportView(txaProcesoDesignacionEstudiantes);
-
-        jpContenidoDelInforme.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 390, -1));
-
-        lblProcesoDesignacionEstudiantes1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblProcesoDesignacionEstudiantes1.setText("Proceso de designación de estudiantes:");
-        jpContenidoDelInforme.add(lblProcesoDesignacionEstudiantes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 319, 25));
-
-        lblDotacionUniformes.setText(" ¿Se dotará de uniforme al estudiante?");
-        jpContenidoDelInforme.add(lblDotacionUniformes, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 760, 319, -1));
-
-        buttonGroupUniformesEstudiantes.add(jrbUniformesSi);
-        jrbUniformesSi.setSelected(true);
-        jrbUniformesSi.setText("SI");
-        jpContenidoDelInforme.add(jrbUniformesSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 780, -1, -1));
-
-        buttonGroupUniformesEstudiantes.add(jrbUniformeNo);
-        jrbUniformeNo.setText("NO");
-        jpContenidoDelInforme.add(jrbUniformeNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 780, -1, -1));
-
-        lblEquipoDeProteccion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEquipoDeProteccion.setText("<html>       <div align=\"justify\">             ¿Se dotará de equipo mínimo de protección personal al setudiante?       </div>   </html>");
-        jpContenidoDelInforme.add(lblEquipoDeProteccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 820, -1, -1));
-
-        buttonGroupEquipoDeProteccion.add(jrbEquipoDeProteccionSi);
-        jrbEquipoDeProteccionSi.setSelected(true);
-        jrbEquipoDeProteccionSi.setText("SI");
-        jpContenidoDelInforme.add(jrbEquipoDeProteccionSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 840, -1, -1));
-
-        buttonGroupEquipoDeProteccion.add(jrbEquipoDeProteccionNo);
-        jrbEquipoDeProteccionNo.setText("NO");
-        jpContenidoDelInforme.add(jrbEquipoDeProteccionNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 840, -1, -1));
-
-        lbObservacionesCondicionesEstudiantes.setText("<html>\n       <div align=\"justify\">\n             Observaciones\n       </div>\n</html>");
-        jpContenidoDelInforme.add(lbObservacionesCondicionesEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 930, 382, 14));
-
-        buttonGroupNormasDeSeguridad.add(jrbNormasDeSeguridadSi);
-        jrbNormasDeSeguridadSi.setSelected(true);
-        jrbNormasDeSeguridadSi.setText("SI");
-        jrbNormasDeSeguridadSi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbNormasDeSeguridadSiActionPerformed(evt);
-            }
-        });
-        jpContenidoDelInforme.add(jrbNormasDeSeguridadSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 900, -1, -1));
-
-        buttonGroupNormasDeSeguridad.add(jrbNormasDeSeguridadNo);
-        jrbNormasDeSeguridadNo.setText("NO");
-        jpContenidoDelInforme.add(jrbNormasDeSeguridadNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 900, -1, -1));
-
-        lblNormasDeSeguridad1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNormasDeSeguridad1.setText("<html>\n       <div align=\"justify\">\n             ¿Se verificó que las normas de seguridad de la ER garanticen la protección de los estudiantes durante sus prácticas?\n       </div>\n</html>");
-        jpContenidoDelInforme.add(lblNormasDeSeguridad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 870, 382, -1));
-
-        txaObservacionesCondicionesEstudiantes.setColumns(20);
-        txaObservacionesCondicionesEstudiantes.setRows(2);
-        txaObservacionesCondicionesEstudiantes.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txaObservacionesCondicionesEstudiantesKeyReleased(evt);
-            }
-        });
-        jScrollPane8.setViewportView(txaObservacionesCondicionesEstudiantes);
-
-        jpContenidoDelInforme.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 960, 382, 57));
-
-        lblCompensacionEstudiante2.setText("<html>\n      <div align=\"justify\">\n            ¿La ER compensará al estudiante en formación dual?\n      </div> \n </html>");
-        jpContenidoDelInforme.add(lblCompensacionEstudiante2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, 319, 14));
-
-        buttonGroupCompensacion.add(jrbCompensacionSi);
-        jrbCompensacionSi.setSelected(true);
-        jrbCompensacionSi.setText("SI");
-        jpContenidoDelInforme.add(jrbCompensacionSi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 790, -1, -1));
-
-        buttonGroupCompensacion.add(jrbCompensacionNo);
-        jrbCompensacionNo.setText("NO");
-        jpContenidoDelInforme.add(jrbCompensacionNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 790, -1, -1));
-
-        lblTipoCompensacion.setText("<html>\n      <div align=\"justify\">\n            Tipo de compensación:\n      </div> \n </html>");
-        jpContenidoDelInforme.add(lblTipoCompensacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 820, 321, -1));
-
-        txaCondiciones.setColumns(20);
-        txaCondiciones.setRows(2);
-        txaCondiciones.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txaCondicionesKeyReleased(evt);
-            }
-        });
-        jScrollPane11.setViewportView(txaCondiciones);
-
-        jpContenidoDelInforme.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 920, 390, -1));
-
-        lblCondiciones.setText("<html>\n      <div align=\"justify\">\n            Condiciones:\n      </div> \n </html>");
-        jpContenidoDelInforme.add(lblCondiciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 890, -1, 14));
-
-        txaTipoCompensacion.setColumns(20);
-        txaTipoCompensacion.setRows(1);
-        txaTipoCompensacion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txaTipoCompensacionKeyReleased(evt);
-            }
-        });
-        jScrollPane13.setViewportView(txaTipoCompensacion);
-
-        jpContenidoDelInforme.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 850, 390, 25));
-
-        btnAgregarCarrera.setText("Agregar");
-        btnAgregarCarrera.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarCarreraActionPerformed(evt);
-            }
-        });
-        jpContenidoDelInforme.add(btnAgregarCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, -1, -1));
-
-        btnQuitarCarrera.setText("Quitar");
-        btnQuitarCarrera.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitarCarreraActionPerformed(evt);
-            }
-        });
-        jpContenidoDelInforme.add(btnQuitarCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 80, -1));
-
-        jtNombreCarreras.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "CARRERA", "N° DE RESOLUCIÓN"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane23.setViewportView(jtNombreCarreras);
-
-        jpContenidoDelInforme.add(jScrollPane23, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 209, 380, 83));
-
-        jspNumEstudiantes.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
-        jpContenidoDelInforme.add(jspNumEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 210, 49, 25));
-
-        jspNumTutores.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
-        jpContenidoDelInforme.add(jspNumTutores, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 360, 49, 25));
-
-        jspPlazoVigenciaConvenio.setModel(new javax.swing.SpinnerNumberModel(0, 0, 20, 1));
-        jpContenidoDelInforme.add(jspPlazoVigenciaConvenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(457, 280, 49, 25));
-
-        jtAsignaturas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "id asignatura", "id carrera", "ASIGNATURA", "CARRERA"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane26.setViewportView(jtAsignaturas);
-
-        jpContenidoDelInforme.add(jScrollPane26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 380, 83));
-
-        btnAgregarAsignatura.setText("Agregar");
-        btnAgregarAsignatura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarAsignaturaActionPerformed(evt);
-            }
-        });
-        jpContenidoDelInforme.add(btnAgregarAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, -1, -1));
-
-        btnQuitarAsignatura.setText("Quitar");
-        btnQuitarAsignatura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuitarAsignaturaActionPerformed(evt);
-            }
-        });
-        jpContenidoDelInforme.add(btnQuitarAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 590, 80, -1));
-
-        jScrollPane12.setViewportView(jpContenidoDelInforme);
-
-        jp_Viabilidad.addTab("Contenido", jScrollPane12);
-        jScrollPane12.getVerticalScrollBar().setUnitIncrement(16);
-
-        jpConclusiones.setBackground(new java.awt.Color(254, 254, 254));
-
-        lblElaborado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblElaborado.setText("Elaborado:");
-
-        txtElaborado.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtElaboradoKeyReleased(evt);
-            }
-        });
-
-        lblRevisado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblRevisado.setText("Revisado:");
-
-        txtRevisado.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtRevisadoKeyReleased(evt);
-            }
-        });
-
-        lblAprobado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblAprobado.setText("Aprobado:");
-
-        txtAprobado.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtAprobadoKeyReleased(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jpConclusionesLayout = new javax.swing.GroupLayout(jpConclusiones);
-        jpConclusiones.setLayout(jpConclusionesLayout);
-        jpConclusionesLayout.setHorizontalGroup(
-            jpConclusionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpConclusionesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpConclusionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAprobado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblElaborado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtElaborado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRevisado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRevisado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAprobado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(179, 676, Short.MAX_VALUE))
-        );
-        jpConclusionesLayout.setVerticalGroup(
-            jpConclusionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpConclusionesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblElaborado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtElaborado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblRevisado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtRevisado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblAprobado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtAprobado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(314, Short.MAX_VALUE))
-        );
-
-        jScrollPane14.setViewportView(jpConclusiones);
-
-        jp_Viabilidad.addTab("Conclusiones", jScrollPane14);
-        jScrollPane14.getVerticalScrollBar().setUnitIncrement(16);
-
-        jPanel1.add(jp_Viabilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 58, 923, -1));
-
         lblRegistro.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
         lblRegistro.setText("REGISTRO");
-        jPanel1.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        jPanel1.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, -1, -1));
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_nuevo_40.png"))); // NOI18N
         btnNuevo.setToolTipText("NUEVO");
@@ -1052,18 +270,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 btnNuevoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, -1, -1));
-
-        btnCrearActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_crear_actualizar_40.png"))); // NOI18N
-        btnCrearActualizar.setToolTipText("GUARDAR");
-        btnCrearActualizar.setBorder(null);
-        btnCrearActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCrearActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearActualizarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCrearActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, -1, -1));
+        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 20, -1, -1));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_eliminar_40.png"))); // NOI18N
         btnEliminar.setToolTipText("ELIMINAR");
@@ -1098,83 +305,951 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnAdjuntarAnexos, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 943, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
-        );
+        jtpInformeViabilidad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtpInformeViabilidadMouseClicked(evt);
+            }
+        });
+
+        jpPrimeraSeccion.setBackground(new java.awt.Color(255, 255, 255));
+        jpPrimeraSeccion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setText("N° Informe:");
+        jpPrimeraSeccion.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 100, 25));
+
+        txtNumeroInforme.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000"))));
+        jpPrimeraSeccion.add(txtNumeroInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 240, 25));
+
+        lblFechaInforme.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblFechaInforme.setText("Fecha Informe:");
+        jpPrimeraSeccion.add(lblFechaInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, 25));
+
+        dtFechaInforme.setDateFormatString("yyyy-MM-dd");
+        dtFechaInforme.setPreferredSize(new java.awt.Dimension(100, 25));
+        jpPrimeraSeccion.add(dtFechaInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
+        dtFechaInforme.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        Date date = new Date();
+        dtFechaInforme.setDate(date);
+
+        lblEmpresa1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblEmpresa1.setText("Instittuto:");
+        jpPrimeraSeccion.add(lblEmpresa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 100, 25));
+
+        txtRUC.setEditable(false);
+        jpPrimeraSeccion.add(txtRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 160, 25));
+
+        lblRUC.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblRUC.setText("RUC:");
+        jpPrimeraSeccion.add(lblRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 100, 25));
+
+        txtEmpresa.setEditable(false);
+        jpPrimeraSeccion.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 240, 25));
+
+        lblEmpresa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblEmpresa.setText("Empresa:");
+        jpPrimeraSeccion.add(lblEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 100, 25));
+
+        btnBuscarCarrera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
+        btnBuscarCarrera.setToolTipText("BUSCAR EMPRESA");
+        btnBuscarCarrera.setBorder(null);
+        btnBuscarCarrera.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscarCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCarreraActionPerformed(evt);
+            }
+        });
+        jpPrimeraSeccion.add(btnBuscarCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, -1, -1));
+
+        lblSolicitante.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblSolicitante.setText("Solicitante:");
+        jpPrimeraSeccion.add(lblSolicitante, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 75, 25));
+
+        lblPara.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblPara.setText("Para:");
+        jpPrimeraSeccion.add(lblPara, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 75, 25));
+
+        lblAsunto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblAsunto.setText("Asunto:");
+        jpPrimeraSeccion.add(lblAsunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 75, 25));
+
+        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel40.setText("Carrera:");
+        jpPrimeraSeccion.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 100, 25));
+
+        txtCarrera.setEditable(false);
+        txtCarrera.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("000"))));
+        jpPrimeraSeccion.add(txtCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 240, 25));
+
+        btnBuscarEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
+        btnBuscarEmpresa.setToolTipText("BUSCAR EMPRESA");
+        btnBuscarEmpresa.setBorder(null);
+        btnBuscarEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscarEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarEmpresaActionPerformed(evt);
+            }
+        });
+        jpPrimeraSeccion.add(btnBuscarEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, -1, -1));
+
+        txaNombreInstituto.setColumns(20);
+        txaNombreInstituto.setLineWrap(true);
+        txaNombreInstituto.setRows(2);
+        txaNombreInstituto.setTabSize(5);
+        jScrollPane4.setViewportView(txaNombreInstituto);
+
+        jpPrimeraSeccion.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 240, 50));
+
+        txaSolicitante.setColumns(20);
+        txaSolicitante.setLineWrap(true);
+        txaSolicitante.setRows(2);
+        txaSolicitante.setTabSize(5);
+        jScrollPane5.setViewportView(txaSolicitante);
+
+        jpPrimeraSeccion.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 300, 60));
+
+        txaPara.setColumns(20);
+        txaPara.setLineWrap(true);
+        txaPara.setRows(2);
+        txaPara.setTabSize(5);
+        jScrollPane19.setViewportView(txaPara);
+
+        jpPrimeraSeccion.add(jScrollPane19, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 300, 70));
+
+        txaAsunto.setColumns(20);
+        txaAsunto.setLineWrap(true);
+        txaAsunto.setRows(4);
+        txaAsunto.setTabSize(5);
+        jScrollPane20.setViewportView(txaAsunto);
+
+        jpPrimeraSeccion.add(jScrollPane20, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 300, 80));
+
+        jtpInformeViabilidad.addTab("Primera sección.- Datos Generales:", jpPrimeraSeccion);
+
+        jpSegundaSeccion.setBackground(new java.awt.Color(255, 255, 255));
+        jpSegundaSeccion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnBuscarRepresentanteLegal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
+        btnBuscarRepresentanteLegal.setToolTipText("BUSCAR SUBSECRETARIO");
+        btnBuscarRepresentanteLegal.setBorder(null);
+        btnBuscarRepresentanteLegal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscarRepresentanteLegal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarRepresentanteLegalActionPerformed(evt);
+            }
+        });
+        jpSegundaSeccion.add(btnBuscarRepresentanteLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 510, -1, -1));
+
+        txtNombreRepresentanteLegal.setEditable(false);
+        txtNombreRepresentanteLegal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreRepresentanteLegalActionPerformed(evt);
+            }
+        });
+        jpSegundaSeccion.add(txtNombreRepresentanteLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 360, 30));
+
+        jLabel6.setText("<html>¿Se realizó el análisis preliminar mediante consultas online a las entidades de regulación y control?</html>");
+        jpSegundaSeccion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 450, 40));
+
+        rbSiConstatacion.setBackground(new java.awt.Color(153, 255, 153));
+        btgConstatacion.add(rbSiConstatacion);
+        rbSiConstatacion.setText("SI");
+        rbSiConstatacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rbSiConstatacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSiConstatacionActionPerformed(evt);
+            }
+        });
+        jpSegundaSeccion.add(rbSiConstatacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+
+        rbNoConstatacion.setBackground(new java.awt.Color(255, 153, 153));
+        btgConstatacion.add(rbNoConstatacion);
+        rbNoConstatacion.setText("NO");
+        rbNoConstatacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jpSegundaSeccion.add(rbNoConstatacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
+
+        jLabel7.setText("<html>¿Se constató que la entidad receptora goce de una conducta institucional/empresarial apropiada, para desarrollar el proceso de formación dual, a través de un análisis preliminar?</html>");
+        jpSegundaSeccion.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 450, 50));
+
+        jtEntidadesRegulacion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jtEntidadesRegulacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jtEntidadesRegulacion.setGridColor(new java.awt.Color(0, 102, 153));
+        jtEntidadesRegulacion.setPreferredSize(new java.awt.Dimension(300, 60));
+        jtEntidadesRegulacion.setSelectionBackground(new java.awt.Color(255, 255, 0));
+        jtEntidadesRegulacion.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jtEntidadesRegulacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtEntidadesRegulacionMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtEntidadesRegulacion);
+
+        jpSegundaSeccion.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 450, 100));
+
+        jLabel8.setText("Observaciones:");
+        jpSegundaSeccion.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 140, 50));
+
+        txaObservacionesDeudas.setColumns(2);
+        txaObservacionesDeudas.setLineWrap(true);
+        txaObservacionesDeudas.setRows(2);
+        txaObservacionesDeudas.setTabSize(3);
+        txaObservacionesDeudas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txaObservacionesDeudasKeyReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(txaObservacionesDeudas);
+
+        jpSegundaSeccion.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 300, 50));
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel9.setText("<html>Consideraciones preliminares/ recomendaciones</html>");
+        jpSegundaSeccion.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 140, 50));
+
+        txaConsideracionesRecomendaciones.setColumns(2);
+        txaConsideracionesRecomendaciones.setLineWrap(true);
+        txaConsideracionesRecomendaciones.setRows(2);
+        txaConsideracionesRecomendaciones.setTabSize(3);
+        txaConsideracionesRecomendaciones.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txaConsideracionesRecomendacionesKeyReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(txaConsideracionesRecomendaciones);
+
+        jpSegundaSeccion.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 300, 90));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel10.setText("<html>(Principales sugerencias a tomar en cuenta previo análisis de los aspectos técnicos y académicos descritos en el informe y a las conclusiones arribadas)</html>");
+        jpSegundaSeccion.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 450, 30));
+
+        jLabel11.setText("Fecha acercamiento inicial:");
+        jpSegundaSeccion.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 160, 25));
+
+        jLabel12.setText("<html>Documentación de respaldo Oficios, Memos, Ayuda Memoria, etc.  </html>");
+        jpSegundaSeccion.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 160, 50));
+
+        jLabel13.setText("<html>Nombre del Representante Legal o delegado/ a:</html>");
+        jpSegundaSeccion.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 160, 40));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel14.setText("<html>(persona legalmente autorizada para la suscripción de convenios o documentos de similar característica)</html>");
+        jpSegundaSeccion.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 410, 30));
+
+        txtFechaAcercamiento.setPreferredSize(new java.awt.Dimension(87, 25));
+        txtFechaAcercamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFechaAcercamientoActionPerformed(evt);
+            }
+        });
+        txtFechaAcercamiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFechaAcercamientoKeyReleased(evt);
+            }
+        });
+        jpSegundaSeccion.add(txtFechaAcercamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 140, -1));
+
+        txaDireccion2.setColumns(2);
+        txaDireccion2.setLineWrap(true);
+        txaDireccion2.setRows(2);
+        txaDireccion2.setTabSize(3);
+        txaDireccion2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txaDireccion2KeyReleased(evt);
+            }
+        });
+        jScrollPane6.setViewportView(txaDireccion2);
+
+        jpSegundaSeccion.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, 240, 50));
+
+        txtCreacionResolucion1.setPreferredSize(new java.awt.Dimension(87, 25));
+        txtCreacionResolucion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCreacionResolucion1ActionPerformed(evt);
+            }
+        });
+        txtCreacionResolucion1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCreacionResolucion1KeyReleased(evt);
+            }
+        });
+        jpSegundaSeccion.add(txtCreacionResolucion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, 240, -1));
+
+        jLabel15.setText("<html>Dirección sucursal/ planta/ filial: (Lugar en donde se realizará la formación dual, establecer referencias para ubicación, por ejm: diagonal a bco. Pacifico) </html>");
+        jpSegundaSeccion.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 410, 50));
+
+        jtSucursales.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jtSucursales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jtSucursales.setGridColor(new java.awt.Color(0, 102, 153));
+        jtSucursales.setPreferredSize(new java.awt.Dimension(300, 100));
+        jtSucursales.setSelectionBackground(new java.awt.Color(255, 255, 0));
+        jtSucursales.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jtSucursales.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtSucursalesMouseClicked(evt);
+            }
+        });
+        jScrollPane7.setViewportView(jtSucursales);
+
+        jpSegundaSeccion.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 350, 140));
+
+        btnAgregarSucursal.setBackground(new java.awt.Color(255, 255, 255));
+        btnAgregarSucursal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_agregar_32.png"))); // NOI18N
+        btnAgregarSucursal.setToolTipText("Agregar");
+        btnAgregarSucursal.setBorder(null);
+        btnAgregarSucursal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarSucursal.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnAgregarSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarSucursalActionPerformed(evt);
+            }
+        });
+        jpSegundaSeccion.add(btnAgregarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 260, -1, -1));
+
+        btnQuitarSucursal.setBackground(new java.awt.Color(255, 255, 255));
+        btnQuitarSucursal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_cancelar_40.png"))); // NOI18N
+        btnQuitarSucursal.setToolTipText("Eliminar");
+        btnQuitarSucursal.setBorder(null);
+        btnQuitarSucursal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnQuitarSucursal.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnQuitarSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarSucursalActionPerformed(evt);
+            }
+        });
+        jpSegundaSeccion.add(btnQuitarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 320, -1, -1));
+
+        jtpInformeViabilidad.addTab("Segunda sección.- Antecedentes:", jpSegundaSeccion);
+
+        jpTereceraSeccion1.setBackground(new java.awt.Color(255, 255, 255));
+        jpTereceraSeccion1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel16.setText("Objetivo:");
+        jpTereceraSeccion1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 50));
+
+        txaProcesoDesignacionEstudiantes.setColumns(2);
+        txaProcesoDesignacionEstudiantes.setLineWrap(true);
+        txaProcesoDesignacionEstudiantes.setRows(2);
+        txaProcesoDesignacionEstudiantes.setTabSize(3);
+        txaProcesoDesignacionEstudiantes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txaProcesoDesignacionEstudiantesKeyReleased(evt);
+            }
+        });
+        jScrollPane8.setViewportView(txaProcesoDesignacionEstudiantes);
+
+        jpTereceraSeccion1.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, 420, 80));
+
+        jLabel17.setText("<html>No. de estudiantes que recibiría la Entidad Receptora por ciclo académico</html>");
+        jpTereceraSeccion1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 260, 50));
+
+        txtCantidadEstudiantes.setPreferredSize(new java.awt.Dimension(87, 25));
+        txtCantidadEstudiantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadEstudiantesActionPerformed(evt);
+            }
+        });
+        txtCantidadEstudiantes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCantidadEstudiantesKeyReleased(evt);
+            }
+        });
+        jpTereceraSeccion1.add(txtCantidadEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 30, -1));
+
+        jLabel18.setText("<html>Cantidad de tutores por parte de la Entidad Receptora (principales y suplentes) por estudiante. </html>");
+        jpTereceraSeccion1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 270, 50));
+
+        txtCantidadTutores.setPreferredSize(new java.awt.Dimension(87, 25));
+        txtCantidadTutores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadTutoresActionPerformed(evt);
+            }
+        });
+        txtCantidadTutores.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCantidadTutoresKeyReleased(evt);
+            }
+        });
+        jpTereceraSeccion1.add(txtCantidadTutores, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 30, -1));
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel19.setText("<html>(establecer la cantidad mínima que conforme a la capacidad de la ER, nos proporcionen)</html>");
+        jpTereceraSeccion1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 260, 30));
+
+        jLabel20.setText("<html>Plazo de vigencia del convenio</html>");
+        jpTereceraSeccion1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 260, 30));
+
+        txtPlazo.setPreferredSize(new java.awt.Dimension(87, 25));
+        txtPlazo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPlazoActionPerformed(evt);
+            }
+        });
+        txtPlazo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPlazoKeyReleased(evt);
+            }
+        });
+        jpTereceraSeccion1.add(txtPlazo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 30, -1));
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel21.setText("<html>(Se recomienda que el plazo sea mínimo de  3 años)</html>");
+        jpTereceraSeccion1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 260, 20));
+
+        jLabel22.setText("<html>Carrera, ciclos académicos y asignaturas que solventan el convenio de formación dual </html>");
+        jpTereceraSeccion1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 430, 30));
+
+        jtAsignaturas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jtAsignaturas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jtAsignaturas.setGridColor(new java.awt.Color(0, 102, 153));
+        jtAsignaturas.setPreferredSize(new java.awt.Dimension(300, 70));
+        jtAsignaturas.setSelectionBackground(new java.awt.Color(255, 255, 0));
+        jtAsignaturas.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jtAsignaturas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtAsignaturasMouseClicked(evt);
+            }
+        });
+        jScrollPane9.setViewportView(jtAsignaturas);
+
+        jpTereceraSeccion1.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 360, 130));
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel23.setText("Estudiantes por escenario pedagógico");
+        jpTereceraSeccion1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 360, 30));
+
+        btnAgregarAsignatura.setBackground(new java.awt.Color(255, 255, 255));
+        btnAgregarAsignatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_agregar_32.png"))); // NOI18N
+        btnAgregarAsignatura.setToolTipText("Agregar");
+        btnAgregarAsignatura.setBorder(null);
+        btnAgregarAsignatura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarAsignatura.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnAgregarAsignatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarAsignaturaActionPerformed(evt);
+            }
+        });
+        jpTereceraSeccion1.add(btnAgregarAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, -1, -1));
+
+        btnQuitarAsignatura.setBackground(new java.awt.Color(255, 255, 255));
+        btnQuitarAsignatura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_cancelar_40.png"))); // NOI18N
+        btnQuitarAsignatura.setToolTipText("Eliminar");
+        btnQuitarAsignatura.setBorder(null);
+        btnQuitarAsignatura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnQuitarAsignatura.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnQuitarAsignatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarAsignaturaActionPerformed(evt);
+            }
+        });
+        jpTereceraSeccion1.add(btnQuitarAsignatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, -1, -1));
+
+        jtEscenariosPedagogicos.setAutoCreateRowSorter(true);
+        jtEscenariosPedagogicos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+            },
+            new String [] {
+                "No. Estudiantes", "Escenario Pedagógico"
+            }
+        ));
+        jtEscenariosPedagogicos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jtEscenariosPedagogicos.setGridColor(new java.awt.Color(0, 102, 153));
+        jtEscenariosPedagogicos.setPreferredSize(new java.awt.Dimension(300, 100));
+        jtEscenariosPedagogicos.setSelectionBackground(new java.awt.Color(255, 255, 0));
+        jtEscenariosPedagogicos.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jtEscenariosPedagogicos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtEscenariosPedagogicosMouseClicked(evt);
+            }
+        });
+        jScrollPane10.setViewportView(jtEscenariosPedagogicos);
+
+        jpTereceraSeccion1.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 360, 130));
+
+        btnAgregarEscenarioPedagogico.setBackground(new java.awt.Color(255, 255, 255));
+        btnAgregarEscenarioPedagogico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_agregar_32.png"))); // NOI18N
+        btnAgregarEscenarioPedagogico.setToolTipText("Agregar");
+        btnAgregarEscenarioPedagogico.setBorder(null);
+        btnAgregarEscenarioPedagogico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregarEscenarioPedagogico.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnAgregarEscenarioPedagogico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarEscenarioPedagogicoActionPerformed(evt);
+            }
+        });
+        jpTereceraSeccion1.add(btnAgregarEscenarioPedagogico, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, -1, -1));
+
+        btnQuitarEscenarioPedagogico.setBackground(new java.awt.Color(255, 255, 255));
+        btnQuitarEscenarioPedagogico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_cancelar_40.png"))); // NOI18N
+        btnQuitarEscenarioPedagogico.setToolTipText("Eliminar");
+        btnQuitarEscenarioPedagogico.setBorder(null);
+        btnQuitarEscenarioPedagogico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnQuitarEscenarioPedagogico.setPreferredSize(new java.awt.Dimension(50, 50));
+        btnQuitarEscenarioPedagogico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarEscenarioPedagogicoActionPerformed(evt);
+            }
+        });
+        jpTereceraSeccion1.add(btnQuitarEscenarioPedagogico, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 120, -1, -1));
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel24.setText("<html>Administradores del Convenio</html>");
+        jpTereceraSeccion1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 420, 20));
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel25.setText("<html>Incluir únicamente el cargo de los administradores </html>");
+        jpTereceraSeccion1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, 360, 20));
+
+        jLabel26.setText("<html>Por la Entidad Receptora</html>");
+        jpTereceraSeccion1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 120, 30));
+
+        jLabel27.setText("<html>Por el Instituto</html>");
+        jpTereceraSeccion1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 120, 20));
+
+        txtAdministradorInstituto.setPreferredSize(new java.awt.Dimension(87, 25));
+        txtAdministradorInstituto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAdministradorInstitutoActionPerformed(evt);
+            }
+        });
+        txtAdministradorInstituto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAdministradorInstitutoKeyReleased(evt);
+            }
+        });
+        jpTereceraSeccion1.add(txtAdministradorInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 230, -1));
+
+        txtAdministradorEntidadReceptora.setPreferredSize(new java.awt.Dimension(87, 25));
+        txtAdministradorEntidadReceptora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAdministradorEntidadReceptoraActionPerformed(evt);
+            }
+        });
+        txtAdministradorEntidadReceptora.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAdministradorEntidadReceptoraKeyReleased(evt);
+            }
+        });
+        jpTereceraSeccion1.add(txtAdministradorEntidadReceptora, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, 230, -1));
+
+        jLabel28.setText("<html>Proceso de designación de estudiantes</html>");
+        jpTereceraSeccion1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 420, 20));
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel29.setText("<html>Acuerdos específicos consensuados con la Entidad Receptora en base al Instructivo para la Selección de Estudiantes, si así lo requiere. </html>");
+        jpTereceraSeccion1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 330, 420, 30));
+
+        txaObjetivo.setColumns(2);
+        txaObjetivo.setLineWrap(true);
+        txaObjetivo.setRows(2);
+        txaObjetivo.setTabSize(3);
+        txaObjetivo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txaObjetivoKeyReleased(evt);
+            }
+        });
+        jScrollPane18.setViewportView(txaObjetivo);
+
+        jpTereceraSeccion1.add(jScrollPane18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 360, 50));
+
+        jtpInformeViabilidad.addTab("Tercera Sección.- Contenido del Informe 1:", jpTereceraSeccion1);
+
+        jpTerceraSeccion2.setBackground(new java.awt.Color(255, 255, 255));
+        jpTerceraSeccion2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel30.setText("<html>Condiciones en las que recibirá a los estudiantes</html>");
+        jpTerceraSeccion2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 420, 20));
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel31.setText("<html>(Para la descripción establecer qué tipo de estructura es donde se va a realizar la formación dual, ej: planta de procesamiento atunero, ubicada en alrededor de 400 metros cuadrados de construcción o fábrica textil, otros)</html>");
+        jpTerceraSeccion2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, 460, 30));
+
+        jLabel32.setText("<html>Condiciones</html>");
+        jpTerceraSeccion2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 140, 25));
+
+        rbSiUniforme.setBackground(new java.awt.Color(153, 255, 153));
+        btgUniforme.add(rbSiUniforme);
+        rbSiUniforme.setText("SI");
+        rbSiUniforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbSiUniformeActionPerformed(evt);
+            }
+        });
+        jpTerceraSeccion2.add(rbSiUniforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+
+        rbNoUniforme.setBackground(new java.awt.Color(255, 153, 153));
+        btgUniforme.add(rbNoUniforme);
+        rbNoUniforme.setText("NO");
+        jpTerceraSeccion2.add(rbNoUniforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+
+        jLabel33.setText("<html>¿Se dotará de equipo mínimo de protección personal  al estudiante?</html>");
+        jpTerceraSeccion2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 390, 30));
+
+        rbNoEquipoProteccion.setBackground(new java.awt.Color(255, 153, 153));
+        btgEquipo.add(rbNoEquipoProteccion);
+        rbNoEquipoProteccion.setText("NO");
+        jpTerceraSeccion2.add(rbNoEquipoProteccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        rbSiEquipoProteccion.setBackground(new java.awt.Color(153, 255, 153));
+        btgEquipo.add(rbSiEquipoProteccion);
+        rbSiEquipoProteccion.setText("SI");
+        jpTerceraSeccion2.add(rbSiEquipoProteccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+
+        jLabel34.setText("<html>¿Se verificó que las normas de seguridad de la entidad receptora garantice la protección de los estudiantes durante su formación práctica?</html>");
+        jpTerceraSeccion2.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 390, 40));
+
+        rbNoNormasSeguridad.setBackground(new java.awt.Color(255, 153, 153));
+        btgNormasSeguridad.add(rbNoNormasSeguridad);
+        rbNoNormasSeguridad.setText("NO");
+        jpTerceraSeccion2.add(rbNoNormasSeguridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
+
+        rbSiNormasSeguridad.setBackground(new java.awt.Color(153, 255, 153));
+        btgNormasSeguridad.add(rbSiNormasSeguridad);
+        rbSiNormasSeguridad.setText("SI");
+        jpTerceraSeccion2.add(rbSiNormasSeguridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+
+        jLabel35.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel35.setText("<html>Observaciones:</html>");
+        jpTerceraSeccion2.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 100, 30));
+
+        txaObjetivo1.setColumns(2);
+        txaObjetivo1.setLineWrap(true);
+        txaObjetivo1.setRows(2);
+        txaObjetivo1.setTabSize(3);
+        txaObjetivo1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txaObjetivo1KeyReleased(evt);
+            }
+        });
+        jScrollPane11.setViewportView(txaObjetivo1);
+
+        jpTerceraSeccion2.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 290, 60));
+
+        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel36.setText("<html>Criterios técnicos de infraestructura</html>");
+        jpTerceraSeccion2.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 460, 30));
+
+        rbSiRecompensa.setBackground(new java.awt.Color(153, 255, 153));
+        btgRecompensa.add(rbSiRecompensa);
+        rbSiRecompensa.setText("SI");
+        jpTerceraSeccion2.add(rbSiRecompensa, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
+
+        rbNoRecompensa.setBackground(new java.awt.Color(255, 153, 153));
+        btgRecompensa.add(rbNoRecompensa);
+        rbNoRecompensa.setText("NO");
+        jpTerceraSeccion2.add(rbNoRecompensa, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
+
+        jLabel37.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel37.setText("<html>La dotación de equipo mínimo de protección personal es indispensable según la naturaleza de la carrera.</html>");
+        jpTerceraSeccion2.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 420, 30));
+
+        jLabel38.setText("<html>¿Se dotará de uniforme al estudiante?</html>");
+        jpTerceraSeccion2.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 390, 20));
+
+        jLabel39.setText("<html>Tipo de compensación</html>");
+        jpTerceraSeccion2.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 140, 25));
+
+        txtCreacionResolucion7.setPreferredSize(new java.awt.Dimension(87, 25));
+        txtCreacionResolucion7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCreacionResolucion7ActionPerformed(evt);
+            }
+        });
+        txtCreacionResolucion7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCreacionResolucion7KeyReleased(evt);
+            }
+        });
+        jpTerceraSeccion2.add(txtCreacionResolucion7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 320, -1));
+
+        txtCreacionResolucion8.setPreferredSize(new java.awt.Dimension(87, 25));
+        txtCreacionResolucion8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCreacionResolucion8ActionPerformed(evt);
+            }
+        });
+        txtCreacionResolucion8.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCreacionResolucion8KeyReleased(evt);
+            }
+        });
+        jpTerceraSeccion2.add(txtCreacionResolucion8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 320, -1));
+
+        txaObjetivo2.setColumns(2);
+        txaObjetivo2.setLineWrap(true);
+        txaObjetivo2.setRows(2);
+        txaObjetivo2.setTabSize(3);
+        txaObjetivo2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txaObjetivo2KeyReleased(evt);
+            }
+        });
+        jScrollPane12.setViewportView(txaObjetivo2);
+
+        jpTerceraSeccion2.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, 460, 70));
+
+        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel41.setText("<html>Descripción General de la Infraestructura </html>");
+        jpTerceraSeccion2.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 450, 30));
+
+        jLabel42.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel42.setText("<html>Incluir el detalle de la naturaleza de la compensación (económica, en especie o mixta). Determinar sus condiciones</html>");
+        jpTerceraSeccion2.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, -1, 20));
+
+        jtAsignaturas2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Espacio Físico (detallar lugares para desarrollo de la FD)", "Descripción General de Actividades", "Equipamiento General Disponible"
+            }
+        ));
+        jtAsignaturas2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jtAsignaturas2.setGridColor(new java.awt.Color(0, 102, 153));
+        jtAsignaturas2.setPreferredSize(new java.awt.Dimension(300, 100));
+        jtAsignaturas2.setSelectionBackground(new java.awt.Color(255, 255, 0));
+        jtAsignaturas2.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jtAsignaturas2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtAsignaturas2MouseClicked(evt);
+            }
+        });
+        jScrollPane13.setViewportView(jtAsignaturas2);
+
+        jpTerceraSeccion2.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 880, 130));
+
+        jLabel43.setText("<html>¿La Entidad Receptora compensará al estudiante en formación dual? </html>");
+        jpTerceraSeccion2.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 460, 20));
+
+        jtpInformeViabilidad.addTab("Tercera Sección.- Contenido del Informe 2:", jpTerceraSeccion2);
+
+        jpCuartaQuintaSeccion.setBackground(new java.awt.Color(255, 255, 255));
+        jpCuartaQuintaSeccion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel44.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel44.setText("Conclusiones:");
+        jpCuartaQuintaSeccion.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 50));
+
+        txaOtrosDocumentosHabilitantes.setColumns(2);
+        txaOtrosDocumentosHabilitantes.setLineWrap(true);
+        txaOtrosDocumentosHabilitantes.setRows(2);
+        txaOtrosDocumentosHabilitantes.setTabSize(3);
+        txaOtrosDocumentosHabilitantes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txaOtrosDocumentosHabilitantesKeyReleased(evt);
+            }
+        });
+        jScrollPane14.setViewportView(txaOtrosDocumentosHabilitantes);
+
+        jpCuartaQuintaSeccion.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, 460, 80));
+
+        jLabel45.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel45.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel45.setText("<html>Rector/a del Instituto en el caso de que el informe haya sido realizado por un docente o el Coordinador de la carrera El/la rector/a de cada institución debe revisar todo el contenido del informe y cotejarlo con el instructivo previo al envío. </html>");
+        jpCuartaQuintaSeccion.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 370, 40));
+
+        jLabel46.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel46.setText("<html>Documentos habilitantes</html>");
+        jpCuartaQuintaSeccion.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 180, 20));
+
+        txtRemitenteInstituto.setPreferredSize(new java.awt.Dimension(87, 25));
+        txtRemitenteInstituto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRemitenteInstitutoActionPerformed(evt);
+            }
+        });
+        txtRemitenteInstituto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRemitenteInstitutoKeyReleased(evt);
+            }
+        });
+        jpCuartaQuintaSeccion.add(txtRemitenteInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 270, -1));
+
+        jLabel47.setText("<html>Revisado y Aprobado por:</html>");
+        jpCuartaQuintaSeccion.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 100, 30));
+
+        txtRemitenteEntidadReceptora.setPreferredSize(new java.awt.Dimension(87, 25));
+        txtRemitenteEntidadReceptora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRemitenteEntidadReceptoraActionPerformed(evt);
+            }
+        });
+        txtRemitenteEntidadReceptora.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRemitenteEntidadReceptoraKeyReleased(evt);
+            }
+        });
+        jpCuartaQuintaSeccion.add(txtRemitenteEntidadReceptora, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 270, -1));
+
+        jLabel48.setText("<html>Elaborado por:</html>");
+        jpCuartaQuintaSeccion.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 100, 20));
+
+        jLabel49.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel49.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel49.setText("<html>Consideraciones finales sobre ventajas y desventajas de firmar el convenio con la posible entidad receptora</html>");
+        jpCuartaQuintaSeccion.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 370, 30));
+
+        jLabel50.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
+        jLabel50.setForeground(new java.awt.Color(0, 51, 153));
+        jLabel50.setText("<html>Nombre del Rector/a, Docente o Coordinador/a de Carrera responsable por la sistematización de la información</html>");
+        jpCuartaQuintaSeccion.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 370, 30));
+
+        jLabel51.setText("<html>Del Instituto</html>");
+        jpCuartaQuintaSeccion.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 460, 20));
+
+        jLabel52.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel52.setText("<html>Remitentes </html>");
+        jpCuartaQuintaSeccion.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 80, 20));
+
+        jLabel53.setText("<html>De la Entidad Receptora</html>");
+        jpCuartaQuintaSeccion.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 460, 20));
+
+        jtDocumentosHabilitantesInstituto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jtDocumentosHabilitantesInstituto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jtDocumentosHabilitantesInstituto.setGridColor(new java.awt.Color(0, 102, 153));
+        jtDocumentosHabilitantesInstituto.setPreferredSize(new java.awt.Dimension(300, 50));
+        jtDocumentosHabilitantesInstituto.setSelectionBackground(new java.awt.Color(255, 255, 0));
+        jtDocumentosHabilitantesInstituto.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jtDocumentosHabilitantesInstituto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtDocumentosHabilitantesInstitutoMouseClicked(evt);
+            }
+        });
+        jScrollPane15.setViewportView(jtDocumentosHabilitantesInstituto);
+
+        jpCuartaQuintaSeccion.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 460, 90));
+
+        jtDocumentosHabilitantesEntidadReceptora.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jtDocumentosHabilitantesEntidadReceptora.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jtDocumentosHabilitantesEntidadReceptora.setGridColor(new java.awt.Color(0, 102, 153));
+        jtDocumentosHabilitantesEntidadReceptora.setPreferredSize(new java.awt.Dimension(300, 60));
+        jtDocumentosHabilitantesEntidadReceptora.setSelectionBackground(new java.awt.Color(255, 255, 0));
+        jtDocumentosHabilitantesEntidadReceptora.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jtDocumentosHabilitantesEntidadReceptora.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtDocumentosHabilitantesEntidadReceptoraMouseClicked(evt);
+            }
+        });
+        jScrollPane16.setViewportView(jtDocumentosHabilitantesEntidadReceptora);
+
+        jpCuartaQuintaSeccion.add(jScrollPane16, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 460, 90));
+
+        jLabel54.setText("Otros:");
+        jpCuartaQuintaSeccion.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 40, 50));
+
+        txaObjetivo4.setColumns(2);
+        txaObjetivo4.setLineWrap(true);
+        txaObjetivo4.setRows(2);
+        txaObjetivo4.setTabSize(3);
+        txaObjetivo4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txaObjetivo4KeyReleased(evt);
+            }
+        });
+        jScrollPane17.setViewportView(txaObjetivo4);
+
+        jpCuartaQuintaSeccion.add(jScrollPane17, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 270, 150));
+
+        jtpInformeViabilidad.addTab("Cuarta y Quinta Sección: Conclusiones y Cierre", jpCuartaQuintaSeccion);
+
+        jPanel1.add(jtpInformeViabilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 930, 510));
+        jPanel1.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
+
+        btnAtras.setBackground(new java.awt.Color(255, 255, 255));
+        btnAtras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_atras_32.png"))); // NOI18N
+        btnAtras.setToolTipText("Atrás");
+        btnAtras.setBorder(null);
+        btnAtras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAtras.setEnabled(false);
+        btnAtras.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        btnAdelante.setBackground(new java.awt.Color(255, 255, 255));
+        btnAdelante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_adelante_32.png"))); // NOI18N
+        btnAdelante.setToolTipText("Siguiente");
+        btnAdelante.setBorder(null);
+        btnAdelante.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdelante.setEnabled(false);
+        btnAdelante.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnAdelante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdelanteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAdelante, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 943, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // <editor-fold defaultstate="collapsed" desc="Eventos"> 
-    private void txtNombreRepresentanteLegalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreRepresentanteLegalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreRepresentanteLegalActionPerformed
-
-    private void txtTipoDeEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoDeEmpresaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTipoDeEmpresaActionPerformed
-
-    private void txtNombreInstitutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreInstitutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreInstitutoActionPerformed
-
-    private void txtDocCreacionInstitutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDocCreacionInstitutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDocCreacionInstitutoActionPerformed
-
-    private void txtNombreRectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreRectorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreRectorActionPerformed
-
-    private void txtNumYTipoDeContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumYTipoDeContratoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumYTipoDeContratoActionPerformed
-
-    private void jrbNormasDeSeguridadSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNormasDeSeguridadSiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbNormasDeSeguridadSiActionPerformed
-
-    private void btnAgregarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarreraActionPerformed
-        criterioBusqueda[0] = idInstituto;
-        
-        buscar("carrera_viabilidad","grid_filtro");//abre una ventana de busqueda
-        controladorVariablesSesion.getInstance().getDatosTemporalesConsulta();
-        llenarNombresCarreras(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "carrera_viabilidad"));//consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos el tipo persona sirve para estudiante, tutor academicoy empresarial
-
-    }//GEN-LAST:event_btnAgregarCarreraActionPerformed
-
-    private void btnQuitarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarCarreraActionPerformed
-        
-        int fila = jtNombreCarreras.getSelectedRow();
-        modeloCarreras.removeRow(fila);
-
-    }//GEN-LAST:event_btnQuitarCarreraActionPerformed
-
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        accion = "crear";
-        limpiarCajasTexto(jp_Viabilidad);//limpia las cajas de texto
+
     }//GEN-LAST:event_btnNuevoActionPerformed
 
-    private void btnCrearActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActualizarActionPerformed
-        if (crearActualizar()) {//crea o actualiza segun la accion designada
-            limpiarCajasTexto(jp_Viabilidad);
-            //llenarGrid();//consulta a la base de datos para que cargue el nuevo registro ingresado
-            cargarTotalRegistros();//carga el total de registros
-        }
-    }//GEN-LAST:event_btnCrearActualizarActionPerformed
-
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        accion = "crear";
-        eliminar();//elimina el registro seleccionado
-        //llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
-        limpiarCajasTexto(jp_Viabilidad);//limpia las cajas de texto
-        cargarTotalRegistros();//carga el total de registros
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -1185,513 +1260,648 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         this.dispose();//cierra el formulario
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void btnBuscarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEmpresaActionPerformed
-        buscar("empresa_sucursal_acercamiento", "grid");//abre una ventana de busqueda
-        //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarEmpresa(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresas_viabilidad"));
-    }//GEN-LAST:event_btnBuscarEmpresaActionPerformed
-
-    private void btnBuscarEncargadoSenescytActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEncargadoSenescytActionPerformed
-        buscar("encargado_senescyt","grid");//abre una ventana de busqueda
-        //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarEncargadoSenescyt(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
-    }//GEN-LAST:event_btnBuscarEncargadoSenescytActionPerformed
-
-    private void btnBuscarInstittutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarInstittutoActionPerformed
-        buscar("instituto","grid");//abre una ventana de busqueda
-        //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarInstituto(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "instituto"));
-    }//GEN-LAST:event_btnBuscarInstittutoActionPerformed
+    private void btnBuscarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCarreraActionPerformed
+        buscar("viabilidad_carrera", "grid", null);
+        llenarCarrera(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "viabilidad_carrera"));
+    }//GEN-LAST:event_btnBuscarCarreraActionPerformed
 
     private void btnAdjuntarAnexosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarAnexosActionPerformed
-        
+
     }//GEN-LAST:event_btnAdjuntarAnexosActionPerformed
 
-    private void txaObservacionesDeudasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaObservacionesDeudasKeyReleased
-        convertirAmayusculas(txaObservacionesDeudas);
-        txaObservacionesDeudas.setText(controladorVariablesSesion.validarLetrasConEspacios(txaObservacionesDeudas.getText()));
-    }//GEN-LAST:event_txaObservacionesDeudasKeyReleased
-
-    private void txaListadoDocumentacionRespaldoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaListadoDocumentacionRespaldoKeyReleased
-        convertirAmayusculas(txaListadoDocumentacionRespaldo);
-    }//GEN-LAST:event_txaListadoDocumentacionRespaldoKeyReleased
-
-    private void txaObservacionesConsideracionesRecomendacionesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaObservacionesConsideracionesRecomendacionesKeyReleased
-        convertirAmayusculas(txaObservacionesConsideracionesRecomendaciones);
-    }//GEN-LAST:event_txaObservacionesConsideracionesRecomendacionesKeyReleased
-
-    private void txaObservacionesPlazoConvenioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaObservacionesPlazoConvenioKeyReleased
-        convertirAmayusculas(txaObservacionesPlazoConvenio);
-    }//GEN-LAST:event_txaObservacionesPlazoConvenioKeyReleased
-
-    private void txaProcesoDesignacionEstudiantesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaProcesoDesignacionEstudiantesKeyReleased
-        convertirAmayusculas(txaProcesoDesignacionEstudiantes);
-    }//GEN-LAST:event_txaProcesoDesignacionEstudiantesKeyReleased
-
-    private void txaTipoCompensacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaTipoCompensacionKeyReleased
-        convertirAmayusculas(txaObservacionesDeudas);
-    }//GEN-LAST:event_txaTipoCompensacionKeyReleased
-
-    private void txaCondicionesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaCondicionesKeyReleased
-        convertirAmayusculas(txaObservacionesDeudas);
-    }//GEN-LAST:event_txaCondicionesKeyReleased
-
-    private void txaObservacionesCondicionesEstudiantesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaObservacionesCondicionesEstudiantesKeyReleased
-        convertirAmayusculas(txaObservacionesCondicionesEstudiantes);
-    }//GEN-LAST:event_txaObservacionesCondicionesEstudiantesKeyReleased
-
-    private void txtElaboradoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtElaboradoKeyReleased
-        convertirAmayusculas(txtElaborado);
-    }//GEN-LAST:event_txtElaboradoKeyReleased
-
-    private void txtRevisadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRevisadoKeyReleased
-        convertirAmayusculas(txtRevisado);
-    }//GEN-LAST:event_txtRevisadoKeyReleased
-
-    private void txtAprobadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAprobadoKeyReleased
-        convertirAmayusculas(txtAprobado);
-    }//GEN-LAST:event_txtAprobadoKeyReleased
-
-    private void txtNombreERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreERActionPerformed
+    private void txtNombreRepresentanteLegalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreRepresentanteLegalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreERActionPerformed
+    }//GEN-LAST:event_txtNombreRepresentanteLegalActionPerformed
 
     private void btnBuscarRepresentanteLegalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRepresentanteLegalActionPerformed
-        buscar("representante_legal","grid");//abre una ventana de busqueda
-        //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarRepresentanteLegal(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
+
     }//GEN-LAST:event_btnBuscarRepresentanteLegalActionPerformed
 
-    private void btnAgregarEmsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEmsuActionPerformed
-         criterioBusqueda[0] = idEmpresaSucursal;
-        buscar("empresa_sucursal_sucursales", "grid_filtro");//abre una ventana de busqueda
-        
-        llenarSucursales(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresa_sucursales"));//consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos el tipo persona sirve para estudiante, tutor academicoy empresarial
+    private void rbSiConstatacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSiConstatacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSiConstatacionActionPerformed
 
-    }//GEN-LAST:event_btnAgregarEmsuActionPerformed
+    private void jtEntidadesRegulacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEntidadesRegulacionMouseClicked
 
-    private void btnQuitarCarrera1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarCarrera1ActionPerformed
-        
-        int fila = jtSucursales.getSelectedRow();
-        modeloSucursales = (DefaultTableModel)jtSucursales.getModel();
-        modeloSucursales.removeRow(fila);
-    }//GEN-LAST:event_btnQuitarCarrera1ActionPerformed
+    }//GEN-LAST:event_jtEntidadesRegulacionMouseClicked
 
-    private void lblAsignaturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAsignaturasMouseClicked
-         
-    }//GEN-LAST:event_lblAsignaturasMouseClicked
+    private void txaObservacionesDeudasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaObservacionesDeudasKeyReleased
+
+    }//GEN-LAST:event_txaObservacionesDeudasKeyReleased
+
+    private void txaConsideracionesRecomendacionesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaConsideracionesRecomendacionesKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txaConsideracionesRecomendacionesKeyReleased
+
+    private void txtFechaAcercamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaAcercamientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaAcercamientoActionPerformed
+
+    private void txtFechaAcercamientoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaAcercamientoKeyReleased
+
+    }//GEN-LAST:event_txtFechaAcercamientoKeyReleased
+
+    private void txaDireccion2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaDireccion2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txaDireccion2KeyReleased
+
+    private void txtCreacionResolucion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCreacionResolucion1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCreacionResolucion1ActionPerformed
+
+    private void txtCreacionResolucion1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCreacionResolucion1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCreacionResolucion1KeyReleased
+
+    private void jtSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtSucursalesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtSucursalesMouseClicked
+
+    private void btnAgregarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarSucursalActionPerformed
+        criterioBusqueda[0] = idEmpresa;
+        buscar("viabilidad_empresa_sucursal", "grid_filtro", criterioBusqueda);
+        llenarEmpresaSucursal(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "viabilidad_empresa_sucursal"));
+        formatearGridSucursales();
+    }//GEN-LAST:event_btnAgregarSucursalActionPerformed
+
+    private void btnQuitarSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarSucursalActionPerformed
+        if (jtSucursales.getSelectedRow() != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) jtSucursales.getModel();
+            modelo.removeRow(jtSucursales.getSelectedRow());
+            jtSucursales.setModel(modelo);
+        }
+    }//GEN-LAST:event_btnQuitarSucursalActionPerformed
+
+    private void txaProcesoDesignacionEstudiantesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaProcesoDesignacionEstudiantesKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txaProcesoDesignacionEstudiantesKeyReleased
+
+    private void txtCantidadEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadEstudiantesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadEstudiantesActionPerformed
+
+    private void txtCantidadEstudiantesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadEstudiantesKeyReleased
+        txtCantidadEstudiantes.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtCantidadEstudiantes.getText()));
+    }//GEN-LAST:event_txtCantidadEstudiantesKeyReleased
+
+    private void txtCantidadTutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadTutoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadTutoresActionPerformed
+
+    private void txtCantidadTutoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadTutoresKeyReleased
+        txtCantidadTutores.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtCantidadTutores.getText()));
+    }//GEN-LAST:event_txtCantidadTutoresKeyReleased
+
+    private void txtPlazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlazoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPlazoActionPerformed
+
+    private void txtPlazoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlazoKeyReleased
+        txtPlazo.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtPlazo.getText()));
+    }//GEN-LAST:event_txtPlazoKeyReleased
+
+    private void jtAsignaturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAsignaturasMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtAsignaturasMouseClicked
 
     private void btnAgregarAsignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAsignaturaActionPerformed
-        
-        
-        frmConsultas1 frm = new frmConsultas1(null, true);
-        //JTable jt = frm.getjtConsulta();
-        
-        String[] nombresColmunas = {"id_asig","id_carr","ASIGNATURA","CARRERA"};
-        DefaultTableModel modeloAignaturas = new DefaultTableModel(nombresColmunas, 0);        
-        
-        try {
-            
-            for(int i = 0; i < idsCarrera.length; i++){
-                
-                PreparedStatement ps = Conexion.getConexion().prepareStatement("select * from v_asignatura_viabilidad_grid where carr_id =" + idsCarrera[i]);
-                ResultSet rs = ps.executeQuery();
-                
-                Object[] datosTabla = new Object[rs.getMetaData().getColumnCount()];
-                while (rs.next()) {
-                    for (int j = 1; j <= rs.getMetaData().getColumnCount(); j++) {
-                        if (rs.getObject(j) != null) {
-                            datosTabla[j - 1] = rs.getObject(j);
-                        } else {
-                            datosTabla[j - 1] = "";
-                        }
-                    }                    
-                    modeloAignaturas.addRow(datosTabla);
-                }
-            }
-            
-            jtAsignaturas.setModel(modeloAignaturas);
-        } catch (SQLException ex) {
-            Logger.getLogger(frmViabilidad.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       // frm.formatearColumnas();
-        frm.setVisible(true); //hace visible la ventan de busqueda
-        llenarAsignaturas(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "asignatura"));//consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos el tipo persona sirve para estudiante, tutor academicoy empresarial
-        
+        criterioBusqueda[0] = idCarrera;
+        buscar("viabilidad_asignatura", "grid_filtro", criterioBusqueda);
+        llenarAsignatura(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "viabilidad_asignatura"));
+        formatearGridAsignaturas();
     }//GEN-LAST:event_btnAgregarAsignaturaActionPerformed
 
     private void btnQuitarAsignaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarAsignaturaActionPerformed
-        // TODO add your handling code here:
+        if (jtAsignaturas.getSelectedRow() != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) jtAsignaturas.getModel();
+            modelo.removeRow(jtAsignaturas.getSelectedRow());
+            jtAsignaturas.setModel(modelo);
+        }
     }//GEN-LAST:event_btnQuitarAsignaturaActionPerformed
 
+    private void jtEscenariosPedagogicosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEscenariosPedagogicosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtEscenariosPedagogicosMouseClicked
+
+    private void btnAgregarEscenarioPedagogicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEscenarioPedagogicoActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) jtEscenariosPedagogicos.getModel();
+        Object[] datos = {"1", ""};
+        modelo.addRow(datos);
+        jtEscenariosPedagogicos.setModel(modelo);
+    }//GEN-LAST:event_btnAgregarEscenarioPedagogicoActionPerformed
+
+    private void btnQuitarEscenarioPedagogicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarEscenarioPedagogicoActionPerformed
+        if (jtEscenariosPedagogicos.getSelectedRow() != -1) {
+            DefaultTableModel modelo = (DefaultTableModel) jtEscenariosPedagogicos.getModel();
+            modelo.removeRow(jtEscenariosPedagogicos.getSelectedRow());
+            jtEscenariosPedagogicos.setModel(modelo);
+        }
+    }//GEN-LAST:event_btnQuitarEscenarioPedagogicoActionPerformed
+
+    private void txtAdministradorInstitutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdministradorInstitutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAdministradorInstitutoActionPerformed
+
+    private void txtAdministradorInstitutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdministradorInstitutoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAdministradorInstitutoKeyReleased
+
+    private void txtAdministradorEntidadReceptoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdministradorEntidadReceptoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAdministradorEntidadReceptoraActionPerformed
+
+    private void txtAdministradorEntidadReceptoraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdministradorEntidadReceptoraKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAdministradorEntidadReceptoraKeyReleased
+
+    private void txaObjetivo1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaObjetivo1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txaObjetivo1KeyReleased
+
+    private void txtCreacionResolucion7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCreacionResolucion7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCreacionResolucion7ActionPerformed
+
+    private void txtCreacionResolucion7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCreacionResolucion7KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCreacionResolucion7KeyReleased
+
+    private void txtCreacionResolucion8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCreacionResolucion8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCreacionResolucion8ActionPerformed
+
+    private void txtCreacionResolucion8KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCreacionResolucion8KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCreacionResolucion8KeyReleased
+
+    private void btnBuscarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEmpresaActionPerformed
+        buscar("empresa", "grid", null);
+        llenarEmpresa(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresa"));
+        llenarAsunto();
+    }//GEN-LAST:event_btnBuscarEmpresaActionPerformed
+
+    private void txaObjetivo2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaObjetivo2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txaObjetivo2KeyReleased
+
+    private void jtAsignaturas2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAsignaturas2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtAsignaturas2MouseClicked
+
+    private void txaOtrosDocumentosHabilitantesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaOtrosDocumentosHabilitantesKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txaOtrosDocumentosHabilitantesKeyReleased
+
+    private void txtRemitenteInstitutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRemitenteInstitutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRemitenteInstitutoActionPerformed
+
+    private void txtRemitenteInstitutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRemitenteInstitutoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRemitenteInstitutoKeyReleased
+
+    private void txtRemitenteEntidadReceptoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRemitenteEntidadReceptoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRemitenteEntidadReceptoraActionPerformed
+
+    private void txtRemitenteEntidadReceptoraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRemitenteEntidadReceptoraKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRemitenteEntidadReceptoraKeyReleased
+
+    private void jtDocumentosHabilitantesInstitutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtDocumentosHabilitantesInstitutoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtDocumentosHabilitantesInstitutoMouseClicked
+
+    private void jtDocumentosHabilitantesEntidadReceptoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtDocumentosHabilitantesEntidadReceptoraMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtDocumentosHabilitantesEntidadReceptoraMouseClicked
+
+    private void txaObjetivo4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaObjetivo4KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txaObjetivo4KeyReleased
+
+    private void txaObjetivoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaObjetivoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txaObjetivoKeyReleased
+
+    private void rbSiUniformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbSiUniformeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbSiUniformeActionPerformed
+
+    private void jtpInformeViabilidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtpInformeViabilidadMouseClicked
+    }//GEN-LAST:event_jtpInformeViabilidadMouseClicked
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        validarProcesoInformeAtras();
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnAdelanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdelanteActionPerformed
+        validarProcesoInformeAdelante();
+    }//GEN-LAST:event_btnAdelanteActionPerformed
+
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Metodos"> 
-    
-    private void buscar(String tabla, String tipo) {
-        
-        switch (tabla) {
-            case "carrera_viabilidad":
-                criterioBusqueda[0] = idInstituto;
+    // <editor-fold defaultstate="collapsed" desc="Métodos">   
+    private void validarProcesoInformeAtras() {
+        switch (jtpInformeViabilidad.getSelectedIndex()) {
+            case 4:
+                if (validarPrimeraSeccion().equals("")) {
+                    jtpInformeViabilidad.setEnabledAt(4, false);
+                    jtpInformeViabilidad.setEnabledAt(3, true);
+                    jtpInformeViabilidad.setSelectedIndex(3);
+                    btnAtras.setEnabled(true);
+                    btnAdelante.setEnabled(true);
+                    ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
+                    btnAdelante.setIcon(icon);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, validarPrimeraSeccion(), "Completar", JOptionPane.WARNING_MESSAGE);
+                }
                 break;
-            case "empresa_sucursal_sucursales":
-                criterioBusqueda[0] = idEmpresa;
+            case 3:
+                if (validarPrimeraSeccion().equals("")) {
+                    jtpInformeViabilidad.setEnabledAt(3, false);
+                    jtpInformeViabilidad.setEnabledAt(2, true);
+                    jtpInformeViabilidad.setSelectedIndex(2);
+                    btnAtras.setEnabled(true);
+                    btnAdelante.setEnabled(true);
+                    ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
+                    btnAdelante.setIcon(icon);
+                }
+                break;
+            case 2:
+                if (validarPrimeraSeccion().equals("")) {
+                    jtpInformeViabilidad.setEnabledAt(2, false);
+                    jtpInformeViabilidad.setEnabledAt(1, true);
+                    jtpInformeViabilidad.setSelectedIndex(1);
+                    btnAtras.setEnabled(true);
+                    btnAdelante.setEnabled(true);
+                    ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
+                    btnAdelante.setIcon(icon);
+                }
+                break;
+            case 1:
+                if (validarPrimeraSeccion().equals("")) {
+                    jtpInformeViabilidad.setEnabledAt(1, false);
+                    jtpInformeViabilidad.setEnabledAt(0, true);
+                    jtpInformeViabilidad.setSelectedIndex(0);
+                    btnAtras.setEnabled(false);
+                    btnAdelante.setEnabled(true);
+                    ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
+                    btnAdelante.setIcon(icon);
+                }
                 break;
             default:
-                criterioBusqueda[0] = "-1";
+                break;
         }
-        
-        frmConsultas consulta = new frmConsultas(null, true);//instancia la el formulario con la ventana de busqueda
-        consulta.consultar(tabla, tipo, criterioBusqueda);//llama al metodo que se encuentra en la ventana de busqueda
-        consulta.setVisible(true); //hace visible la ventan de busqueda
-
     }
-    
-    private void cargarTotalRegistros() {
-//        int total = jtUsuario.getRowCount();
-//        lblTotalRegistros.setText(String.valueOf(total));
-    }
-    
-    private ArrayList<Object> consultarRegistroIndividual(String id, String tabla) {
 
-        criterioBusqueda[0] = id;
-        controladorConsulta consulta = new controladorConsulta();
-        return consulta.obtenerConsulta(tabla, controladorVariablesSesion.getInstance().getFiltrar(), criterioBusqueda);
-
-    }
-    
-    private void convertirAmayusculas(Component componente) {
-
-        if (componente instanceof JTextField) {
-            JTextField text = (JTextField) componente;
-            String cadena = (text.getText()).toUpperCase();
-            text.setText(cadena);
-
-        } else if (componente instanceof JTextArea) {
-            JTextArea textArea = (JTextArea) componente;
-            String cadena = (textArea.getText()).toUpperCase();
-            textArea.setText(cadena);
+    private void validarProcesoInformeAdelante() {
+        switch (jtpInformeViabilidad.getSelectedIndex()) {
+            case 0:
+                if (validarPrimeraSeccion().equals("")) {
+                    jtpInformeViabilidad.setEnabledAt(0, false);
+                    jtpInformeViabilidad.setEnabledAt(1, true);
+                    jtpInformeViabilidad.setSelectedIndex(1);
+                    btnAtras.setEnabled(true);
+                    btnAdelante.setEnabled(true);
+                    ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
+                    btnAdelante.setIcon(icon);
+                    cargarSegundaSeccion();
+                } else {
+                    JOptionPane.showMessageDialog(null, validarPrimeraSeccion(), "Completar", JOptionPane.WARNING_MESSAGE);
+                }
+                break;
+            case 1:
+                if (validarSegundaSeccion().equals("")) {
+                    jtpInformeViabilidad.setEnabledAt(1, false);
+                    jtpInformeViabilidad.setEnabledAt(2, true);
+                    jtpInformeViabilidad.setSelectedIndex(2);
+                    btnAtras.setEnabled(true);
+                    btnAdelante.setEnabled(true);
+                    ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
+                    btnAdelante.setIcon(icon);
+                } else {
+                    JOptionPane.showMessageDialog(null, validarPrimeraSeccion(), "Completar", JOptionPane.WARNING_MESSAGE);
+                }
+                break;
+            case 2:
+                if (validarPrimeraSeccion().equals("")) {
+                    jtpInformeViabilidad.setEnabledAt(2, false);
+                    jtpInformeViabilidad.setEnabledAt(3, true);
+                    jtpInformeViabilidad.setSelectedIndex(3);
+                    btnAtras.setEnabled(true);
+                    btnAdelante.setEnabled(true);
+                    ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
+                    btnAdelante.setIcon(icon);
+                } else {
+                    JOptionPane.showMessageDialog(null, validarPrimeraSeccion(), "Completar", JOptionPane.WARNING_MESSAGE);
+                }
+                break;
+            case 3:
+                if (validarPrimeraSeccion().equals("")) {
+                    jtpInformeViabilidad.setEnabledAt(3, false);
+                    jtpInformeViabilidad.setEnabledAt(4, true);
+                    jtpInformeViabilidad.setSelectedIndex(4);
+                    btnAtras.setEnabled(true);
+                    btnAdelante.setEnabled(true);
+                    ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_crear_actualizar_40.png"));
+                    btnAdelante.setIcon(icon);
+                } else {
+                    JOptionPane.showMessageDialog(null, validarPrimeraSeccion(), "Completar", JOptionPane.WARNING_MESSAGE);
+                }
+                break;
+            case 4:
+                if (validarPrimeraSeccion().equals("")) {
+                    btnAtras.setEnabled(true);
+                    btnAdelante.setEnabled(true);
+                }
+                break;
+            default:
+                break;
         }
-
     }
 
-    private void convertirAminusculas(javax.swing.JTextField jTextfieldS) {
-        String cadena = (jTextfieldS.getText()).toLowerCase();
-        jTextfieldS.setText(cadena);
+    private String validarPrimeraSeccion() {
+        String errores = "";
+        if (txtNumeroInforme.getText().equals("")) {
+            errores += "Número de Informe\n";
+        }
+        if (dtFechaInforme.getDate().equals("")) {
+            errores += "Fecha\n";
+        }
+        if (txaNombreInstituto.getText().equals("")) {
+            errores += "Nombre Instituto\n";
+        }
+        if (idCarrera.equals("")) {
+            errores += "Carrera\n";
+        }
+        if (idEmpresa.equals("")) {
+            errores += "Empresa\n";
+        }
+        if (txaPara.getText().equals("")) {
+            errores += "Para\n";
+        }
+        if (txaAsunto.getText().equals("")) {
+            errores += "Asunto\n";
+        }
+        if (txaSolicitante.getText().equals("")) {
+            errores += "Solicitante\n";
+        }
+        return errores;
     }
-    
-    private boolean crearActualizar() {
-        Map<String, Object> map = new HashMap<>();
 
-        map.put("accion", accion);
-        map.put("id", lblId.getText());
-        map.put("idEmpresaSucursal", idEmpresaSucursal);
-        map.put("numeroDeInforme", txtViabNumeroInforme.getText());
-        map.put("fechaInforme", "djjjdksjk");
-        map.put("asunto", txaAsunto.getText());
-        map.put("constatacion", respuestaRadioButton = (jrbConductaInstitucionalSi.isSelected()) ? "1" : "0");
-        map.put("deudaSRI", respuestaCheckBox = (boolean) jtDeudas.getValueAt(0, 1) == true ? "1" : "0");
-        map.put("deudaIESS", respuestaRadioButton = (boolean) jtDeudas.getValueAt(2, 1) == true ? "1" : "0");
-        map.put("deudaSERCOP", respuestaRadioButton = (boolean) jtDeudas.getValueAt(1, 1) == true ? "1" : "0");
-        map.put("deudaSupIntendencia", respuestaRadioButton = (boolean) jtDeudas.getValueAt(3, 1) == true ? "1" : "0");
-        map.put("observacionesDeudas", txaObservacionesDeudas.getText());
-        map.put("recomendaciones", txaObservacionesConsideracionesRecomendaciones.getText());
-        map.put("fechaPrimerAcercamiento", txtFechaDeAcercamientoInicial.getText());
-        map.put("documentAcercamiento", txaListadoDocumentacionRespaldo.getText());
-        map.put("observacionesInforme", "0");
-        map.put("numeroEstudiantes", String.valueOf(jspNumEstudiantes.getValue()));
-        map.put("numeroTutores", String.valueOf(jspNumTutores.getValue()));
-        map.put("plazo", String.valueOf(jspPlazoVigenciaConvenio.getValue()));
-        map.put("renuevaConvenio", respuestaRadioButton = (jrbRespuestaRenovarConvenioSi.isSelected()) ? "1" : "0");
-        map.put("observacionesRenovacion", txaObservacionesPlazoConvenio.getText());
-        map.put("administradorInstiituto", txtAdministradorConvInstituto.getText());
-        map.put("administradorEmpresa", txtAdministradorConvER.getText());
-        map.put("procesoDesignacion", txaProcesoDesignacionEstudiantes.getText());
-        map.put("uniformes", respuestaRadioButton = (jrbUniformesSi.isSelected()) ? "1" : "0");
-        map.put("equipoProteccion", respuestaRadioButton = (jrbEquipoDeProteccionSi.isSelected()) ? "1" : "0");
-        map.put("normasSeguridad", respuestaRadioButton = (jrbNormasDeSeguridadSi.isSelected()) ? "1" : "0");
-        map.put("observacionesCondiciones", txaObservacionesCondicionesEstudiantes.getText());
-        map.put("compensacion", respuestaRadioButton = (jrbCompensacionSi.isSelected()) ? "1" : "0");
-        map.put("compensacionTipo", txaCondiciones.getText());
-        map.put("compensacionCondiciones", txaCondiciones.getText());
-        map.put("elaborado", txtElaborado.getText());
-        map.put("revisado", txtRevisado.getText());
-        map.put("aprobado", txtAprobado.getText());
-        map.put("estadoTramite", "0");
-        map.put("idCarrera", idsCarrera[0]);
+    private String validarSegundaSeccion() {
+        String errores = "";
+        if (txtNumeroInforme.getText().equals("")) {
+            errores += "Número de Informe\n";
+        }
+        if (dtFechaInforme.getDate().equals("")) {
+            errores += "Fecha\n";
+        }
+        if (idInstituto.equals("")) {
+            errores += "Nombre Instituto\n";
+        }
+        if (idCarrera.equals("")) {
+            errores += "Carrera\n";
+        }
+        if (idEmpresa.equals("")) {
+            errores += "Empresa\n";
+        }
+        if (txaPara.getText().equals("")) {
+            errores += "Para\n";
+        }
+        if (txaAsunto.getText().equals("")) {
+            errores += "Asunto\n";
+        }
+        if (txaSolicitante.getText().equals("")) {
+            errores += "Solicitante\n";
+        }
+        return errores;
+    }
 
+    private void cargarPrimeraSeccion() {
+        idCarrera = "";
+        idEmpresa = "";
+        idInstituto = "";
         ControladorViabilidad controladorViabilidad = new ControladorViabilidad();
-        return controladorViabilidad.crearActualizar(map);
-
+        txtNumeroInforme.setText(controladorViabilidad.obtenerNumeroInforme());
+        idInstituto = controladorViabilidad.obtenerInstituto()[0];
+        txaNombreInstituto.setText(controladorViabilidad.obtenerInstituto()[1]);
+        txaPara.setText(controladorViabilidad.obtenerParaAsuntoSolicitante()[0]);
+        txaAsunto.setText(controladorViabilidad.obtenerParaAsuntoSolicitante()[1]);
+        txaSolicitante.setText(controladorViabilidad.obtenerParaAsuntoSolicitante()[2]);
     }
 
-    private void eliminar() {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("id", txtAprobado.getText());
-
+    private void cargarSegundaSeccion() {
         ControladorViabilidad controladorViabilidad = new ControladorViabilidad();
-        controladorViabilidad.eliminar(map);
+        txtFechaAcercamiento.setText(controladorViabilidad.obtenerFechaAcercamiento(idEmpresa));
 
     }
-    
+
+    private void llenarGridEntidadesRegulacion() {
+        criterioBusqueda[0] = "0";
+        jtEntidadesRegulacion.setModel(controladorGrid.getInstance().llenarGridEntidadesRegulacion());
+        formatearColumnas();
+    }
+
+    private void llenarGridDocumentosHabilitantesEntidadReceptora() {
+        criterioBusqueda[0] = "0";
+        jtDocumentosHabilitantesEntidadReceptora.setModel(controladorGrid.getInstance().llenarGridDocumentosHabilitantes("viabilidad_documentos_habilitantes_entidad_receptora"));
+    }
+
+    private void llenarGridDocumentosHabilitantesInstituto() {
+        criterioBusqueda[0] = "0";
+        jtDocumentosHabilitantesInstituto.setModel(controladorGrid.getInstance().llenarGridDocumentosHabilitantes("viabilidad_documentos_habilitantes_instituto"));
+        formatearGridDocumentosHabilitantes();
+    }
+
     private void formatearColumnas() {
         //Oculta la primera columna que corresponde al ID de la tabla
-        jtNombreCarreras.getColumnModel().getColumn(0).setMaxWidth(0);
-        jtNombreCarreras.getColumnModel().getColumn(0).setMinWidth(0);
-        jtNombreCarreras.getColumnModel().getColumn(0).setPreferredWidth(0);
-       
-        
-        //formatea la tabla que muestra la ubicación de la sucursal asociada a el actual informe de viabilidad
-        for(int i = 1; i < jtSucursales.getColumnCount(); i++){
-            
-            jtSucursales.getColumnModel().getColumn(i).setMaxWidth(110);
-            jtSucursales.getColumnModel().getColumn(i).setMinWidth(110);
-            jtSucursales.getColumnModel().getColumn(i).setPreferredWidth(110);
-            jtSucursales.getTableHeader().getColumnModel().getColumn(i).setMaxWidth(110);
-            jtSucursales.getTableHeader().getColumnModel().getColumn(i).setMinWidth(110);
-            jtSucursales.getTableHeader().getColumnModel().getColumn(i).setPreferredWidth(110);           
-            
-        }
-        
-        if(modeloSucursales != null){
-            jtSucursales.getColumnModel().getColumn(0).setMaxWidth(140);
-            jtSucursales.getColumnModel().getColumn(0).setMinWidth(140);
-            jtSucursales.getColumnModel().getColumn(0).setPreferredWidth(140);
-            jtSucursales.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(140);
-            jtSucursales.getTableHeader().getColumnModel().getColumn(0).setMinWidth(140);
-            jtSucursales.getTableHeader().getColumnModel().getColumn(0).setPreferredWidth(140); 
-        }
-        
-        
-        //formatea la tabla que muestra la ubicación de la empresa matriz asociada a el actual informe de viabilidad
-        for(int i = 0; i < jtDireccionMatriz.getColumnCount(); i++){
-            
-            jtDireccionMatriz.getColumnModel().getColumn(i).setMaxWidth(110);
-            jtDireccionMatriz.getColumnModel().getColumn(i).setMinWidth(110);
-            jtDireccionMatriz.getColumnModel().getColumn(i).setPreferredWidth(110);
-            jtDireccionMatriz.getTableHeader().getColumnModel().getColumn(i).setMaxWidth(110);
-            jtDireccionMatriz.getTableHeader().getColumnModel().getColumn(i).setMinWidth(110);
-            jtDireccionMatriz.getTableHeader().getColumnModel().getColumn(i).setPreferredWidth(110);           
-            
-        }
-        
-        jtDeudas.getColumnModel().getColumn(0).setMaxWidth(0);
-        jtDeudas.getColumnModel().getColumn(0).setMinWidth(0);
-        jtDeudas.getColumnModel().getColumn(0).setPreferredWidth(0);
-        
-        jtDeudas.getColumnModel().getColumn(3).setMaxWidth(0);
-        jtDeudas.getColumnModel().getColumn(3).setMinWidth(0);
-        jtDeudas.getColumnModel().getColumn(3).setPreferredWidth(0);
-        
+        jtEntidadesRegulacion.getColumnModel().getColumn(0).setMaxWidth(0);
+        jtEntidadesRegulacion.getColumnModel().getColumn(0).setMinWidth(0);
+        jtEntidadesRegulacion.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+    }
+
+    private void formatearGridDocumentosHabilitantes() {
+        jtDocumentosHabilitantesEntidadReceptora.getColumnModel().getColumn(0).setMaxWidth(0);
+        jtDocumentosHabilitantesEntidadReceptora.getColumnModel().getColumn(0).setMinWidth(0);
+        jtDocumentosHabilitantesEntidadReceptora.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+        jtDocumentosHabilitantesInstituto.getColumnModel().getColumn(0).setMaxWidth(0);
+        jtDocumentosHabilitantesInstituto.getColumnModel().getColumn(0).setMinWidth(0);
+        jtDocumentosHabilitantesInstituto.getColumnModel().getColumn(0).setPreferredWidth(0);
+    }
+
+    private void formatearGridSucursales() {
+        jtSucursales.getColumnModel().getColumn(0).setMaxWidth(0);
+        jtSucursales.getColumnModel().getColumn(0).setMinWidth(0);
+        jtSucursales.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+        jtSucursales.getColumnModel().getColumn(1).setMaxWidth(0);
+        jtSucursales.getColumnModel().getColumn(1).setMinWidth(0);
+        jtSucursales.getColumnModel().getColumn(1).setPreferredWidth(0);
+    }
+
+    private void formatearGridAsignaturas() {
         jtAsignaturas.getColumnModel().getColumn(0).setMaxWidth(0);
         jtAsignaturas.getColumnModel().getColumn(0).setMinWidth(0);
         jtAsignaturas.getColumnModel().getColumn(0).setPreferredWidth(0);
-        
+
         jtAsignaturas.getColumnModel().getColumn(1).setMaxWidth(0);
         jtAsignaturas.getColumnModel().getColumn(1).setMinWidth(0);
         jtAsignaturas.getColumnModel().getColumn(1).setPreferredWidth(0);
-        
-        
-        
     }
-    
-    protected void limpiarCajasTexto(Component component) {
-        lblId.setText("0");
-        //txaPara.setText("Mgs. Galo Nina Rada, Subsecretario de Formación Tecnica,\nTecnología, Artes, Música y Pedagogía");
-        if (component instanceof JTextField) {
 
-            JTextField text = (JTextField) component;
-            text.setText("");
+    private void buscar(String tabla, String tipo, String[] criterio) {
+        frmConsultas consulta = new frmConsultas(null, true);//instancia la el formulario con la ventana de busqueda
+        consulta.consultar(tabla, tipo, criterio);//llama al metodo que se encuentra en la ventana de busqueda
+        consulta.setVisible(true);//hace visible la ventan de busqueda
+    }
 
-        } else if (component instanceof JTextArea) {
-            JTextArea textArea = (JTextArea) component;
-            textArea.setText("");
-        } else if (component instanceof Container) {
-            for (Component c : ((Container) component).getComponents()) {
-                limpiarCajasTexto(c);
-            }
-        }
-
-    }
-    
-    private void llenarAsignaturas(ArrayList<Object> datos) {
-        
-        modeloAsignaturas = (DefaultTableModel) jtAsignaturas.getModel();        
-        String[] buffer = new String[datos.size()];
-        //Guardando los datos en un array para llenar en Jtable
-        for(int i = 0; i < datos.size(); i++) buffer[i] = String.valueOf(datos.get(i));
-        //añadiendo una fila        
-        modeloAsignaturas.addRow(buffer);
-        //Poniendo los datos en la Jtable
-        jtAsignaturas.setModel(modeloAsignaturas);  
-        //Ocultando las filas de los ids
-        formatearColumnas();
-        
-        
-    
-    }
-    
-    private void llenarDireccionMatriz(String[] direccion){
-        
-        String[] cabecera = {"NOMBRE","PAÍS", "PROVINCIA", "CIUDAD", "CANTÓN","SECTOR", "REFERENCIA", "CALLE PRINCIPAL", "INTERSECCIÓN", "NÚMERO" };
-        
-        modeloDireccionMatriz = new DefaultTableModel(cabecera, 0);
-        
-        modeloDireccionMatriz.addRow(direccion);
-        
-        jtDireccionMatriz.setModel(modeloDireccionMatriz);
-        
-        formatearColumnas();
-    }
-    
-    private void llenarDireccionSucursal(String[] direccion){
-        
-        String[] cabecera = {"NOMBRE","PAÍS", "PROVINCIA", "CIUDAD", "CANTÓN","SECTOR", "REFERENCIA", "CALLE PRINCIPAL", "INTERSECCIÓN", "NÚMERO" };
-        
-        
-        if(modeloDireccionSucursal == null)modeloDireccionSucursal = new DefaultTableModel(cabecera, 0);
-        
-        modeloDireccionSucursal.addRow(direccion);
-       
-        jtSucursales.setModel(modeloDireccionSucursal);
-        
-    }    
-    
     private void llenarEmpresa(ArrayList<Object> datos) {
-        
-        int indicePais = 5;
-        for(int i = 0 ; i < direccionEmpresa.length  - 1; i++) direccionEmpresa[i+1] =  (String) datos.get(i + indicePais);
-        
-        direccionEmpresa[0] = (String) datos.get(3);
-        
-        llenarDireccionMatriz(direccionEmpresa);
-        
-        idEmpresaSucursal = (String.valueOf(datos.get(0)));
-        idEmpresa = (String.valueOf(datos.get(1)));
-        nombreEmpresa = (String) datos.get(3);
-        txtEmpresa.setText((String) datos.get(3));
-        txtRUC.setText((String) datos.get(14));
-        txtTipoDeEmpresa.setText((String) datos.get(16));
-        txtActividadEconomica.setText((String) datos.get(17));
-        txtFechaDeAcercamientoInicial.setText((String) datos.get(18));
-        txtNombreER.setText((String) datos.get(3));
-
-        txaAsunto.setText("Informe técnico-académico de viabilidad para la firma del\nConvenio de formación dual entre \"" + nombreEmpresa + "\" y el \"" + nombreInstituto + " \"");
-        
-        
-    }
-    
-    private void llenarEncargadoSenescyt(ArrayList<Object> datos) {
-        idPersona = (String.valueOf(datos.get(0)));
-        txaPara.setText((String) datos.get(10) + " " + (String) datos.get(2) + " " + (String) datos.get(1) + ", " + (String) datos.get(14));
-    }
-    
-    private void llenarGridEntidadesDeControl() {
-        criterioBusqueda[0] = "'TIPO ENTIDAD'";
-        jtDeudas.setModel(controladorGrid.getInstance().llenarGridPermisos("consulta_regulacion", "grid_filtro", criterioBusqueda));
-        sorterEntidades = new TableRowSorter<>(jtDeudas.getModel());
-        jtDeudas.setRowSorter(sorterEntidades);
-        jtDeudas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        formatearColumnas();
+        idEmpresa = (String.valueOf(datos.get(0)));
+        txtRUC.setText(String.valueOf(datos.get(1)));
+        txtEmpresa.setText(String.valueOf(datos.get(3)));
     }
 
-    private void llenarInstituto(ArrayList<Object> datos) {
-        
-        idInstituto = (String.valueOf(datos.get(0)));
-        
-        txtNombreInstituto.setText((String) datos.get(4));
-        nombreInstituto = (String) datos.get(4);
-        txtDocCreacionInstituto.setText((String) datos.get(11));
-        txtInstituto.setText((String) datos.get(8));
-        txaAsunto.setText("Informe técnico-académico de viabilidad para la firma del\nConvenio de formación dual entre \"" + nombreEmpresa + "\" y el \"" + nombreInstituto + " \"");
-
-        DecimalFormat fmt = new DecimalFormat("000");
-        Year año = Year.now();
-
-        int numeroInforme = (Integer) datos.get(12)+1;
-        txtViabNumeroInforme.setText("SENESCYT-SFTT-" + fmt.format(numeroInforme) + "-" + año);
-        
-        
-        txaSolicitante.setText(((String) datos.get(15)).toUpperCase() + ", " + (String) datos.get(3) + " " + (String) datos.get(2) + ", RECTOR/A DE " + (String) datos.get(4));
-        txtNumYTipoDeContrato.setText((String) datos.get(14));
-        txtNombreRector.setText((String) datos.get(3) + " " + (String) datos.get(2));
-
+    private void llenarCarrera(ArrayList<Object> datos) {
+        idCarrera = (String.valueOf(datos.get(0)));
+        txtCarrera.setText(String.valueOf(datos.get(5)));
     }
 
-    private void llenarNombresCarreras(ArrayList<Object> datos) {
-        
-        modeloCarreras = (DefaultTableModel) jtNombreCarreras.getModel();
-        
-        String[] prueba = new String[datos.size()];
-        
-        for(int i = 0; i < datos.size(); i++) prueba[i] = String.valueOf(datos.get(i));
-                
-        modeloCarreras.addRow(prueba);
-        jtNombreCarreras.setModel(modeloCarreras);
-        
-        idsCarrera = new String[jtNombreCarreras.getRowCount()];
-        
-        for(int i = 0; i < jtNombreCarreras.getRowCount(); i++) idsCarrera[i] = String.valueOf(modeloCarreras.getValueAt(i, 0)); 
-        
-       formatearColumnas();
-        
-        
-    
+    private void llenarEmpresaSucursal(ArrayList<Object> datos) {
+        String[] nombresColumnas = {"id", "empresa", "SUCURSALES"};
+
+        DefaultTableModel modelo = new DefaultTableModel(nombresColumnas, 0);
+        if (jtSucursales.getRowCount() == 0) {
+            modelo.addRow(arrayListToArrayString(datos));
+        } else {
+
+            for (int i = 0; i < jtSucursales.getRowCount(); i++) {
+                modelo.addRow(nombresColumnas);
+                modelo.setValueAt(jtSucursales.getValueAt(i, 0).toString(), i, 0);
+                modelo.setValueAt(jtSucursales.getValueAt(i, 1).toString(), i, 1);
+                modelo.setValueAt(jtSucursales.getValueAt(i, 2).toString(), i, 2);
+
+            }
+            modelo.addRow(arrayListToArrayString(datos));
+        }
+        jtSucursales.setModel(modelo);
     }
 
-    private void llenarRepresentanteLegal(ArrayList<Object> datos) {
-        //idPersona = (String.valueOf(datos.get(0)));
-        
-        txtNombreRepresentanteLegal.setText((String) datos.get(2) + " " + (String) datos.get(1));
-        
-        lblInfoRepresentanteLegal.setText("<html> <b>Nombre:</b> "+ (String) datos.get(2) + " " + (String) datos.get(1)+ " <br>"
-                + "                         <b>Correo:</b> "+ (String) datos.get(7) + " <br>"
-                + "                         <b>Teléfono:</b> "+ (String) datos.get(5) + " <br>"
-                + "                         <b>Celular:</b> "+ (String) datos.get(6) + " <br>"
-                + "                         </html>");
+    private void llenarAsignatura(ArrayList<Object> datos) {
+        String[] nombresColumnas = {"id", "carrera", "ASGINATURAS", "RESULTADO APRENDIZAJE", "EQUIPAMIENTO", "SIMILITUD"};
+        DefaultTableModel modelo = new DefaultTableModel(nombresColumnas, 0);
+        if (jtAsignaturas.getRowCount() == 0) {
+            modelo.addRow(arrayListToArrayString(datos));
+        } else {
 
+            for (int i = 0; i < jtAsignaturas.getRowCount(); i++) {
+                modelo.addRow(nombresColumnas);
+                modelo.setValueAt(jtAsignaturas.getValueAt(i, 0).toString(), i, 0);
+                modelo.setValueAt(jtAsignaturas.getValueAt(i, 1).toString(), i, 1);
+                modelo.setValueAt(jtAsignaturas.getValueAt(i, 2).toString(), i, 2);
+                modelo.setValueAt(jtAsignaturas.getValueAt(i, 3).toString(), i, 3);
+                modelo.setValueAt(jtAsignaturas.getValueAt(i, 4).toString(), i, 4);
+                modelo.setValueAt(jtAsignaturas.getValueAt(i, 5).toString(), i, 5);
+
+            }
+            modelo.addRow(arrayListToArrayString(datos));
+        }
+        jtAsignaturas.setModel(modelo);
     }
-    
-    private void llenarSucursales(ArrayList<Object> datos) {
-        
-        for(int i = 0 ; i < direccionSucursal.length  - 1; i++) direccionSucursal[i+1] =  (String) datos.get(i + 6);
-        
-        direccionSucursal[0] = (String) datos.get(4);
-        
-        llenarDireccionSucursal(direccionSucursal);
-        
-        idEmpresaSucursal = String.valueOf(datos.get(0));        
-        
-        formatearColumnas();
-    
+
+    private Object[] arrayListToArrayString(ArrayList datos) {
+        Object[] datosTemporales = new Object[datos.size()];
+        for (int i = 0; i < datos.size(); i++) {
+            datosTemporales[i] = datos.get(i).toString();
+        }
+        return datosTemporales;
     }
-// </editor-fold>  
+
+    private ArrayList<Object> consultarRegistroIndividual(String id, String tabla) {
+        criterioBusqueda[0] = id;
+        controladorConsulta consulta = new controladorConsulta();
+        return consulta.obtenerConsulta(tabla, controladorVariablesSesion.getInstance().getFiltrar(), criterioBusqueda);
+    }
+
+    private void llenarAsunto() {
+        txaAsunto.setText(txaAsunto.getText() + " " + txtEmpresa.getText() + " y el " + txaNombreInstituto.getText());
+    }
+    // </editor-fold>     
     // <editor-fold defaultstate="collapsed" desc="Variables declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btgConstatacion;
+    private javax.swing.ButtonGroup btgEquipo;
+    private javax.swing.ButtonGroup btgNormasSeguridad;
+    private javax.swing.ButtonGroup btgRecompensa;
+    private javax.swing.ButtonGroup btgUniforme;
+    private javax.swing.JButton btnAdelante;
     private javax.swing.JButton btnAdjuntarAnexos;
     private javax.swing.JButton btnAgregarAsignatura;
-    private javax.swing.JButton btnAgregarCarrera;
-    private javax.swing.JButton btnAgregarEmsu;
+    private javax.swing.JButton btnAgregarEscenarioPedagogico;
+    private javax.swing.JButton btnAgregarSucursal;
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnBuscarCarrera;
     private javax.swing.JButton btnBuscarEmpresa;
-    private javax.swing.JButton btnBuscarEncargadoSenescyt;
-    private javax.swing.JButton btnBuscarInstittuto;
     private javax.swing.JButton btnBuscarRepresentanteLegal;
     private javax.swing.JButton btnCerrar;
-    private javax.swing.JButton btnCrearActualizar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.ButtonGroup btnGroupConductaInstitucional;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnQuitarAsignatura;
-    private javax.swing.JButton btnQuitarCarrera;
-    private javax.swing.JButton btnQuitarCarrera1;
-    private javax.swing.ButtonGroup buttonGroupCompensacion;
-    private javax.swing.ButtonGroup buttonGroupEquipoDeProteccion;
-    private javax.swing.ButtonGroup buttonGroupNormasDeSeguridad;
-    private javax.swing.ButtonGroup buttonGroupRenovacionConvenio;
-    private javax.swing.ButtonGroup buttonGroupUniformesEstudiantes;
+    private javax.swing.JButton btnQuitarEscenarioPedagogico;
+    private javax.swing.JButton btnQuitarSucursal;
     public static com.toedter.calendar.JDateChooser dtFechaInforme;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1702,122 +1912,79 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
+    private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane20;
-    private javax.swing.JScrollPane jScrollPane23;
-    private javax.swing.JScrollPane jScrollPane24;
-    private javax.swing.JScrollPane jScrollPane25;
-    private javax.swing.JScrollPane jScrollPane26;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JPanel jpConclusiones;
-    private javax.swing.JPanel jpContenidoDelInforme;
-    public static javax.swing.JPanel jp_Antecedentes;
-    private javax.swing.JPanel jp_DatosGenerales;
-    public static javax.swing.JTabbedPane jp_Viabilidad;
-    private javax.swing.JRadioButton jrbCompensacionNo;
-    private javax.swing.JRadioButton jrbCompensacionSi;
-    private javax.swing.JRadioButton jrbConductaInstitucionalNo;
-    private javax.swing.JRadioButton jrbConductaInstitucionalSi;
-    private javax.swing.JRadioButton jrbEquipoDeProteccionNo;
-    private javax.swing.JRadioButton jrbEquipoDeProteccionSi;
-    private javax.swing.JRadioButton jrbNormasDeSeguridadNo;
-    private javax.swing.JRadioButton jrbNormasDeSeguridadSi;
-    private javax.swing.JRadioButton jrbRespuestaRenovarConvenioNo;
-    private javax.swing.JRadioButton jrbRespuestaRenovarConvenioSi;
-    private javax.swing.JRadioButton jrbUniformeNo;
-    private javax.swing.JRadioButton jrbUniformesSi;
-    private javax.swing.JSpinner jspNumEstudiantes;
-    private javax.swing.JSpinner jspNumTutores;
-    private javax.swing.JSpinner jspPlazoVigenciaConvenio;
+    private javax.swing.JPanel jpCuartaQuintaSeccion;
+    private javax.swing.JPanel jpPrimeraSeccion;
+    private javax.swing.JPanel jpSegundaSeccion;
+    private javax.swing.JPanel jpTerceraSeccion2;
+    private javax.swing.JPanel jpTereceraSeccion1;
     private javax.swing.JTable jtAsignaturas;
-    private javax.swing.JTable jtDeudas;
-    private javax.swing.JTable jtDireccionMatriz;
-    private javax.swing.JTable jtEstudiantesEscenarioPedagogico;
-    private javax.swing.JTable jtNombreCarreras;
+    private javax.swing.JTable jtAsignaturas2;
+    private javax.swing.JTable jtDocumentosHabilitantesEntidadReceptora;
+    private javax.swing.JTable jtDocumentosHabilitantesInstituto;
+    private javax.swing.JTable jtEntidadesRegulacion;
+    private javax.swing.JTable jtEscenariosPedagogicos;
     private javax.swing.JTable jtSucursales;
-    private javax.swing.JLabel lbAdministradorConvER;
-    private javax.swing.JLabel lbAdministradorConvInstituto;
-    private javax.swing.JLabel lbObservacionesCondicionesEstudiantes;
-    private javax.swing.JLabel lblActividadEconomica;
-    private javax.swing.JLabel lblAprobado;
-    private javax.swing.JLabel lblAsignaturas;
+    private javax.swing.JTabbedPane jtpInformeViabilidad;
     private javax.swing.JLabel lblAsunto;
-    private javax.swing.JLabel lblCompensacionEstudiante2;
-    private javax.swing.JLabel lblCompensacionEstudiantes;
-    private javax.swing.JLabel lblCondiciones;
-    private javax.swing.JLabel lblConsideracionesRecomendaciones;
-    private javax.swing.JLabel lblDireccionMatriz;
-    private javax.swing.JLabel lblDireccionSucursal;
-    private javax.swing.JLabel lblDireccionSucursal2;
-    private javax.swing.JLabel lblDisposicionRenovarConvenio;
-    private javax.swing.JLabel lblDocCreacionInstituto;
-    private javax.swing.JLabel lblDotacionUniformes;
-    private javax.swing.JLabel lblElaborado;
     private javax.swing.JLabel lblEmpresa;
     private javax.swing.JLabel lblEmpresa1;
-    private javax.swing.JLabel lblEquipoDeProteccion;
-    private javax.swing.JLabel lblEstudiantesEscenarioPedagogico;
-    private javax.swing.JLabel lblFechaDeAcercamientoInicial;
     private javax.swing.JLabel lblFechaInforme;
     private javax.swing.JLabel lblId;
-    private javax.swing.JLabel lblInfoRepresentanteLegal;
-    private javax.swing.JLabel lblListadoDocumentacionRespaldo;
-    private javax.swing.JLabel lblNombreCarreras;
-    private javax.swing.JLabel lblNombreInstituto;
-    private javax.swing.JLabel lblNombreRector;
-    private javax.swing.JLabel lblNombreRepresentanteLegal;
-    private javax.swing.JLabel lblNormasDeSeguridad1;
-    private javax.swing.JLabel lblNumResolucion;
-    private javax.swing.JLabel lblNumTutores;
-    private javax.swing.JLabel lblNumYTipoDeContrato;
-    private javax.swing.JLabel lblObservaciones;
-    private javax.swing.JLabel lblObservacionesPlazoConvenio;
     private javax.swing.JLabel lblPara;
-    private javax.swing.JLabel lblPlazoVigenciaConvenio;
-    private javax.swing.JLabel lblProcesoDesignacionEstudiantes1;
     private javax.swing.JLabel lblRUC;
     private javax.swing.JLabel lblRegistro;
-    private javax.swing.JLabel lblRevisado;
     private javax.swing.JLabel lblSolicitante;
-    private javax.swing.JLabel lblTipoCompensacion;
-    private javax.swing.JLabel lblTipoDeEmpresa;
-    private javax.swing.JLabel lblTipoDeEmpresa1;
+    private javax.swing.JRadioButton rbNoConstatacion;
+    private javax.swing.JRadioButton rbNoEquipoProteccion;
+    private javax.swing.JRadioButton rbNoNormasSeguridad;
+    private javax.swing.JRadioButton rbNoRecompensa;
+    private javax.swing.JRadioButton rbNoUniforme;
+    private javax.swing.JRadioButton rbSiConstatacion;
+    private javax.swing.JRadioButton rbSiEquipoProteccion;
+    private javax.swing.JRadioButton rbSiNormasSeguridad;
+    private javax.swing.JRadioButton rbSiRecompensa;
+    private javax.swing.JRadioButton rbSiUniforme;
     private javax.swing.JTextArea txaAsunto;
-    private javax.swing.JTextArea txaCondiciones;
-    private javax.swing.JTextArea txaListadoDocumentacionRespaldo;
-    private javax.swing.JTextArea txaObservacionesCondicionesEstudiantes;
-    private javax.swing.JTextArea txaObservacionesConsideracionesRecomendaciones;
+    private javax.swing.JTextArea txaConsideracionesRecomendaciones;
+    private javax.swing.JTextArea txaDireccion2;
+    private javax.swing.JTextArea txaNombreInstituto;
+    private javax.swing.JTextArea txaObjetivo;
+    private javax.swing.JTextArea txaObjetivo1;
+    private javax.swing.JTextArea txaObjetivo2;
+    private javax.swing.JTextArea txaObjetivo4;
     private javax.swing.JTextArea txaObservacionesDeudas;
-    private javax.swing.JTextArea txaObservacionesPlazoConvenio;
+    private javax.swing.JTextArea txaOtrosDocumentosHabilitantes;
     private javax.swing.JTextArea txaPara;
     private javax.swing.JTextArea txaProcesoDesignacionEstudiantes;
     private javax.swing.JTextArea txaSolicitante;
-    private javax.swing.JTextArea txaTipoCompensacion;
-    private javax.swing.JTextArea txtActividadEconomica;
-    private javax.swing.JTextField txtAdministradorConvER;
-    private javax.swing.JTextField txtAdministradorConvInstituto;
-    private javax.swing.JTextField txtAprobado;
-    public static javax.swing.JTextField txtDocCreacionInstituto;
-    private javax.swing.JTextField txtElaborado;
+    private javax.swing.JTextField txtAdministradorEntidadReceptora;
+    private javax.swing.JTextField txtAdministradorInstituto;
+    private javax.swing.JTextField txtCantidadEstudiantes;
+    private javax.swing.JTextField txtCantidadTutores;
+    private javax.swing.JFormattedTextField txtCarrera;
+    private javax.swing.JTextField txtCreacionResolucion1;
+    private javax.swing.JTextField txtCreacionResolucion7;
+    private javax.swing.JTextField txtCreacionResolucion8;
     private javax.swing.JTextField txtEmpresa;
-    private javax.swing.JTextField txtFechaDeAcercamientoInicial;
-    private javax.swing.JTextField txtInstituto;
-    private javax.swing.JTextField txtNombreER;
-    public static javax.swing.JTextField txtNombreInstituto;
-    public static javax.swing.JTextField txtNombreRector;
+    private javax.swing.JTextField txtFechaAcercamiento;
     private javax.swing.JTextField txtNombreRepresentanteLegal;
-    public static javax.swing.JTextField txtNumYTipoDeContrato;
+    private javax.swing.JFormattedTextField txtNumeroInforme;
+    private javax.swing.JTextField txtPlazo;
     private javax.swing.JTextField txtRUC;
-    private javax.swing.JTextField txtRevisado;
-    private javax.swing.JTextField txtTipoDeEmpresa;
-    private javax.swing.JFormattedTextField txtViabNumeroInforme;
+    private javax.swing.JTextField txtRemitenteEntidadReceptora;
+    private javax.swing.JTextField txtRemitenteInstituto;
     // End of variables declaration//GEN-END:variables
 // </editor-fold>  
 }

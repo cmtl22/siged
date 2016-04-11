@@ -283,6 +283,11 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         jpRegistroUsuario.add(lblRol3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 130, -1));
 
         txtNumeroIdentificacion.setPreferredSize(new java.awt.Dimension(100, 25));
+        txtNumeroIdentificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroIdentificacionActionPerformed(evt);
+            }
+        });
         txtNumeroIdentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNumeroIdentificacionKeyReleased(evt);
@@ -575,7 +580,7 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtEmailKeyReleased
 
     private void txtNumeroIdentificacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionKeyReleased
-        // TODO add your handling code here:
+        txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtNumeroIdentificacion.getText()));
     }//GEN-LAST:event_txtNumeroIdentificacionKeyReleased
 
     private void txaDireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaDireccionKeyReleased
@@ -631,6 +636,10 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
             controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtPersona));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+
+    private void txtNumeroIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionActionPerformed
+        txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosConEspacios(txtNumeroIdentificacion.getText()));
+    }//GEN-LAST:event_txtNumeroIdentificacionActionPerformed
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
@@ -743,6 +752,7 @@ public class frmAutoridadesInstituto extends javax.swing.JInternalFrame {
         cmbTipoIdentificacion.setSelectedIndex(0);
         cmbGenero.setSelectedIndex(0);
         cmbTipoAutoridad.setSelectedIndex(0);
+        //dtFechaNacimiento.setDate("0000/00/00");
         if (component instanceof JTextField) {
 
             JTextField text = (JTextField) component;
