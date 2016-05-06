@@ -139,7 +139,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
         lblId.setPreferredSize(new java.awt.Dimension(100, 20));
         jpRegistroEntrevista.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
 
-        cmbEstadoEntrevista.setBackground(new java.awt.Color(204, 204, 255));
+        cmbEstadoEntrevista.setBackground(new java.awt.Color(255, 255, 204));
         cmbEstadoEntrevista.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbEstadoEntrevista.setPreferredSize(new java.awt.Dimension(150, 25));
         cmbEstadoEntrevista.addActionListener(new java.awt.event.ActionListener() {
@@ -232,7 +232,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
         lblNivel.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroEntrevista.add(lblNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
 
-        cmbNivel.setBackground(new java.awt.Color(204, 204, 255));
+        cmbNivel.setBackground(new java.awt.Color(255, 255, 204));
         cmbNivel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbNivel.setPreferredSize(new java.awt.Dimension(150, 25));
         jpRegistroEntrevista.add(cmbNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 230, -1));
@@ -307,6 +307,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
 
         jpBusquedaEntrevista.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 430, 460));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaEntrevista.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 150, -1));
@@ -453,12 +454,14 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
     private void btnEmpresaSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresaSucursalActionPerformed
         buscar("empresa_sucursal");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarEmpresaSucursal(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresa_sucursal"));
     }//GEN-LAST:event_btnEmpresaSucursalActionPerformed
 
     private void btnEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstudianteActionPerformed
         buscar("estudiante");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarEstudiante(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
     }//GEN-LAST:event_btnEstudianteActionPerformed
 
@@ -515,7 +518,7 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtEntrevista));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtEntrevista));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
     private DefaultTableModel filtrarGrid() {
@@ -618,8 +621,8 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
-        idEmpresaSucursal="-1";
-        idEstudiante="-1";
+        idEmpresaSucursal = "-1";
+        idEstudiante = "-1";
         cmbNivel.setSelectedIndex(0);
         cmbEstadoEntrevista.setSelectedIndex(0);
         if (component instanceof JTextField) {
@@ -643,7 +646,9 @@ public class frmEntrevista extends javax.swing.JInternalFrame {
         criterioBusqueda[0] = "periodo";
         criterioBusqueda[1] = "tabla";
         cmbPeriodo.setModel(consulta.consultarCombo(criterioBusqueda));
-        cmbPeriodo.setSelectedIndex(1);
+        if (cmbPeriodo.getItemCount() > 1) {
+            cmbPeriodo.setSelectedIndex(1);
+        }
         codigoPeriodo = consulta.getCodigoCombo();
     }
 

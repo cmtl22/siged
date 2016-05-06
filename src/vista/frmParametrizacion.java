@@ -54,7 +54,7 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
         lblRegistros = new javax.swing.JLabel();
         lblTotalRegistros = new javax.swing.JLabel();
         lblFiltro = new javax.swing.JLabel();
-        cmbTipo = new javax.swing.JComboBox<>();
+        cmbTipo = new javax.swing.JComboBox<String>();
         jScrollPane2 = new javax.swing.JScrollPane();
         txaDescripción = new javax.swing.JTextArea();
         lblClave3 = new javax.swing.JLabel();
@@ -108,7 +108,7 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtEnumeración);
 
-        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 590, 260));
+        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 590, 270));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
@@ -123,10 +123,9 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
         lblFiltro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblFiltro.setText("Filtro:");
         lblFiltro.setPreferredSize(new java.awt.Dimension(32, 25));
-        jpBusquedaUsuario.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        jpBusquedaUsuario.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        cmbTipo.setBackground(new java.awt.Color(204, 204, 255));
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTipo.setBackground(new java.awt.Color(255, 255, 204));
         cmbTipo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbTipo.setPreferredSize(new java.awt.Dimension(150, 25));
         cmbTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +133,7 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
                 cmbTipoActionPerformed(evt);
             }
         });
-        jpBusquedaUsuario.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 160, -1));
+        jpBusquedaUsuario.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 270, -1));
 
         txaDescripción.setColumns(20);
         txaDescripción.setRows(3);
@@ -145,17 +144,17 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(txaDescripción);
 
-        jpBusquedaUsuario.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 500, 70));
+        jpBusquedaUsuario.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 500, 70));
 
         lblClave3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave3.setText("Descripción:");
         lblClave3.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpBusquedaUsuario.add(lblClave3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 70, -1));
+        jpBusquedaUsuario.add(lblClave3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 70, -1));
 
         lblPersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblPersona.setText("Nombre:");
         lblPersona.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpBusquedaUsuario.add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 60, -1));
+        jpBusquedaUsuario.add(lblPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 60, -1));
 
         txtNombreEnumeracion.setPreferredSize(new java.awt.Dimension(225, 25));
         txtNombreEnumeracion.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -163,7 +162,7 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
                 txtNombreEnumeracionKeyReleased(evt);
             }
         });
-        jpBusquedaUsuario.add(txtNombreEnumeracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 500, -1));
+        jpBusquedaUsuario.add(txtNombreEnumeracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 500, -1));
 
         txtCodigo.setPreferredSize(new java.awt.Dimension(225, 25));
         txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -171,12 +170,12 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
                 txtCodigoKeyReleased(evt);
             }
         });
-        jpBusquedaUsuario.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 160, -1));
+        jpBusquedaUsuario.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 160, -1));
 
         lblClave2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblClave2.setText("Código:");
         lblClave2.setPreferredSize(new java.awt.Dimension(120, 25));
-        jpBusquedaUsuario.add(lblClave2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 90, -1));
+        jpBusquedaUsuario.add(lblClave2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 90, -1));
 
         lblTitulo_Id.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblTitulo_Id.setText("Id:");
@@ -256,6 +255,7 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
         accion = "actualizar";
         if (fila != -1) {
             //consulta en la base de datos y llena las cajas de texto con la consulta realizada
+            txtCodigo.setEditable(false);
             llenarEnumeracion(consultarRegistroIndividual(jtEnumeración.getValueAt(fila, 0).toString(), "enumeracion"));
         }
     }//GEN-LAST:event_jtEnumeraciónMouseClicked
@@ -302,7 +302,12 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txaDescripciónKeyReleased
 
     private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
-        txaDescripción.setText(descripcion.get(cmbTipo.getSelectedIndex()));
+
+        if (cmbTipo.getSelectedIndex() > 0) {
+            txaDescripción.setText(descripcion.get(cmbTipo.getSelectedIndex()));
+        } else {
+            txaDescripción.setText("");
+        }
         if (cmbTipo.getSelectedIndex() == 0) {
             llenarGrid();
         } else {
@@ -312,12 +317,6 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbTipoActionPerformed
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
-
-    private void buscar(String tabla) {
-        frmConsultas consulta = new frmConsultas(null, true);//instancia el formulario con la ventana de busqueda
-        consulta.consultar(tabla, "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
-        consulta.setVisible(true);//hace visible la ventan de busqueda
-    }
 
     private void cargarTotalRegistros() {
         int total = jtEnumeración.getRowCount();
@@ -343,11 +342,6 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
             textArea.setText(cadena);
         }
 
-    }
-
-    private void convertirAminusculas(javax.swing.JTextField jTextfieldS) {
-        String cadena = (jTextfieldS.getText()).toLowerCase();
-        jTextfieldS.setText(cadena);
     }
 
     private boolean crearActualizar() {
@@ -378,7 +372,7 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
     private void filtrar() {
         RowFilter<TableModel, Object> rf;
         try {
-            rf = RowFilter.regexFilter(cmbTipo.getSelectedItem().toString(), 2);
+            rf = RowFilter.regexFilter(cmbTipo.getSelectedItem().toString(), 1);
             sorter.setRowFilter(rf);
 
         } catch (java.util.regex.PatternSyntaxException e) {
@@ -393,10 +387,23 @@ public class frmParametrizacion extends javax.swing.JInternalFrame {
         jtEnumeración.getColumnModel().getColumn(0).setMinWidth(0);
         jtEnumeración.getColumnModel().getColumn(0).setPreferredWidth(0);
 
+        jtEnumeración.getColumnModel().getColumn(1).setMaxWidth(500);
+        jtEnumeración.getColumnModel().getColumn(1).setMinWidth(0);
+        jtEnumeración.getColumnModel().getColumn(1).setPreferredWidth(350);
+
+        jtEnumeración.getColumnModel().getColumn(2).setMaxWidth(500);
+        jtEnumeración.getColumnModel().getColumn(2).setMinWidth(0);
+        jtEnumeración.getColumnModel().getColumn(2).setPreferredWidth(350);
+
+        jtEnumeración.getColumnModel().getColumn(3).setMaxWidth(500);
+        jtEnumeración.getColumnModel().getColumn(3).setMinWidth(0);
+        jtEnumeración.getColumnModel().getColumn(3).setPreferredWidth(100);
+
     }
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
+        txtCodigo.setEditable(true);
         if (component instanceof JTextField) {
 
             JTextField text = (JTextField) component;

@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Acercamiento {
-
+    // <editor-fold defaultstate="collapsed" desc="Declaracion de variables">
     private String _id;
     private String _idEmpresaSucursal;
     private String _fecha;
@@ -13,12 +13,12 @@ public class Acercamiento {
     private String _idEstadoAcercamiento;
 
     private String accion;
-    private boolean bandera;
     private String sql;
     private PreparedStatement sentencia;
     private ResultSet resultadoQuery;
     private final String respuesta[] = new String[3];
 
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
     public String getIdEstadoAcercamiento() {
         return _idEstadoAcercamiento;
@@ -67,10 +67,10 @@ public class Acercamiento {
     public void setAccion(String accion) {
         this.accion = accion;
     }
- // </editor-fold>
-    
-    public String[] crearActualizar(Acercamiento datos) {
 
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Métodos">
+    public String[] crearActualizar(Acercamiento datos) {
         try {
             sql = "select *from sp_siged_acercamiento_crear_actualizar(?, ?, ?, ?, ?, ?);";
             sentencia = Conexion.getConexion().prepareStatement(sql);
@@ -80,10 +80,12 @@ public class Acercamiento {
             sentencia.setString(4, datos.getFecha());
             sentencia.setString(5, datos.getObservaciones());
             sentencia.setString(6, datos.getIdEstadoAcercamiento());
-
             System.out.println(sentencia);
             resultadoQuery = sentencia.executeQuery();
+
+//Recorre la respuesta que viene desde la base de datos
             resultadoQuery.next();
+//Se almacenan los resultados en un array 1:id del registro; 2:mensaje; 3:codigo de error sql de postgres
             respuesta[0] = resultadoQuery.getString(1);
             respuesta[1] = resultadoQuery.getString(2);
             respuesta[2] = resultadoQuery.getString(3);
@@ -102,15 +104,18 @@ public class Acercamiento {
             sentencia = Conexion.getConexion().prepareStatement(sql);
             sentencia.setInt(1, Integer.parseInt(datos.getId()));
             resultadoQuery = sentencia.executeQuery();
+//Recorre la respuesta que viene desde la base de datos
             resultadoQuery.next();
+//Se almacenan los resultados en un array 1:id del registro; 2:mensaje; 3:codigo de error sql de postgres
             respuesta[0] = resultadoQuery.getString(1);
             respuesta[1] = resultadoQuery.getString(2);
             respuesta[2] = resultadoQuery.getString(3);
             sentencia.close();
             return respuesta[1];
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
             return null;
         }
     }
-
+    // </editor-fold>
 }

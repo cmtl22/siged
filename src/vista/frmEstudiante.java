@@ -27,7 +27,6 @@ public class frmEstudiante extends javax.swing.JInternalFrame {
 
     private String accion;
     private String idCarrera;
-    ArrayList<String> codigoTipoPersona = new ArrayList<>();
     ArrayList<String> codigoTipoDocumento = new ArrayList<>();
     private ArrayList<String> codigoGenero = new ArrayList<>();
     String[] criterioBusqueda;
@@ -50,7 +49,6 @@ public class frmEstudiante extends javax.swing.JInternalFrame {
         llenarGrid();
         llenarComboGenero();
         llenarComboTipoIdentificacion();
-        llenarComboTipoPersona();
         cargarTotalRegistros();
 
     }
@@ -160,8 +158,7 @@ public class frmEstudiante extends javax.swing.JInternalFrame {
         });
         jpRegistroUsuario.add(txtNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 230, -1));
 
-        cmbTipoIdentificacion.setBackground(new java.awt.Color(204, 204, 255));
-        cmbTipoIdentificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTipoIdentificacion.setBackground(new java.awt.Color(255, 255, 204));
         cmbTipoIdentificacion.setToolTipText("");
         cmbTipoIdentificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbTipoIdentificacion.setPreferredSize(new java.awt.Dimension(150, 25));
@@ -306,6 +303,9 @@ public class frmEstudiante extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNumeroIdentificacionKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroIdentificacionKeyTyped(evt);
+            }
         });
         jpRegistroUsuario.add(txtNumeroIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, 100, -1));
 
@@ -399,7 +399,7 @@ public class frmEstudiante extends javax.swing.JInternalFrame {
         lblPersona15.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroUsuario.add(lblPersona15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 10, -1));
 
-        cmbGenero.setBackground(new java.awt.Color(204, 204, 255));
+        cmbGenero.setBackground(new java.awt.Color(255, 255, 204));
         cmbGenero.setToolTipText("");
         cmbGenero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbGenero.setPreferredSize(new java.awt.Dimension(110, 25));
@@ -438,7 +438,7 @@ public class frmEstudiante extends javax.swing.JInternalFrame {
 
         jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 460));
 
-        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaUsuario.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 120, -1));
@@ -603,6 +603,7 @@ public class frmEstudiante extends javax.swing.JInternalFrame {
     private void btnBuscarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCarreraActionPerformed
         buscar("carrera");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarCarrera(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "carrera_persona"));
     }//GEN-LAST:event_btnBuscarCarreraActionPerformed
 
@@ -634,8 +635,15 @@ public class frmEstudiante extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtEmailKeyReleased
 
     private void txtNumeroIdentificacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionKeyReleased
-        txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtNumeroIdentificacion.getText()));
-
+        switch((String) cmbTipoIdentificacion.getSelectedItem()){
+            case "CEDULA": 
+                txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtNumeroIdentificacion.getText()));
+                break;
+            case "RUC":
+                txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtNumeroIdentificacion.getText()));
+                break;           
+            default: 
+        }
     }//GEN-LAST:event_txtNumeroIdentificacionKeyReleased
 
     private void txaDireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaDireccionKeyReleased
@@ -657,13 +665,32 @@ public class frmEstudiante extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtPersona));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtPersona));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
 
     private void txtNumeroIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionActionPerformed
         txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosConEspacios(txtNumeroIdentificacion.getText()));
     }//GEN-LAST:event_txtNumeroIdentificacionActionPerformed
+
+    private void txtNumeroIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionKeyTyped
+switch((String) cmbTipoIdentificacion.getSelectedItem()){
+            
+            case "CEDULA": 
+                int maxTamanoCed = txtNumeroIdentificacion.getText().length();
+                if(maxTamanoCed >= 10){
+                    txtNumeroIdentificacion.setText(txtNumeroIdentificacion.getText().substring(0, maxTamanoCed - 1));
+                }                
+                break;
+            case "RUC":
+                int maxTamanoRUC = txtNumeroIdentificacion.getText().length();
+                if(maxTamanoRUC >= 13){
+                    txtNumeroIdentificacion.setText(txtNumeroIdentificacion.getText().substring(0, maxTamanoRUC - 1));
+                }    
+                break;
+            default: 
+                return;
+        }    }//GEN-LAST:event_txtNumeroIdentificacionKeyTyped
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
@@ -719,7 +746,7 @@ public class frmEstudiante extends javax.swing.JInternalFrame {
         map.put("telefonoFijo", txtTelefonoFijo.getText());
         map.put("telefonoCelular", txtTelefonoMovil.getText());
         map.put("correo", txtEmail.getText());
-        map.put("tipo", "ES");
+        map.put("tipo", "EST");
         map.put("formacionAcademica", txtFormacionAcademica.getText());
         map.put("informacionAdicional", txaInformacionAdicional.getText());
         map.put("tipoGeneral", "sn");
@@ -809,19 +836,10 @@ public class frmEstudiante extends javax.swing.JInternalFrame {
     private void llenarComboTipoIdentificacion() {
         controladorConsulta consulta = new controladorConsulta();
 
-        criterioBusqueda[0] = "TIPO IDENTIFICACION";//nombre de la tabla
+        criterioBusqueda[0] = "IDENTIFICACION";//nombre de la tabla
         criterioBusqueda[1] = "enumeracion";//tipo de consulta
         cmbTipoIdentificacion.setModel(consulta.consultarCombo(criterioBusqueda));
         codigoTipoDocumento = consulta.getCodigoCombo();
-    }
-
-    private void llenarComboTipoPersona() {
-        controladorConsulta consulta = new controladorConsulta();
-
-        criterioBusqueda[0] = "TP";//nombre de la tabla
-        criterioBusqueda[1] = "enumeracion";//tipo de consulta
-        //cmbTipoPersona.setModel(consulta.consultarCombo(criterioBusqueda));
-        codigoTipoPersona = consulta.getCodigoCombo();
     }
 
     private void llenarFiltro() {

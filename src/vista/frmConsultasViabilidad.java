@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-public class frmConsultas1 extends javax.swing.JDialog {
+public class frmConsultasViabilidad extends javax.swing.JDialog {
 
     TableRowSorter<TableModel> sorter;
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -20,7 +20,7 @@ public class frmConsultas1 extends javax.swing.JDialog {
 
     String[] nombresColmunas;
 
-    public frmConsultas1(java.awt.Frame parent, boolean modal) {
+    public frmConsultasViabilidad(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         datosTemporales = new String[3];
@@ -109,6 +109,7 @@ public class frmConsultas1 extends javax.swing.JDialog {
         });
         jp_consulta3.add(txt_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 530, -1));
 
+        txt_filtro.setBackground(new java.awt.Color(255, 255, 204));
         txt_filtro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txt_filtro.setPreferredSize(new java.awt.Dimension(150, 25));
         jp_consulta3.add(txt_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
@@ -226,14 +227,18 @@ public class frmConsultas1 extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmConsultas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmConsultasViabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmConsultas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmConsultasViabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmConsultas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmConsultasViabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmConsultas1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmConsultasViabilidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -242,7 +247,7 @@ public class frmConsultas1 extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                frmConsultas1 dialog = new frmConsultas1(new javax.swing.JFrame(), true);
+                frmConsultasViabilidad dialog = new frmConsultasViabilidad(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

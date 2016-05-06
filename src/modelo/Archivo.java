@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 public class Archivo {
 
+    // <editor-fold defaultstate="collapsed" desc="Declaracion de variables">
     private String _id;
     private int[] _idArchivos;
     private String _referencia;
@@ -23,7 +24,8 @@ public class Archivo {
     private PreparedStatement sentencia;
     private ResultSet resultadoQuery;
     private final String respuesta[] = new String[3];
-// <editor-fold defaultstate="collapsed" desc="Getters and Setters">
+// </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
 
     public String getId() {
         return _id;
@@ -114,13 +116,11 @@ public class Archivo {
     }
 
 // </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="Métodos">
+    // <editor-fold defaultstate="collapsed" desc="Métodos">
     public String[] crearActualizar(Archivo datos) {
-
         try {
             sql = "select *from sp_siged_documento_anexos_crear_actualizar(?, ?, ?, ?, ?, ?,?);";
             sentencia = Conexion.getConexion().prepareStatement(sql);
-
             sentencia.setString(1, datos.getAccion());
             sentencia.setInt(2, Integer.parseInt(datos.getId()));
             sentencia.setInt(3, Integer.parseInt(datos.getReferencia()));
@@ -145,7 +145,6 @@ public class Archivo {
     }
 
     public String[] modificarDescripcionArchivos(Archivo datos) {
-
         try {
             PostgreSQLInt4Array idArchivos = new PostgreSQLInt4Array(datos.getIdArchivos());
             PostgreSQLTextArray nombresArchivos = new PostgreSQLTextArray(datos.getNombresArchivos());
@@ -187,6 +186,7 @@ public class Archivo {
             sentencia.close();
             return respuesta[1];
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
             return null;
         }
     }

@@ -27,6 +27,9 @@ public class controladorConsulta {
     public ResultSet consultarDatos(String tabla, String tipo, String[] criterioBusqueda) {
         switch (tipo) {
             //muestra la informacion para llenar los grid
+             case "reporte":
+                sql = "select *from v_" + tabla + "_rpt;";
+                break;
             case "grid":
                 sql = "select *from v_" + tabla + "_grid;";
                 break;
@@ -152,6 +155,9 @@ public class controladorConsulta {
                 break;
             case "filtrar":
                 sql = "select *from v_" + criterioBusqueda[0] + "_combo where codigo = " + criterioBusqueda[2] + ";";
+                break;
+            case "tabla_reporte":
+                sql = "select *from v_" + criterioBusqueda[0] + "_rpt;";
                 break;
             default:
                 sql = "error";

@@ -5,8 +5,10 @@ import controlador.controladorConsulta;
 import controlador.controladorExcel;
 import controlador.controladorGrid;
 import controlador.controladorVariablesSesion;
+import java.awt.AWTEvent;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -121,11 +123,13 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtRucKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRucKeyTyped(evt);
+            }
         });
         jpRegistroUsuario.add(txtRuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
-        cmbTipoEmpresa.setBackground(new java.awt.Color(204, 204, 255));
-        cmbTipoEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTipoEmpresa.setBackground(new java.awt.Color(255, 255, 204));
         cmbTipoEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbTipoEmpresa.setPreferredSize(new java.awt.Dimension(150, 25));
         jpRegistroUsuario.add(cmbTipoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 220, -1));
@@ -177,7 +181,9 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
         jpRegistroUsuario.add(txtRazonSocial1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, -1, -1));
 
         txaActividadEconomica.setColumns(20);
+        txaActividadEconomica.setLineWrap(true);
         txaActividadEconomica.setRows(3);
+        txaActividadEconomica.setWrapStyleWord(true);
         txaActividadEconomica.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txaActividadEconomicaKeyReleased(evt);
@@ -293,7 +299,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
 
         jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 460));
 
-        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaUsuario.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 90, -1));
@@ -454,6 +460,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
 
     private void txtRucKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyReleased
         txtRuc.setText(controladorVariablesSesion.validarNumerosConEspacios(txtRuc.getText()));
+        
     }//GEN-LAST:event_txtRucKeyReleased
 
     private void txtNombreComercial1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreComercial1KeyReleased
@@ -491,9 +498,16 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtEmpresa));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtEmpresa));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
+
+    private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
+        int tamanoRUC = txtRuc.getText().length();
+        if(tamanoRUC >= 13){
+            txtRuc.setText(txtRuc.getText().substring(0, tamanoRUC - 1));
+        }
+    }//GEN-LAST:event_txtRucKeyTyped
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
@@ -514,7 +528,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
         return consulta.obtenerConsulta(tabla, controladorVariablesSesion.getInstance().getFiltrar(), criterioBusqueda);
     }
 
-   private void convertirAmayusculas(Component componente) {
+    private void convertirAmayusculas(Component componente) {
 
         if (componente instanceof JTextField) {
             JTextField text = (JTextField) componente;
@@ -560,7 +574,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
         ControladorEmpresa empresa = new ControladorEmpresa();
         empresa.eliminar(map);
     }
-    
+
     private void filtrar() {
         RowFilter<TableModel, Object> rf;
         try {
@@ -572,7 +586,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
         }
 
     }
-    
+
     private void formatearColumnas() {
         //Oculta la primera columna que corresponde al ID de la tabla
         jtEmpresa.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -580,7 +594,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
         jtEmpresa.getColumnModel().getColumn(0).setPreferredWidth(0);
 
     }
-    
+
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
         cmbTipoEmpresa.setSelectedIndex(0);
@@ -607,7 +621,7 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
         cmbTipoEmpresa.setModel(consulta.consultarCombo(criterioBusqueda));
         codigoEmpresa = consulta.getCodigoCombo();
     }
-    
+
     private void llenarEmpresa(ArrayList<Object> datos) {
         lblId.setText(String.valueOf(datos.get(0)));
         txtRuc.setText(String.valueOf(datos.get(1)));
@@ -634,11 +648,10 @@ public class frmEmpresa extends javax.swing.JInternalFrame {
         jtEmpresa.setRowSorter(sorter);
         jtEmpresa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         formatearColumnas();
-        
+
         llenarFiltro();
     }
 
-    
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Variables declaration - do not modify                     "> 
     // Variables declaration - do not modify//GEN-BEGIN:variables

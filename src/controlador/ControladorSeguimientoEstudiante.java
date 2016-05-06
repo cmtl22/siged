@@ -1,7 +1,13 @@
 package controlador;
 
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.SeguimientoEstudiante;
 
 public class ControladorSeguimientoEstudiante {
@@ -14,7 +20,8 @@ public class ControladorSeguimientoEstudiante {
 
     public boolean crearActualizar(Map datos, Object[] datosArchivos, int[] tamanioArchivos) {
         camposObligatorios = validarCamposObligatorios(datos);
-        if (camposObligatorios.equals("")) {
+        camposInvalidos = validarInformacion(datos);
+        if (camposObligatorios.equals("") && camposInvalidos.equals("")) {
 
             SeguimientoEstudiante seguimientoEstudiante = new SeguimientoEstudiante();
             seguimientoEstudiante.setAccion((String) datos.get("accion"));
@@ -35,7 +42,12 @@ public class ControladorSeguimientoEstudiante {
             controladorMensaje.getInstance().getMsgGuardar(respuesta[1]);
             bandera = controladorVariablesSesion.getInstance().validarRespuestaDB(respuesta[2]);
         } else {
-            controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
+            if (!camposObligatorios.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
+            }
+            if (!camposInvalidos.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposInvalidos(camposInvalidos);
+            }
         }
         return bandera;
     }
@@ -49,7 +61,7 @@ public class ControladorSeguimientoEstudiante {
     }
 
     public String validarCamposObligatorios(Map datos) {
-         camposObligatorios = "";
+        camposObligatorios = "";
         if (datos.get("id").equals("")) {
             camposObligatorios += "\nFalta el id";
 
@@ -58,15 +70,15 @@ public class ControladorSeguimientoEstudiante {
             camposObligatorios += "\nSeleccione el período";
 
         }
-        
+
         if (datos.get("fechaInicio").equals("")) {
             camposObligatorios += "\nSeleccione una fecha";
         }
-        
+
         if (datos.get("fechaFin").equals("")) {
             camposObligatorios += "\nSeleccione una fecha";
         }
-        
+
         if (datos.get("idEstudiante").equals("-1")) {
             camposObligatorios += "\nSeleccione el estudiante";
 
@@ -98,4 +110,30 @@ public class ControladorSeguimientoEstudiante {
         return camposObligatorios;
     }
 
+    private String validarInformacion(Map datos) {
+
+        camposInvalidos = "";
+        if (validarFechas((String) datos.get("fechaInicio"), (String) datos.get("fechaFin")) < 0) {
+            camposInvalidos += "Fechas incorrectas\n";
+
+        }
+        return camposInvalidos;
+    }
+
+    private int validarFechas(String strFechaInicio, String strFechaFin) {
+        try {
+            Calendar calFechaInicio = new GregorianCalendar();
+            Calendar calFechaFin = new GregorianCalendar();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            calFechaInicio.setTime(sdf.parse(strFechaInicio));
+            calFechaFin.setTime(sdf.parse(strFechaFin));
+
+            return calFechaFin.compareTo(calFechaInicio);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 1;
+    }
 }

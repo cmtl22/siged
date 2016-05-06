@@ -1,6 +1,5 @@
 package vista;
 
-import controlador.ControladorCarrera;
 import controlador.ControladorPeriodo;
 import controlador.controladorConsulta;
 import controlador.controladorVariablesSesion;
@@ -68,6 +67,7 @@ public class frmAbrirPeriodo extends javax.swing.JDialog {
         lblFechaFin.setText("Fecha de Finalización:");
         jpRegistroCronograma.add(lblFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
+        cmbPeriodo.setBackground(new java.awt.Color(255, 255, 204));
         cmbPeriodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbPeriodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -147,7 +147,7 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
         lblFiltro.setPreferredSize(new java.awt.Dimension(32, 25));
         jpRegistroEnumeración.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
-        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpRegistroEnumeración.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 110, -1));
@@ -243,7 +243,7 @@ public class frmConfiguraciones extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

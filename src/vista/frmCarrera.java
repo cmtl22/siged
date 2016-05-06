@@ -19,7 +19,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowFilter;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -29,7 +28,6 @@ public class frmCarrera extends javax.swing.JInternalFrame {
     //id de las claves foraneas
     Date fechaActual;
     private String idInstituto;//Foreign Key
-    private String idPersona;
     private String idCoordinador;
     private String accion;//para saber si estoy creando o actualizando (crear, actualizar)
     private String[] criterioBusqueda;
@@ -44,7 +42,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
     private void init() {
         accion = "crear";
         idInstituto = "-1";
-        idPersona = "-1";
+        idCoordinador = "-1";
         criterioBusqueda = new String[3];
         fechaActual = new Date();
         dtFecha.setDate(fechaActual);
@@ -192,6 +190,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
         lblFiltro.setPreferredSize(new java.awt.Dimension(35, 20));
         jpBusquedaAsignatura.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbFiltroActionPerformed(evt);
@@ -423,7 +422,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- // <editor-fold defaultstate="collapsed" desc="Eventos">     
+    // <editor-fold defaultstate="collapsed" desc="Eventos">     
     private void txtNumeroResolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroResolucionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroResolucionActionPerformed
@@ -435,7 +434,9 @@ public class frmCarrera extends javax.swing.JInternalFrame {
     private void btnInstitutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstitutoActionPerformed
         buscar("instituto");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarInstituto(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "instituto"));
+        if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) {
+            llenarInstituto(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "instituto"));
+        }
     }//GEN-LAST:event_btnInstitutoActionPerformed
 
     private void txtCriterioBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCriterioBusquedaActionPerformed
@@ -523,7 +524,9 @@ public class frmCarrera extends javax.swing.JInternalFrame {
     private void btnCoordinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCoordinadorActionPerformed
         buscar("coordinador");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarCoordinador(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
+        if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) {
+            llenarCoordinador(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
+        }
     }//GEN-LAST:event_btnCoordinadorActionPerformed
 
     private void txaDescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaDescripcionKeyReleased
@@ -533,13 +536,12 @@ public class frmCarrera extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtCarrera));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtCarrera));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
 
     // </editor-fold>     
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
-
     private void buscar(String tipo) {
         frmConsultas consulta = new frmConsultas(null, true);//instancia la el formulario con la ventana de busqueda
         consulta.consultar(tipo, "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
@@ -581,7 +583,7 @@ public class frmCarrera extends javax.swing.JInternalFrame {
         map.put("accion", accion);
         map.put("id", lblId.getText());
         map.put("idInstituto", idInstituto);
-        map.put("idPersona", idPersona);
+        map.put("idPersona", idCoordinador);
         map.put("nombre", txtNombre.getText());
         map.put("descripcion", txaDescripcion.getText());
         map.put("fecha", dateToString(dtFecha));
@@ -637,8 +639,8 @@ public class frmCarrera extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
-        idCoordinador="-1";
-        idInstituto="-1";
+        idCoordinador = "-1";
+        idInstituto = "-1";
         txaInstituto.setText("");
         if (component instanceof JTextField) {
 
@@ -656,15 +658,15 @@ public class frmCarrera extends javax.swing.JInternalFrame {
     }
 
     private void llenarCarrera(ArrayList<Object> datos) {
-        txaInstituto.setText("<html>" + String.valueOf(datos.get(2) + "</html>"));
         lblId.setText(String.valueOf(datos.get(0)));
         idInstituto = (String.valueOf(datos.get(1)));
         txaInstituto.setText("<html>" + String.valueOf(datos.get(2) + "</html>"));
-        txtCoordinador.setText(String.valueOf(datos.get(3) + " " + String.valueOf(datos.get(4))));
-        txtNombre.setText((String) datos.get(5));
-        txaDescripcion.setText((String) datos.get(6));
-        dtFecha.setDate(stringToJDateChooser((String) datos.get(7)));
-        txtNumeroResolucion.setText((String) datos.get(8));
+        idCoordinador = String.valueOf(datos.get(3));
+        txtCoordinador.setText(String.valueOf(datos.get(4) + " " + String.valueOf(datos.get(5))));
+        txtNombre.setText((String) datos.get(6));
+        txaDescripcion.setText((String) datos.get(7));
+        dtFecha.setDate(stringToJDateChooser((String) datos.get(8)));
+        txtNumeroResolucion.setText((String) datos.get(9));
     }
 
     private void llenarFiltro() {
@@ -686,12 +688,12 @@ public class frmCarrera extends javax.swing.JInternalFrame {
 
     private void llenarInstituto(ArrayList<Object> datos) {
         idInstituto = (String.valueOf(datos.get(0)));
-        txaInstituto.setText(String.valueOf("<html>"+datos.get(4)+"</html>"));
+        txaInstituto.setText(String.valueOf("<html>" + datos.get(4) + "</html>"));
 
     }
 
     private void llenarCoordinador(ArrayList<Object> datos) {
-        idPersona = (String.valueOf(datos.get(0)));
+        idCoordinador = (String.valueOf(datos.get(0)));
         txtCoordinador.setText(String.valueOf(datos.get(2)) + " " + String.valueOf(datos.get(1)));
     }
 

@@ -1,39 +1,20 @@
 package vista;
 
-import controlador.ControladorNotificacion;
 import controlador.controladorConfiguraciones;
 import controlador.controladorConsulta;
-import controlador.controladorGrid;
-import controlador.controladorReporte;
 import controlador.controladorVariablesSesion;
 import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 public class frmPrincipal extends javax.swing.JFrame {
 
-    private TableRowSorter<TableModel> sorter;
     private ImageIcon icon;
 
     public frmPrincipal() {
@@ -53,8 +34,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     private void init() {
-        jtNotificaciones.setVisible(false);
-        lblNotificaciones.setVisible(false);
         if (controladorVariablesSesion.getInstance().getNombreUsuario() == null) {
             icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_sesion_iniciar_48.png"));
             btnCerrarSesion.setIcon(icon);
@@ -79,22 +58,18 @@ public class frmPrincipal extends javax.swing.JFrame {
         criterioBusqueda[0] = "permisos";//nombre de la tabla
         criterioBusqueda[1] = "filtrar";//tipo de consulta
         criterioBusqueda[2] = controladorVariablesSesion.getInstance().getPerfilUsuario();//id del perfil
-        if (criterioBusqueda[2].equals("1")) {
-            habilitarNotificaciones();
-        }
         controladorConsulta consulta = new controladorConsulta();
         consulta.consultarCombo(criterioBusqueda);
         permisos = consulta.getCodigoCombo();
 
-        for (int i = 0; i < permisos.size(); i++) {
-            switch (permisos.get(i).toString()) {
+        for (Object permiso : permisos) {
+            switch (permiso.toString()) {
                 case "frmAcercamiento":
                     frmPrincipal.btnAcercamientos.setEnabled(true);
                     break;
                 case "frmAgenda":
                     frmPrincipal.btnAgenda.setEnabled(true);
                     break;
-
                 case "frmAsignatura":
                     frmPrincipal.btnAsignaturas.setEnabled(true);
                     break;
@@ -113,7 +88,6 @@ public class frmPrincipal extends javax.swing.JFrame {
                 case "frmConvenio":
                     frmPrincipal.btnConvenio.setEnabled(true);
                     break;
-
                 case "frmCronograma":
                     frmPrincipal.btnCronograma.setEnabled(true);
                     break;
@@ -143,47 +117,36 @@ public class frmPrincipal extends javax.swing.JFrame {
                 case "frmParametrizacion":
                     frmPrincipal.btnParametrizacion.setEnabled(true);
                     break;
-
                 case "frmPeriodoAcademico":
                     frmPrincipal.btnPeriodoAcademico.setEnabled(true);
                     break;
-
                 case "frmPermisos":
                     frmPrincipal.btnPermisos.setEnabled(true);
                     break;
-
                 case "frmReportes":
-                    frmPrincipal.btnReportes.setEnabled(true);
+                    frmPrincipal.mnReportes.setEnabled(true);
                     break;
-
                 case "frmReuniones":
                     frmPrincipal.btnReuniones.setEnabled(true);
                     break;
-
                 case "frmSeguimientoEstudiantes":
                     frmPrincipal.btnSeguimientoEstudiantes.setEnabled(true);
                     break;
-
                 case "frmSucursal":
                     frmPrincipal.btnSucursal.setEnabled(true);
                     break;
-
                 case "frmTutorAcademico":
                     frmPrincipal.btnTutorAcademico.setEnabled(true);
                     break;
-
                 case "frmTutorEmpresarial":
                     frmPrincipal.btnTutorEmpresarial.setEnabled(true);
                     break;
-
                 case "frmUsuarios":
                     frmPrincipal.btnUsuarios.setEnabled(true);
                     break;
-
                 case "frmViabilidad":
                     frmPrincipal.btnViabilidad.setEnabled(true);
                     break;
-
                 default:
                     frmPrincipal.btnAcercamientos.setEnabled(false);
                     frmPrincipal.btnAsignaturas.setEnabled(false);
@@ -202,7 +165,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                     frmPrincipal.btnParametrizacion.setEnabled(false);
                     frmPrincipal.btnPeriodoAcademico.setEnabled(false);
                     frmPrincipal.btnPermisos.setEnabled(false);
-                    frmPrincipal.btnReportes.setEnabled(false);
+                    frmPrincipal.mnReportes.setEnabled(false);
                     frmPrincipal.btnReuniones.setEnabled(false);
                     frmPrincipal.btnSeguimientoEstudiantes.setEnabled(false);
                     frmPrincipal.btnSucursal.setEnabled(false);
@@ -225,13 +188,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         dpContenedor = new javax.swing.JDesktopPane();
         jpFondo = new javax.swing.JPanel();
         lblLogo = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtNotificaciones = new javax.swing.JTable();
-        lblNotificaciones = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        btnEliminar = new javax.swing.JButton();
-        lblRegistros = new javax.swing.JLabel();
-        lblTotalRegistros = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         mnAdministracion = new javax.swing.JMenu();
@@ -314,64 +270,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_sistema.jpg"))); // NOI18N
-        jpFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 300, 900, 250));
-
-        jtNotificaciones.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jtNotificaciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jtNotificaciones.setGridColor(new java.awt.Color(0, 102, 153));
-        jtNotificaciones.setSelectionBackground(new java.awt.Color(255, 255, 0));
-        jtNotificaciones.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        jtNotificaciones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtNotificacionesMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jtNotificaciones);
-
-        jpFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 910, 210));
-
-        lblNotificaciones.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        lblNotificaciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNotificaciones.setText("NOTIFICACIONES");
-        lblNotificaciones.setPreferredSize(new java.awt.Dimension(100, 25));
-        jpFondo.add(lblNotificaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 180, -1));
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(300, 50));
-
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_eliminar_40.png"))); // NOI18N
-        btnEliminar.setToolTipText("Eliminar");
-        btnEliminar.setBorder(null);
-        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminar.setPreferredSize(new java.awt.Dimension(40, 40));
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnEliminar);
-
-        jpFondo.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 50, 50));
-
-        lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblRegistros.setText("Registros:");
-        lblRegistros.setPreferredSize(new java.awt.Dimension(60, 20));
-        jpFondo.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
-
-        lblTotalRegistros.setText("0");
-        lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jpFondo.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
+        jpFondo.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 930, 250));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("1.0.1");
@@ -576,8 +475,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnSeguimiento.add(btnReuniones);
 
         btnSeguimientoEstudiantes.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12)); // NOI18N
-        btnSeguimientoEstudiantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_estudiante_32.png"))); // NOI18N
-        btnSeguimientoEstudiantes.setText("Estudiantes");
+        btnSeguimientoEstudiantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_seguimiento_estudiante_32.png"))); // NOI18N
+        btnSeguimientoEstudiantes.setText("Seguimiento Estudiantes");
         btnSeguimientoEstudiantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSeguimientoEstudiantes.setEnabled(false);
         btnSeguimientoEstudiantes.addActionListener(new java.awt.event.ActionListener() {
@@ -660,7 +559,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         btnReportes.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12)); // NOI18N
         btnReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_reportes_32.png"))); // NOI18N
-        btnReportes.setText("Matriz Formación Dual");
+        btnReportes.setText("Reportes Dinamicos");
         btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReportes.setEnabled(false);
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
@@ -1017,10 +916,8 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCarrerasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        Map parametros = new HashMap();
-        parametros.put("p_numero_informe_principal", "SENESCYT-SFTT-001-2016");
-        controladorReporte reporte = new controladorReporte();
-        reporte.generarReporte("matriz_formacion_dual", parametros);
+        frmReportes reportes = new frmReportes();
+        reportes.setVisible(true);
 
     }//GEN-LAST:event_btnReportesActionPerformed
 
@@ -1048,16 +945,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnConfiguracionesActionPerformed
 
-    private void jtNotificacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtNotificacionesMouseClicked
-
-    }//GEN-LAST:event_jtNotificacionesMouseClicked
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        quitar();//elimina el registro seleccionado
-        llenarNotificaciones();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
-        cargarTotalRegistros();//carga el total de registros
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
     private void btnPeriodoAcademicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPeriodoAcademicoMouseClicked
         if (!validarFormularios()) {
             controladorVariablesSesion.getInstance().setContadorVentanas(1);
@@ -1081,6 +968,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             controladorVariablesSesion.getInstance().setContadorVentanas(1);
             frmPrincipal.jpEncabezado.setVisible(false);
             frmAutoridadesInstituto frm = new frmAutoridadesInstituto();
+            //frmPersonaInstituto frm = new frmPersonaInstituto();
             dpContenedor.add(frm);
             frm.setSize(dpContenedor.getSize());
             frm.setVisible(true);
@@ -1109,10 +997,10 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        Map parametros = new HashMap();
-        parametros.put("p_numero_informe_principal", "SENESCYT-SFTT-001-2016");
-        controladorReporte reporte = new controladorReporte();
-        reporte.generarReporte("viabilidad", parametros);
+        /*        Map parametros = new HashMap();
+         parametros.put("p_numero_informe_principal", "SENESCYT-SFTT-001-2016");
+         controladorReporte reporte = new controladorReporte();
+         reporte.generarReporte("viabilidad", parametros);*/
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -1122,11 +1010,11 @@ public class frmPrincipal extends javax.swing.JFrame {
             Desktop.getDesktop().open(informe);
 
             /*Map parametros = new HashMap();
-            parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
-            parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
-            parametros.put("p_condicion", "");
-            controladorReporte reporte = new controladorReporte();
-            reporte.generarReporte("segumiento_estudiantes", parametros);*/
+             parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
+             parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
+             parametros.put("p_condicion", "");
+             controladorReporte reporte = new controladorReporte();
+             reporte.generarReporte("segumiento_estudiantes", parametros);*/
         } catch (IOException ex) {
             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1136,13 +1024,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         try {
             File informe = new File("c:/seguimiento_estudiante_historial.pdf");
             Desktop.getDesktop().open(informe);
-            
+
             /*        Map parametros = new HashMap();
-            parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
-            parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
-            parametros.put("p_id_estudiante", 4);
-            controladorReporte reporte = new controladorReporte();
-            reporte.generarReporte("historial_segumiento_estudiantes_individual", parametros);*/
+             parametros.put("p_titulo", "REPORTE SEGUIMIENTO ESTUDIANTE");
+             parametros.put("p_cabecera", "SEGUIMIENTO ESTUDIANTE INDIVIDUAL");
+             parametros.put("p_id_estudiante", 4);
+             controladorReporte reporte = new controladorReporte();
+             reporte.generarReporte("historial_segumiento_estudiantes_individual", parametros);*/
         } catch (IOException ex) {
             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1155,44 +1043,6 @@ public class frmPrincipal extends javax.swing.JFrame {
 // </editor-fold >  
 
     // <editor-fold defaultstate="collapsed" desc="Metodos">    
-    private void cargarTotalRegistros() {
-        int total = jtNotificaciones.getRowCount();
-        lblTotalRegistros.setText(String.valueOf(total));
-    }
-
-    private void quitar() {
-        if (jtNotificaciones.getSelectedRow() != -1) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("id", jtNotificaciones.getValueAt(jtNotificaciones.getSelectedRow(), 0).toString());
-            ControladorNotificacion controladorNotificacion = new ControladorNotificacion();
-            controladorNotificacion.eliminar(map);
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Seleccione una notificación", "Seleccionar", 2);
-        }
-    }
-
-    private void habilitarNotificaciones() {
-        llenarNotificaciones();
-        cargarTotalRegistros();
-        jtNotificaciones.setVisible(true);
-        lblNotificaciones.setVisible(true);
-    }
-
-    private void llenarNotificaciones() {
-        jtNotificaciones.setModel(controladorGrid.getInstance().llenarGrid("notificaciones", "grid", null, true));
-        sorter = new TableRowSorter<>(jtNotificaciones.getModel());
-        jtNotificaciones.setRowSorter(sorter);
-        jtNotificaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        formatearColumnas();
-    }
-
-    private void formatearColumnas() {
-        //Oculta la primera columna que corresponde al ID de la tabla
-        jtNotificaciones.getColumnModel().getColumn(0).setMaxWidth(0);
-        jtNotificaciones.getColumnModel().getColumn(0).setMinWidth(0);
-        jtNotificaciones.getColumnModel().getColumn(0).setPreferredWidth(0);
-    }
-
     private boolean validarFormularios() {
         if (controladorVariablesSesion.getInstance().getContadorVentanas() >= controladorVariablesSesion.getInstance().getLimiteVentanas()) {
             return true;
@@ -1257,7 +1107,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     public static javax.swing.JMenuItem btnConvenio;
     public static javax.swing.JMenuItem btnCronograma;
     public static javax.swing.JMenuItem btnDirectivosContactos;
-    private javax.swing.JButton btnEliminar;
     public static javax.swing.JMenuItem btnEmpresa;
     public static javax.swing.JMenuItem btnEncuesta;
     public static javax.swing.JMenuItem btnEntrevista;
@@ -1284,20 +1133,14 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JPanel jpEncabezado;
     private javax.swing.JPanel jpFondo;
-    private javax.swing.JTable jtNotificaciones;
     private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblNombreUsuario;
-    private javax.swing.JLabel lblNotificaciones;
-    private javax.swing.JLabel lblRegistros;
-    private javax.swing.JLabel lblTotalRegistros;
     private javax.swing.JMenu mnAdministracion;
     private javax.swing.JMenu mnConfiguracion;
     private javax.swing.JMenu mnLegalizacion;
-    private javax.swing.JMenu mnReportes;
+    public static javax.swing.JMenu mnReportes;
     private javax.swing.JMenu mnSeguimiento;
     // End of variables declaration//GEN-END:variables
 // </editor-fold >    

@@ -1,8 +1,16 @@
 package controlador;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import modelo.Persona;
 
 public class ControladorPersona {
@@ -13,20 +21,19 @@ public class ControladorPersona {
     boolean bandera;
     private String[] respuesta;
 //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="Métodos">
     public ControladorPersona() {
         this.bandera = false;
         this.respuesta = new String[3];
-    }    
-    
+    }
+
     public boolean crearActualizar(Map datosPersona) {
-        
+
         camposObligatorios = validarCamposObligatorios(datosPersona);
         camposInvalidos = validarInformacion(datosPersona);
-        
         if (camposObligatorios.equals("") && camposInvalidos.equals("")) {
-            
+
             Persona persona = new Persona();
             persona.setAccion((String) datosPersona.get("accion"));
             persona.setId((String) datosPersona.get("id"));
@@ -45,32 +52,34 @@ public class ControladorPersona {
             persona.setInformacionAdicional((String) datosPersona.get("informacionAdicional"));
             persona.setTipoGeneral((String) datosPersona.get("tipoGeneral"));
             persona.setGenero((String) datosPersona.get("genero"));
-            
 
-            
             respuesta = persona.crearActualizar(persona);
-            
+
             controladorMensaje.getInstance().getMsgGuardar(respuesta[1]);
             return bandera = controladorVariablesSesion.getInstance().validarRespuestaDB(respuesta[2]);
         } else {
-            if(!camposObligatorios.equals("")) controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
-            if(!camposInvalidos.equals("")) controladorMensaje.getInstance().getMsgCamposInvalidos(camposInvalidos);
+            if (!camposObligatorios.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
+            }
+            if (!camposInvalidos.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposInvalidos(camposInvalidos);
+            }
         }
         return bandera;
-        
+
     }
-    
+
     public void eliminar(Map datos) {
-        
+
         Persona persona = new Persona();
         persona.setId((String) datos.get("id"));
         controladorMensaje.getInstance().getMsgEliminar(persona.eliminar(persona));
-        
+
     }
-    
+
     public String validarCamposObligatorios(Map datosPersona) {
         camposObligatorios = "";
-        
+
         if (datosPersona.get("idCarreraEmpresa").equals("-1")) {
             camposObligatorios += "Seleccione una Empresa\n";
         }
@@ -104,28 +113,47 @@ public class ControladorPersona {
         if (datosPersona.get("formacionAcademica").equals("")) {
             camposObligatorios += "Ingrese los Datos de Formación Académica\n";
         }
-        
+
         return camposObligatorios;
     }
-    
+
     private String validarInformacion(Map datosPersona) {
-        
+
         camposInvalidos = "";
-        if (!validarCedula((String) datosPersona.get("numeroIdentificacion")) && datosPersona.get("tipoIdentificacion").equals("CEDULA")) {
+        if (!validarCedula((String) datosPersona.get("numeroIdentificacion")) && datosPersona.get("tipoIdentificacion").equals("CED")) {
             camposInvalidos += "No es un Formato de Cédula Aceptado\n";
-            
+
         }
         if (!validarEmail((String) datosPersona.get("correo"))) {
             camposInvalidos += "No es un formato de Correo Electrónico Aceptado\n";
-            
+
         }
         if (!validarRuc((String) datosPersona.get("numeroIdentificacion")) && datosPersona.get("tipoIdentificacion").equals("RUC")) {
             camposInvalidos += "No es un Formato de RUC Aceptado\n";
-            
+
+        }
+        if (!validarFechaNacimiento((String) datosPersona.get("fechaNacimiento"))) {
+            camposInvalidos += "La fecha de nacimiento debe ser menor\n";
+
         }
         return camposInvalidos;
     }
-    
+
+    private boolean validarFechaNacimiento(String strFechaNacimiento) {
+        try {
+            Calendar calFechaActual = new GregorianCalendar();
+            Calendar calFechaNacimiento = new GregorianCalendar();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            calFechaNacimiento.setTime(sdf.parse(strFechaNacimiento));
+            calFechaActual.add(Calendar.YEAR, -16);
+            return calFechaActual.after(calFechaNacimiento);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
     public boolean validarCedula(String num_identificacion) {
         boolean cedulaCorrecta;
         try {
@@ -137,8 +165,8 @@ public class ControladorPersona {
                     cedula = cedula + num_identificacion.charAt(x);
                 }
             }
-            
-            if (cedula.length() == 10) // ConstantesApp.LongitudCedula
+
+            if (num_identificacion.length() == 10) // ConstantesApp.LongitudCedula
             {
                 int tercerDigito = Integer.parseInt(cedula.substring(2, 3));
                 if (tercerDigito < 6) {
@@ -152,7 +180,7 @@ public class ControladorPersona {
                         digito = Integer.parseInt(cedula.substring(i, i + 1)) * coefValCedula[i];
                         suma += ((digito % 10) + (digito / 10));
                     }
-                    
+
                     if ((suma % 10 == 0) && (suma % 10 == verificador)) {
                         cedulaCorrecta = true;
                     } else if ((10 - (suma % 10)) == verificador) {
@@ -172,31 +200,32 @@ public class ControladorPersona {
             System.out.println("Una excepcion ocurrio en el proceso de validadcion");
             cedulaCorrecta = false;
         }
-        
+
         if (!cedulaCorrecta) {
             System.out.println("La Cédula ingresada es Incorrecta");
         }
         return cedulaCorrecta;
     }
-    
+
     private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-    
+
     public boolean validarEmail(String email) {
-        
+
         // Compiles the given regular expression into a pattern.
         Pattern pattern = Pattern.compile(PATTERN_EMAIL);
-        
+
         // Match the given input against this pattern
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
-        
+
     }
-    
+
     public boolean validarRuc(String ruc) {
         boolean rucCorrecto;
         try {
             String Ruc = "";
+            String finalRUC = ruc.substring(10, 13);
             if (ruc.length() == 10) {
                 Ruc = ruc;
             } else {
@@ -204,8 +233,8 @@ public class ControladorPersona {
                     Ruc = Ruc + ruc.charAt(x);
                 }
             }
-            
-            if (Ruc.length() == 10) // ConstantesApp.LongitudCedula
+
+            if (ruc.length() == 13 && finalRUC.equals("001")) // ConstantesApp.LongitudCedula
             {
                 int tercerDigito = Integer.parseInt(Ruc.substring(2, 3));
                 if (tercerDigito < 6) {
@@ -219,7 +248,7 @@ public class ControladorPersona {
                         digito = Integer.parseInt(Ruc.substring(i, i + 1)) * coefValCedula[i];
                         suma += ((digito % 10) + (digito / 10));
                     }
-                    
+
                     if ((suma % 10 == 0) && (suma % 10 == verificador)) {
                         rucCorrecto = true;
                     } else if ((10 - (suma % 10)) == verificador) {
@@ -239,12 +268,12 @@ public class ControladorPersona {
             System.out.println("Una excepcion ocurrio en el proceso de validadcion");
             rucCorrecto = false;
         }
-        
+
         if (!rucCorrecto) {
             System.out.println("La Cédula ingresada es Incorrecta");
         }
         return rucCorrecto;
     }
-    
+
 //</editor-fold>
 }

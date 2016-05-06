@@ -109,6 +109,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
         lblFiltro.setPreferredSize(new java.awt.Dimension(35, 20));
         jpBusquedaAsignatura.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpBusquedaAsignatura.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 120, 23));
 
@@ -388,7 +389,10 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
     private void btnCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarreraActionPerformed
         buscar("carrera");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarCarrera(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "carrera"));
+        if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) {
+            llenarCarrera(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "carrera"));
+        }
+
     }//GEN-LAST:event_btnCarreraActionPerformed
 
     private void txtNombreAsignaturaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreAsignaturaKeyReleased
@@ -481,13 +485,12 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtAsignatura));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtAsignatura));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
-    
+
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
-
     private void buscar(String tabla) {
         frmConsultas consulta = new frmConsultas(null, true);//instancia la el formulario con la ventana de busqueda
         consulta.consultar(tabla, "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
@@ -570,7 +573,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
-        idCarrera="-1";
+        idCarrera = "-1";
         if (component instanceof JTextField) {
 
             JTextField text = (JTextField) component;
@@ -615,7 +618,7 @@ public class frmAsignatura extends javax.swing.JInternalFrame {
 
     private void llenarCarrera(ArrayList<Object> datos) {
         idCarrera = (String.valueOf(datos.get(0)));
-        txtCarrera.setText(String.valueOf(datos.get(5)));
+        txtCarrera.setText(String.valueOf(datos.get(6)));
 
     }
 

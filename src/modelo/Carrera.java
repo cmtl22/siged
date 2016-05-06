@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Carrera {
+    // <editor-fold defaultstate="collapsed" desc="Declaracion de variables">
 
     private String _id;
     private String _idInstituto;
@@ -20,8 +21,9 @@ public class Carrera {
     PreparedStatement sentencia;
     ResultSet resultadoQuery;
     private final String respuesta[] = new String[3];
-
+// </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
+
     public String getId() {
         return _id;
     }
@@ -77,7 +79,7 @@ public class Carrera {
     public void setAccion(String accion) {
         this.accion = accion;
     }
-   
+
     public String getIdPersona() {
         return _idPersona;
     }
@@ -85,8 +87,9 @@ public class Carrera {
     public void setIdPersona(String _idPersona) {
         this._idPersona = _idPersona;
     }
-     // </editor-fold>
-    
+
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Métodos">
     public String[] crearActualizar(Carrera datos) {
 
         try {
@@ -95,8 +98,8 @@ public class Carrera {
 
             sentencia.setString(1, datos.getAccion());
             sentencia.setInt(2, Integer.parseInt(datos.getId()));
-            sentencia.setInt(3, Integer.parseInt(datos.getIdInstituto()));
-            sentencia.setInt(4, Integer.parseInt(datos.getIdPersona()));
+            sentencia.setInt(3, Integer.parseInt(datos.getIdPersona()));
+            sentencia.setInt(4, Integer.parseInt(datos.getIdInstituto()));
             sentencia.setString(5, datos.getNombre());
             sentencia.setString(6, datos.getDescripcion());
             sentencia.setString(7, datos.getFecha());
@@ -133,5 +136,5 @@ public class Carrera {
             return null;
         }
     }
-
+// </editor-fold>
 }

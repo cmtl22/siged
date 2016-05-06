@@ -29,6 +29,7 @@ import static vista.frmCronograma.cmbPeriodo;
 public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
 // <editor-fold defaultstate="collapsed" desc="Declaracion de Variables"> 
     //id de las claves foraneas
+
     Date fechaActual;
     private String idEstudiante = "-1";//Foreign Key
     private String idTutorEmpresarial = "-1";//Foreign Key
@@ -143,6 +144,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         btnNuevo1 = new javax.swing.JButton();
 
         setTitle("SEGUIMIENTO ESTUDIANTE");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_seguimiento_estudiante_32.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(945, 535));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -177,6 +179,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         lblNotaInstituto.setText("Nota Instituto:");
         jpRegistroSeguimientoEstudiante.add(lblNotaInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
 
+        cmbNivel.setBackground(new java.awt.Color(255, 255, 204));
         cmbNivel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         cmbNivel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpRegistroSeguimientoEstudiante.add(cmbNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 110, 25));
@@ -203,8 +206,8 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         });
         jpRegistroSeguimientoEstudiante.add(txtEmpresaSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 270, -1));
 
+        cmbPeriodo.setBackground(new java.awt.Color(255, 255, 204));
         cmbPeriodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmbPeriodo.setEnabled(false);
         cmbPeriodo.setPreferredSize(new java.awt.Dimension(28, 25));
         jpRegistroSeguimientoEstudiante.add(cmbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 270, -1));
 
@@ -458,6 +461,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         lblFiltro.setPreferredSize(new java.awt.Dimension(35, 20));
         jpBusquedaSeguimientoEstudiante.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 10, -1, -1));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(62, 25));
         jpBusquedaSeguimientoEstudiante.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 110, -1));
@@ -605,7 +609,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
 
         setBounds(0, 0, 975, 615);
     }// </editor-fold>//GEN-END:initComponents
-// <editor-fold defaultstate="collapsed" desc="Eventos">    
+    // <editor-fold defaultstate="collapsed" desc="Eventos">    
     private void txtTutorAcademicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTutorAcademicoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTutorAcademicoActionPerformed
@@ -698,6 +702,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
     private void btnEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstudianteActionPerformed
         buscar("estudiante", "grid");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarEstudiante(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona", controladorVariablesSesion.getInstance().getFiltrar()));
     }//GEN-LAST:event_btnEstudianteActionPerformed
 
@@ -705,32 +710,26 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         criterioBusqueda[0] = idEmpresaSucursal;
         buscar("tutor_empresarial", "grid");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarTutorEmpresarial(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona", controladorVariablesSesion.getInstance().getFiltrar()));
     }//GEN-LAST:event_btnTutorEmpresarialActionPerformed
 
     private void btnTutorAcademicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutorAcademicoActionPerformed
         buscar("tutor_academico", "grid");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals(""))
         llenarTutorAcademico(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona", controladorVariablesSesion.getInstance().getFiltrar()));
     }//GEN-LAST:event_btnTutorAcademicoActionPerformed
 
     private void btnEmpresaSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresaSucursalActionPerformed
         buscar("empresa_sucursal", "grid");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarEmpresaSucursal(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresa_sucursal", controladorVariablesSesion.getInstance().getFiltrar()));
     }//GEN-LAST:event_btnEmpresaSucursalActionPerformed
 
     private void btnAdjuntarAnexosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarAnexosActionPerformed
-        int fila = jtSeguimientoEstudiante.getSelectedRow();
-        if (fila != -1) {
-            criterioBusqueda[0] = jtSeguimientoEstudiante.getValueAt(fila, 0).toString();
-            criterioBusqueda[1] = "S";//tipo de documento anexo
-            criterioBusqueda[2] = "Seguimiento Estudiante";//descripcion de los anexos
-            frmDocumentoAnexos frm = new frmDocumentoAnexos(null, true, criterioBusqueda);
-            frm.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Seleccione un Documento", "Seleccionar", 2);
-        }
+        consultarDocumentoAnexos();
     }//GEN-LAST:event_btnAdjuntarAnexosActionPerformed
 
     private void txtNotaInstitutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNotaInstitutoKeyReleased
@@ -761,7 +760,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNuevo1ActionPerformed
 
     // </editor-fold>
-// <editor-fold defaultstate="collapsed" desc="Metodos"> 
+    // <editor-fold defaultstate="collapsed" desc="Metodos"> 
     private boolean calcularPromedio() {
         double notaEmpresa = 0.0;
         double notaInstituto = 0.0;
@@ -856,21 +855,12 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         int fila = jtSeguimientoEstudiante.getSelectedRow();
         if (fila != -1) {
             criterioBusqueda[0] = jtSeguimientoEstudiante.getValueAt(fila, 0).toString();
-            criterioBusqueda[1] = "S";
-            consultarDocumentoAnexos(criterioBusqueda);
+            criterioBusqueda[1] = "S";//tipo de documento anexo
+            criterioBusqueda[2] = "Seguimiento Estudiante";//descripcion de los anexos
+            frmDocumentoAnexos frm = new frmDocumentoAnexos(null, true, criterioBusqueda);
+            frm.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(rootPane, "seleccione un registro");
-        }
-    }
-
-    private void consultarDocumentoAnexos(String[] criterioBusqueda) {
-        try {
-            frmDocumentoAnexos documentoAnexos = new frmDocumentoAnexos(null, true, criterioBusqueda);
-
-            documentoAnexos.setVisible(true);
-
-        } catch (Exception ex) {
-            JOptionPane.showConfirmDialog(null, ex.getMessage(), "Error Buscar Subgrupos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un Documento", "Seleccionar", 2);
         }
     }
 
@@ -948,7 +938,9 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         criterioBusqueda[0] = "periodo";
         criterioBusqueda[1] = "tabla";
         cmbPeriodo.setModel(consulta.consultarCombo(criterioBusqueda));
-        cmbPeriodo.setSelectedIndex(1);
+        if (cmbPeriodo.getItemCount() > 1) {
+            cmbPeriodo.setSelectedIndex(1);
+        }
         codigoPeriodo = consulta.getCodigoCombo();
     }
 
@@ -1001,7 +993,7 @@ public class frmSeguimientoEstudiante extends javax.swing.JInternalFrame {
         idEmpresaSucursal = (String.valueOf(datos.get(0)));
         txtEmpresaSucursal.setText(String.valueOf(datos.get(3)));
     }
-    
+
     public Date stringToJDateChooser(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String strFecha = fecha;

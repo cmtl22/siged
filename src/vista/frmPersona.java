@@ -176,8 +176,7 @@ public class frmPersona extends javax.swing.JInternalFrame {
         });
         jpRegistroUsuario.add(txtNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 230, -1));
 
-        cmbTipoIdentificacion.setBackground(new java.awt.Color(204, 204, 255));
-        cmbTipoIdentificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTipoIdentificacion.setBackground(new java.awt.Color(255, 255, 204));
         cmbTipoIdentificacion.setToolTipText("");
         cmbTipoIdentificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbTipoIdentificacion.setPreferredSize(new java.awt.Dimension(150, 25));
@@ -448,7 +447,7 @@ public class frmPersona extends javax.swing.JInternalFrame {
 
         jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
-        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaUsuario.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 120, -1));
@@ -597,6 +596,7 @@ public class frmPersona extends javax.swing.JInternalFrame {
     private void btnBuscarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCarreraActionPerformed
         buscar("carrera");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarCarrera(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "carrera"));
     }//GEN-LAST:event_btnBuscarCarreraActionPerformed
 

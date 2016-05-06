@@ -196,6 +196,7 @@ public class frmAsignarPermisos extends javax.swing.JInternalFrame {
 
         jpBusquedaRol.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 440, 440));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaRol.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 120, -1));

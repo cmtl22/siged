@@ -140,8 +140,8 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         jLabel10.setText("*");
         jpRegistroEncuesta.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 10, -1));
 
+        cmbPeriodo.setBackground(new java.awt.Color(255, 255, 204));
         cmbPeriodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmbPeriodo.setEnabled(false);
         cmbPeriodo.setPreferredSize(new java.awt.Dimension(28, 25));
         jpRegistroEncuesta.add(cmbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 260, -1));
 
@@ -176,6 +176,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
 
         jpBusquedaEntrevista.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 440, 460));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaEntrevista.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 150, -1));
@@ -299,7 +300,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
 
         pack();
@@ -328,7 +329,7 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-    if (controladorVariablesSesion.getInstance().eliminar(lblId.getText()) == 0) {
+        if (controladorVariablesSesion.getInstance().eliminar(lblId.getText()) == 0) {
             accion = "crear";
             eliminar();//elimina el registro seleccionado
             llenarGrid(tipo_consulta);//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
@@ -488,7 +489,9 @@ public class frmEncuesta extends javax.swing.JInternalFrame {
         criterioBusqueda[0] = "periodo";
         criterioBusqueda[1] = "tabla";
         cmbPeriodo.setModel(consulta.consultarCombo(criterioBusqueda));
-        cmbPeriodo.setSelectedIndex(1);
+        if (cmbPeriodo.getItemCount() > 1) {
+            cmbPeriodo.setSelectedIndex(1);
+        }
         codigoPeriodo = consulta.getCodigoCombo();
     }
 

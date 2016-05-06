@@ -7,6 +7,7 @@ import controlador.controladorGrid;
 import controlador.controladorVariablesSesion;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -195,6 +196,11 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         jpRegistroUsuario.add(lblClave5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 50, -1));
 
         txtCanton.setPreferredSize(new java.awt.Dimension(225, 25));
+        txtCanton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantonActionPerformed(evt);
+            }
+        });
         txtCanton.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCantonKeyReleased(evt);
@@ -280,6 +286,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         });
         jpRegistroUsuario.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, -1, -1));
 
+        cmbTipo.setBackground(new java.awt.Color(255, 255, 204));
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         cmbTipo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbTipo.setPreferredSize(new java.awt.Dimension(100, 25));
@@ -362,7 +369,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
         lblClave12.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroUsuario.add(lblClave12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 120, -1));
 
-        cmbPais.setBackground(new java.awt.Color(204, 204, 255));
+        cmbPais.setBackground(new java.awt.Color(255, 255, 204));
         cmbPais.setToolTipText("");
         cmbPais.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbPais.setPreferredSize(new java.awt.Dimension(220, 25));
@@ -403,6 +410,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
 
         jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 460));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaUsuario.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 90, -1));
@@ -564,6 +572,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
     private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
         buscar("empresa");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarEmpresa(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresa"));
     }//GEN-LAST:event_btnPersonaActionPerformed
 
@@ -584,7 +593,10 @@ public class frmSucursal extends javax.swing.JInternalFrame {
 
     private void txtCiudadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCiudadKeyReleased
         convertirAmayusculas(txtCiudad);
-        txtCiudad.setText(controladorVariablesSesion.validarLetrasConEspacios(txtCiudad.getText()));
+      
+            
+            txtCiudad.setText(controladorVariablesSesion.validarLetrasConEspacios(txtCiudad.getText()));
+           
     }//GEN-LAST:event_txtCiudadKeyReleased
 
     private void txtSectorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSectorKeyReleased
@@ -618,6 +630,10 @@ public class frmSucursal extends javax.swing.JInternalFrame {
     private void txtProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProvinciaActionPerformed
        
     }//GEN-LAST:event_txtProvinciaActionPerformed
+
+    private void txtCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantonActionPerformed
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
@@ -743,7 +759,7 @@ public class frmSucursal extends javax.swing.JInternalFrame {
     private void llenarComboTipos() {
         controladorConsulta consulta = new controladorConsulta();
 
-        criterioBusqueda[0] = "TIPO EMPRESA";
+        criterioBusqueda[0] = "EMPRESA";
         criterioBusqueda[1] = "enumeracion";
         cmbTipo.setModel(consulta.consultarCombo(criterioBusqueda));
         codigoTipo = consulta.getCodigoCombo();

@@ -49,7 +49,7 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         accion = "crear";
         criterioBusqueda = new String[2];
         idEmpresaSucursal = "-1";
-        tipoGeneral = "TIPO DIRECTIVO";
+        tipoGeneral = "DIRECTIVO";
         llenarGrid();
         llenarComboTipoIdentificacion();
         llenarComboTipoPersona();
@@ -164,8 +164,7 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         });
         jpRegistroUsuario.add(txtNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 230, -1));
 
-        cmbTipoIdentificacion.setBackground(new java.awt.Color(204, 204, 255));
-        cmbTipoIdentificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTipoIdentificacion.setBackground(new java.awt.Color(255, 255, 204));
         cmbTipoIdentificacion.setToolTipText("");
         cmbTipoIdentificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbTipoIdentificacion.setPreferredSize(new java.awt.Dimension(120, 25));
@@ -305,6 +304,9 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNumeroIdentificacionKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroIdentificacionKeyTyped(evt);
+            }
         });
         jpRegistroUsuario.add(txtNumeroIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
 
@@ -392,8 +394,7 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         lblPersona8.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroUsuario.add(lblPersona8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 10, -1));
 
-        cmbTipoPersonaEmpresa.setBackground(new java.awt.Color(204, 204, 255));
-        cmbTipoPersonaEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTipoPersonaEmpresa.setBackground(new java.awt.Color(255, 255, 204));
         cmbTipoPersonaEmpresa.setToolTipText("");
         cmbTipoPersonaEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbTipoPersonaEmpresa.setPreferredSize(new java.awt.Dimension(150, 25));
@@ -410,8 +411,7 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         lblPersona15.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroUsuario.add(lblPersona15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 10, -1));
 
-        cmbGenero.setBackground(new java.awt.Color(204, 204, 255));
-        cmbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbGenero.setBackground(new java.awt.Color(255, 255, 204));
         cmbGenero.setToolTipText("");
         cmbGenero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbGenero.setPreferredSize(new java.awt.Dimension(110, 25));
@@ -451,7 +451,7 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
 
         jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 460));
 
-        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaUsuario.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 120, -1));
@@ -612,9 +612,10 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnBuscarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEmpresaActionPerformed
-        buscar("empresa_sucursal_acercamiento");//abre una ventana de busqueda
+        buscar("empresa_sucursal");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarCarrera(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresas_viabilidad"));
+        if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
+            llenarCarrera(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresa_sucursal"));
     }//GEN-LAST:event_btnBuscarEmpresaActionPerformed
 
     private void txtNombrePersonaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePersonaKeyReleased
@@ -645,8 +646,15 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtEmailKeyReleased
 
     private void txtNumeroIdentificacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionKeyReleased
-        txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtNumeroIdentificacion.getText()));
-
+        switch ((String) cmbTipoIdentificacion.getSelectedItem()) {
+            case "CEDULA":
+                txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtNumeroIdentificacion.getText()));
+                break;
+            case "RUC":
+                txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtNumeroIdentificacion.getText()));
+                break;
+            default:
+        }
     }//GEN-LAST:event_txtNumeroIdentificacionKeyReleased
 
     private void txaDireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaDireccionKeyReleased
@@ -668,13 +676,33 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtPersona));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtPersona));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
 
     private void txtNumeroIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionActionPerformed
         txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosConEspacios(txtNumeroIdentificacion.getText()));
     }//GEN-LAST:event_txtNumeroIdentificacionActionPerformed
+
+    private void txtNumeroIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionKeyTyped
+        switch ((String) cmbTipoIdentificacion.getSelectedItem()) {
+
+            case "CEDULA":
+                int maxTamanoCed = txtNumeroIdentificacion.getText().length();
+                if (maxTamanoCed >= 10) {
+                    txtNumeroIdentificacion.setText(txtNumeroIdentificacion.getText().substring(0, maxTamanoCed - 1));
+                }
+                break;
+            case "RUC":
+                int maxTamanoRUC = txtNumeroIdentificacion.getText().length();
+                if (maxTamanoRUC >= 13) {
+                    txtNumeroIdentificacion.setText(txtNumeroIdentificacion.getText().substring(0, maxTamanoRUC - 1));
+                }
+                break;
+            default:
+                return;
+        }
+    }//GEN-LAST:event_txtNumeroIdentificacionKeyTyped
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
@@ -788,7 +816,7 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         cmbTipoIdentificacion.setSelectedIndex(0);
         cmbGenero.setSelectedIndex(0);
         cmbTipoPersonaEmpresa.setSelectedIndex(0);
-        
+
         if (component instanceof JTextField) {
 
             JTextField text = (JTextField) component;
@@ -822,7 +850,7 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
     private void llenarComboTipoIdentificacion() {
         controladorConsulta consulta = new controladorConsulta();
 
-        criterioBusqueda[0] = "TIPO IDENTIFICACION";//nombre de la tabla
+        criterioBusqueda[0] = "IDENTIFICACION";//nombre de la tabla
         criterioBusqueda[1] = "enumeracion";//tipo de consulta
         cmbTipoIdentificacion.setModel(consulta.consultarCombo(criterioBusqueda));
         codigoTipoDocumento = consulta.getCodigoCombo();
@@ -850,7 +878,7 @@ public class frmDirectivosYContactos extends javax.swing.JInternalFrame {
         sorter = new TableRowSorter<>(jtPersona.getModel());
         jtPersona.setRowSorter(sorter);
         jtPersona.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        formatearColumnas();        
+        formatearColumnas();
         llenarFiltro();
     }
 

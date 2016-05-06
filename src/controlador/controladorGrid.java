@@ -89,14 +89,14 @@ public class controladorGrid {
             modelo = (new DefaultTableModel(
                     nombresColmunas, 0) {
 
-                Class[] types = new Class[]{
-                    java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
-                };
+                        Class[] types = new Class[]{
+                            java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
+                        };
 
-                public Class getColumnClass(int columnIndex) {
-                    return types[columnIndex];
-                }
-            });
+                        public Class getColumnClass(int columnIndex) {
+                            return types[columnIndex];
+                        }
+                    });
 
             ArrayList<Object> datosTabla;
             while (resultado.next()) {
@@ -125,6 +125,55 @@ public class controladorGrid {
         return modelo;
     }
 
+    public DefaultTableModel llenarGridCargos() {
+
+        controladorConsulta consultaClass = new controladorConsulta();
+        DefaultTableModel modelo = null;
+        try {
+            ResultSet resultado;
+
+            resultado = consultaClass.consultarDatos("cargos", "grid", null);
+
+            int numCol = consultaClass.getNumColumnas();
+            nombresColmunas = new String[numCol];
+            nombresColmunas = consultaClass.getNombColumnas();
+
+            modelo = (new DefaultTableModel(
+                    nombresColmunas, 0) {
+
+                        Class[] types = new Class[]{
+                            java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                        };
+
+                        public Class getColumnClass(int columnIndex) {
+                            return types[columnIndex];
+                        }
+                    });
+
+            ArrayList<Object> datosTabla;
+            while (resultado.next()) {
+                //          JOptionPane.showMessageDialog(null,"id: "+ resultado.getObject(1));
+                datosTabla = new ArrayList();
+                if (resultado.getObject(1) != null) {
+
+                    datosTabla.add(resultado.getObject(1));
+                    datosTabla.add(resultado.getObject(2));
+                    datosTabla.add(resultado.getObject(3));
+                } else {
+
+                    datosTabla.add("0");
+                    datosTabla.add("SN");
+                    datosTabla.add(true);
+                }
+
+                modelo.addRow(arrayListToArray(datosTabla));
+            }
+        } catch (Exception ex) {
+
+        }
+        return modelo;
+    }
+
     public DefaultTableModel llenarGridEntidadesRegulacion() {
 
         controladorConsulta consultaClass = new controladorConsulta();
@@ -141,14 +190,14 @@ public class controladorGrid {
             modelo = (new DefaultTableModel(
                     nombresColmunas, 0) {
 
-                Class[] types = new Class[]{
-                    java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
-                };
+                        Class[] types = new Class[]{
+                            java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                        };
 
-                public Class getColumnClass(int columnIndex) {
-                    return types[columnIndex];
-                }
-            });
+                        public Class getColumnClass(int columnIndex) {
+                            return types[columnIndex];
+                        }
+                    });
 
             ArrayList<Object> datosTabla;
             while (resultado.next()) {
@@ -190,14 +239,14 @@ public class controladorGrid {
             modelo = (new DefaultTableModel(
                     nombresColmunas, 0) {
 
-                Class[] types = new Class[]{
-                    java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
-                };
+                        Class[] types = new Class[]{
+                            java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                        };
 
-                public Class getColumnClass(int columnIndex) {
-                    return types[columnIndex];
-                }
-            });
+                        public Class getColumnClass(int columnIndex) {
+                            return types[columnIndex];
+                        }
+                    });
 
             ArrayList<Object> datosTabla;
             while (resultado.next()) {
@@ -239,14 +288,14 @@ public class controladorGrid {
             modelo = (new DefaultTableModel(
                     nombresColmunas, 0) {
 
-                Class[] types = new Class[]{
-                    java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
-                };
+                        Class[] types = new Class[]{
+                            java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                        };
 
-                public Class getColumnClass(int columnIndex) {
-                    return types[columnIndex];
-                }
-            });
+                        public Class getColumnClass(int columnIndex) {
+                            return types[columnIndex];
+                        }
+                    });
 
             ArrayList<Object> datosTabla;
             while (resultado.next()) {
@@ -290,16 +339,16 @@ public class controladorGrid {
             modelo = (new DefaultTableModel(
                     //new String[]{" ", "", "", "ARCHIVO ", "DESCRIPCIÓN"}, 0) {
                     new String[]{" ", "ARCHIVO ", "DESCRIPCIÓN"}, 0) {
-                //nombresColmunas, 0) {
+                        //nombresColmunas, 0) {
 
-                Class[] types = new Class[]{
-                    java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-                };
+                        Class[] types = new Class[]{
+                            java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                        };
 
-                public Class getColumnClass(int columnIndex) {
-                    return types[columnIndex];
-                }
-            });
+                        public Class getColumnClass(int columnIndex) {
+                            return types[columnIndex];
+                        }
+                    });
 
             ArrayList<Object> datosTabla;
             while (resultado.next()) {

@@ -112,7 +112,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
         lblId.setPreferredSize(new java.awt.Dimension(100, 20));
         jpRegistroAcercamiento.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
 
-        cmbEstadoAcercamiento.setBackground(new java.awt.Color(204, 204, 255));
+        cmbEstadoAcercamiento.setBackground(new java.awt.Color(255, 255, 204));
         cmbEstadoAcercamiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbEstadoAcercamiento.setPreferredSize(new java.awt.Dimension(150, 25));
         cmbEstadoAcercamiento.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +220,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
 
         jpBusquedaAcercamiento.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 440, 450));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         cmbFiltro.addActionListener(new java.awt.event.ActionListener() {
@@ -346,9 +347,11 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
     // <editor-fold defaultstate="collapsed" desc="Eventos">     
     private void btnEmpresaSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpresaSucursalActionPerformed
-        buscar("empresa_sucursal_acercamiento");//abre una ventana de busqueda
+        buscar("empresa_acercamiento");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarEmpresaSucursal(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresa_sucursal"));
+        if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) {
+            llenarEmpresaSucursal(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresa"));
+        }
     }//GEN-LAST:event_btnEmpresaSucursalActionPerformed
 
     private void jtAcercamientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAcercamientoMouseClicked
@@ -445,6 +448,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
         criterioBusqueda[0] = id;
         controladorConsulta consulta = new controladorConsulta();
         return consulta.obtenerConsulta(tabla, controladorVariablesSesion.getInstance().getFiltrar(), criterioBusqueda);
+
     }
 
     private void convertirAmayusculas(Component componente) {
@@ -472,7 +476,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
         //llena las variables de tipo map con los valores de las cajas de texto
         map.put("accion", accion);
         map.put("id", lblId.getText());
-        map.put("idEmpresaSucursal", idEmpresaSucursal);
+        map.put("fecha_creacion_registro", idEmpresaSucursal);
         map.put("fecha", dateToString(dtFechaAcercamiento));
         map.put("estadoAcercamiento", codigoEstadoAcercamiento.get(cmbEstadoAcercamiento.getSelectedIndex()));
         map.put("observaciones", txaObservaciones.getText());
@@ -525,7 +529,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
-        idEmpresaSucursal="-1";
+        idEmpresaSucursal = "-1";
         cmbEstadoAcercamiento.setSelectedIndex(0);
         if (component instanceof JTextField) {
 
@@ -570,7 +574,7 @@ public class frmAcercamiento extends javax.swing.JInternalFrame {
 
     private void llenarEmpresaSucursal(ArrayList<Object> datos) {
         idEmpresaSucursal = (String.valueOf(datos.get(0)));
-        txtEmpresaSucursal.setText((String) datos.get(4));
+        txtEmpresaSucursal.setText((String) datos.get(2));
 
     }
 

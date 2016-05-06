@@ -46,8 +46,12 @@ public class ControladorEmpresa {
             return bandera = controladorVariablesSesion.getInstance().validarRespuestaDB(respuesta[2]);
         } else {
             
-            if (!camposObligatorios.equals("")) controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
-            if (!camposInvalidos.equals("")) controladorMensaje.getInstance().getMsgCamposInvalidos(camposInvalidos);
+            if (!camposObligatorios.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
+            }
+            if (!camposInvalidos.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposInvalidos(camposInvalidos);
+            }
         }
         return bandera;
         
@@ -85,7 +89,7 @@ public class ControladorEmpresa {
         
         camposInvalidos = "";
         if (!validarRuc((String) datosEmpresa.get("ruc"))) {
-            camposInvalidos += "Ingrese un Ruc Válido\n";            
+            camposInvalidos += "Ingrese un Ruc Válido\n";
         }
         
         if (!validarEmail((String) datosEmpresa.get("correo"))) {
@@ -100,6 +104,8 @@ public class ControladorEmpresa {
         boolean rucCorrecto;
         try {
             String Ruc = "";
+            String finalRUC = ruc.substring(10, 13);
+            
             if (ruc.length() == 10) {
                 Ruc = ruc;
             } else {
@@ -108,7 +114,7 @@ public class ControladorEmpresa {
                 }
             }
             
-            if (Ruc.length() == 10) // ConstantesApp.LongitudCedula
+            if (ruc.length() == 13 && finalRUC.equals("001")) // ConstantesApp.LongitudCedula
             {
                 int tercerDigito = Integer.parseInt(Ruc.substring(2, 3));
                 if (tercerDigito < 6) {
@@ -153,10 +159,10 @@ public class ControladorEmpresa {
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     
     public boolean validarEmail(String email) {
-        
+
         // Compiles the given regular expression into a pattern.
         Pattern pattern = Pattern.compile(PATTERN_EMAIL);
-        
+
         // Match the given input against this pattern
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();

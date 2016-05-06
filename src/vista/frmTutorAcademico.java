@@ -64,7 +64,7 @@ public class frmTutorAcademico extends javax.swing.JInternalFrame {
         lblTitulo_Id = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         txtNombrePersona = new javax.swing.JTextField();
-        cmbTipoIdentificacion = new javax.swing.JComboBox<>();
+        cmbTipoIdentificacion = new javax.swing.JComboBox<String>();
         lblPersona = new javax.swing.JLabel();
         lblRol = new javax.swing.JLabel();
         lblClave = new javax.swing.JLabel();
@@ -97,11 +97,11 @@ public class frmTutorAcademico extends javax.swing.JInternalFrame {
         lblPersona13 = new javax.swing.JLabel();
         lblRol4 = new javax.swing.JLabel();
         lblPersona15 = new javax.swing.JLabel();
-        cmbGenero = new javax.swing.JComboBox<>();
+        cmbGenero = new javax.swing.JComboBox<String>();
         jpBusquedaUsuario = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtPersona = new javax.swing.JTable();
-        cmbFiltro = new javax.swing.JComboBox<>();
+        cmbFiltro = new javax.swing.JComboBox<String>();
         txtCriterioBusqueda = new javax.swing.JTextField();
         lblRegistros = new javax.swing.JLabel();
         lblTotalRegistros = new javax.swing.JLabel();
@@ -155,8 +155,7 @@ public class frmTutorAcademico extends javax.swing.JInternalFrame {
         });
         jpRegistroUsuario.add(txtNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 230, -1));
 
-        cmbTipoIdentificacion.setBackground(new java.awt.Color(204, 204, 255));
-        cmbTipoIdentificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbTipoIdentificacion.setBackground(new java.awt.Color(255, 255, 204));
         cmbTipoIdentificacion.setToolTipText("");
         cmbTipoIdentificacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbTipoIdentificacion.setPreferredSize(new java.awt.Dimension(120, 25));
@@ -296,6 +295,9 @@ public class frmTutorAcademico extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNumeroIdentificacionKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroIdentificacionKeyTyped(evt);
+            }
         });
         jpRegistroUsuario.add(txtNumeroIdentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
 
@@ -378,8 +380,7 @@ public class frmTutorAcademico extends javax.swing.JInternalFrame {
         lblPersona15.setPreferredSize(new java.awt.Dimension(120, 25));
         jpRegistroUsuario.add(lblPersona15, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 10, -1));
 
-        cmbGenero.setBackground(new java.awt.Color(204, 204, 255));
-        cmbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbGenero.setBackground(new java.awt.Color(255, 255, 204));
         cmbGenero.setToolTipText("");
         cmbGenero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbGenero.setPreferredSize(new java.awt.Dimension(110, 25));
@@ -418,7 +419,7 @@ public class frmTutorAcademico extends javax.swing.JInternalFrame {
 
         jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 460));
 
-        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaUsuario.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 120, -1));
@@ -611,7 +612,15 @@ public class frmTutorAcademico extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtEmailKeyReleased
 
     private void txtNumeroIdentificacionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionKeyReleased
-        txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtNumeroIdentificacion.getText()));
+        switch((String) cmbTipoIdentificacion.getSelectedItem()){
+            case "CEDULA": 
+                txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtNumeroIdentificacion.getText()));
+                break;
+            case "RUC":
+                txtNumeroIdentificacion.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtNumeroIdentificacion.getText()));
+                break;
+            default: 
+        }
 
     }//GEN-LAST:event_txtNumeroIdentificacionKeyReleased
 
@@ -653,6 +662,25 @@ public class frmTutorAcademico extends javax.swing.JInternalFrame {
     private void txtTelefonoMovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoMovilActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoMovilActionPerformed
+
+    private void txtNumeroIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroIdentificacionKeyTyped
+        switch((String) cmbTipoIdentificacion.getSelectedItem()){
+            
+            case "CEDULA": 
+                int maxTamanoCed = txtNumeroIdentificacion.getText().length();
+                if(maxTamanoCed >= 10){
+                    txtNumeroIdentificacion.setText(txtNumeroIdentificacion.getText().substring(0, maxTamanoCed - 1));
+                }                
+                break;
+            case "RUC":
+                int maxTamanoRUC = txtNumeroIdentificacion.getText().length();
+                if(maxTamanoRUC >= 13){
+                    txtNumeroIdentificacion.setText(txtNumeroIdentificacion.getText().substring(0, maxTamanoRUC - 1));
+                }    
+                break;
+            default: 
+                return;
+        }    }//GEN-LAST:event_txtNumeroIdentificacionKeyTyped
 // </editor-fold> 
     // <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
@@ -708,7 +736,7 @@ public class frmTutorAcademico extends javax.swing.JInternalFrame {
         map.put("telefonoFijo", txtTelefonoFijo.getText());
         map.put("telefonoCelular", txtTelefonoMovil.getText());
         map.put("correo", txtEmail.getText());
-        map.put("tipo", "TA");
+        map.put("tipo", "TUA");
         map.put("formacionAcademica", txtFormacionAcademica.getText());
         map.put("informacionAdicional", txaInformacionAdicional.getText());
         map.put("tipoGeneral", "sn");
@@ -791,7 +819,7 @@ public class frmTutorAcademico extends javax.swing.JInternalFrame {
     private void llenarComboTipoIdentificacion() {
         controladorConsulta consulta = new controladorConsulta();
 
-        criterioBusqueda[0] = "TIPO IDENTIFICACION";//nombre de la tabla
+        criterioBusqueda[0] = "IDENTIFICACION";//nombre de la tabla
         criterioBusqueda[1] = "enumeracion";//tipo de consulta
         cmbTipoIdentificacion.setModel(consulta.consultarCombo(criterioBusqueda));
         codigoTipoDocumento = consulta.getCodigoCombo();

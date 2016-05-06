@@ -122,6 +122,7 @@ public class frmCronograma extends javax.swing.JInternalFrame {
         lblFiltro.setPreferredSize(new java.awt.Dimension(35, 20));
         jpBusquedaCronograma.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbFiltroActionPerformed(evt);
@@ -256,6 +257,7 @@ public class frmCronograma extends javax.swing.JInternalFrame {
         lblFechaFin.setText("Fecha de Finalización:");
         jpRegistroCronograma.add(lblFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
+        cmbTarea.setBackground(new java.awt.Color(255, 255, 204));
         cmbTarea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpRegistroCronograma.add(cmbTarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 240, 25));
 
@@ -296,8 +298,8 @@ public class frmCronograma extends javax.swing.JInternalFrame {
         jLabel12.setText("*");
         jpRegistroCronograma.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 10, -1));
 
+        cmbPeriodo.setBackground(new java.awt.Color(255, 255, 204));
         cmbPeriodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmbPeriodo.setEnabled(false);
         jpRegistroCronograma.add(cmbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 240, 25));
 
         jPanel1.add(jpRegistroCronograma, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 50, -1, -1));
@@ -477,7 +479,9 @@ public class frmCronograma extends javax.swing.JInternalFrame {
         criterioBusqueda[0] = "periodo";
         criterioBusqueda[1] = "tabla";
         cmbPeriodo.setModel(consulta.consultarCombo(criterioBusqueda));
-        cmbPeriodo.setSelectedIndex(1);
+        if (cmbPeriodo.getItemCount() > 1) {
+            cmbPeriodo.setSelectedIndex(1);
+        }
         codigoPeriodo = consulta.getCodigoCombo();
     }
 
@@ -531,15 +535,14 @@ public class frmCronograma extends javax.swing.JInternalFrame {
 
     private void formatearColumnas() {
         //Oculta la primera columna que corresponde al ID de la tabla
-         jtCronograma.getColumnModel().getColumn(0).setMaxWidth(0);
-         jtCronograma.getColumnModel().getColumn(0).setMinWidth(0);
-         jtCronograma.getColumnModel().getColumn(0).setPreferredWidth(0);
-         
-         jtCronograma.getColumnModel().getColumn(1).setMaxWidth(150);
-         jtCronograma.getColumnModel().getColumn(1).setMinWidth(0);
-         jtCronograma.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jtCronograma.getColumnModel().getColumn(0).setMaxWidth(0);
+        jtCronograma.getColumnModel().getColumn(0).setMinWidth(0);
+        jtCronograma.getColumnModel().getColumn(0).setPreferredWidth(0);
 
-        
+        jtCronograma.getColumnModel().getColumn(1).setMaxWidth(150);
+        jtCronograma.getColumnModel().getColumn(1).setMinWidth(0);
+        jtCronograma.getColumnModel().getColumn(1).setPreferredWidth(150);
+
     }
 
     public Date stringToJDateChooser(String fecha) {

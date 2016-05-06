@@ -1,7 +1,14 @@
 package controlador;
 
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.Carrera;
 
 public class ControladorCarrera {
@@ -19,7 +26,8 @@ public class ControladorCarrera {
 
     public boolean crearActualizar(Map datos) {
         camposObligatorios = validarCamposObligatorios(datos);
-        if (camposObligatorios.equals("")) {
+        camposInvalidos = validarInformacion(datos);
+        if (camposObligatorios.equals("") && camposInvalidos.equals("")) {
 
             Carrera carrera = new Carrera();
             carrera.setAccion((String) datos.get("accion"));
@@ -36,8 +44,14 @@ public class ControladorCarrera {
             bandera = controladorVariablesSesion.getInstance().validarRespuestaDB(respuesta[2]);
 
         } else {
-            controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
+            if (!camposObligatorios.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
+            }
+            if (!camposInvalidos.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposInvalidos(camposInvalidos);
+            }
         }
+        
         return bandera;
     }
 
@@ -81,6 +95,31 @@ public class ControladorCarrera {
         }
 
         return camposObligatorios;
+    }
+
+    private String validarInformacion(Map datos) {
+
+        camposInvalidos = "";
+        if (!(validarFecha((String) datos.get("fecha")))) {
+            camposInvalidos += "La fecha de aprobación debe ser menor\n";
+        }
+
+        return camposInvalidos;
+    }
+
+    private boolean validarFecha(String strFecha) {
+        try {
+            Calendar calFechaActual = new GregorianCalendar();
+            Calendar calFecha = new GregorianCalendar();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            calFecha.setTime(sdf.parse(strFecha));
+
+            return calFechaActual.after(calFecha);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
 }

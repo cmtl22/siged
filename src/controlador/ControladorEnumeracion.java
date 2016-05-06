@@ -57,7 +57,7 @@ public class ControladorEnumeracion {
         if (datos.get("nombre").equals("")) {
             camposObligatorios += "Nombre\n";
         }
-        if (datos.get("valor").equals("")) {
+        if (datos.get("codigo").equals("")) {
             camposObligatorios += "Valor\n";
         }
 

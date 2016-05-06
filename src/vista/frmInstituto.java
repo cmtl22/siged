@@ -440,6 +440,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
 
         jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 47, 440, 450));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaUsuario.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 90, -1));
@@ -486,7 +487,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    // <editor-fold defaultstate="collapsed" desc="Eventos"> 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
@@ -584,7 +585,9 @@ public class frmInstituto extends javax.swing.JInternalFrame {
     private void btnRectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRectorActionPerformed
         buscar();//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarRector(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
+        if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) {
+            llenarRector(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
+        }
     }//GEN-LAST:event_btnRectorActionPerformed
 
     private void txaNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaNombreKeyReleased
@@ -598,13 +601,12 @@ public class frmInstituto extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtInstituto));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtInstituto));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
-    
-    // </editor-fold>  
-// <editor-fold defaultstate="collapsed" desc="Metodos"> 
 
+    // </editor-fold>  
+    // <editor-fold defaultstate="collapsed" desc="Metodos"> 
     private void buscar() {
         frmConsultas consulta = new frmConsultas(null, true);//instancia la el formulario con la ventana de busqueda
         consulta.consultar("rector", "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
@@ -705,7 +707,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
-        idRector="-1";
+        idRector = "-1";
         txaNombre.isFocusable();
         if (component instanceof JTextField) {
 
@@ -747,7 +749,7 @@ public class frmInstituto extends javax.swing.JInternalFrame {
     private void llenarInstituto(ArrayList<Object> datos) {
         lblId.setText(String.valueOf(datos.get(0)));
         txtRector.setText((String) datos.get(2) + " " + (String) datos.get(3));
-        idRector=String.valueOf(datos.get(1));
+        idRector = String.valueOf(datos.get(1));
         txaNombre.setText((String) datos.get(4));
         txaDireccion.setText((String) datos.get(5));
         txtTelefono.setText((String) datos.get(6));

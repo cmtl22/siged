@@ -1,7 +1,13 @@
 package controlador;
 
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Periodo;
 
 public class ControladorPeriodo {
@@ -28,7 +34,8 @@ public class ControladorPeriodo {
 
     public boolean crearActualizar(Map datos) {
         camposObligatorios = validarCamposObligatorios(datos);
-        if (camposObligatorios.equals("")) {
+        camposInvalidos = validarInformacion(datos);
+        if (camposObligatorios.equals("") && camposInvalidos.equals("")) {
             Periodo periodo = new Periodo();
             periodo.setAccion((String) datos.get("accion"));
             System.out.println((String) datos.get("accion"));
@@ -44,7 +51,12 @@ public class ControladorPeriodo {
             bandera = controladorVariablesSesion.getInstance().validarRespuestaDB(respuesta[2]);
 
         } else {
-            controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
+            if (!camposObligatorios.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
+            }
+            if (!camposInvalidos.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposInvalidos(camposInvalidos);
+            }
         }
         return bandera;
     }
@@ -79,4 +91,30 @@ public class ControladorPeriodo {
         return camposObligatorios;
     }
 
+    private String validarInformacion(Map datos) {
+
+        camposInvalidos = "";
+        if (validarFechas((String) datos.get("fechaInicio"), (String) datos.get("fechaFin")) < 0) {
+            camposInvalidos += "Fechas incorrectas\n";
+
+        }
+        return camposInvalidos;
+    }
+
+    private int validarFechas(String strFechaInicio, String strFechaFin) {
+        try {
+            Calendar calFechaInicio = new GregorianCalendar();
+            Calendar calFechaFin = new GregorianCalendar();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            calFechaInicio.setTime(sdf.parse(strFechaInicio));
+            calFechaFin.setTime(sdf.parse(strFechaFin));
+
+            return calFechaFin.compareTo(calFechaInicio);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 1;
+    }
 }

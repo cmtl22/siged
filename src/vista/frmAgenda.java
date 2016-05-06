@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
 import controlador.controladorConsulta;
@@ -109,6 +104,7 @@ public class frmAgenda extends javax.swing.JFrame {
         lblFiltro.setPreferredSize(new java.awt.Dimension(35, 20));
         jpBusquedaAsignatura.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpBusquedaAsignatura.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 140, 23));
 
@@ -498,7 +494,7 @@ public class frmAgenda extends javax.swing.JFrame {
     }
 
     private void llenarGrid() {
-        jtContactos.setModel(controladorGrid.getInstance().llenarGrid("persona", "grid", null, true));
+        jtContactos.setModel(controladorGrid.getInstance().llenarGrid("agenda", "grid", null, true));
         sorter = new TableRowSorter<>(jtContactos.getModel());
         jtContactos.setRowSorter(sorter);
         jtContactos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

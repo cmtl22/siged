@@ -79,7 +79,6 @@ public class frmEscenariosViabilidad extends javax.swing.JInternalFrame {
         lblRegistros = new javax.swing.JLabel();
         lblTotalRegistros = new javax.swing.JLabel();
         lblFiltro = new javax.swing.JLabel();
-        btnNuevo1 = new javax.swing.JButton();
         lblBusqueda = new javax.swing.JLabel();
         lblRegistro = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -87,6 +86,7 @@ public class frmEscenariosViabilidad extends javax.swing.JInternalFrame {
         btnCrearActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        btnNuevo1 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("ESCENARIOS PEDAGÓGICOS");
@@ -253,9 +253,9 @@ public class frmEscenariosViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtEscenariosPedagogicos);
 
-        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 410));
+        jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, 430));
 
-        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaUsuario.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 90, -1));
@@ -266,7 +266,7 @@ public class frmEscenariosViabilidad extends javax.swing.JInternalFrame {
                 txtCriterioBusquedaKeyReleased(evt);
             }
         });
-        jpBusquedaUsuario.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 240, -1));
+        jpBusquedaUsuario.add(txtCriterioBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 280, -1));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
@@ -282,19 +282,6 @@ public class frmEscenariosViabilidad extends javax.swing.JInternalFrame {
         lblFiltro.setText("Filtro:");
         lblFiltro.setPreferredSize(new java.awt.Dimension(32, 25));
         jpBusquedaUsuario.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
-        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
-        btnNuevo1.setToolTipText("Exportar");
-        btnNuevo1.setBorder(null);
-        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
-        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevo1ActionPerformed(evt);
-            }
-        });
-        jpBusquedaUsuario.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, 40, 40));
 
         jPanel1.add(jpBusquedaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 55, -1, -1));
 
@@ -355,6 +342,19 @@ public class frmEscenariosViabilidad extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 190, 50));
 
+        btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
+        btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
+        btnNuevo1.setToolTipText("Exportar");
+        btnNuevo1.setBorder(null);
+        btnNuevo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo1.setPreferredSize(new java.awt.Dimension(48, 48));
+        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevo1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNuevo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 40, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -363,7 +363,7 @@ public class frmEscenariosViabilidad extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 549, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
         );
 
         pack();
@@ -417,6 +417,7 @@ public class frmEscenariosViabilidad extends javax.swing.JInternalFrame {
     private void btnViabilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViabilidadActionPerformed
         buscar("persona");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarViabilidad(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
     }//GEN-LAST:event_btnViabilidadActionPerformed
 

@@ -4,35 +4,13 @@ import controlador.ControladorViabilidad;
 import controlador.controladorConsulta;
 import controlador.controladorGrid;
 import controlador.controladorVariablesSesion;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultCellEditor;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import modelo.Conexion;
 
 public class frmViabilidad extends javax.swing.JInternalFrame {
 
@@ -79,6 +57,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         llenarGridEntidadesRegulacion();
         llenarGridDocumentosHabilitantesEntidadReceptora();
         llenarGridDocumentosHabilitantesInstituto();
+        formatearGridEscenariosPedagogicos();
         btnAdelante.setEnabled(true);
         jtpInformeViabilidad.setEnabledAt(0, true);
         jtpInformeViabilidad.setEnabledAt(1, false);
@@ -97,11 +76,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         btgEquipo = new javax.swing.ButtonGroup();
         btgUniforme = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        lblRegistro = new javax.swing.JLabel();
-        btnNuevo = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        btnCerrar = new javax.swing.JButton();
-        btnAdjuntarAnexos = new javax.swing.JButton();
         jtpInformeViabilidad = new javax.swing.JTabbedPane();
         jpPrimeraSeccion = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -128,6 +102,9 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         txaPara = new javax.swing.JTextArea();
         jScrollPane20 = new javax.swing.JScrollPane();
         txaAsunto = new javax.swing.JTextArea();
+        lblParaInforme = new javax.swing.JLabel();
+        lblParaInforme1 = new javax.swing.JLabel();
+        lblParaInforme2 = new javax.swing.JLabel();
         jpSegundaSeccion = new javax.swing.JPanel();
         btnBuscarRepresentanteLegal = new javax.swing.JButton();
         txtNombreRepresentanteLegal = new javax.swing.JTextField();
@@ -157,17 +134,21 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jtSucursales = new javax.swing.JTable();
         btnAgregarSucursal = new javax.swing.JButton();
         btnQuitarSucursal = new javax.swing.JButton();
+        lblParaInforme3 = new javax.swing.JLabel();
+        lblParaInforme5 = new javax.swing.JLabel();
+        lblParaInforme6 = new javax.swing.JLabel();
+        lblParaInforme7 = new javax.swing.JLabel();
+        lblParaInforme8 = new javax.swing.JLabel();
+        lblParaInforme9 = new javax.swing.JLabel();
+        lblParaInforme10 = new javax.swing.JLabel();
+        lblParaInforme11 = new javax.swing.JLabel();
         jpTereceraSeccion1 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         txaProcesoDesignacionEstudiantes = new javax.swing.JTextArea();
         jLabel17 = new javax.swing.JLabel();
-        txtCantidadEstudiantes = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        txtCantidadTutores = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        txtPlazo = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -189,6 +170,19 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jLabel29 = new javax.swing.JLabel();
         jScrollPane18 = new javax.swing.JScrollPane();
         txaObjetivo = new javax.swing.JTextArea();
+        jsCantidadEstudiantes = new javax.swing.JSpinner();
+        jsCantidadTutores = new javax.swing.JSpinner();
+        jsPlazo = new javax.swing.JSpinner();
+        jLabel55 = new javax.swing.JLabel();
+        lblParaInforme4 = new javax.swing.JLabel();
+        lblParaInforme12 = new javax.swing.JLabel();
+        lblParaInforme13 = new javax.swing.JLabel();
+        lblParaInforme14 = new javax.swing.JLabel();
+        lblParaInforme15 = new javax.swing.JLabel();
+        lblParaInforme16 = new javax.swing.JLabel();
+        lblParaInforme17 = new javax.swing.JLabel();
+        lblParaInforme18 = new javax.swing.JLabel();
+        lblParaInforme19 = new javax.swing.JLabel();
         jpTerceraSeccion2 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -219,6 +213,15 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jScrollPane13 = new javax.swing.JScrollPane();
         jtAsignaturas2 = new javax.swing.JTable();
         jLabel43 = new javax.swing.JLabel();
+        lblParaInforme20 = new javax.swing.JLabel();
+        lblParaInforme21 = new javax.swing.JLabel();
+        lblParaInforme22 = new javax.swing.JLabel();
+        lblParaInforme23 = new javax.swing.JLabel();
+        lblParaInforme24 = new javax.swing.JLabel();
+        lblParaInforme25 = new javax.swing.JLabel();
+        lblParaInforme26 = new javax.swing.JLabel();
+        lblParaInforme27 = new javax.swing.JLabel();
+        lblParaInforme28 = new javax.swing.JLabel();
         jpCuartaQuintaSeccion = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
         jScrollPane14 = new javax.swing.JScrollPane();
@@ -241,9 +244,21 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jLabel54 = new javax.swing.JLabel();
         jScrollPane17 = new javax.swing.JScrollPane();
         txaObjetivo4 = new javax.swing.JTextArea();
+        lblParaInforme29 = new javax.swing.JLabel();
+        lblParaInforme30 = new javax.swing.JLabel();
+        lblParaInforme31 = new javax.swing.JLabel();
+        lblParaInforme32 = new javax.swing.JLabel();
+        lblParaInforme33 = new javax.swing.JLabel();
+        lblParaInforme34 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
         btnAdelante = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnNuevo = new javax.swing.JButton();
+        btnBuscarInformeViabilidad = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnAdjuntarAnexos = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("INFORME DE VIABILIDAD");
@@ -256,54 +271,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jPanel1.setMaximumSize(new java.awt.Dimension(935, 535));
         jPanel1.setPreferredSize(new java.awt.Dimension(935, 535));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblRegistro.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 24)); // NOI18N
-        lblRegistro.setText("REGISTRO");
-        jPanel1.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, -1, -1));
-
-        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_nuevo_40.png"))); // NOI18N
-        btnNuevo.setToolTipText("NUEVO");
-        btnNuevo.setBorder(null);
-        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 20, -1, -1));
-
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_eliminar_40.png"))); // NOI18N
-        btnEliminar.setToolTipText("ELIMINAR");
-        btnEliminar.setBorder(null);
-        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 20, -1, -1));
-
-        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_cerrar_40.png"))); // NOI18N
-        btnCerrar.setToolTipText("CERRAR");
-        btnCerrar.setBorder(null);
-        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, -1, -1));
-
-        btnAdjuntarAnexos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_adjuntar_40.jpg"))); // NOI18N
-        btnAdjuntarAnexos.setToolTipText("ADJUNTAR");
-        btnAdjuntarAnexos.setBorder(null);
-        btnAdjuntarAnexos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAdjuntarAnexos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdjuntarAnexosActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnAdjuntarAnexos, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, -1, -1));
 
         jtpInformeViabilidad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -425,6 +392,39 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 
         jpPrimeraSeccion.add(jScrollPane20, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 300, 80));
 
+        lblParaInforme.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInformeMouseMoved(evt);
+            }
+        });
+        jpPrimeraSeccion.add(lblParaInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 190, -1, -1));
+
+        lblParaInforme1.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme1.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme1MouseMoved(evt);
+            }
+        });
+        jpPrimeraSeccion.add(lblParaInforme1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, -1, -1));
+
+        lblParaInforme2.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme2.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme2MouseMoved(evt);
+            }
+        });
+        jpPrimeraSeccion.add(lblParaInforme2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 90, -1, -1));
+
         jtpInformeViabilidad.addTab("Primera sección.- Datos Generales:", jpPrimeraSeccion);
 
         jpSegundaSeccion.setBackground(new java.awt.Color(255, 255, 255));
@@ -450,7 +450,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jpSegundaSeccion.add(txtNombreRepresentanteLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 360, 30));
 
         jLabel6.setText("<html>¿Se realizó el análisis preliminar mediante consultas online a las entidades de regulación y control?</html>");
-        jpSegundaSeccion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 450, 40));
+        jpSegundaSeccion.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 410, 40));
 
         rbSiConstatacion.setBackground(new java.awt.Color(153, 255, 153));
         btgConstatacion.add(rbSiConstatacion);
@@ -461,16 +461,16 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 rbSiConstatacionActionPerformed(evt);
             }
         });
-        jpSegundaSeccion.add(rbSiConstatacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        jpSegundaSeccion.add(rbSiConstatacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         rbNoConstatacion.setBackground(new java.awt.Color(255, 153, 153));
         btgConstatacion.add(rbNoConstatacion);
         rbNoConstatacion.setText("NO");
         rbNoConstatacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpSegundaSeccion.add(rbNoConstatacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
+        jpSegundaSeccion.add(rbNoConstatacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
         jLabel7.setText("<html>¿Se constató que la entidad receptora goce de una conducta institucional/empresarial apropiada, para desarrollar el proceso de formación dual, a través de un análisis preliminar?</html>");
-        jpSegundaSeccion.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 450, 50));
+        jpSegundaSeccion.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 420, 50));
 
         jtEntidadesRegulacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -492,8 +492,9 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtEntidadesRegulacion);
 
-        jpSegundaSeccion.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 450, 100));
+        jpSegundaSeccion.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 410, 100));
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Observaciones:");
         jpSegundaSeccion.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 140, 50));
 
@@ -508,8 +509,9 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(txaObservacionesDeudas);
 
-        jpSegundaSeccion.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 300, 50));
+        jpSegundaSeccion.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 260, 50));
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("<html>Consideraciones preliminares/ recomendaciones</html>");
         jpSegundaSeccion.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 140, 50));
@@ -525,7 +527,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(txaConsideracionesRecomendaciones);
 
-        jpSegundaSeccion.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 300, 90));
+        jpSegundaSeccion.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 260, 90));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 51, 153));
@@ -544,7 +546,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 51, 153));
         jLabel14.setText("<html>(persona legalmente autorizada para la suscripción de convenios o documentos de similar característica)</html>");
-        jpSegundaSeccion.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 410, 30));
+        jpSegundaSeccion.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 410, 30));
 
         txtFechaAcercamiento.setPreferredSize(new java.awt.Dimension(87, 25));
         txtFechaAcercamiento.addActionListener(new java.awt.event.ActionListener() {
@@ -585,8 +587,9 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jpSegundaSeccion.add(txtCreacionResolucion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, 240, -1));
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel15.setText("<html>Dirección sucursal/ planta/ filial: (Lugar en donde se realizará la formación dual, establecer referencias para ubicación, por ejm: diagonal a bco. Pacifico) </html>");
-        jpSegundaSeccion.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 410, 50));
+        jpSegundaSeccion.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 350, 50));
 
         jtSucursales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -608,7 +611,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane7.setViewportView(jtSucursales);
 
-        jpSegundaSeccion.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 350, 140));
+        jpSegundaSeccion.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 350, 140));
 
         btnAgregarSucursal.setBackground(new java.awt.Color(255, 255, 255));
         btnAgregarSucursal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_agregar_32.png"))); // NOI18N
@@ -621,7 +624,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 btnAgregarSucursalActionPerformed(evt);
             }
         });
-        jpSegundaSeccion.add(btnAgregarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 260, -1, -1));
+        jpSegundaSeccion.add(btnAgregarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 270, -1, -1));
 
         btnQuitarSucursal.setBackground(new java.awt.Color(255, 255, 255));
         btnQuitarSucursal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_cancelar_40.png"))); // NOI18N
@@ -634,7 +637,95 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 btnQuitarSucursalActionPerformed(evt);
             }
         });
-        jpSegundaSeccion.add(btnQuitarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 320, -1, -1));
+        jpSegundaSeccion.add(btnQuitarSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 330, -1, -1));
+
+        lblParaInforme3.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme3.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme3MouseMoved(evt);
+            }
+        });
+        jpSegundaSeccion.add(lblParaInforme3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, -1, -1));
+
+        lblParaInforme5.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme5.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme5MouseMoved(evt);
+            }
+        });
+        jpSegundaSeccion.add(lblParaInforme5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, -1, -1));
+
+        lblParaInforme6.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme6.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme6MouseMoved(evt);
+            }
+        });
+        jpSegundaSeccion.add(lblParaInforme6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, -1, -1));
+
+        lblParaInforme7.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme7.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme7.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme7MouseMoved(evt);
+            }
+        });
+        jpSegundaSeccion.add(lblParaInforme7, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, -1, -1));
+
+        lblParaInforme8.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme8.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme8MouseMoved(evt);
+            }
+        });
+        jpSegundaSeccion.add(lblParaInforme8, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 40, -1, -1));
+
+        lblParaInforme9.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme9.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme9.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme9MouseMoved(evt);
+            }
+        });
+        jpSegundaSeccion.add(lblParaInforme9, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 100, -1, -1));
+
+        lblParaInforme10.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme10.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme10.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme10MouseMoved(evt);
+            }
+        });
+        jpSegundaSeccion.add(lblParaInforme10, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 220, -1, -1));
+
+        lblParaInforme11.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme11.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme11.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme11MouseMoved(evt);
+            }
+        });
+        jpSegundaSeccion.add(lblParaInforme11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, -1));
 
         jtpInformeViabilidad.addTab("Segunda sección.- Antecedentes:", jpSegundaSeccion);
 
@@ -659,65 +750,24 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jpTereceraSeccion1.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, 420, 80));
 
         jLabel17.setText("<html>No. de estudiantes que recibiría la Entidad Receptora por ciclo académico</html>");
-        jpTereceraSeccion1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 260, 50));
-
-        txtCantidadEstudiantes.setPreferredSize(new java.awt.Dimension(87, 25));
-        txtCantidadEstudiantes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCantidadEstudiantesActionPerformed(evt);
-            }
-        });
-        txtCantidadEstudiantes.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCantidadEstudiantesKeyReleased(evt);
-            }
-        });
-        jpTereceraSeccion1.add(txtCantidadEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 30, -1));
+        jpTereceraSeccion1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 370, 40));
 
         jLabel18.setText("<html>Cantidad de tutores por parte de la Entidad Receptora (principales y suplentes) por estudiante. </html>");
-        jpTereceraSeccion1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 270, 50));
-
-        txtCantidadTutores.setPreferredSize(new java.awt.Dimension(87, 25));
-        txtCantidadTutores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCantidadTutoresActionPerformed(evt);
-            }
-        });
-        txtCantidadTutores.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCantidadTutoresKeyReleased(evt);
-            }
-        });
-        jpTereceraSeccion1.add(txtCantidadTutores, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 30, -1));
+        jpTereceraSeccion1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 370, 40));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(0, 51, 153));
         jLabel19.setText("<html>(establecer la cantidad mínima que conforme a la capacidad de la ER, nos proporcionen)</html>");
-        jpTereceraSeccion1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 260, 30));
-
-        jLabel20.setText("<html>Plazo de vigencia del convenio</html>");
-        jpTereceraSeccion1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 260, 30));
-
-        txtPlazo.setPreferredSize(new java.awt.Dimension(87, 25));
-        txtPlazo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPlazoActionPerformed(evt);
-            }
-        });
-        txtPlazo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPlazoKeyReleased(evt);
-            }
-        });
-        jpTereceraSeccion1.add(txtPlazo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 30, -1));
+        jpTereceraSeccion1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 370, 30));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 51, 153));
         jLabel21.setText("<html>(Se recomienda que el plazo sea mínimo de  3 años)</html>");
-        jpTereceraSeccion1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 260, 20));
+        jpTereceraSeccion1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 370, 20));
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel22.setText("<html>Carrera, ciclos académicos y asignaturas que solventan el convenio de formación dual </html>");
-        jpTereceraSeccion1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 430, 30));
+        jpTereceraSeccion1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 360, 30));
 
         jtAsignaturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -774,12 +824,20 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jtEscenariosPedagogicos.setAutoCreateRowSorter(true);
         jtEscenariosPedagogicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+                { new Integer(1), null}
             },
             new String [] {
                 "No. Estudiantes", "Escenario Pedagógico"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jtEscenariosPedagogicos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jtEscenariosPedagogicos.setGridColor(new java.awt.Color(0, 102, 153));
         jtEscenariosPedagogicos.setPreferredSize(new java.awt.Dimension(300, 100));
@@ -805,7 +863,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 btnAgregarEscenarioPedagogicoActionPerformed(evt);
             }
         });
-        jpTereceraSeccion1.add(btnAgregarEscenarioPedagogico, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, -1, -1));
+        jpTereceraSeccion1.add(btnAgregarEscenarioPedagogico, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 40, -1, -1));
 
         btnQuitarEscenarioPedagogico.setBackground(new java.awt.Color(255, 255, 255));
         btnQuitarEscenarioPedagogico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_cancelar_40.png"))); // NOI18N
@@ -818,7 +876,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 btnQuitarEscenarioPedagogicoActionPerformed(evt);
             }
         });
-        jpTereceraSeccion1.add(btnQuitarEscenarioPedagogico, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 120, -1, -1));
+        jpTereceraSeccion1.add(btnQuitarEscenarioPedagogico, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 100, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setText("<html>Administradores del Convenio</html>");
@@ -861,13 +919,14 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jpTereceraSeccion1.add(txtAdministradorEntidadReceptora, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, 230, -1));
 
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel28.setText("<html>Proceso de designación de estudiantes</html>");
         jpTereceraSeccion1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 420, 20));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(0, 51, 153));
         jLabel29.setText("<html>Acuerdos específicos consensuados con la Entidad Receptora en base al Instructivo para la Selección de Estudiantes, si así lo requiere. </html>");
-        jpTereceraSeccion1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 330, 420, 30));
+        jpTereceraSeccion1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 330, 360, 30));
 
         txaObjetivo.setColumns(2);
         txaObjetivo.setLineWrap(true);
@@ -880,15 +939,127 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane18.setViewportView(txaObjetivo);
 
-        jpTereceraSeccion1.add(jScrollPane18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 360, 50));
+        jpTereceraSeccion1.add(jScrollPane18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 350, 50));
+
+        jsCantidadEstudiantes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jpTereceraSeccion1.add(jsCantidadEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 40, -1));
+
+        jsCantidadTutores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jpTereceraSeccion1.add(jsCantidadTutores, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 40, -1));
+
+        jsPlazo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jpTereceraSeccion1.add(jsPlazo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 40, -1));
+
+        jLabel55.setText("<html>Plazo de vigencia del convenio</html>");
+        jpTereceraSeccion1.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 370, 30));
+
+        lblParaInforme4.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme4.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme4MouseMoved(evt);
+            }
+        });
+        jpTereceraSeccion1.add(lblParaInforme4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, -1, -1));
+
+        lblParaInforme12.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme12.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme12.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme12MouseMoved(evt);
+            }
+        });
+        jpTereceraSeccion1.add(lblParaInforme12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, -1, -1));
+
+        lblParaInforme13.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme13.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme13.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme13MouseMoved(evt);
+            }
+        });
+        jpTereceraSeccion1.add(lblParaInforme13, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
+
+        lblParaInforme14.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme14.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme14.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme14MouseMoved(evt);
+            }
+        });
+        jpTereceraSeccion1.add(lblParaInforme14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
+
+        lblParaInforme15.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme15.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme15.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme15MouseMoved(evt);
+            }
+        });
+        jpTereceraSeccion1.add(lblParaInforme15, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 10, -1, -1));
+
+        lblParaInforme16.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme16.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme16.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme16MouseMoved(evt);
+            }
+        });
+        jpTereceraSeccion1.add(lblParaInforme16, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 220, -1, -1));
+
+        lblParaInforme17.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme17.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme17.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme17MouseMoved(evt);
+            }
+        });
+        jpTereceraSeccion1.add(lblParaInforme17, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 260, -1, -1));
+
+        lblParaInforme18.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme18.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme18.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme18MouseMoved(evt);
+            }
+        });
+        jpTereceraSeccion1.add(lblParaInforme18, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 320, -1, -1));
+
+        lblParaInforme19.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme19.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme19.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme19MouseMoved(evt);
+            }
+        });
+        jpTereceraSeccion1.add(lblParaInforme19, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, -1, -1));
 
         jtpInformeViabilidad.addTab("Tercera Sección.- Contenido del Informe 1:", jpTereceraSeccion1);
 
         jpTerceraSeccion2.setBackground(new java.awt.Color(255, 255, 255));
         jpTerceraSeccion2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel30.setText("<html>Condiciones en las que recibirá a los estudiantes</html>");
-        jpTerceraSeccion2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 420, 20));
+        jpTerceraSeccion2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 20));
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(0, 51, 153));
@@ -901,6 +1072,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         rbSiUniforme.setBackground(new java.awt.Color(153, 255, 153));
         btgUniforme.add(rbSiUniforme);
         rbSiUniforme.setText("SI");
+        rbSiUniforme.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         rbSiUniforme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbSiUniformeActionPerformed(evt);
@@ -911,19 +1083,22 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         rbNoUniforme.setBackground(new java.awt.Color(255, 153, 153));
         btgUniforme.add(rbNoUniforme);
         rbNoUniforme.setText("NO");
+        rbNoUniforme.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpTerceraSeccion2.add(rbNoUniforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         jLabel33.setText("<html>¿Se dotará de equipo mínimo de protección personal  al estudiante?</html>");
-        jpTerceraSeccion2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 390, 30));
+        jpTerceraSeccion2.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 290, 30));
 
         rbNoEquipoProteccion.setBackground(new java.awt.Color(255, 153, 153));
         btgEquipo.add(rbNoEquipoProteccion);
         rbNoEquipoProteccion.setText("NO");
+        rbNoEquipoProteccion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpTerceraSeccion2.add(rbNoEquipoProteccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
         rbSiEquipoProteccion.setBackground(new java.awt.Color(153, 255, 153));
         btgEquipo.add(rbSiEquipoProteccion);
         rbSiEquipoProteccion.setText("SI");
+        rbSiEquipoProteccion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpTerceraSeccion2.add(rbSiEquipoProteccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         jLabel34.setText("<html>¿Se verificó que las normas de seguridad de la entidad receptora garantice la protección de los estudiantes durante su formación práctica?</html>");
@@ -932,11 +1107,13 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         rbNoNormasSeguridad.setBackground(new java.awt.Color(255, 153, 153));
         btgNormasSeguridad.add(rbNoNormasSeguridad);
         rbNoNormasSeguridad.setText("NO");
+        rbNoNormasSeguridad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpTerceraSeccion2.add(rbNoNormasSeguridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
 
         rbSiNormasSeguridad.setBackground(new java.awt.Color(153, 255, 153));
         btgNormasSeguridad.add(rbSiNormasSeguridad);
         rbSiNormasSeguridad.setText("SI");
+        rbSiNormasSeguridad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpTerceraSeccion2.add(rbSiNormasSeguridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -954,29 +1131,31 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane11.setViewportView(txaObjetivo1);
 
-        jpTerceraSeccion2.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 290, 60));
+        jpTerceraSeccion2.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 240, 60));
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel36.setText("<html>Criterios técnicos de infraestructura</html>");
-        jpTerceraSeccion2.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 460, 30));
+        jpTerceraSeccion2.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 420, 30));
 
         rbSiRecompensa.setBackground(new java.awt.Color(153, 255, 153));
         btgRecompensa.add(rbSiRecompensa);
         rbSiRecompensa.setText("SI");
+        rbSiRecompensa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpTerceraSeccion2.add(rbSiRecompensa, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
 
         rbNoRecompensa.setBackground(new java.awt.Color(255, 153, 153));
         btgRecompensa.add(rbNoRecompensa);
         rbNoRecompensa.setText("NO");
+        rbNoRecompensa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jpTerceraSeccion2.add(rbNoRecompensa, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(0, 51, 153));
         jLabel37.setText("<html>La dotación de equipo mínimo de protección personal es indispensable según la naturaleza de la carrera.</html>");
-        jpTerceraSeccion2.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 420, 30));
+        jpTerceraSeccion2.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 370, 30));
 
         jLabel38.setText("<html>¿Se dotará de uniforme al estudiante?</html>");
-        jpTerceraSeccion2.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 390, 20));
+        jpTerceraSeccion2.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 370, 20));
 
         jLabel39.setText("<html>Tipo de compensación</html>");
         jpTerceraSeccion2.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 140, 25));
@@ -992,7 +1171,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 txtCreacionResolucion7KeyReleased(evt);
             }
         });
-        jpTerceraSeccion2.add(txtCreacionResolucion7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 320, -1));
+        jpTerceraSeccion2.add(txtCreacionResolucion7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 280, -1));
 
         txtCreacionResolucion8.setPreferredSize(new java.awt.Dimension(87, 25));
         txtCreacionResolucion8.addActionListener(new java.awt.event.ActionListener() {
@@ -1005,7 +1184,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 txtCreacionResolucion8KeyReleased(evt);
             }
         });
-        jpTerceraSeccion2.add(txtCreacionResolucion8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 320, -1));
+        jpTerceraSeccion2.add(txtCreacionResolucion8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 90, 280, -1));
 
         txaObjetivo2.setColumns(2);
         txaObjetivo2.setLineWrap(true);
@@ -1054,8 +1233,108 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 
         jpTerceraSeccion2.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 880, 130));
 
+        jLabel43.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel43.setText("<html>¿La Entidad Receptora compensará al estudiante en formación dual? </html>");
         jpTerceraSeccion2.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 460, 20));
+
+        lblParaInforme20.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme20.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme20.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme20MouseMoved(evt);
+            }
+        });
+        jpTerceraSeccion2.add(lblParaInforme20, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, -1, -1));
+
+        lblParaInforme21.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme21.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme21.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme21.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme21MouseMoved(evt);
+            }
+        });
+        jpTerceraSeccion2.add(lblParaInforme21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, -1, -1));
+
+        lblParaInforme22.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme22.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme22.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme22.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme22MouseMoved(evt);
+            }
+        });
+        jpTerceraSeccion2.add(lblParaInforme22, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, -1, -1));
+
+        lblParaInforme23.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme23.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme23.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme23.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme23MouseMoved(evt);
+            }
+        });
+        jpTerceraSeccion2.add(lblParaInforme23, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, -1, -1));
+
+        lblParaInforme24.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme24.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme24.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme24MouseMoved(evt);
+            }
+        });
+        jpTerceraSeccion2.add(lblParaInforme24, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, -1, -1));
+
+        lblParaInforme25.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme25.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme25.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme25.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme25MouseMoved(evt);
+            }
+        });
+        jpTerceraSeccion2.add(lblParaInforme25, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 80, -1, -1));
+
+        lblParaInforme26.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme26.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme26.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme26.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme26MouseMoved(evt);
+            }
+        });
+        jpTerceraSeccion2.add(lblParaInforme26, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 120, -1, -1));
+
+        lblParaInforme27.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme27.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme27.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme27MouseMoved(evt);
+            }
+        });
+        jpTerceraSeccion2.add(lblParaInforme27, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, -1, -1));
+
+        lblParaInforme28.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme28.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme28.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme28.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme28MouseMoved(evt);
+            }
+        });
+        jpTerceraSeccion2.add(lblParaInforme28, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, -1, -1));
 
         jtpInformeViabilidad.addTab("Tercera Sección.- Contenido del Informe 2:", jpTerceraSeccion2);
 
@@ -1077,7 +1356,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane14.setViewportView(txaOtrosDocumentosHabilitantes);
 
-        jpCuartaQuintaSeccion.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, 460, 80));
+        jpCuartaQuintaSeccion.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 510, 80));
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 2, 9)); // NOI18N
         jLabel45.setForeground(new java.awt.Color(0, 51, 153));
@@ -1086,7 +1365,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 
         jLabel46.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel46.setText("<html>Documentos habilitantes</html>");
-        jpCuartaQuintaSeccion.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 180, 20));
+        jpCuartaQuintaSeccion.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 180, 20));
 
         txtRemitenteInstituto.setPreferredSize(new java.awt.Dimension(87, 25));
         txtRemitenteInstituto.addActionListener(new java.awt.event.ActionListener() {
@@ -1099,7 +1378,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 txtRemitenteInstitutoKeyReleased(evt);
             }
         });
-        jpCuartaQuintaSeccion.add(txtRemitenteInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 270, -1));
+        jpCuartaQuintaSeccion.add(txtRemitenteInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 240, -1));
 
         jLabel47.setText("<html>Revisado y Aprobado por:</html>");
         jpCuartaQuintaSeccion.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 100, 30));
@@ -1115,7 +1394,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 txtRemitenteEntidadReceptoraKeyReleased(evt);
             }
         });
-        jpCuartaQuintaSeccion.add(txtRemitenteEntidadReceptora, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 270, -1));
+        jpCuartaQuintaSeccion.add(txtRemitenteEntidadReceptora, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 240, -1));
 
         jLabel48.setText("<html>Elaborado por:</html>");
         jpCuartaQuintaSeccion.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 100, 20));
@@ -1131,15 +1410,18 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jpCuartaQuintaSeccion.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 370, 30));
 
         jLabel51.setText("<html>Del Instituto</html>");
-        jpCuartaQuintaSeccion.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 460, 20));
+        jpCuartaQuintaSeccion.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, 460, 20));
 
         jLabel52.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel52.setText("<html>Remitentes </html>");
         jpCuartaQuintaSeccion.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 80, 20));
 
         jLabel53.setText("<html>De la Entidad Receptora</html>");
-        jpCuartaQuintaSeccion.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 460, 20));
+        jpCuartaQuintaSeccion.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 460, 20));
 
+        jScrollPane15.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+
+        jtDocumentosHabilitantesInstituto.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         jtDocumentosHabilitantesInstituto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -1153,7 +1435,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         ));
         jtDocumentosHabilitantesInstituto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jtDocumentosHabilitantesInstituto.setGridColor(new java.awt.Color(0, 102, 153));
-        jtDocumentosHabilitantesInstituto.setPreferredSize(new java.awt.Dimension(300, 50));
+        jtDocumentosHabilitantesInstituto.setPreferredSize(new java.awt.Dimension(300, 80));
         jtDocumentosHabilitantesInstituto.setSelectionBackground(new java.awt.Color(255, 255, 0));
         jtDocumentosHabilitantesInstituto.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jtDocumentosHabilitantesInstituto.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1163,8 +1445,11 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane15.setViewportView(jtDocumentosHabilitantesInstituto);
 
-        jpCuartaQuintaSeccion.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 460, 90));
+        jpCuartaQuintaSeccion.add(jScrollPane15, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 510, 120));
 
+        jScrollPane16.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
+
+        jtDocumentosHabilitantesEntidadReceptora.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         jtDocumentosHabilitantesEntidadReceptora.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -1178,7 +1463,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         ));
         jtDocumentosHabilitantesEntidadReceptora.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jtDocumentosHabilitantesEntidadReceptora.setGridColor(new java.awt.Color(0, 102, 153));
-        jtDocumentosHabilitantesEntidadReceptora.setPreferredSize(new java.awt.Dimension(300, 60));
+        jtDocumentosHabilitantesEntidadReceptora.setPreferredSize(new java.awt.Dimension(300, 80));
         jtDocumentosHabilitantesEntidadReceptora.setSelectionBackground(new java.awt.Color(255, 255, 0));
         jtDocumentosHabilitantesEntidadReceptora.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jtDocumentosHabilitantesEntidadReceptora.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1188,10 +1473,10 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane16.setViewportView(jtDocumentosHabilitantesEntidadReceptora);
 
-        jpCuartaQuintaSeccion.add(jScrollPane16, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 460, 90));
+        jpCuartaQuintaSeccion.add(jScrollPane16, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 510, 110));
 
         jLabel54.setText("Otros:");
-        jpCuartaQuintaSeccion.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 40, 50));
+        jpCuartaQuintaSeccion.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 40, 20));
 
         txaObjetivo4.setColumns(2);
         txaObjetivo4.setLineWrap(true);
@@ -1204,7 +1489,72 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jScrollPane17.setViewportView(txaObjetivo4);
 
-        jpCuartaQuintaSeccion.add(jScrollPane17, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 270, 150));
+        jpCuartaQuintaSeccion.add(jScrollPane17, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 240, 150));
+
+        lblParaInforme29.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme29.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme29.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme29MouseMoved(evt);
+            }
+        });
+        jpCuartaQuintaSeccion.add(lblParaInforme29, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
+
+        lblParaInforme30.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme30.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme30.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme30.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme30MouseMoved(evt);
+            }
+        });
+        jpCuartaQuintaSeccion.add(lblParaInforme30, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 230, -1, -1));
+
+        lblParaInforme31.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme31.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme31.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme31.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme31MouseMoved(evt);
+            }
+        });
+        jpCuartaQuintaSeccion.add(lblParaInforme31, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, -1, -1));
+
+        lblParaInforme32.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme32.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme32.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme32.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme32MouseMoved(evt);
+            }
+        });
+        jpCuartaQuintaSeccion.add(lblParaInforme32, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, -1, -1));
+
+        lblParaInforme33.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme33.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme33.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme33MouseMoved(evt);
+            }
+        });
+        jpCuartaQuintaSeccion.add(lblParaInforme33, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, -1, -1));
+
+        lblParaInforme34.setBackground(new java.awt.Color(255, 255, 255));
+        lblParaInforme34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_ayuda_32.png"))); // NOI18N
+        lblParaInforme34.setToolTipText("Para quien va dirigido el informe de viabilidad");
+        lblParaInforme34.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblParaInforme34.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblParaInforme34MouseMoved(evt);
+            }
+        });
+        jpCuartaQuintaSeccion.add(lblParaInforme34, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, -1, -1));
 
         jtpInformeViabilidad.addTab("Cuarta y Quinta Sección: Conclusiones y Cierre", jpCuartaQuintaSeccion);
 
@@ -1239,6 +1589,65 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnAdelante, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_nuevo_40.png"))); // NOI18N
+        btnNuevo.setToolTipText("NUEVO");
+        btnNuevo.setBorder(null);
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnNuevo);
+
+        btnBuscarInformeViabilidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_buscar_40.png"))); // NOI18N
+        btnBuscarInformeViabilidad.setToolTipText("NUEVO");
+        btnBuscarInformeViabilidad.setBorder(null);
+        btnBuscarInformeViabilidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscarInformeViabilidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarInformeViabilidadActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnBuscarInformeViabilidad);
+
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_eliminar_40.png"))); // NOI18N
+        btnEliminar.setToolTipText("ELIMINAR");
+        btnEliminar.setBorder(null);
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnEliminar);
+
+        btnAdjuntarAnexos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_adjuntar_40.jpg"))); // NOI18N
+        btnAdjuntarAnexos.setToolTipText("ADJUNTAR");
+        btnAdjuntarAnexos.setBorder(null);
+        btnAdjuntarAnexos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdjuntarAnexos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdjuntarAnexosActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnAdjuntarAnexos);
+
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_cerrar_40.png"))); // NOI18N
+        btnCerrar.setToolTipText("CERRAR");
+        btnCerrar.setBorder(null);
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnCerrar);
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 250, 50));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 943, 580));
 
         pack();
@@ -1262,6 +1671,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 
     private void btnBuscarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCarreraActionPerformed
         buscar("viabilidad_carrera", "grid", null);
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarCarrera(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "viabilidad_carrera"));
     }//GEN-LAST:event_btnBuscarCarreraActionPerformed
 
@@ -1335,30 +1745,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private void txaProcesoDesignacionEstudiantesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txaProcesoDesignacionEstudiantesKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txaProcesoDesignacionEstudiantesKeyReleased
-
-    private void txtCantidadEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadEstudiantesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadEstudiantesActionPerformed
-
-    private void txtCantidadEstudiantesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadEstudiantesKeyReleased
-        txtCantidadEstudiantes.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtCantidadEstudiantes.getText()));
-    }//GEN-LAST:event_txtCantidadEstudiantesKeyReleased
-
-    private void txtCantidadTutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadTutoresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadTutoresActionPerformed
-
-    private void txtCantidadTutoresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadTutoresKeyReleased
-        txtCantidadTutores.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtCantidadTutores.getText()));
-    }//GEN-LAST:event_txtCantidadTutoresKeyReleased
-
-    private void txtPlazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlazoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPlazoActionPerformed
-
-    private void txtPlazoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlazoKeyReleased
-        txtPlazo.setText(controladorVariablesSesion.validarNumerosSinEspacios(txtPlazo.getText()));
-    }//GEN-LAST:event_txtPlazoKeyReleased
 
     private void jtAsignaturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAsignaturasMouseClicked
         // TODO add your handling code here:
@@ -1436,6 +1822,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 
     private void btnBuscarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEmpresaActionPerformed
         buscar("empresa", "grid", null);
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarEmpresa(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "empresa"));
         llenarAsunto();
     }//GEN-LAST:event_btnBuscarEmpresaActionPerformed
@@ -1499,6 +1886,150 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         validarProcesoInformeAdelante();
     }//GEN-LAST:event_btnAdelanteActionPerformed
 
+    private void btnBuscarInformeViabilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarInformeViabilidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarInformeViabilidadActionPerformed
+
+    private void lblParaInformeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInformeMouseMoved
+        
+    }//GEN-LAST:event_lblParaInformeMouseMoved
+
+    private void lblParaInforme1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme1MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme1MouseMoved
+
+    private void lblParaInforme2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme2MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme2MouseMoved
+
+    private void lblParaInforme3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme3MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme3MouseMoved
+
+    private void lblParaInforme5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme5MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme5MouseMoved
+
+    private void lblParaInforme6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme6MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme6MouseMoved
+
+    private void lblParaInforme7MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme7MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme7MouseMoved
+
+    private void lblParaInforme8MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme8MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme8MouseMoved
+
+    private void lblParaInforme9MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme9MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme9MouseMoved
+
+    private void lblParaInforme10MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme10MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme10MouseMoved
+
+    private void lblParaInforme11MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme11MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme11MouseMoved
+
+    private void lblParaInforme4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme4MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme4MouseMoved
+
+    private void lblParaInforme12MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme12MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme12MouseMoved
+
+    private void lblParaInforme13MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme13MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme13MouseMoved
+
+    private void lblParaInforme14MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme14MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme14MouseMoved
+
+    private void lblParaInforme15MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme15MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme15MouseMoved
+
+    private void lblParaInforme16MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme16MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme16MouseMoved
+
+    private void lblParaInforme17MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme17MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme17MouseMoved
+
+    private void lblParaInforme18MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme18MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme18MouseMoved
+
+    private void lblParaInforme19MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme19MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme19MouseMoved
+
+    private void lblParaInforme20MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme20MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme20MouseMoved
+
+    private void lblParaInforme21MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme21MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme21MouseMoved
+
+    private void lblParaInforme22MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme22MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme22MouseMoved
+
+    private void lblParaInforme23MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme23MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme23MouseMoved
+
+    private void lblParaInforme24MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme24MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme24MouseMoved
+
+    private void lblParaInforme25MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme25MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme25MouseMoved
+
+    private void lblParaInforme26MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme26MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme26MouseMoved
+
+    private void lblParaInforme27MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme27MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme27MouseMoved
+
+    private void lblParaInforme28MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme28MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme28MouseMoved
+
+    private void lblParaInforme29MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme29MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme29MouseMoved
+
+    private void lblParaInforme30MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme30MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme30MouseMoved
+
+    private void lblParaInforme31MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme31MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme31MouseMoved
+
+    private void lblParaInforme32MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme32MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme32MouseMoved
+
+    private void lblParaInforme33MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme33MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme33MouseMoved
+
+    private void lblParaInforme34MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblParaInforme34MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblParaInforme34MouseMoved
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Métodos">   
     private void validarProcesoInformeAtras() {
@@ -1512,6 +2043,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                     btnAdelante.setEnabled(true);
                     ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
                     btnAdelante.setIcon(icon);
+                    btnAdelante.setToolTipText("Siguiente");
                 } else {
                     JOptionPane.showMessageDialog(rootPane, validarPrimeraSeccion(), "Completar", JOptionPane.WARNING_MESSAGE);
                 }
@@ -1525,6 +2057,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                     btnAdelante.setEnabled(true);
                     ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
                     btnAdelante.setIcon(icon);
+                    btnAdelante.setToolTipText("Siguiente");
                 }
                 break;
             case 2:
@@ -1536,6 +2069,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                     btnAdelante.setEnabled(true);
                     ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
                     btnAdelante.setIcon(icon);
+                    btnAdelante.setToolTipText("Siguiente");
                 }
                 break;
             case 1:
@@ -1547,6 +2081,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                     btnAdelante.setEnabled(true);
                     ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
                     btnAdelante.setIcon(icon);
+                    btnAdelante.setToolTipText("Siguiente");
                 }
                 break;
             default:
@@ -1566,6 +2101,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                     ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
                     btnAdelante.setIcon(icon);
                     cargarSegundaSeccion();
+                    btnAdelante.setToolTipText("Siguiente");
                 } else {
                     JOptionPane.showMessageDialog(null, validarPrimeraSeccion(), "Completar", JOptionPane.WARNING_MESSAGE);
                 }
@@ -1579,6 +2115,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                     btnAdelante.setEnabled(true);
                     ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
                     btnAdelante.setIcon(icon);
+                    btnAdelante.setToolTipText("Siguiente");
                 } else {
                     JOptionPane.showMessageDialog(null, validarPrimeraSeccion(), "Completar", JOptionPane.WARNING_MESSAGE);
                 }
@@ -1592,6 +2129,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                     btnAdelante.setEnabled(true);
                     ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_adelante_32.png"));
                     btnAdelante.setIcon(icon);
+                    btnAdelante.setToolTipText("Siguiente");
                 } else {
                     JOptionPane.showMessageDialog(null, validarPrimeraSeccion(), "Completar", JOptionPane.WARNING_MESSAGE);
                 }
@@ -1605,6 +2143,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                     btnAdelante.setEnabled(true);
                     ImageIcon icon = new ImageIcon(ClassLoader.getSystemResource("recursos/ico_crear_actualizar_40.png"));
                     btnAdelante.setIcon(icon);
+                    btnAdelante.setToolTipText("Guardar");
                 } else {
                     JOptionPane.showMessageDialog(null, validarPrimeraSeccion(), "Completar", JOptionPane.WARNING_MESSAGE);
                 }
@@ -1726,10 +2265,19 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jtDocumentosHabilitantesEntidadReceptora.getColumnModel().getColumn(0).setMaxWidth(0);
         jtDocumentosHabilitantesEntidadReceptora.getColumnModel().getColumn(0).setMinWidth(0);
         jtDocumentosHabilitantesEntidadReceptora.getColumnModel().getColumn(0).setPreferredWidth(0);
-
+        
+        jtDocumentosHabilitantesEntidadReceptora.getColumnModel().getColumn(1).setMaxWidth(1000);
+        jtDocumentosHabilitantesEntidadReceptora.getColumnModel().getColumn(1).setMinWidth(0);
+        jtDocumentosHabilitantesEntidadReceptora.getColumnModel().getColumn(1).setPreferredWidth(725);
+        
+        
         jtDocumentosHabilitantesInstituto.getColumnModel().getColumn(0).setMaxWidth(0);
         jtDocumentosHabilitantesInstituto.getColumnModel().getColumn(0).setMinWidth(0);
         jtDocumentosHabilitantesInstituto.getColumnModel().getColumn(0).setPreferredWidth(0);
+        
+        jtDocumentosHabilitantesInstituto.getColumnModel().getColumn(1).setMaxWidth(1000);
+        jtDocumentosHabilitantesInstituto.getColumnModel().getColumn(1).setMinWidth(0);
+        jtDocumentosHabilitantesInstituto.getColumnModel().getColumn(1).setPreferredWidth(700);
     }
 
     private void formatearGridSucursales() {
@@ -1740,6 +2288,12 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
         jtSucursales.getColumnModel().getColumn(1).setMaxWidth(0);
         jtSucursales.getColumnModel().getColumn(1).setMinWidth(0);
         jtSucursales.getColumnModel().getColumn(1).setPreferredWidth(0);
+    }
+
+    private void formatearGridEscenariosPedagogicos() {
+        jtEscenariosPedagogicos.getColumnModel().getColumn(1).setMaxWidth(500);
+        jtEscenariosPedagogicos.getColumnModel().getColumn(1).setMinWidth(0);
+        jtEscenariosPedagogicos.getColumnModel().getColumn(1).setPreferredWidth(250);
     }
 
     private void formatearGridAsignaturas() {
@@ -1766,7 +2320,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
 
     private void llenarCarrera(ArrayList<Object> datos) {
         idCarrera = (String.valueOf(datos.get(0)));
-        txtCarrera.setText(String.valueOf(datos.get(5)));
+        txtCarrera.setText(String.valueOf(datos.get(1)));
     }
 
     private void llenarEmpresaSucursal(ArrayList<Object> datos) {
@@ -1790,7 +2344,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     }
 
     private void llenarAsignatura(ArrayList<Object> datos) {
-        String[] nombresColumnas = {"id", "carrera", "ASGINATURAS", "RESULTADO APRENDIZAJE", "EQUIPAMIENTO", "SIMILITUD"};
+        String[] nombresColumnas = {"id", "carrera", "ASGINATURAS"};
         DefaultTableModel modelo = new DefaultTableModel(nombresColumnas, 0);
         if (jtAsignaturas.getRowCount() == 0) {
             modelo.addRow(arrayListToArrayString(datos));
@@ -1801,9 +2355,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
                 modelo.setValueAt(jtAsignaturas.getValueAt(i, 0).toString(), i, 0);
                 modelo.setValueAt(jtAsignaturas.getValueAt(i, 1).toString(), i, 1);
                 modelo.setValueAt(jtAsignaturas.getValueAt(i, 2).toString(), i, 2);
-                modelo.setValueAt(jtAsignaturas.getValueAt(i, 3).toString(), i, 3);
-                modelo.setValueAt(jtAsignaturas.getValueAt(i, 4).toString(), i, 4);
-                modelo.setValueAt(jtAsignaturas.getValueAt(i, 5).toString(), i, 5);
 
             }
             modelo.addRow(arrayListToArrayString(datos));
@@ -1844,6 +2395,7 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnBuscarCarrera;
     private javax.swing.JButton btnBuscarEmpresa;
+    private javax.swing.JButton btnBuscarInformeViabilidad;
     private javax.swing.JButton btnBuscarRepresentanteLegal;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEliminar;
@@ -1862,7 +2414,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1898,11 +2449,13 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
@@ -1929,6 +2482,9 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jpSegundaSeccion;
     private javax.swing.JPanel jpTerceraSeccion2;
     private javax.swing.JPanel jpTereceraSeccion1;
+    private javax.swing.JSpinner jsCantidadEstudiantes;
+    private javax.swing.JSpinner jsCantidadTutores;
+    private javax.swing.JSpinner jsPlazo;
     private javax.swing.JTable jtAsignaturas;
     private javax.swing.JTable jtAsignaturas2;
     private javax.swing.JTable jtDocumentosHabilitantesEntidadReceptora;
@@ -1943,8 +2499,42 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblFechaInforme;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblPara;
+    private javax.swing.JLabel lblParaInforme;
+    private javax.swing.JLabel lblParaInforme1;
+    private javax.swing.JLabel lblParaInforme10;
+    private javax.swing.JLabel lblParaInforme11;
+    private javax.swing.JLabel lblParaInforme12;
+    private javax.swing.JLabel lblParaInforme13;
+    private javax.swing.JLabel lblParaInforme14;
+    private javax.swing.JLabel lblParaInforme15;
+    private javax.swing.JLabel lblParaInforme16;
+    private javax.swing.JLabel lblParaInforme17;
+    private javax.swing.JLabel lblParaInforme18;
+    private javax.swing.JLabel lblParaInforme19;
+    private javax.swing.JLabel lblParaInforme2;
+    private javax.swing.JLabel lblParaInforme20;
+    private javax.swing.JLabel lblParaInforme21;
+    private javax.swing.JLabel lblParaInforme22;
+    private javax.swing.JLabel lblParaInforme23;
+    private javax.swing.JLabel lblParaInforme24;
+    private javax.swing.JLabel lblParaInforme25;
+    private javax.swing.JLabel lblParaInforme26;
+    private javax.swing.JLabel lblParaInforme27;
+    private javax.swing.JLabel lblParaInforme28;
+    private javax.swing.JLabel lblParaInforme29;
+    private javax.swing.JLabel lblParaInforme3;
+    private javax.swing.JLabel lblParaInforme30;
+    private javax.swing.JLabel lblParaInforme31;
+    private javax.swing.JLabel lblParaInforme32;
+    private javax.swing.JLabel lblParaInforme33;
+    private javax.swing.JLabel lblParaInforme34;
+    private javax.swing.JLabel lblParaInforme4;
+    private javax.swing.JLabel lblParaInforme5;
+    private javax.swing.JLabel lblParaInforme6;
+    private javax.swing.JLabel lblParaInforme7;
+    private javax.swing.JLabel lblParaInforme8;
+    private javax.swing.JLabel lblParaInforme9;
     private javax.swing.JLabel lblRUC;
-    private javax.swing.JLabel lblRegistro;
     private javax.swing.JLabel lblSolicitante;
     private javax.swing.JRadioButton rbNoConstatacion;
     private javax.swing.JRadioButton rbNoEquipoProteccion;
@@ -1971,8 +2561,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txaSolicitante;
     private javax.swing.JTextField txtAdministradorEntidadReceptora;
     private javax.swing.JTextField txtAdministradorInstituto;
-    private javax.swing.JTextField txtCantidadEstudiantes;
-    private javax.swing.JTextField txtCantidadTutores;
     private javax.swing.JFormattedTextField txtCarrera;
     private javax.swing.JTextField txtCreacionResolucion1;
     private javax.swing.JTextField txtCreacionResolucion7;
@@ -1981,7 +2569,6 @@ public class frmViabilidad extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtFechaAcercamiento;
     private javax.swing.JTextField txtNombreRepresentanteLegal;
     private javax.swing.JFormattedTextField txtNumeroInforme;
-    private javax.swing.JTextField txtPlazo;
     private javax.swing.JTextField txtRUC;
     private javax.swing.JTextField txtRemitenteEntidadReceptora;
     private javax.swing.JTextField txtRemitenteInstituto;

@@ -7,6 +7,8 @@ import controlador.controladorVariablesSesion;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -59,6 +61,13 @@ public final class frmDocumentoAnexos extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
     }
 
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("recursos/ico_adjuntar_40.jpg"));
+
+        return retValue;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -75,16 +84,20 @@ public final class frmDocumentoAnexos extends javax.swing.JDialog {
         btnAgregarAnexos = new javax.swing.JButton();
         btnDescargarAnexo = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Consulta");
+        setTitle("Adjuntar");
+        setIconImage(getIconImage());
 
         jp_consulta3.setBackground(new java.awt.Color(255, 255, 255));
-        jp_consulta3.setBorder(javax.swing.BorderFactory.createTitledBorder("Consulta"));
+        jp_consulta3.setBorder(javax.swing.BorderFactory.createTitledBorder("Adjuntar"));
         jp_consulta3.setPreferredSize(new java.awt.Dimension(900, 523));
+        jp_consulta3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel18.setText("Buscar:");
+        jp_consulta3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 16, 62, 30));
 
         jtConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -114,6 +127,8 @@ public final class frmDocumentoAnexos extends javax.swing.JDialog {
         });
         jScrollPane4.setViewportView(jtConsulta);
 
+        jp_consulta3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 113, 506, 357));
+
         txt_buscar.setAlignmentY(0.0F);
         txt_buscar.setPreferredSize(new java.awt.Dimension(250, 25));
         txt_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -121,8 +136,11 @@ public final class frmDocumentoAnexos extends javax.swing.JDialog {
                 txt_buscarKeyReleased(evt);
             }
         });
+        jp_consulta3.add(txt_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 19, 281, -1));
 
+        txt_filtro.setBackground(new java.awt.Color(255, 255, 204));
         txt_filtro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jp_consulta3.add(txt_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 16, 147, 30));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -191,40 +209,18 @@ public final class frmDocumentoAnexos extends javax.swing.JDialog {
         });
         jPanel1.add(btnEliminar);
 
-        javax.swing.GroupLayout jp_consulta3Layout = new javax.swing.GroupLayout(jp_consulta3);
-        jp_consulta3.setLayout(jp_consulta3Layout);
-        jp_consulta3Layout.setHorizontalGroup(
-            jp_consulta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_consulta3Layout.createSequentialGroup()
-                .addGroup(jp_consulta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jp_consulta3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jp_consulta3Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jp_consulta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jp_consulta3Layout.createSequentialGroup()
-                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jp_consulta3Layout.setVerticalGroup(
-            jp_consulta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jp_consulta3Layout.createSequentialGroup()
-                .addGroup(jp_consulta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jp_consulta3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txt_filtro, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                        .addComponent(txt_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
-        );
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_cerrar_40.png"))); // NOI18N
+        btnCerrar.setToolTipText("CERRAR");
+        btnCerrar.setBorder(null);
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCerrar);
+
+        jp_consulta3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -250,15 +246,15 @@ public final class frmDocumentoAnexos extends javax.swing.JDialog {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if (fila != -1) {
             if (controladorVariablesSesion.getInstance().eliminar(jtConsulta.getValueAt(fila, 0).toString()) == 0) {
-               eliminar();//elimina el registro seleccionado
-               llenarGrid(criterioBusqueda);
+                eliminar();//elimina el registro seleccionado
+                llenarGrid(criterioBusqueda);
             }
-                
-            } else {
 
-                JOptionPane.showMessageDialog(rootPane, "seleccione un documento");
+        } else {
 
-            }
+            JOptionPane.showMessageDialog(rootPane, "seleccione un documento");
+
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAgregarAnexosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAnexosActionPerformed
@@ -297,6 +293,11 @@ public final class frmDocumentoAnexos extends javax.swing.JDialog {
         modificarDescripcionAnexos();
         llenarGrid(criterioBusqueda);
     }//GEN-LAST:event_btnGuardarDescripcionActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+
+        this.dispose();//cierra el formulario
+    }//GEN-LAST:event_btnCerrarActionPerformed
     private void convertirAmayusculas(Component componente) {
 
         if (componente instanceof JTextField) {
@@ -487,6 +488,7 @@ public final class frmDocumentoAnexos extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbrirAnexo;
     private javax.swing.JButton btnAgregarAnexos;
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnDescargarAnexo;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardarDescripcion;

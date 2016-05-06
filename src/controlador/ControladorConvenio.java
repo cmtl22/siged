@@ -6,7 +6,13 @@
 package controlador;
 
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Convenio;
 
 
@@ -31,8 +37,8 @@ public class ControladorConvenio {
     public boolean crearActualizar(Map datosConvenio) {
         
         camposObligatorios = validarCamposObligatorios(datosConvenio);
-        
-        if (camposObligatorios.equals("")) {
+        camposInvalidos = validarInformacion(datosConvenio);
+        if (camposObligatorios.equals("") && camposInvalidos.equals("")) {
        
         Convenio convenio = new Convenio(); 
 
@@ -53,8 +59,13 @@ public class ControladorConvenio {
         controladorMensaje.getInstance().getMsgGuardar(respuesta[1]);
         return bandera = controladorVariablesSesion.getInstance().validarRespuestaDB(respuesta[2]);
         } else {
+            if (!camposObligatorios.equals("")) {
                 controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
             }
+            if (!camposInvalidos.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposInvalidos(camposInvalidos);
+            }
+        }
         return bandera;
     }
 
@@ -94,6 +105,32 @@ public class ControladorConvenio {
         }
         
         return camposObligatorios;
+    }
+    private String validarInformacion(Map datos) {
+
+        camposInvalidos = "";
+        if (validarFechas((String) datos.get("fechaSuscripcion"), (String) datos.get("fechaFin")) < 0) {
+            camposInvalidos += "Fechas incorrectas\n";
+
+        }
+        return camposInvalidos;
+    }
+
+    private int validarFechas(String strFechaSuscripcion, String strFechaFin) {
+        try {
+            Calendar calFechaSuscripcion = new GregorianCalendar();
+            Calendar calFechaFin = new GregorianCalendar();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            calFechaSuscripcion.setTime(sdf.parse(strFechaSuscripcion));
+            calFechaFin.setTime(sdf.parse(strFechaFin));
+
+            return calFechaFin.compareTo(calFechaSuscripcion);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 1;
     }
     // </editor-fold>
     

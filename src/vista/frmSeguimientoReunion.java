@@ -62,7 +62,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
             tipo_consulta = "seguimiento_reunion_admin";
             llenarGrid(tipo_consulta);
         } else {
-            tipo_consulta="seguimiento_reunion";
+            tipo_consulta = "seguimiento_reunion";
             llenarGrid(tipo_consulta);
         }
     }
@@ -189,8 +189,8 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         lblTutorEmpresarial.setText("Tutor Empresarial:");
         jpRegistroSeguimientoReunion.add(lblTutorEmpresarial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
+        cmbPeriodo.setBackground(new java.awt.Color(255, 255, 204));
         cmbPeriodo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmbPeriodo.setEnabled(false);
         jpRegistroSeguimientoReunion.add(cmbPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 300, 25));
 
         txtCedula.setEditable(false);
@@ -287,6 +287,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         lblFiltro.setPreferredSize(new java.awt.Dimension(35, 20));
         jpBusquedaSeguimientoReunion.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -433,7 +434,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-// <editor-fold defaultstate="collapsed" desc="Eventos">    
+    // <editor-fold defaultstate="collapsed" desc="Eventos">    
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCedulaActionPerformed
@@ -483,6 +484,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
     private void btnTutorEmpresarialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTutorEmpresarialActionPerformed
         buscar("tutor_empresarial");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarTutorEmpresarial(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
     }//GEN-LAST:event_btnTutorEmpresarialActionPerformed
 
@@ -496,17 +498,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtSeguimientoReunionMouseClicked
 
     private void btnAdjuntarAnexosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarAnexosActionPerformed
-        int fila = jtSeguimientoReunion.getSelectedRow();
-        if (fila != -1) {
-            criterioBusqueda[0] = jtSeguimientoReunion.getValueAt(fila, 0).toString();
-            criterioBusqueda[1] = "R";//tipo de documento anexo
-            criterioBusqueda[2] = "Reunion Seguimiento";//descripcion de los anexos
-            frmDocumentoAnexos frm = new frmDocumentoAnexos(null, true, criterioBusqueda);
-            frm.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Seleccione un Documento", "Seleccionar", 2);
-        }
-
+        consultarDocumentoAnexos();
     }//GEN-LAST:event_btnAdjuntarAnexosActionPerformed
 
     private void txtParticipanteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtParticipanteKeyReleased
@@ -532,22 +524,15 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtSeguimientoReunion));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtSeguimientoReunion));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
 
     // </editor-fold>  
-// <editor-fold defaultstate="collapsed" desc="Metodos"> 
-
+    // <editor-fold defaultstate="collapsed" desc="Metodos"> 
     private void buscar(String tabla) {
         frmConsultas consulta = new frmConsultas(null, true);//instancia la el formulario con la ventana de busqueda
         consulta.consultar(tabla, "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
-        consulta.setVisible(true);//hace visible la ventan de busqueda
-    }
-
-    private void buscar() {
-        frmConsultas consulta = new frmConsultas(null, true);//instancia la el formulario con la ventana de busqueda
-        consulta.consultar("seguimientoReunion", "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
         consulta.setVisible(true);//hace visible la ventan de busqueda
     }
 
@@ -569,21 +554,12 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         int fila = jtSeguimientoReunion.getSelectedRow();
         if (fila != -1) {
             criterioBusqueda[0] = jtSeguimientoReunion.getValueAt(fila, 0).toString();
-            criterioBusqueda[1] = "S";
-            consultarDocumentoAnexos(criterioBusqueda);
+            criterioBusqueda[1] = "R";//tipo de documento anexo
+            criterioBusqueda[2] = "Reunion Seguimiento";//descripcion de los anexos
+            frmDocumentoAnexos frm = new frmDocumentoAnexos(null, true, criterioBusqueda);
+            frm.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(rootPane, "seleccione un registro");
-        }
-    }
-
-    private void consultarDocumentoAnexos(String[] criterioBusqueda) {
-        try {
-            frmDocumentoAnexos documentoAnexos = new frmDocumentoAnexos(null, true, criterioBusqueda);
-
-            documentoAnexos.setVisible(true);
-
-        } catch (Exception ex) {
-            JOptionPane.showConfirmDialog(null, ex.getMessage(), "Error Buscar Subgrupos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un Documento", "Seleccionar", 2);
         }
     }
 
@@ -683,13 +659,15 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         criterioBusqueda[0] = "periodo";
         criterioBusqueda[1] = "tabla";
         cmbPeriodo.setModel(consulta.consultarCombo(criterioBusqueda));
-        cmbPeriodo.setSelectedIndex(1);
+        if (cmbPeriodo.getItemCount() > 1) {
+            cmbPeriodo.setSelectedIndex(1);
+        }
         codigoPeriodo = consulta.getCodigoCombo();
     }
 
     protected void limpiarCajasTexto(Component component) {
         lblId.setText("0");
-        idTutorEmpresarial="-1";
+        idTutorEmpresarial = "-1";
         //cmbPeriodo.setSelectedIndex(0);
         if (component instanceof JTextField) {
 
@@ -723,6 +701,7 @@ public class frmSeguimientoReunion extends javax.swing.JInternalFrame {
         idTutorEmpresarial = (String.valueOf(datos.get(0)));
         txtCedula.setText(String.valueOf(datos.get(4)));
         txtNombresApellidos.setText(String.valueOf(datos.get(2)) + " " + String.valueOf(datos.get(1)));
+        txtParticipante.setText(String.valueOf(datos.get(2)) + " " + String.valueOf(datos.get(1)));
     }
 
     public Date stringToJDateChooser(String fecha) {

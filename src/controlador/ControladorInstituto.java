@@ -1,7 +1,13 @@
 package controlador;
 
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import modelo.Instituto;
@@ -16,13 +22,13 @@ public class ControladorInstituto {
 
     public boolean crearActualizar(Map datos) {
         camposObligatorios = validarCamposObligatorios(datos);
-        camposInvalidos=validarInformacion(datos);
-        if (camposObligatorios.equals("")&&camposInvalidos.equals("")){
+        camposInvalidos = validarInformacion(datos);
+        if (camposObligatorios.equals("") && camposInvalidos.equals("")) {
 
             Instituto instituto = new Instituto();
             instituto.setAccion((String) datos.get("accion"));
             instituto.setId((String) datos.get("id"));
-            instituto.setIdPersona( String.valueOf(datos.get("idPersona")));
+            instituto.setIdPersona(String.valueOf(datos.get("idPersona")));
             instituto.setNombre((String) datos.get("nombre"));
             instituto.setDireccion((String) datos.get("direccion"));
             instituto.setTelefono((String) datos.get("telefono"));
@@ -37,13 +43,15 @@ public class ControladorInstituto {
             controladorMensaje.getInstance().getMsgGuardar(respuesta[1]);
             bandera = controladorVariablesSesion.getInstance().validarRespuestaDB(respuesta[2]);
         } else {
-           if (!camposObligatorios.equals(""))  
-            controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
-           if (!camposInvalidos.equals(""))  
-            controladorMensaje.getInstance().getMsgCamposInvalidos(camposInvalidos);
-        }   
-            
-       return bandera;
+            if (!camposObligatorios.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposObligatorios(camposObligatorios);
+            }
+            if (!camposInvalidos.equals("")) {
+                controladorMensaje.getInstance().getMsgCamposInvalidos(camposInvalidos);
+            }
+        }
+
+        return bandera;
 
     }
 
@@ -66,7 +74,7 @@ public class ControladorInstituto {
             camposObligatorios += "\nIngrese el nombre del instituto";
 
         }
-         if (datos.get("idPersona").equals("-1")) {
+        if (datos.get("idPersona").equals("-1")) {
             camposObligatorios += "\nIngrese el nombre del rector";
 
         }
@@ -99,10 +107,14 @@ public class ControladorInstituto {
         camposInvalidos = "";
         if (!validarEmail((String) datos.get("correo"))) {
             camposInvalidos += "Correo Electrónico\n";
-
         }
+        if (!validarFechaCreacion((String) datos.get("fechaCreacion"))) {
+            camposInvalidos += "La fecha de creación debe ser menor\n";
+        }
+
         return camposInvalidos;
     }
+
     private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
@@ -116,4 +128,20 @@ public class ControladorInstituto {
         return matcher.matches();
 
     }
+
+    private boolean validarFechaCreacion(String strFechaCreacion) {
+        try {
+            Calendar calFechaActual = new GregorianCalendar(); 
+            Calendar calFechaCreacion = new GregorianCalendar();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            calFechaCreacion.setTime(sdf.parse(strFechaCreacion));
+
+            return calFechaActual.after(calFechaCreacion);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ControladorPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
 }

@@ -25,6 +25,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 public class frmConvenio extends javax.swing.JInternalFrame {
+
     // <editor-fold defaultstate="collapsed" desc="Declaracion de Variables">
     private Date fechaActual;
     private String accion;
@@ -34,7 +35,6 @@ public class frmConvenio extends javax.swing.JInternalFrame {
     TableRowSorter<TableModel> sorter;
 
 // </editor-fold >
-    
     public frmConvenio() {
         initComponents();
         init();
@@ -47,12 +47,12 @@ public class frmConvenio extends javax.swing.JInternalFrame {
         llenarGrid();
         llenarFiltro();
         cargarTotalRegistros();
-        fechaActual = new Date() ;
+        fechaActual = new Date();
         dtFechaFin.setDate(fechaActual);
         dtFechaSuscripcion.setDate(fechaActual);
 
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -102,6 +102,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
         btnNuevo = new javax.swing.JButton();
         btnCrearActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnAdjuntarAnexos = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         btnNuevo1 = new javax.swing.JButton();
 
@@ -341,7 +342,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
 
         jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 430, 460));
 
-        cmbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaUsuario.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 130, -1));
@@ -415,6 +416,17 @@ public class frmConvenio extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnEliminar);
 
+        btnAdjuntarAnexos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_adjuntar_40.jpg"))); // NOI18N
+        btnAdjuntarAnexos.setToolTipText("Nuevo");
+        btnAdjuntarAnexos.setBorder(null);
+        btnAdjuntarAnexos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdjuntarAnexos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdjuntarAnexosActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnAdjuntarAnexos);
+
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_cerrar_40.png"))); // NOI18N
         btnCerrar.setToolTipText("CERRAR");
         btnCerrar.setBorder(null);
@@ -426,7 +438,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
         });
         jPanel2.add(btnCerrar);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 5, 190, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 5, 230, 50));
 
         btnNuevo1.setBackground(new java.awt.Color(255, 255, 255));
         btnNuevo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ico_exportar_excel_32.png"))); // NOI18N
@@ -456,7 +468,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
     // <editor-fold defaultstate="collapsed" desc="Eventos">
     private void jtConvenioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtConvenioMouseClicked
-        
+
         int fila = jtConvenio.getSelectedRow();//guarda la fila seleccionada
         accion = "actualizar";
         //cambiarColorPanel(accion);
@@ -468,7 +480,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
 
     private void txtCriterioBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCriterioBusquedaKeyReleased
         convertirAmayusculas(txtCriterioBusqueda);
-        filtrar();        
+        filtrar();
     }//GEN-LAST:event_txtCriterioBusquedaKeyReleased
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -501,13 +513,15 @@ public class frmConvenio extends javax.swing.JInternalFrame {
             frmPrincipal.jpEncabezado.setVisible(true);
         }
         this.dispose();//cierra el formulario
-        
+
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
         buscar("viabilidad");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
-        llenarViabilidad(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "viabilidad"));
+        if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) {
+            llenarViabilidad(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "viabilidad"));
+        }
     }//GEN-LAST:event_btnPersonaActionPerformed
 
     private void txtNumeroConvenioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroConvenioKeyReleased
@@ -521,7 +535,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
 
     private void txtAdmEmpPrinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdmEmpPrinKeyReleased
         convertirAmayusculas(txtAdmEmpPrin);
-        txtAdmEmpPrin.setText(controladorVariablesSesion.validarLetrasConEspacios(txtAdmEmpPrin.getText()));   
+        txtAdmEmpPrin.setText(controladorVariablesSesion.validarLetrasConEspacios(txtAdmEmpPrin.getText()));
     }//GEN-LAST:event_txtAdmEmpPrinKeyReleased
 
     private void txtAdmInsSupKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdmInsSupKeyReleased
@@ -538,33 +552,45 @@ public class frmConvenio extends javax.swing.JInternalFrame {
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
         String[] rutaArchivo = controladorVariablesSesion.getInstance().obtenerRuta();
         if (rutaArchivo[0] != null) {
-            controladorExcel.getInstance().generarExcel(rutaArchivo,controladorGrid.getInstance().filtrarGrid(jtConvenio));
+            controladorExcel.getInstance().generarExcel(rutaArchivo, controladorGrid.getInstance().filtrarGrid(jtConvenio));
         }
     }//GEN-LAST:event_btnNuevo1ActionPerformed
 
     private void jtConvenioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtConvenioKeyTyped
-        
+
         jtConvenio.getModel().addTableModelListener(jtConvenio);
-        
-        
+
         int fila = jtConvenio.getSelectedRow();//guarda la fila seleccionada
         cambiarColorPanel(accion);
         int keycode = evt.getKeyCode();
-        
-        System.out.println(""+ KeyEvent.VK_DELETE +" " + keycode);
-        
+
+        System.out.println("" + KeyEvent.VK_DELETE + " " + keycode);
+
         if (fila != -1 && keycode == KeyEvent.VK_DELETE) {
             //consulta en la base de datos y llena las cajas de texto con la consulta realizada
-            
+
             if (controladorVariablesSesion.getInstance().eliminar(jtConvenio.getValueAt(fila, 0).toString()) == 0) {
-            accion = "crear";
-            eliminar();//elimina el registro seleccionado
-            llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
-            limpiarCajasTexto(jpRegistroUsuario);//limpia las cajas de texto
-            cargarTotalRegistros();//carga el total de registros
-        }
+                accion = "crear";
+                eliminar();//elimina el registro seleccionado
+                llenarGrid();//vuelve a consultar a la base de datos para que cargue sin el registro eliminado
+                limpiarCajasTexto(jpRegistroUsuario);//limpia las cajas de texto
+                cargarTotalRegistros();//carga el total de registros
+            }
         }
     }//GEN-LAST:event_jtConvenioKeyTyped
+
+    private void btnAdjuntarAnexosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdjuntarAnexosActionPerformed
+        int fila = jtConvenio.getSelectedRow();
+        if (fila != -1) {
+            criterioBusqueda[0] = jtConvenio.getValueAt(fila, 0).toString();
+            criterioBusqueda[1] = "C";//tipo de documento anexo
+            criterioBusqueda[2] = "Convenio";//descripcion de los anexos
+            frmDocumentoAnexos frm = new frmDocumentoAnexos(null, true, criterioBusqueda);
+            frm.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un Documento", "Seleccionar", 2);
+        }
+    }//GEN-LAST:event_btnAdjuntarAnexosActionPerformed
 // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Metodos">
 
@@ -573,20 +599,19 @@ public class frmConvenio extends javax.swing.JInternalFrame {
         consulta.consultar(tabla, "grid", null);//llama al metodo que se encuentra en la ventana de busqueda
         consulta.setVisible(true);//hace visible la ventan de busqueda
     }
-    
-    private void cambiarColorPanel(String accion){
-        
-        if(accion.equals("crear")){
+
+    private void cambiarColorPanel(String accion) {
+
+        if (accion.equals("crear")) {
             jpRegistroUsuario.setBackground(Color.WHITE);
             lblRegistro.setText("CREANDO...");
-        }else if(accion.equals("actualizar")){
+        } else if (accion.equals("actualizar")) {
             jpRegistroUsuario.setBackground(Color.lightGray);
             lblRegistro.setText("MODIFICANDO...");
-        }  
-        
+        }
+
     }
-         
-    
+
     private void cargarTotalRegistros() {
         int total = jtConvenio.getRowCount();
         lblTotalRegistros.setText(String.valueOf(total));
@@ -629,7 +654,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
         return convenio.crearActualizar(map);
 
     }
-    
+
     private String dateToString(JDateChooser fecha) {
         Date fechaNacimiento;
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
@@ -690,7 +715,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void llenarConvenio(ArrayList<Object> datos) {
         lblId.setText(String.valueOf(datos.get(0)));
         idViabilidad = (String.valueOf(datos.get(1)));
@@ -744,6 +769,7 @@ public class frmConvenio extends javax.swing.JInternalFrame {
 // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Variables declaration - do not modify                     ">
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdjuntarAnexos;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnCrearActualizar;
     private javax.swing.JButton btnEliminar;

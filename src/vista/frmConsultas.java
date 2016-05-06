@@ -14,27 +14,27 @@ import javax.swing.table.TableRowSorter;
 public class frmConsultas extends javax.swing.JDialog {
 
     private TableRowSorter<TableModel> sorter;
-    private DefaultTableModel modelo = new DefaultTableModel();
-    private String[] datosTemporales;
-
     String[] nombresColmunas;
 
     public frmConsultas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        datosTemporales = new String[3];
+        init();
+    }
+
+    private void init() {
         txt_buscar.requestFocus();
 
         //Inahblita el boton cerrar
         this.setResizable(false);
         //setDefaultCloseOperation(0);
         this.setLocationRelativeTo(null);
-
+        controladorVariablesSesion.getInstance().setDatosTemporalesConsulta("");
     }
 
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
-                getImage(ClassLoader.getSystemResource("recursos/ico_sistema.jpg"));
+                getImage(ClassLoader.getSystemResource("recursos/ico_buscar_40.png"));
 
         return retValue;
     }
@@ -43,7 +43,7 @@ public class frmConsultas extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jp_consulta3 = new javax.swing.JPanel();
+        jp_consulta = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtConsulta = new javax.swing.JTable();
         txt_buscar = new javax.swing.JTextField();
@@ -53,12 +53,13 @@ public class frmConsultas extends javax.swing.JDialog {
         lblTotalRegistros = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Consulta");
+        setTitle("Consultar");
+        setIconImage(getIconImage());
 
-        jp_consulta3.setBackground(new java.awt.Color(255, 255, 255));
-        jp_consulta3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jp_consulta3.setPreferredSize(new java.awt.Dimension(900, 523));
-        jp_consulta3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jp_consulta.setBackground(new java.awt.Color(255, 255, 255));
+        jp_consulta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jp_consulta.setPreferredSize(new java.awt.Dimension(900, 523));
+        jp_consulta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,7 +89,7 @@ public class frmConsultas extends javax.swing.JDialog {
         });
         jScrollPane4.setViewportView(jtConsulta);
 
-        jp_consulta3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 59, 730, 320));
+        jp_consulta.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 59, 730, 320));
 
         txt_buscar.setAlignmentY(0.0F);
         txt_buscar.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -98,38 +99,39 @@ public class frmConsultas extends javax.swing.JDialog {
                 txt_buscarKeyReleased(evt);
             }
         });
-        jp_consulta3.add(txt_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 530, -1));
+        jp_consulta.add(txt_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 530, -1));
 
+        txt_filtro.setBackground(new java.awt.Color(255, 255, 204));
         txt_filtro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         txt_filtro.setPreferredSize(new java.awt.Dimension(150, 25));
-        jp_consulta3.add(txt_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        jp_consulta.add(txt_filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
         lblFiltro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblFiltro.setText("Filtro:");
         lblFiltro.setPreferredSize(new java.awt.Dimension(32, 25));
-        jp_consulta3.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jp_consulta.add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         lblRegistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblRegistros.setText("Registros:");
         lblRegistros.setPreferredSize(new java.awt.Dimension(60, 20));
-        jp_consulta3.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
+        jp_consulta.add(lblRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
 
         lblTotalRegistros.setText("0");
         lblTotalRegistros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         lblTotalRegistros.setPreferredSize(new java.awt.Dimension(200, 20));
-        jp_consulta3.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, -1, -1));
+        jp_consulta.add(lblTotalRegistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jp_consulta3, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jp_consulta, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jp_consulta3, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+            .addComponent(jp_consulta, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
         );
 
         pack();
@@ -151,6 +153,7 @@ public class frmConsultas extends javax.swing.JDialog {
         jtConsulta.getColumnModel().getColumn(0).setMinWidth(0);
         jtConsulta.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
+
     private void jtConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtConsultaMouseClicked
         guardarConsulta();
     }//GEN-LAST:event_jtConsultaMouseClicked
@@ -159,13 +162,13 @@ public class frmConsultas extends javax.swing.JDialog {
         convertirAmayusculas(txt_buscar);
         filtrar();
     }//GEN-LAST:event_txt_buscarKeyReleased
+
     private void guardarConsulta() {
         if (jtConsulta.getSelectedRow() != -1) {
             controladorVariablesSesion.getInstance().setDatosTemporalesConsulta(jtConsulta.getValueAt(jtConsulta.getSelectedRow(), 0).toString());
-            //datosTemporales[0] = jtConsulta.getValueAt(jtConsulta.getSelectedRow(), 0).toString();
-            //datosTemporales[1] = jtConsulta.getValueAt(jtConsulta.getSelectedRow(), 1).toString();
-            //datosTemporales[2] = jtConsulta.getValueAt(jtConsulta.getSelectedRow(), 2).toString();
-            controladorVariablesSesion.getInstance().setDatosConsulta(datosTemporales);
+
+        } else {
+            controladorVariablesSesion.getInstance().setDatosTemporalesConsulta("");
         }
         this.dispose();
     }
@@ -241,7 +244,7 @@ public class frmConsultas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JPanel jp_consulta3;
+    private javax.swing.JPanel jp_consulta;
     private javax.swing.JTable jtConsulta;
     private javax.swing.JLabel lblFiltro;
     private javax.swing.JLabel lblRegistros;

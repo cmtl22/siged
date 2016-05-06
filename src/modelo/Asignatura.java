@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Asignatura {
+    // <editor-fold defaultstate="collapsed" desc="Declaracion de variables">
 
     private String _id;
     private String _idCarrera;
@@ -14,13 +15,13 @@ public class Asignatura {
     private String _similitud;
 
     private String accion;
-    private boolean bandera;
     private String sql;
     private PreparedStatement sentencia;
     private ResultSet resultadoQuery;
     private final String respuesta[] = new String[3];
-
+// </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Getters and Setters">
+
     public String getId() {
         return _id;
     }
@@ -76,8 +77,9 @@ public class Asignatura {
     public void setAccion(String accion) {
         this.accion = accion;
     }
- // </editor-fold>
-    
+
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Declaracion de variables">
     public String[] crearActualizar(Asignatura datos) {
 
         try {
@@ -90,7 +92,6 @@ public class Asignatura {
             sentencia.setString(5, datos.getResultadoAprendizaje());
             sentencia.setString(6, datos.getEquipamiento());
             sentencia.setString(7, datos.getSimilitud());
-            
 
             System.out.println(sentencia);
             resultadoQuery = sentencia.executeQuery();
@@ -123,5 +124,5 @@ public class Asignatura {
             return null;
         }
     }
-
+// </editor-fold>
 }

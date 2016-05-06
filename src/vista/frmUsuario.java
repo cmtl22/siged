@@ -129,7 +129,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtRepetirClave.setPreferredSize(new java.awt.Dimension(225, 25));
         jpRegistroUsuario.add(txtRepetirClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, -1, -1));
 
-        cmbRol.setBackground(new java.awt.Color(204, 204, 255));
+        cmbRol.setBackground(new java.awt.Color(255, 255, 204));
         cmbRol.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbRol.setPreferredSize(new java.awt.Dimension(150, 25));
         jpRegistroUsuario.add(cmbRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 220, -1));
@@ -220,6 +220,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
 
         jpBusquedaUsuario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 430, -1));
 
+        cmbFiltro.setBackground(new java.awt.Color(255, 255, 204));
         cmbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cmbFiltro.setPreferredSize(new java.awt.Dimension(80, 25));
         jpBusquedaUsuario.add(cmbFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 100, -1));
@@ -422,6 +423,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
         buscar("persona");//abre una ventana de busqueda
         //consulta el registro seleccionado en la ventana de busqueda y llena las cajas de texto con la consulta a la base de datos
+           if (!controladorVariablesSesion.getInstance().getDatosTemporalesConsulta().equals("")) 
         llenarPersona(consultarRegistroIndividual(controladorVariablesSesion.getInstance().getDatosTemporalesConsulta(), "persona"));
     }//GEN-LAST:event_btnPersonaActionPerformed
 
